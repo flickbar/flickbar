@@ -28,15 +28,19 @@ Put the pointer on a window's title bar and use two fingers:
 | Pinch in | Close the window |
 | Hold ⌘ and swipe | Move the window to the display on that side |
 
+Hold ⌥ Option to use the same gestures anywhere in a window, not just on its title bar.
+
 While your fingers are down, a highlight shows where the window will land and a light haptic tap
-confirms the gesture; it runs when you lift them. Press Esc first to cancel. Gestures that start anywhere else pass through untouched, so normal
-scrolling and zooming keep working.
+confirms the gesture; it runs when you lift them. Press Esc first to cancel. Other scrolling and
+zooming passes through untouched.
 
 ## Settings
 
-Open **Settings…** from the menu bar icon (or press ⌘, while it's open) to turn individual gestures on
-or off, add space between snapped windows, turn off the preview or haptic feedback, keep gestures off in specific
-apps, and open Flickbar at login. The menu bar icon can also turn gestures off for the app you're
+Open **Settings…** from the menu bar icon (or press ⌘, while it's open) to choose what each gesture
+does (any half, third, quarter, fill, center, full screen, close, next window of the app, hide or quit
+the app, or nothing), pick the key for gesturing anywhere in a window, add space between snapped
+windows, turn off the preview or haptic feedback, keep gestures off in specific apps, and open
+Flickbar at login. The menu bar icon can also turn gestures off for the app you're
 using.
 
 <p align="center">
@@ -46,7 +50,7 @@ using.
 
 ## Install
 
-**Download:** get **Flickbar-0.2.0.zip** from the
+**Download:** get **Flickbar-0.3.0.zip** from the
 [latest release](https://github.com/flickbar/flickbar/releases/latest), unzip it and move
 **Flickbar.app** to Applications. This early build isn't notarized by Apple yet, so macOS blocks it the
 first time: open it once, then click **Open Anyway** in *System Settings → Privacy & Security*.
@@ -101,7 +105,7 @@ Settings stay in its local preferences.
   unified toolbars count too.
 - `FlickbarCore.GestureRecognizer` turns finger movement into strokes (`left`, `up`, `pinchIn`, …);
   each change of direction starts a new stroke. When the fingers lift, `ActionMap` picks the action
-  and `SnapGeometry` computes the target frame.
+  (your choice from Settings, otherwise the default) and `SnapGeometry` computes the target frame.
 
 The gesture logic in `FlickbarCore` has no AppKit dependencies and is fully unit-tested; the app layer
 is in `Sources/Flickbar`.

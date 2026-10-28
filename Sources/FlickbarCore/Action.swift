@@ -1,38 +1,58 @@
 import CoreGraphics
 
-public enum SnapTarget: Equatable, Sendable {
+public enum SnapTarget: String, CaseIterable, Sendable {
     case leftHalf, rightHalf, maximize, center
     case topLeft, topRight, bottomLeft, bottomRight
     case leftThird, centerThird, rightThird, leftTwoThirds, rightTwoThirds
 }
 
-public enum WindowAction: Equatable, Sendable {
+public enum WindowAction: Hashable, Sendable {
     case snap(SnapTarget)
-    case minimize, close, toggleFullscreen
+    /// Restores the size from before Flickbar moved the window, otherwise minimizes.
+    case minimize
+    case close, toggleFullscreen
     case moveToDisplay(Stroke)
+    /// Brings the app's backmost window to the front, so repeating cycles through its windows.
+    case nextWindow
+    case hideApp, quitApp
 }
 
 public enum ActionMap {
-    /// The action a finished gesture performs. Quarters accept either stroke order.
-    /// With ⌘ held, a single swipe moves the window to the neighbouring display instead.
-    public static func action(for strokes: [Stroke], command: Bool = false) -> WindowAction? {
+    /// `gestureMap` value that turns a gesture off.
+    public static let off = "none"
+    /// `gestureMap` key for ⌘-swipe (move to another display), which is either on or off.
+    public static let commandSwipe = "commandSwipe"
+
+    /// The action for `gesture`: the user's choice in `overrides` (gesture raw value → action id), else the default.
+    public static func action(for gesture: TrackpadGesture, overrides: [String: String] = [:]) -> WindowAction? {
+        guard let id = overrides[gesture.rawValue] else { return gesture.defaultAction }
+        return WindowAction(id: id)
+    }
+
+    /// The action a finished gesture performs. With ⌘ held, a single swipe moves the window to the
+    /// neighbouring display instead.
+    public static func action(for strokes: [Stroke], command: Bool = false, overrides: [String: String] = [:]) -> WindowAction? {
         if command {
-            guard strokes.count == 1, let s = strokes.first, s != .pinchIn, s != .pinchOut else { return nil }
+            guard overrides[commandSwipe] != off, strokes.count == 1, let s = strokes.first, s != .pinchIn, s != .pinchOut
+            else { return nil }
             return .moveToDisplay(s)
         }
-        return switch strokes {
-        case [.left]: .snap(.leftHalf)
-        case [.right]: .snap(.rightHalf)
-        case [.up]: .snap(.maximize)
-        case [.down]: .minimize
-        case [.left, .up], [.up, .left]: .snap(.topLeft)
-        case [.right, .up], [.up, .right]: .snap(.topRight)
-        case [.left, .down], [.down, .left]: .snap(.bottomLeft)
-        case [.right, .down], [.down, .right]: .snap(.bottomRight)
-        case [.pinchIn]: .close
-        case [.pinchOut]: .toggleFullscreen
-        default: nil
-        }
+        return TrackpadGesture(strokes: strokes).flatMap { action(for: $0, overrides: overrides) }
+    }
+
+    /// `gestureMap` entries for the per-group switches of version 0.2 (`disabledGestures`).
+    public static func migrate(disabled groups: [String]) -> [String: String] {
+        let members: [String: [String]] = [
+            "halves": [TrackpadGesture.swipeLeft, .swipeRight].map(\.rawValue),
+            "fill": [TrackpadGesture.swipeUp.rawValue],
+            "quarters": [TrackpadGesture.swipeLeftUp, .swipeRightUp, .swipeLeftDown, .swipeRightDown].map(\.rawValue),
+            "restoreOrMinimize": [TrackpadGesture.swipeDown.rawValue],
+            "center": [TrackpadGesture.doubleTap.rawValue],
+            "fullScreen": [TrackpadGesture.pinchOut.rawValue],
+            "close": [TrackpadGesture.pinchIn.rawValue],
+            "moveToDisplay": [commandSwipe],
+        ]
+        return Dictionary(groups.flatMap { members[$0] ?? [] }.map { ($0, off) }, uniquingKeysWith: { a, _ in a })
     }
 }
 

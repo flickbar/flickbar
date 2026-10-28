@@ -71,47 +71,115 @@ private struct GeneralSettings: View {
 
 private struct GestureSettings: View {
     @Bindable var state: AppState
+    @AppStorage("anywhereModifier") private var anywhereModifier = "option"
 
     var body: some View {
         Form {
-            Section("Snap") {
-                row(.halves, "Left or right half", "Swipe left or right; repeat for ⅔ and ⅓", "rectangle.lefthalf.inset.filled")
-                row(.quarters, "Quarter", "Swipe left or right, then up or down", "rectangle.split.2x2")
-                row(.fill, "Fill the screen", "Swipe up; repeat for the middle third", "rectangle.inset.filled")
-                row(.center, "Center", "Double-tap with two fingers", "rectangle.center.inset.filled")
-                row(.restoreOrMinimize, "Restore or minimize", "Swipe down", "arrow.uturn.backward.square")
+            Section {
+                row(.swipeLeft, "Swipe left", "arrow.left")
+                row(.swipeRight, "Swipe right", "arrow.right")
+                row(.swipeUp, "Swipe up", "arrow.up")
+                row(.swipeDown, "Swipe down", "arrow.down")
+            } header: {
+                Text("Swipe")
+            } footer: {
+                footnote("Repeat a swipe to a half for ⅔ and ⅓, or to fill the screen for the middle third. Swiping down on a snapped window restores its earlier size.")
+            }
+            Section("Swipe sideways, then up or down") {
+                row(.swipeLeftUp, "Left and up", "arrow.up.left")
+                row(.swipeRightUp, "Right and up", "arrow.up.right")
+                row(.swipeLeftDown, "Left and down", "arrow.down.left")
+                row(.swipeRightDown, "Right and down", "arrow.down.right")
+            }
+            Section("Tap and pinch") {
+                row(.doubleTap, "Double-tap", "hand.tap")
+                row(.pinchOut, "Pinch out", "arrow.up.left.and.arrow.down.right")
+                row(.pinchIn, "Pinch in", "arrow.down.right.and.arrow.up.left")
+                Toggle(isOn: $state.commandSwipeEnabled) {
+                    label("Move to another display", "Hold ⌘ and swipe toward the display", "display.2")
+                }
             }
             Section {
-                row(.fullScreen, "Full screen", "Pinch out", "arrow.up.left.and.arrow.down.right.square")
-                row(.close, "Close", "Pinch in", "xmark.square")
-                row(.moveToDisplay, "Move to another display", "Hold ⌘ and swipe toward the display", "display.2")
-            } header: {
-                Text("Window")
+                Picker("Use gestures anywhere in a window while holding", selection: $anywhereModifier) {
+                    Text("⌥ Option").tag("option")
+                    Text("⌃ Control").tag("control")
+                    Text("Off").tag("off")
+                }
             } footer: {
-                Text("Use two fingers with the pointer over a window's title bar. Swiping down on a snapped window restores its earlier size. Press Esc before lifting your fingers to cancel.")
-                    .foregroundStyle(.secondary)
-                    .multilineTextAlignment(.leading)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                footnote("Otherwise gestures work with the pointer over a window's title bar. Press Esc before lifting your fingers to cancel.")
+            }
+            Section {
+                Button("Restore Defaults") { state.gestureMap = [:] }
+                    .disabled(state.gestureMap.isEmpty)
+                    .frame(maxWidth: .infinity, alignment: .trailing)
             }
         }
         .formStyle(.grouped)
         .frame(height: 640)
     }
 
-    private func row(_ kind: GestureKind, _ title: String, _ how: String, _ symbol: String) -> some View {
-        Toggle(isOn: state.gestureBinding(kind)) {
-            Label {
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(title)
-                    Text(how).font(.callout).foregroundStyle(.secondary)
-                }
-            } icon: {
-                // Fixed width so titles line up whatever the symbol's shape.
-                Image(systemName: symbol)
-                    .foregroundStyle(.tint)
-                    .font(.title2)
-                    .frame(width: 30)
+    private func row(_ gesture: TrackpadGesture, _ title: String, _ symbol: String) -> some View {
+        Picker(selection: state.actionBinding(gesture)) {
+            ForEach(actionGroups, id: \.self) { group in
+                ForEach(group, id: \.id) { Text(Self.title(of: $0)).tag($0.id) }
+                Divider()
             }
+            Text("Nothing").tag(ActionMap.off)
+        } label: {
+            label(title, nil, symbol)
+        }
+    }
+
+    private func label(_ title: String, _ detail: String?, _ symbol: String) -> some View {
+        Label {
+            VStack(alignment: .leading, spacing: 2) {
+                Text(title)
+                if let detail { Text(detail).font(.callout).foregroundStyle(.secondary) }
+            }
+        } icon: {
+            // Fixed width so titles line up whatever the symbol's shape.
+            Image(systemName: symbol).foregroundStyle(.tint).frame(width: 24)
+        }
+    }
+
+    private func footnote(_ text: String) -> some View {
+        Text(text)
+            .foregroundStyle(.secondary)
+            .multilineTextAlignment(.leading)
+            .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    /// Menu sections: halves and fill, thirds, quarters, window actions, app actions.
+    private var actionGroups: [[WindowAction]] {
+        [[.snap(.leftHalf), .snap(.rightHalf), .snap(.maximize), .snap(.center)],
+         [.snap(.leftThird), .snap(.centerThird), .snap(.rightThird), .snap(.leftTwoThirds), .snap(.rightTwoThirds)],
+         [.snap(.topLeft), .snap(.topRight), .snap(.bottomLeft), .snap(.bottomRight)],
+         [.minimize, .toggleFullscreen, .close, .nextWindow],
+         [.hideApp, .quitApp]]
+    }
+
+    static func title(of action: WindowAction) -> String {
+        switch action {
+        case .snap(.leftHalf): "Left Half"
+        case .snap(.rightHalf): "Right Half"
+        case .snap(.maximize): "Fill Screen"
+        case .snap(.center): "Center"
+        case .snap(.leftThird): "Left Third"
+        case .snap(.centerThird): "Middle Third"
+        case .snap(.rightThird): "Right Third"
+        case .snap(.leftTwoThirds): "Left Two-Thirds"
+        case .snap(.rightTwoThirds): "Right Two-Thirds"
+        case .snap(.topLeft): "Top-Left Quarter"
+        case .snap(.topRight): "Top-Right Quarter"
+        case .snap(.bottomLeft): "Bottom-Left Quarter"
+        case .snap(.bottomRight): "Bottom-Right Quarter"
+        case .minimize: "Restore or Minimize"
+        case .toggleFullscreen: "Full Screen"
+        case .close: "Close Window"
+        case .nextWindow: "Next Window of App"
+        case .hideApp: "Hide App"
+        case .quitApp: "Quit App"
+        case .moveToDisplay: "Move to Another Display"
         }
     }
 }

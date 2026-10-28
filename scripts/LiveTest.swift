@@ -156,9 +156,13 @@ let prefs = UserDefaults(suiteName: "io.github.flickbar.Flickbar")!
 prefs.set(["com.apple.TextEdit"], forKey: "excludedApps")
 swipe(titlebar(), [(-120, 0)]);               expect("excluded app is ignored", before)
 prefs.removeObject(forKey: "excludedApps")
-prefs.set(["halves"], forKey: "disabledGestures")
+prefs.set(["swipeLeft": "none"], forKey: "gestureMap")
 swipe(titlebar(), [(-120, 0)]);               expect("gesture turned off in Settings is ignored", before)
-prefs.removeObject(forKey: "disabledGestures")
+prefs.set(["swipeLeft": "rightThird"], forKey: "gestureMap")
+swipe(titlebar(), [(-120, 0)]);               expect("remapped gesture: swipe left → right ⅓", CGRect(x: main.maxX - thirdW, y: main.minY, width: thirdW, height: main.height))
+prefs.removeObject(forKey: "gestureMap")
+swipe(content(), [(-120, 0)], flags: .maskAlternate); expect("⌥ swipe on content → left half", CGRect(x: main.minX, y: main.minY, width: halfW, height: main.height))
+setFrame(window, before); usleep(300000)
 
 if screens.count > 1 {
     swipe(titlebar(), [(0, -120)], flags: .maskCommand)

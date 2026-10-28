@@ -20,10 +20,26 @@ final class GestureTap {
         set { UserDefaults.standard.set(newValue.sorted(), forKey: "excludedApps") }
     }
 
-    /// Gesture groups the user turned off in Settings.
-    static var disabledGestures: Set<GestureKind> {
-        get { Set((UserDefaults.standard.stringArray(forKey: "disabledGestures") ?? []).compactMap(GestureKind.init)) }
-        set { UserDefaults.standard.set(newValue.map(\.rawValue).sorted(), forKey: "disabledGestures") }
+    /// The user's gesture → action choices (see `ActionMap`); gestures not in it do their default.
+    static var gestureMap: [String: String] {
+        get { UserDefaults.standard.dictionary(forKey: "gestureMap") as? [String: String] ?? [:] }
+        set { UserDefaults.standard.set(newValue, forKey: "gestureMap") }
+    }
+
+    /// Version 0.2 had on/off switches per gesture group; turn those into `gestureMap` entries once.
+    static func migratePreferences() {
+        guard let old = UserDefaults.standard.stringArray(forKey: "disabledGestures") else { return }
+        gestureMap.merge(ActionMap.migrate(disabled: old)) { current, _ in current }
+        UserDefaults.standard.removeObject(forKey: "disabledGestures")
+    }
+
+    /// Holding this key makes gestures work anywhere in a window, not just on its title bar. Nil when off.
+    static var anywhereModifier: NSEvent.ModifierFlags? {
+        switch UserDefaults.standard.string(forKey: "anywhereModifier") ?? "option" {
+        case "option": .option
+        case "control": .control
+        default: nil
+        }
     }
 
     var isEnabled = false {
@@ -67,7 +83,7 @@ final class GestureTap {
         return switch ns.type {
         case .scrollWheel: handleScroll(ns, at: event.location)
         case .magnify: handlePinch(ns, at: event.location)
-        case .smartMagnify: handleDoubleTap(at: event.location)
+        case .smartMagnify: handleDoubleTap(at: event.location, flags: ns.modifierFlags)
         default: false
         }
     }
@@ -97,10 +113,16 @@ final class GestureTap {
         return true
     }
 
-    private func handleDoubleTap(at point: CGPoint) -> Bool {
-        guard !Self.disabledGestures.contains(.center), let window = AXWindow.titlebar(at: point) else { return false }
-        run(.snap(.center), on: window)
+    private func handleDoubleTap(at point: CGPoint, flags: NSEvent.ModifierFlags) -> Bool {
+        guard let action = ActionMap.action(for: .doubleTap, overrides: Self.gestureMap),
+              let window = Self.window(at: point, flags: flags) else { return false }
+        run(action, on: window)
         return true
+    }
+
+    private static func window(at point: CGPoint, flags: NSEvent.ModifierFlags) -> AXWindow? {
+        let anywhere = anywhereModifier.map(flags.contains) ?? false
+        return AXWindow.at(point, titleBarOnly: !anywhere)
     }
 
     private func begin(at point: CGPoint, flags: NSEvent.ModifierFlags) {
@@ -108,8 +130,8 @@ final class GestureTap {
         swallowMomentum = false
         command = flags.contains(.command)
         escaped = false
-        target = AXWindow.titlebar(at: point)
-        logger.debug("gesture began at \(point.debugDescription, privacy: .public), on title bar: \(self.target != nil, privacy: .public)")
+        target = Self.window(at: point, flags: flags)
+        logger.debug("gesture began at \(point.debugDescription, privacy: .public), on window: \(self.target != nil, privacy: .public)")
     }
 
     /// A tick and a preview of where the window will land tell the user the gesture so far maps to an action,
@@ -133,11 +155,9 @@ final class GestureTap {
         return window.targetFrame(for: action, gap: gap)
     }
 
-    /// The action the strokes so far map to, unless the user turned that gesture off.
+    /// The action the strokes so far map to, with the user's choices from Settings.
     private func currentAction() -> WindowAction? {
-        guard let action = ActionMap.action(for: recognizer.strokes, command: command),
-              !Self.disabledGestures.contains(action.kind) else { return nil }
-        return action
+        ActionMap.action(for: recognizer.strokes, command: command, overrides: Self.gestureMap)
     }
 
     /// Swipe down on a window Flickbar placed restores it; otherwise the action runs and moves are remembered.

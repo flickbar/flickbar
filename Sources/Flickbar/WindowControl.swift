@@ -11,8 +11,8 @@ struct AXWindow {
     private static let systemWide = AXUIElementCreateSystemWide()
     private static let fallbackTitlebarHeight: CGFloat = 28
 
-    /// The window whose title bar is under `point`, if any.
-    static func titlebar(at point: CGPoint) -> AXWindow? {
+    /// The window under `point`, if any; with `titleBarOnly`, only when the point is on its title bar.
+    static func at(_ point: CGPoint, titleBarOnly: Bool) -> AXWindow? {
         var hit: AXUIElement?
         guard AXUIElementCopyElementAtPosition(systemWide, Float(point.x), Float(point.y), &hit) == .success,
               let hit else { return nil }
@@ -24,6 +24,7 @@ struct AXWindow {
               !GestureTap.excludedApps.contains(NSRunningApplication(processIdentifier: pid)?.bundleIdentifier ?? ""),
               let frame = window.frame else { return nil }
         let candidate = AXWindow(element: window, app: AXUIElementCreateApplication(pid))
+        guard titleBarOnly else { return candidate }
         let height = candidate.titlebarHeight(windowTop: frame.minY)
         return point.y - frame.minY <= height ? candidate : nil
     }
@@ -70,7 +71,24 @@ struct AXWindow {
         case .toggleFullscreen:
             let isFull = element.bool("AXFullScreen") ?? false
             AXUIElementSetAttributeValue(element, "AXFullScreen" as CFString, (!isFull) as CFBoolean)
+        case .nextWindow:
+            // Windows are listed front to back, so raising the last one cycles through all of them.
+            let windows = (app.value(kAXWindowsAttribute) as? [AXUIElement] ?? []).filter {
+                $0.string(kAXSubroleAttribute) == kAXStandardWindowSubrole && $0.bool(kAXMinimizedAttribute) != true
+            }
+            guard let back = windows.last, windows.count > 1 else { return }
+            AXUIElementPerformAction(back, kAXRaiseAction as CFString)
+            runningApplication?.activate()
+        case .hideApp:
+            runningApplication?.hide()
+        case .quitApp:
+            runningApplication?.terminate()
         }
+    }
+
+    private var runningApplication: NSRunningApplication? {
+        var pid: pid_t = 0
+        return AXUIElementGetPid(app, &pid) == .success ? NSRunningApplication(processIdentifier: pid) : nil
     }
 
     func setFrame(_ rect: CGRect) {

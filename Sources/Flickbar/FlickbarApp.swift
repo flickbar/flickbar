@@ -74,8 +74,11 @@ final class AppState {
     var excludedApps = GestureTap.excludedApps {
         didSet { GestureTap.excludedApps = excludedApps }
     }
-    var disabledGestures = GestureTap.disabledGestures {
-        didSet { GestureTap.disabledGestures = disabledGestures }
+    var gestureMap: [String: String] = {
+        GestureTap.migratePreferences()
+        return GestureTap.gestureMap
+    }() {
+        didSet { GestureTap.gestureMap = gestureMap }
     }
 
     /// The app the user was last in (Flickbar's menu never becomes frontmost itself, but guard anyway).
@@ -87,10 +90,16 @@ final class AppState {
             set: { if $0 { self.excludedApps.insert(bundleID) } else { self.excludedApps.remove(bundleID) } })
     }
 
-    func gestureBinding(_ kind: GestureKind) -> Binding<Bool> {
+    /// The id of the action `gesture` does (`ActionMap.off` when turned off).
+    func actionBinding(_ gesture: TrackpadGesture) -> Binding<String> {
         Binding(
-            get: { !self.disabledGestures.contains(kind) },
-            set: { if $0 { self.disabledGestures.remove(kind) } else { self.disabledGestures.insert(kind) } })
+            get: { ActionMap.action(for: gesture, overrides: self.gestureMap)?.id ?? ActionMap.off },
+            set: { self.gestureMap[gesture.rawValue] = $0 == gesture.defaultAction.id ? nil : $0 })
+    }
+
+    var commandSwipeEnabled: Bool {
+        get { gestureMap[ActionMap.commandSwipe] != ActionMap.off }
+        set { gestureMap[ActionMap.commandSwipe] = newValue ? nil : ActionMap.off }
     }
 
     private let tap = GestureTap()

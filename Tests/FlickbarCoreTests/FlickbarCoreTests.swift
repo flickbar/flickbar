@@ -83,16 +83,40 @@ import Testing
     }
 }
 
-@Suite struct GestureKindTests {
-    @Test func everyStrokeSequenceMapsToItsGroup() {
-        #expect(ActionMap.action(for: [.left])?.kind == .halves)
-        #expect(ActionMap.action(for: [.up])?.kind == .fill)
-        #expect(ActionMap.action(for: [.down, .right])?.kind == .quarters)
-        #expect(ActionMap.action(for: [.down])?.kind == .restoreOrMinimize)
-        #expect(ActionMap.action(for: [.pinchIn])?.kind == .close)
-        #expect(ActionMap.action(for: [.pinchOut])?.kind == .fullScreen)
-        #expect(ActionMap.action(for: [.up], command: true)?.kind == .moveToDisplay)
-        #expect(WindowAction.snap(.center).kind == .center)
+@Suite struct GestureMapTests {
+    @Test func defaultsMatchTheBuiltInGestures() {
+        #expect(ActionMap.action(for: [.left]) == .snap(.leftHalf))
+        #expect(ActionMap.action(for: [.up]) == .snap(.maximize))
+        #expect(ActionMap.action(for: [.down]) == .minimize)
+        #expect(ActionMap.action(for: [.down, .right]) == .snap(.bottomRight))
+        #expect(ActionMap.action(for: [.pinchOut]) == .toggleFullscreen)
+        #expect(ActionMap.action(for: .doubleTap) == .snap(.center))
+    }
+
+    @Test func overridesReplaceDefaults() {
+        let map = ["swipeLeft": "leftThird", "pinchIn": "quitApp", "swipeUp": ActionMap.off, "swipeDown": "bogus"]
+        #expect(ActionMap.action(for: [.left], overrides: map) == .snap(.leftThird))
+        #expect(ActionMap.action(for: [.pinchIn], overrides: map) == .quitApp)
+        #expect(ActionMap.action(for: [.up], overrides: map) == nil)
+        #expect(ActionMap.action(for: [.down], overrides: map) == nil)
+        #expect(ActionMap.action(for: [.right], overrides: map) == .snap(.rightHalf))
+    }
+
+    @Test func commandSwipeCanBeTurnedOff() {
+        #expect(ActionMap.action(for: [.up], command: true, overrides: [ActionMap.commandSwipe: ActionMap.off]) == nil)
+    }
+
+    @Test func everyAssignableActionRoundTrips() {
+        for action in WindowAction.assignable { #expect(WindowAction(id: action.id) == action) }
+        #expect(Set(WindowAction.assignable.map(\.id)).count == WindowAction.assignable.count)
+        for gesture in TrackpadGesture.allCases { #expect(WindowAction.assignable.contains(gesture.defaultAction)) }
+    }
+
+    @Test func oldGroupSwitchesMigrate() {
+        let map = ActionMap.migrate(disabled: ["halves", "moveToDisplay", "unknown"])
+        #expect(map == ["swipeLeft": "none", "swipeRight": "none", "commandSwipe": "none"])
+        #expect(ActionMap.action(for: [.left], overrides: map) == nil)
+        #expect(ActionMap.action(for: [.up], overrides: map) == .snap(.maximize))
     }
 }
 
