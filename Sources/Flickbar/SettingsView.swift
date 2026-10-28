@@ -63,10 +63,16 @@ private struct GeneralSettings: View {
             }
             Section {
                 Toggle("Open at login", isOn: $state.launchAtLogin)
+                Toggle("Check for updates", isOn: $state.checkForUpdates)
+            } footer: {
+                Text("Once a day, Flickbar asks GitHub for the latest version number and shows it in the menu if it's newer. It sends nothing else.")
+                    .foregroundStyle(.secondary)
+                    .multilineTextAlignment(.leading)
+                    .frame(maxWidth: .infinity, alignment: .leading)
             }
         }
         .formStyle(.grouped)
-        .frame(height: 370)
+        .frame(height: 450)
     }
 }
 
