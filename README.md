@@ -46,7 +46,7 @@ using.
 
 ## Install
 
-**Download:** get **Flickbar-0.1.0.zip** from the
+**Download:** get **Flickbar-0.2.0.zip** from the
 [latest release](https://github.com/flickbar/flickbar/releases/latest), unzip it and move
 **Flickbar.app** to Applications. This early build isn't notarized by Apple yet, so macOS blocks it the
 first time: open it once, then click **Open Anyway** in *System Settings → Privacy & Security*.
