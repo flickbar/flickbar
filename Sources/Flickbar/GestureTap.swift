@@ -10,6 +10,7 @@ final class GestureTap {
     private var target: AXWindow?
     private var swallowMomentum = false
     private var command = false
+    private var escaped = false
     // shortcut: entries for closed windows are never pruned, a few bytes each; prune if it ever matters.
     private var restoreMemory = RestoreMemory<AXUIElement>()
 
@@ -21,8 +22,8 @@ final class GestureTap {
     }
 
     private func install() {
-        // 22 scrollWheel, 29 gesture, 30 magnify, 32 smartMagnify (two-finger double tap).
-        let mask: CGEventMask = (1 << 22) | (1 << 29) | (1 << 30) | (1 << 32)
+        // 10 keyDown (Esc cancels), 22 scrollWheel, 29 gesture, 30 magnify, 32 smartMagnify (two-finger double tap).
+        let mask: CGEventMask = (1 << 10) | (1 << 22) | (1 << 29) | (1 << 30) | (1 << 32)
         let callback: CGEventTapCallBack = { _, type, event, info in
             let me = Unmanaged<GestureTap>.fromOpaque(info!).takeUnretainedValue()
             let consumed = MainActor.assumeIsolated { me.handle(type, event) }
@@ -40,6 +41,13 @@ final class GestureTap {
         if type == .tapDisabledByTimeout || type == .tapDisabledByUserInput {
             if let tap, isEnabled { CGEvent.tapEnable(tap: tap, enable: true) }
             return false
+        }
+        if type == .keyDown {
+            let escape: Int64 = 53
+            guard target != nil, event.getIntegerValueField(.keyboardEventKeycode) == escape else { return false }
+            // Keep consuming the rest of the gesture so it doesn't leak into the app; it just won't fire.
+            escaped = true
+            return true
         }
         guard let ns = NSEvent(cgEvent: event) else { return false }
         return switch ns.type {
@@ -85,12 +93,13 @@ final class GestureTap {
         recognizer.reset()
         swallowMomentum = false
         command = flags.contains(.command)
+        escaped = false
         target = AXWindow.titlebar(at: point)
     }
 
     /// A tick tells the user the gesture so far maps to an action, before they lift their fingers.
     private func strokeRecognized() {
-        guard ActionMap.action(for: recognizer.strokes, command: command) != nil else { return }
+        guard !escaped, ActionMap.action(for: recognizer.strokes, command: command) != nil else { return }
         NSHapticFeedbackManager.defaultPerformer.perform(.alignment, performanceTime: .now)
     }
 
@@ -111,7 +120,7 @@ final class GestureTap {
     }
 
     private func finish(cancelled: Bool) {
-        if !cancelled, let target, let action = ActionMap.action(for: recognizer.strokes, command: command) {
+        if !cancelled, !escaped, let target, let action = ActionMap.action(for: recognizer.strokes, command: command) {
             run(action, on: target)
         }
         swallowMomentum = true
