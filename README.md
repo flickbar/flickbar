@@ -19,7 +19,18 @@ A haptic tick confirms when the gesture so far maps to an action; it runs when y
 Press Esc before lifting to cancel.
 Gestures that start anywhere else are passed through untouched, so normal scrolling and zooming keep working.
 
-The menu bar icon has options for gaps between snapped windows and launching at login.
+The menu bar icon has options for gaps between snapped windows, turning gestures off for the current
+app, and launching at login.
+
+## Testing
+
+```sh
+swift test               # unit tests (no permissions needed)
+./scripts/livetest.sh    # end-to-end: drives the running app with synthetic gestures
+```
+
+The live test opens its own TextEdit document and moves it around (and the pointer) for about a
+minute, so don't use the Mac while it runs. The terminal needs Accessibility permission to post events.
 
 ## Requirements
 

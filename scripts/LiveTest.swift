@@ -147,6 +147,11 @@ swipe(titlebar(), [(-120, 0)], escape: true); expect("Esc cancels", before)
 swipe(content(), [(-120, 0)]);                expect("swipe on content is ignored", before)
 swipe(titlebar(), [(-60, -60)]);              expect("diagonal is ignored", before)
 
+let prefs = UserDefaults(suiteName: "io.github.flickbar.Flickbar")!
+prefs.set(["com.apple.TextEdit"], forKey: "excludedApps")
+swipe(titlebar(), [(-120, 0)]);               expect("excluded app is ignored", before)
+prefs.removeObject(forKey: "excludedApps")
+
 if screens.count > 1 {
     swipe(titlebar(), [(0, -120)], flags: .maskCommand)
     check("⌘ swipe moves to another display", !main.contains(CGPoint(x: frame(window).midX, y: frame(window).midY)), "\(frame(window))")

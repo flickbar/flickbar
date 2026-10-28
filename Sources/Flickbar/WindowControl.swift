@@ -21,6 +21,7 @@ struct AXWindow {
 
         var pid: pid_t = 0
         guard AXUIElementGetPid(window, &pid) == .success, pid != getpid(),
+              !GestureTap.excludedApps.contains(NSRunningApplication(processIdentifier: pid)?.bundleIdentifier ?? ""),
               let frame = window.frame else { return nil }
         let candidate = AXWindow(element: window, app: AXUIElementCreateApplication(pid))
         let height = candidate.titlebarHeight(windowTop: frame.minY)

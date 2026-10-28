@@ -24,6 +24,9 @@ struct FlickbarApp: App {
                 Text("Medium").tag(12)
                 Text("Large").tag(20)
             }
+            if let app = state.frontmostApp, let id = app.bundleIdentifier {
+                Toggle("Disable in \(app.localizedName ?? id)", isOn: state.excludedBinding(id))
+            }
             Toggle("Launch at Login", isOn: $state.launchAtLogin)
             Divider()
             Button("Quit Flickbar") { NSApp.terminate(nil) }.keyboardShortcut("q")
@@ -53,6 +56,19 @@ final class AppState {
         }
     }
 
+    /// The app the user was last in (Flickbar's menu never becomes frontmost itself, but guard anyway).
+    private(set) var frontmostApp = NSWorkspace.shared.frontmostApplication
+
+    func excludedBinding(_ bundleID: String) -> Binding<Bool> {
+        Binding(
+            get: { GestureTap.excludedApps.contains(bundleID) },
+            set: { exclude in
+                var apps = GestureTap.excludedApps
+                if exclude { apps.insert(bundleID) } else { apps.remove(bundleID) }
+                GestureTap.excludedApps = apps
+            })
+    }
+
     private let tap = GestureTap()
     private var trustPoll: Timer?
 
@@ -60,6 +76,14 @@ final class AppState {
         NSApp?.setActivationPolicy(.accessory)
         logger.notice("launched, accessibility trusted: \(self.isTrusted, privacy: .public)")
         if isTrusted { tap.isEnabled = isEnabled } else { waitForTrust() }
+        NSWorkspace.shared.notificationCenter.addObserver(
+            forName: NSWorkspace.didActivateApplicationNotification, object: nil, queue: .main
+        ) { [weak self] note in
+            let app = note.userInfo?[NSWorkspace.applicationUserInfoKey] as? NSRunningApplication
+            MainActor.assumeIsolated {
+                if let app, app.processIdentifier != getpid() { self?.frontmostApp = app }
+            }
+        }
     }
 
     func requestAccess() {

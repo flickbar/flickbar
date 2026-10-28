@@ -14,6 +14,12 @@ final class GestureTap {
     // shortcut: entries for closed windows are never pruned, a few bytes each; prune if it ever matters.
     private var restoreMemory = RestoreMemory<AXUIElement>()
 
+    /// Bundle IDs of apps where title-bar gestures are turned off.
+    static var excludedApps: Set<String> {
+        get { Set(UserDefaults.standard.stringArray(forKey: "excludedApps") ?? []) }
+        set { UserDefaults.standard.set(newValue.sorted(), forKey: "excludedApps") }
+    }
+
     var isEnabled = false {
         didSet {
             if isEnabled, tap == nil { install() }
@@ -86,7 +92,7 @@ final class GestureTap {
 
     private func handleDoubleTap(at point: CGPoint) -> Bool {
         guard let window = AXWindow.titlebar(at: point) else { return false }
-        window.perform(.snap(.center))
+        run(.snap(.center), on: window)
         return true
     }
 
