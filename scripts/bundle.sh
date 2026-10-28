@@ -9,7 +9,8 @@ BIN="$(swift build -c release --arch arm64 --arch x86_64 --show-bin-path)/Flickb
 
 APP=build/Flickbar.app
 rm -rf "$APP"
-mkdir -p "$APP/Contents/MacOS"
+mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
+cp Resources/AppIcon.icns "$APP/Contents/Resources/AppIcon.icns"
 cp "$BIN" "$APP/Contents/MacOS/Flickbar"
 
 cat > "$APP/Contents/Info.plist" <<EOF
@@ -20,6 +21,7 @@ cat > "$APP/Contents/Info.plist" <<EOF
     <key>CFBundleExecutable</key><string>Flickbar</string>
     <key>CFBundleIdentifier</key><string>io.github.flickbar.Flickbar</string>
     <key>CFBundleName</key><string>Flickbar</string>
+    <key>CFBundleIconFile</key><string>AppIcon</string>
     <key>CFBundlePackageType</key><string>APPL</string>
     <key>CFBundleShortVersionString</key><string>$VERSION</string>
     <key>CFBundleVersion</key><string>$VERSION</string>

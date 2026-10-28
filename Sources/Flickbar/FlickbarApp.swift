@@ -1,46 +1,50 @@
 import AppKit
 import ApplicationServices
+import FlickbarCore
 import ServiceManagement
 import SwiftUI
 
 @main
 struct FlickbarApp: App {
     @State private var state = AppState()
-    @AppStorage("gap") private var gap = 0
 
     var body: some Scene {
-        MenuBarExtra("Flickbar", systemImage: "hand.draw") {
-            if state.isTrusted {
-                Toggle("Enabled", isOn: $state.isEnabled)
-            } else {
-                Text("Accessibility access needed")
-                Text("Already on? Remove Flickbar with − and add it again.")
-                Button("Grant Access…") { state.requestAccess() }
-            }
-            Menu("Gestures on a Title Bar") {
-                Text("Swipe left / right — half screen")
-                Text("Swipe up — fill screen")
-                Text("Swipe sideways, then up or down — quarter")
-                Text("Swipe down — restore, or minimize")
-                Text("Pinch in — close · Pinch out — full screen")
-                Text("Double-tap with two fingers — center")
-                Text("⌘ + swipe — move to another display")
-                Text("Esc before lifting — cancel")
-            }
-            Divider()
-            Picker("Window Gap", selection: $gap) {
-                Text("None").tag(0)
-                Text("Small").tag(6)
-                Text("Medium").tag(12)
-                Text("Large").tag(20)
-            }
-            if let app = state.frontmostApp, let id = app.bundleIdentifier {
-                Toggle("Disable in \(app.localizedName ?? id)", isOn: state.excludedBinding(id))
-            }
-            Toggle("Launch at Login", isOn: $state.launchAtLogin)
-            Divider()
-            Button("Quit Flickbar") { NSApp.terminate(nil) }.keyboardShortcut("q")
+        MenuBarExtra {
+            MenuContent(state: state)
+        } label: {
+            // Without a label VoiceOver reads the symbol's name ("Hand Drawing A Line").
+            Image(systemName: state.isActive ? "hand.draw" : "hand.raised.slash")
+                .accessibilityLabel(state.isActive ? "Flickbar" : "Flickbar, off")
         }
+        Settings {
+            SettingsView(state: state)
+        }
+    }
+}
+
+/// Kept short, as the HIG asks of menu bar extras: status, the contextual per-app switch, Settings, Quit.
+private struct MenuContent: View {
+    @Bindable var state: AppState
+    @Environment(\.openSettings) private var openSettings
+
+    var body: some View {
+        if state.isTrusted {
+            Toggle("Title Bar Gestures", isOn: $state.isEnabled)
+        } else {
+            Button("Grant Accessibility Access…") { state.showWelcome() }
+        }
+        if let app = state.frontmostApp, let id = app.bundleIdentifier {
+            Toggle("Turn Off in \(app.localizedName ?? id)", isOn: state.excludedBinding(id))
+        }
+        Divider()
+        Button("Settings…") {
+            // A menu bar app isn't active, so its Settings window would otherwise open behind other apps.
+            NSApp.activate()
+            openSettings()
+        }
+        .keyboardShortcut(",")
+        Divider()
+        Button("Quit Flickbar") { NSApp.terminate(nil) }.keyboardShortcut("q")
     }
 }
 
@@ -53,6 +57,7 @@ final class AppState {
             tap.isEnabled = isEnabled && isTrusted
         }
     }
+    var isActive: Bool { isEnabled && isTrusted }
 
     var launchAtLogin = SMAppService.mainApp.status == .enabled {
         didSet {
@@ -66,17 +71,26 @@ final class AppState {
         }
     }
 
+    var excludedApps = GestureTap.excludedApps {
+        didSet { GestureTap.excludedApps = excludedApps }
+    }
+    var disabledGestures = GestureTap.disabledGestures {
+        didSet { GestureTap.disabledGestures = disabledGestures }
+    }
+
     /// The app the user was last in (Flickbar's menu never becomes frontmost itself, but guard anyway).
     private(set) var frontmostApp = NSWorkspace.shared.frontmostApplication
 
     func excludedBinding(_ bundleID: String) -> Binding<Bool> {
         Binding(
-            get: { GestureTap.excludedApps.contains(bundleID) },
-            set: { exclude in
-                var apps = GestureTap.excludedApps
-                if exclude { apps.insert(bundleID) } else { apps.remove(bundleID) }
-                GestureTap.excludedApps = apps
-            })
+            get: { self.excludedApps.contains(bundleID) },
+            set: { if $0 { self.excludedApps.insert(bundleID) } else { self.excludedApps.remove(bundleID) } })
+    }
+
+    func gestureBinding(_ kind: GestureKind) -> Binding<Bool> {
+        Binding(
+            get: { !self.disabledGestures.contains(kind) },
+            set: { if $0 { self.disabledGestures.remove(kind) } else { self.disabledGestures.insert(kind) } })
     }
 
     private let tap = GestureTap()
@@ -85,7 +99,14 @@ final class AppState {
     init() {
         NSApp?.setActivationPolicy(.accessory)
         logger.notice("launched, accessibility trusted: \(self.isTrusted, privacy: .public)")
-        if isTrusted { tap.isEnabled = isEnabled } else { waitForTrust() }
+        if isTrusted {
+            tap.isEnabled = isEnabled
+        } else {
+            waitForTrust()
+            DispatchQueue.main.async { self.showWelcome() }
+        }
+        // `open Flickbar.app --args --welcome` previews the first-run window without revoking access.
+        if CommandLine.arguments.contains("--welcome") { DispatchQueue.main.async { self.showWelcome() } }
         NSWorkspace.shared.notificationCenter.addObserver(
             forName: NSWorkspace.didActivateApplicationNotification, object: nil, queue: .main
         ) { [weak self] note in
@@ -96,7 +117,10 @@ final class AppState {
         }
     }
 
+    func showWelcome() { WelcomeWindow.show(state: self) }
+
     func requestAccess() {
+        // The prompt adds Flickbar to the Accessibility list; the pane lets the user switch it on.
         let options = ["AXTrustedCheckOptionPrompt": true] as CFDictionary
         AXIsProcessTrustedWithOptions(options)
         NSWorkspace.shared.open(URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility")!)

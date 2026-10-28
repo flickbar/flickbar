@@ -20,6 +20,12 @@ final class GestureTap {
         set { UserDefaults.standard.set(newValue.sorted(), forKey: "excludedApps") }
     }
 
+    /// Gesture groups the user turned off in Settings.
+    static var disabledGestures: Set<GestureKind> {
+        get { Set((UserDefaults.standard.stringArray(forKey: "disabledGestures") ?? []).compactMap(GestureKind.init)) }
+        set { UserDefaults.standard.set(newValue.map(\.rawValue).sorted(), forKey: "disabledGestures") }
+    }
+
     var isEnabled = false {
         didSet {
             if isEnabled, tap == nil { install() }
@@ -91,7 +97,7 @@ final class GestureTap {
     }
 
     private func handleDoubleTap(at point: CGPoint) -> Bool {
-        guard let window = AXWindow.titlebar(at: point) else { return false }
+        guard !Self.disabledGestures.contains(.center), let window = AXWindow.titlebar(at: point) else { return false }
         run(.snap(.center), on: window)
         return true
     }
@@ -107,8 +113,15 @@ final class GestureTap {
 
     /// A tick tells the user the gesture so far maps to an action, before they lift their fingers.
     private func strokeRecognized() {
-        guard !escaped, ActionMap.action(for: recognizer.strokes, command: command) != nil else { return }
+        guard !escaped, currentAction() != nil, UserDefaults.standard.object(forKey: "haptics") as? Bool ?? true else { return }
         NSHapticFeedbackManager.defaultPerformer.perform(.alignment, performanceTime: .now)
+    }
+
+    /// The action the strokes so far map to, unless the user turned that gesture off.
+    private func currentAction() -> WindowAction? {
+        guard let action = ActionMap.action(for: recognizer.strokes, command: command),
+              !Self.disabledGestures.contains(action.kind) else { return nil }
+        return action
     }
 
     /// Swipe down on a window Flickbar placed restores it; otherwise the action runs and moves are remembered.
@@ -128,7 +141,7 @@ final class GestureTap {
     }
 
     private func finish(cancelled: Bool) {
-        if !cancelled, !escaped, let target, let action = ActionMap.action(for: recognizer.strokes, command: command) {
+        if !cancelled, !escaped, let target, let action = currentAction() {
             run(action, on: target)
         }
         swallowMomentum = true

@@ -19,8 +19,9 @@ A haptic tick confirms when the gesture so far maps to an action; it runs when y
 Press Esc before lifting to cancel.
 Gestures that start anywhere else are passed through untouched, so normal scrolling and zooming keep working.
 
-The menu bar icon has options for gaps between snapped windows, turning gestures off for the current
-app, and launching at login.
+**Settings** (menu bar icon → Settings…, or ⌘,) let you turn individual gestures on or off, set the
+space between snapped windows, turn off haptic feedback, keep gestures off in specific apps, and open
+Flickbar at login. The menu bar icon can also turn gestures off for the app you're using.
 
 ## Testing
 

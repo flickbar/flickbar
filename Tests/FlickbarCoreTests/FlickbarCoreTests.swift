@@ -83,6 +83,19 @@ import Testing
     }
 }
 
+@Suite struct GestureKindTests {
+    @Test func everyStrokeSequenceMapsToItsGroup() {
+        #expect(ActionMap.action(for: [.left])?.kind == .halves)
+        #expect(ActionMap.action(for: [.up])?.kind == .fill)
+        #expect(ActionMap.action(for: [.down, .right])?.kind == .quarters)
+        #expect(ActionMap.action(for: [.down])?.kind == .restoreOrMinimize)
+        #expect(ActionMap.action(for: [.pinchIn])?.kind == .close)
+        #expect(ActionMap.action(for: [.pinchOut])?.kind == .fullScreen)
+        #expect(ActionMap.action(for: [.up], command: true)?.kind == .moveToDisplay)
+        #expect(WindowAction.snap(.center).kind == .center)
+    }
+}
+
 @Suite struct RestoreTests {
     let original = CGRect(x: 100, y: 100, width: 600, height: 400)
     let half = CGRect(x: 0, y: 25, width: 500, height: 800)

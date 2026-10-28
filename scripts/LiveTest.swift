@@ -151,6 +151,9 @@ let prefs = UserDefaults(suiteName: "io.github.flickbar.Flickbar")!
 prefs.set(["com.apple.TextEdit"], forKey: "excludedApps")
 swipe(titlebar(), [(-120, 0)]);               expect("excluded app is ignored", before)
 prefs.removeObject(forKey: "excludedApps")
+prefs.set(["halves"], forKey: "disabledGestures")
+swipe(titlebar(), [(-120, 0)]);               expect("gesture turned off in Settings is ignored", before)
+prefs.removeObject(forKey: "disabledGestures")
 
 if screens.count > 1 {
     swipe(titlebar(), [(0, -120)], flags: .maskCommand)
