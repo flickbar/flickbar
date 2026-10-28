@@ -14,6 +14,7 @@ struct FlickbarApp: App {
                 Toggle("Enabled", isOn: $state.isEnabled)
             } else {
                 Text("Accessibility access needed")
+                Text("Already on? Remove Flickbar with − and add it again.")
                 Button("Grant Access…") { state.requestAccess() }
             }
             Divider()
@@ -46,7 +47,7 @@ final class AppState {
                 if launchAtLogin { try SMAppService.mainApp.register() } else { try SMAppService.mainApp.unregister() }
             } catch {
                 // Fails when run outside an app bundle (e.g. `swift run`); show the real state instead.
-                NSLog("Flickbar: launch at login change failed: \(error)")
+                logger.error("launch at login change failed: \(error.localizedDescription, privacy: .public)")
                 launchAtLogin = SMAppService.mainApp.status == .enabled
             }
         }
@@ -57,6 +58,7 @@ final class AppState {
 
     init() {
         NSApp?.setActivationPolicy(.accessory)
+        logger.notice("launched, accessibility trusted: \(self.isTrusted, privacy: .public)")
         if isTrusted { tap.isEnabled = isEnabled } else { waitForTrust() }
     }
 

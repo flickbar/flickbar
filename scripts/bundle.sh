@@ -30,5 +30,13 @@ cat > "$APP/Contents/Info.plist" <<EOF
 </plist>
 EOF
 
-codesign --force --sign - "$APP"
+# macOS ties the Accessibility grant to the signature. Ad-hoc signatures change on every build, so the grant
+# silently stops applying; a stable identity (see README) keeps it across rebuilds.
+IDENTITY="${SIGN_IDENTITY:-Flickbar Local Signing}"
+if security find-certificate -c "$IDENTITY" >/dev/null 2>&1; then
+    codesign --force --sign "$IDENTITY" "$APP"
+else
+    echo "warning: no '$IDENTITY' certificate; ad-hoc signing (re-grant Accessibility after each build)" >&2
+    codesign --force --sign - "$APP"
+fi
 echo "Built $APP"

@@ -31,12 +31,22 @@ The menu bar icon has options for gaps between snapped windows and launching at 
 
 ```sh
 swift test               # unit tests for the gesture recognizer and snap geometry
-./scripts/bundle.sh      # builds build/Flickbar.app (universal, ad-hoc signed)
+./scripts/bundle.sh      # builds build/Flickbar.app (universal)
 open build/Flickbar.app
 ```
 
-Ad-hoc signed builds get a new signature each time, so after rebuilding you may need to remove and re-add
-Flickbar under *System Settings → Privacy & Security → Accessibility*.
+macOS ties the Accessibility permission to the app's code signature. Without a signing certificate the
+script signs ad-hoc, which produces a new signature on every build: the toggle in System Settings stays on
+but no longer applies, and Flickbar does nothing. Either remove Flickbar from *System Settings → Privacy &
+Security → Accessibility* (the **−** button) and grant it again after each build, or create a local
+signing certificate once:
+
+1. Open *Keychain Access → Certificate Assistant → Create a Certificate…*
+2. Name: `Flickbar Local Signing`, Identity Type: *Self Signed Root*, Certificate Type: *Code Signing*.
+3. Rebuild, then grant Accessibility one last time. Later builds keep the permission.
+
+Flickbar logs to the unified log under the subsystem `io.github.flickbar.Flickbar`
+(`log stream --predicate 'subsystem == "io.github.flickbar.Flickbar"'`).
 
 ## How it works
 

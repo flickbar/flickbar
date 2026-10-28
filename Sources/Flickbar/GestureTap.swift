@@ -32,7 +32,8 @@ final class GestureTap {
         tap = CGEvent.tapCreate(tap: .cgSessionEventTap, place: .headInsertEventTap, options: .defaultTap,
                                 eventsOfInterest: mask, callback: callback,
                                 userInfo: Unmanaged.passUnretained(self).toOpaque())
-        guard let tap else { return }
+        guard let tap else { return logger.error("event tap creation failed (not trusted for Accessibility?)") }
+        logger.notice("event tap installed")
         CFRunLoopAddSource(CFRunLoopGetMain(), CFMachPortCreateRunLoopSource(nil, tap, 0), .commonModes)
     }
 
@@ -95,6 +96,7 @@ final class GestureTap {
         command = flags.contains(.command)
         escaped = false
         target = AXWindow.titlebar(at: point)
+        logger.notice("gesture began at \(point.debugDescription, privacy: .public), on title bar: \(self.target != nil, privacy: .public)")
     }
 
     /// A tick tells the user the gesture so far maps to an action, before they lift their fingers.
