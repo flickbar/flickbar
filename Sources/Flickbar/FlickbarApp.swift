@@ -17,6 +17,16 @@ struct FlickbarApp: App {
                 Text("Already on? Remove Flickbar with − and add it again.")
                 Button("Grant Access…") { state.requestAccess() }
             }
+            Menu("Gestures on a Title Bar") {
+                Text("Swipe left / right — half screen")
+                Text("Swipe up — fill screen")
+                Text("Swipe sideways, then up or down — quarter")
+                Text("Swipe down — restore, or minimize")
+                Text("Pinch in — close · Pinch out — full screen")
+                Text("Double-tap with two fingers — center")
+                Text("⌘ + swipe — move to another display")
+                Text("Esc before lifting — cancel")
+            }
             Divider()
             Picker("Window Gap", selection: $gap) {
                 Text("None").tag(0)
