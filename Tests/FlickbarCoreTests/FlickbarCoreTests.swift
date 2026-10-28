@@ -75,4 +75,29 @@ import Testing
         #expect(ActionMap.action(for: [.left, .right]) == nil)
         #expect(ActionMap.action(for: []) == nil)
     }
+
+    @Test func commandSwipeMovesDisplay() {
+        #expect(ActionMap.action(for: [.right], command: true) == .moveToDisplay(.right))
+        #expect(ActionMap.action(for: [.right, .up], command: true) == nil)
+        #expect(ActionMap.action(for: [.pinchIn], command: true) == nil)
+    }
+}
+
+@Suite struct DisplayTests {
+    let main = CGRect(x: 0, y: 0, width: 1000, height: 800)
+    let right = CGRect(x: 1000, y: 0, width: 2000, height: 1000)
+    let above = CGRect(x: 0, y: -900, width: 1000, height: 900)
+
+    @Test func picksNeighborInDirection() {
+        let all = [main, right, above]
+        #expect(SnapGeometry.neighbor(of: main, in: all, toward: .right) == right)
+        #expect(SnapGeometry.neighbor(of: main, in: all, toward: .up) == above)
+        #expect(SnapGeometry.neighbor(of: main, in: all, toward: .left) == nil)
+        #expect(SnapGeometry.neighbor(of: right, in: all, toward: .left) == main)
+    }
+
+    @Test func relocateKeepsProportions() {
+        let leftHalf = CGRect(x: 0, y: 0, width: 500, height: 800)
+        #expect(SnapGeometry.relocate(leftHalf, from: main, to: right) == CGRect(x: 1000, y: 0, width: 1000, height: 1000))
+    }
 }

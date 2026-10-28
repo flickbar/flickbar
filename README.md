@@ -13,8 +13,12 @@ Put the pointer on a window's title bar and swipe with two fingers:
 | Pinch in | Close window |
 | Pinch out | Toggle full screen |
 | Double-tap with two fingers | Center window |
+| Hold ⌘ and swipe in any direction | Move window to the display on that side |
 
+A haptic tick confirms when the gesture so far maps to an action; it runs when you lift your fingers.
 Gestures that start anywhere else are passed through untouched, so normal scrolling and zooming keep working.
+
+The menu bar icon has options for gaps between snapped windows and launching at login.
 
 ## Requirements
 

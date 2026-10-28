@@ -36,11 +36,16 @@ struct AXWindow {
 
     var frame: CGRect? { element.frame }
 
-    func perform(_ action: WindowAction) {
+    func perform(_ action: WindowAction, gap: CGFloat = 0) {
         switch action {
         case .snap(let target):
             guard let current = frame, let visible = Self.visibleFrame(containing: current) else { return }
-            setFrame(SnapGeometry.frame(for: target, in: visible, current: current))
+            setFrame(SnapGeometry.frame(for: target, in: visible, current: current, gap: gap))
+        case .moveToDisplay(let direction):
+            let screens = Self.visibleFrames()
+            guard let current = frame, let source = Self.visibleFrame(containing: current),
+                  let destination = SnapGeometry.neighbor(of: source, in: screens, toward: direction) else { return }
+            setFrame(SnapGeometry.relocate(current, from: source, to: destination))
         case .minimize:
             AXUIElementSetAttributeValue(element, kAXMinimizedAttribute as CFString, kCFBooleanTrue)
         case .close:
@@ -67,14 +72,18 @@ struct AXWindow {
         AXUIElementSetAttributeValue(element, kAXSizeAttribute as CFString, axSize)
     }
 
-    /// Visible frame (minus menu bar and Dock) of the screen holding most of `rect`, in AX coordinates.
-    private static func visibleFrame(containing rect: CGRect) -> CGRect? {
-        guard let primary = NSScreen.screens.first else { return nil }
-        let toAX = { (r: CGRect) in CGRect(x: r.minX, y: primary.frame.maxY - r.maxY, width: r.width, height: r.height) }
-        let screen = NSScreen.screens.max { a, b in
-            toAX(a.frame).intersection(rect).area < toAX(b.frame).intersection(rect).area
+    /// Visible frames (minus menu bar and Dock) of all screens, in AX coordinates.
+    private static func visibleFrames() -> [CGRect] {
+        guard let primary = NSScreen.screens.first else { return [] }
+        return NSScreen.screens.map { s in
+            let r = s.visibleFrame
+            return CGRect(x: r.minX, y: primary.frame.maxY - r.maxY, width: r.width, height: r.height)
         }
-        return screen.map { toAX($0.visibleFrame) }
+    }
+
+    /// Visible frame of the screen holding most of `rect`.
+    private static func visibleFrame(containing rect: CGRect) -> CGRect? {
+        visibleFrames().max { $0.intersection(rect).area < $1.intersection(rect).area }
     }
 }
 

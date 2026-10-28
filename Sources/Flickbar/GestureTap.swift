@@ -9,6 +9,7 @@ final class GestureTap {
     private var recognizer = GestureRecognizer()
     private var target: AXWindow?
     private var swallowMomentum = false
+    private var command = false
 
     var isEnabled = false {
         didSet {
@@ -54,20 +55,20 @@ final class GestureTap {
             if e.momentumPhase.contains(.ended) { swallowMomentum = false }
             return swallow
         }
-        if e.phase.contains(.began) { begin(at: point) }
+        if e.phase.contains(.began) { begin(at: point, flags: e.modifierFlags) }
         guard target != nil else { return false }
 
         // Convert content-scroll deltas to finger movement, regardless of the natural-scrolling setting.
         let sign: CGFloat = e.isDirectionInvertedFromDevice ? 1 : -1
-        recognizer.addScroll(dx: sign * e.scrollingDeltaX, dy: sign * e.scrollingDeltaY)
+        if recognizer.addScroll(dx: sign * e.scrollingDeltaX, dy: sign * e.scrollingDeltaY) != nil { strokeRecognized() }
         if e.phase.contains(.ended) || e.phase.contains(.cancelled) { finish(cancelled: e.phase.contains(.cancelled)) }
         return true
     }
 
     private func handlePinch(_ e: NSEvent, at point: CGPoint) -> Bool {
-        if e.phase.contains(.began) { begin(at: point) }
+        if e.phase.contains(.began) { begin(at: point, flags: e.modifierFlags) }
         guard target != nil else { return false }
-        recognizer.addMagnification(e.magnification)
+        if recognizer.addMagnification(e.magnification) != nil { strokeRecognized() }
         if e.phase.contains(.ended) || e.phase.contains(.cancelled) { finish(cancelled: e.phase.contains(.cancelled)) }
         return true
     }
@@ -78,15 +79,22 @@ final class GestureTap {
         return true
     }
 
-    private func begin(at point: CGPoint) {
+    private func begin(at point: CGPoint, flags: NSEvent.ModifierFlags) {
         recognizer.reset()
         swallowMomentum = false
+        command = flags.contains(.command)
         target = AXWindow.titlebar(at: point)
     }
 
+    /// A tick tells the user the gesture so far maps to an action, before they lift their fingers.
+    private func strokeRecognized() {
+        guard ActionMap.action(for: recognizer.strokes, command: command) != nil else { return }
+        NSHapticFeedbackManager.defaultPerformer.perform(.alignment, performanceTime: .now)
+    }
+
     private func finish(cancelled: Bool) {
-        if !cancelled, let target, let action = ActionMap.action(for: recognizer.strokes) {
-            target.perform(action)
+        if !cancelled, let target, let action = ActionMap.action(for: recognizer.strokes, command: command) {
+            target.perform(action, gap: CGFloat(UserDefaults.standard.integer(forKey: "gap")))
         }
         swallowMomentum = true
         target = nil

@@ -1,10 +1,12 @@
 import AppKit
 import ApplicationServices
+import ServiceManagement
 import SwiftUI
 
 @main
 struct FlickbarApp: App {
     @State private var state = AppState()
+    @AppStorage("gap") private var gap = 0
 
     var body: some Scene {
         MenuBarExtra("Flickbar", systemImage: "hand.draw") {
@@ -14,6 +16,14 @@ struct FlickbarApp: App {
                 Text("Accessibility access needed")
                 Button("Grant Access…") { state.requestAccess() }
             }
+            Divider()
+            Picker("Window Gap", selection: $gap) {
+                Text("None").tag(0)
+                Text("Small").tag(6)
+                Text("Medium").tag(12)
+                Text("Large").tag(20)
+            }
+            Toggle("Launch at Login", isOn: $state.launchAtLogin)
             Divider()
             Button("Quit Flickbar") { NSApp.terminate(nil) }.keyboardShortcut("q")
         }
@@ -27,6 +37,18 @@ final class AppState {
         didSet {
             UserDefaults.standard.set(isEnabled, forKey: "enabled")
             tap.isEnabled = isEnabled && isTrusted
+        }
+    }
+
+    var launchAtLogin = SMAppService.mainApp.status == .enabled {
+        didSet {
+            do {
+                if launchAtLogin { try SMAppService.mainApp.register() } else { try SMAppService.mainApp.unregister() }
+            } catch {
+                // Fails when run outside an app bundle (e.g. `swift run`); show the real state instead.
+                NSLog("Flickbar: launch at login change failed: \(error)")
+                launchAtLogin = SMAppService.mainApp.status == .enabled
+            }
         }
     }
 

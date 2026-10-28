@@ -8,12 +8,18 @@ public enum SnapTarget: Equatable, Sendable {
 public enum WindowAction: Equatable, Sendable {
     case snap(SnapTarget)
     case minimize, close, toggleFullscreen
+    case moveToDisplay(Stroke)
 }
 
 public enum ActionMap {
     /// The action a finished gesture performs. Quarters accept either stroke order.
-    public static func action(for strokes: [Stroke]) -> WindowAction? {
-        switch strokes {
+    /// With ⌘ held, a single swipe moves the window to the neighbouring display instead.
+    public static func action(for strokes: [Stroke], command: Bool = false) -> WindowAction? {
+        if command {
+            guard strokes.count == 1, let s = strokes.first, s != .pinchIn, s != .pinchOut else { return nil }
+            return .moveToDisplay(s)
+        }
+        return switch strokes {
         case [.left]: .snap(.leftHalf)
         case [.right]: .snap(.rightHalf)
         case [.up]: .snap(.maximize)
@@ -49,5 +55,28 @@ public enum SnapGeometry {
                    width: min(current.width, area.width), height: min(current.height, area.height))
         }
         return rect.integral
+    }
+
+    /// The display next to `current` in `direction` (nearest centre on that side), or nil if there is none.
+    public static func neighbor(of current: CGRect, in screens: [CGRect], toward direction: Stroke) -> CGRect? {
+        let candidates = screens.filter { s in
+            switch direction {
+            case .left: s.midX < current.minX
+            case .right: s.midX > current.maxX
+            case .up: s.midY < current.minY
+            case .down: s.midY > current.maxY
+            case .pinchIn, .pinchOut: false
+            }
+        }
+        let distance = { (s: CGRect) in hypot(s.midX - current.midX, s.midY - current.midY) }
+        return candidates.min { distance($0) < distance($1) }
+    }
+
+    /// `frame` moved from one visible area to another, keeping its relative position and size.
+    public static func relocate(_ frame: CGRect, from source: CGRect, to destination: CGRect) -> CGRect {
+        let sx = destination.width / source.width, sy = destination.height / source.height
+        return CGRect(x: destination.minX + (frame.minX - source.minX) * sx,
+                      y: destination.minY + (frame.minY - source.minY) * sy,
+                      width: frame.width * sx, height: frame.height * sy).integral
     }
 }
