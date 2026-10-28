@@ -7,7 +7,8 @@ VERSION="${VERSION:-0.1.0}"
 swift build -c release --arch arm64 --arch x86_64
 BIN="$(swift build -c release --arch arm64 --arch x86_64 --show-bin-path)/Flickbar"
 
-APP=build/Flickbar.app
+APP="${APP:-build/Flickbar.app}"
+mkdir -p "$(dirname "$APP")"
 rm -rf "$APP"
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
 cp Resources/AppIcon.icns "$APP/Contents/Resources/AppIcon.icns"
