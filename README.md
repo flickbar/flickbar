@@ -34,11 +34,17 @@ While your fingers are down, a highlight shows where the window will land and a 
 confirms the gesture; it runs when you lift them. Press Esc first to cancel. Other scrolling and
 zooming passes through untouched.
 
+## Keyboard shortcuts
+
+Every action can also have a keyboard shortcut, set in *Settings → Shortcuts* (none are set at first, so
+Flickbar doesn't take over keys you already use). Shortcuts act on the frontmost window; repeating a
+half or Fill Screen shortcut cycles through thirds, just like repeating the swipe.
+
 ## Settings
 
 Open **Settings…** from the menu bar icon (or press ⌘, while it's open) to choose what each gesture
 does (any half, third, quarter, fill, center, full screen, close, next window of the app, hide or quit
-the app, or nothing), pick the key for gesturing anywhere in a window, add space between snapped
+the app, or nothing), pick the key for gesturing anywhere in a window, record keyboard shortcuts, add space between snapped
 windows, turn off the preview or haptic feedback, keep gestures off in specific apps, and open
 Flickbar at login. The menu bar icon can also turn gestures off for the app you're
 using.
@@ -50,7 +56,7 @@ using.
 
 ## Install
 
-**Download:** get **Flickbar-0.3.0.zip** from the
+**Download:** get **Flickbar-0.4.0.zip** from the
 [latest release](https://github.com/flickbar/flickbar/releases/latest), unzip it and move
 **Flickbar.app** to Applications. This early build isn't notarized by Apple yet, so macOS blocks it the
 first time: open it once, then click **Open Anyway** in *System Settings → Privacy & Security*.
@@ -130,3 +136,6 @@ don't submit code, assets or text copied from other apps or derived from decompi
 ## License
 
 [GPL-3.0-or-later](LICENSE)
+
+Keyboard shortcuts use [KeyboardShortcuts](https://github.com/sindresorhus/KeyboardShortcuts) by Sindre
+Sorhus (MIT); its license ships inside the app.

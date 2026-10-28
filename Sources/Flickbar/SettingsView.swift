@@ -1,5 +1,6 @@
 import AppKit
 import FlickbarCore
+import KeyboardShortcuts
 import SwiftUI
 import UniformTypeIdentifiers
 
@@ -12,6 +13,8 @@ struct SettingsView: View {
                 .tabItem { Label("General", systemImage: "gearshape") }
             GestureSettings(state: state)
                 .tabItem { Label("Gestures", systemImage: "hand.draw") }
+            ShortcutSettings()
+                .tabItem { Label("Shortcuts", systemImage: "command") }
             AppSettings(state: state)
                 .tabItem { Label("Apps", systemImage: "app.badge.checkmark") }
             AboutSettings()
@@ -64,6 +67,49 @@ private struct GeneralSettings: View {
         }
         .formStyle(.grouped)
         .frame(height: 370)
+    }
+}
+
+// MARK: Action names
+
+/// Menu titles for actions, shared by the Gestures and Shortcuts tabs.
+enum ActionNames {
+    /// Menu sections: halves and fill, thirds, quarters, window actions, app actions.
+    static var groups: [[WindowAction]] {
+        [[.snap(.leftHalf), .snap(.rightHalf), .snap(.maximize), .snap(.center)],
+         [.snap(.leftThird), .snap(.centerThird), .snap(.rightThird), .snap(.leftTwoThirds), .snap(.rightTwoThirds)],
+         [.snap(.topLeft), .snap(.topRight), .snap(.bottomLeft), .snap(.bottomRight)],
+         [.minimize, .toggleFullscreen, .close, .nextWindow],
+         [.hideApp, .quitApp]]
+    }
+
+    static func title(_ action: WindowAction) -> String {
+        switch action {
+        case .snap(.leftHalf): "Left Half"
+        case .snap(.rightHalf): "Right Half"
+        case .snap(.maximize): "Fill Screen"
+        case .snap(.center): "Center"
+        case .snap(.leftThird): "Left Third"
+        case .snap(.centerThird): "Middle Third"
+        case .snap(.rightThird): "Right Third"
+        case .snap(.leftTwoThirds): "Left Two-Thirds"
+        case .snap(.rightTwoThirds): "Right Two-Thirds"
+        case .snap(.topLeft): "Top-Left Quarter"
+        case .snap(.topRight): "Top-Right Quarter"
+        case .snap(.bottomLeft): "Bottom-Left Quarter"
+        case .snap(.bottomRight): "Bottom-Right Quarter"
+        case .minimize: "Restore or Minimize"
+        case .toggleFullscreen: "Full Screen"
+        case .close: "Close Window"
+        case .nextWindow: "Next Window of App"
+        case .hideApp: "Hide App"
+        case .quitApp: "Quit App"
+        case .moveToDisplay(.left): "Move to Display on the Left"
+        case .moveToDisplay(.right): "Move to Display on the Right"
+        case .moveToDisplay(.up): "Move to Display Above"
+        case .moveToDisplay(.down): "Move to Display Below"
+        case .moveToDisplay: "Move to Another Display"
+        }
     }
 }
 
@@ -120,8 +166,8 @@ private struct GestureSettings: View {
 
     private func row(_ gesture: TrackpadGesture, _ title: String, _ symbol: String) -> some View {
         Picker(selection: state.actionBinding(gesture)) {
-            ForEach(actionGroups, id: \.self) { group in
-                ForEach(group, id: \.id) { Text(Self.title(of: $0)).tag($0.id) }
+            ForEach(ActionNames.groups, id: \.self) { group in
+                ForEach(group, id: \.id) { Text(ActionNames.title($0)).tag($0.id) }
                 Divider()
             }
             Text("Nothing").tag(ActionMap.off)
@@ -148,38 +194,32 @@ private struct GestureSettings: View {
             .multilineTextAlignment(.leading)
             .frame(maxWidth: .infinity, alignment: .leading)
     }
+}
 
-    /// Menu sections: halves and fill, thirds, quarters, window actions, app actions.
-    private var actionGroups: [[WindowAction]] {
-        [[.snap(.leftHalf), .snap(.rightHalf), .snap(.maximize), .snap(.center)],
-         [.snap(.leftThird), .snap(.centerThird), .snap(.rightThird), .snap(.leftTwoThirds), .snap(.rightTwoThirds)],
-         [.snap(.topLeft), .snap(.topRight), .snap(.bottomLeft), .snap(.bottomRight)],
-         [.minimize, .toggleFullscreen, .close, .nextWindow],
-         [.hideApp, .quitApp]]
+// MARK: Shortcuts
+
+private struct ShortcutSettings: View {
+    var body: some View {
+        Form {
+            ForEach(ActionNames.groups, id: \.self) { group in
+                Section { recorders(group) }
+            }
+            Section {
+                recorders(Shortcuts.displayMoves)
+            } footer: {
+                Text("Shortcuts act on the frontmost window. Repeat a half or Fill Screen shortcut to cycle through thirds.")
+                    .foregroundStyle(.secondary)
+                    .multilineTextAlignment(.leading)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+        }
+        .formStyle(.grouped)
+        .frame(height: 640)
     }
 
-    static func title(of action: WindowAction) -> String {
-        switch action {
-        case .snap(.leftHalf): "Left Half"
-        case .snap(.rightHalf): "Right Half"
-        case .snap(.maximize): "Fill Screen"
-        case .snap(.center): "Center"
-        case .snap(.leftThird): "Left Third"
-        case .snap(.centerThird): "Middle Third"
-        case .snap(.rightThird): "Right Third"
-        case .snap(.leftTwoThirds): "Left Two-Thirds"
-        case .snap(.rightTwoThirds): "Right Two-Thirds"
-        case .snap(.topLeft): "Top-Left Quarter"
-        case .snap(.topRight): "Top-Right Quarter"
-        case .snap(.bottomLeft): "Bottom-Left Quarter"
-        case .snap(.bottomRight): "Bottom-Right Quarter"
-        case .minimize: "Restore or Minimize"
-        case .toggleFullscreen: "Full Screen"
-        case .close: "Close Window"
-        case .nextWindow: "Next Window of App"
-        case .hideApp: "Hide App"
-        case .quitApp: "Quit App"
-        case .moveToDisplay: "Move to Another Display"
+    private func recorders(_ actions: [WindowAction]) -> some View {
+        ForEach(actions, id: \.id) { action in
+            KeyboardShortcuts.Recorder(LocalizedStringKey(ActionNames.title(action)), name: Shortcuts.name(action))
         }
     }
 }

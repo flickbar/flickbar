@@ -13,6 +13,10 @@ rm -rf "$APP"
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
 cp Resources/AppIcon.icns "$APP/Contents/Resources/AppIcon.icns"
 cp "$BIN" "$APP/Contents/MacOS/Flickbar"
+# Dependencies' resource bundles (KeyboardShortcuts' translations) go where Bundle.module looks in an app.
+find "$(dirname "$BIN")" -maxdepth 1 -name '*.bundle' -exec cp -R {} "$APP/Contents/Resources/" \;
+# The MIT license asks for its notice to ship with copies.
+cp .build/checkouts/KeyboardShortcuts/license "$APP/Contents/Resources/KeyboardShortcuts-LICENSE.txt"
 
 cat > "$APP/Contents/Info.plist" <<EOF
 <?xml version="1.0" encoding="UTF-8"?>

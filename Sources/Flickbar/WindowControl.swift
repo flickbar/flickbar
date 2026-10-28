@@ -29,6 +29,15 @@ struct AXWindow {
         return point.y - frame.minY <= height ? candidate : nil
     }
 
+    /// The frontmost app's focused window, for keyboard shortcuts.
+    static func focused() -> AXWindow? {
+        guard let app = NSWorkspace.shared.frontmostApplication, app.processIdentifier != getpid() else { return nil }
+        let element = AXUIElementCreateApplication(app.processIdentifier)
+        guard let window = element.element(kAXFocusedWindowAttribute),
+              window.string(kAXSubroleAttribute) == kAXStandardWindowSubrole else { return nil }
+        return AXWindow(element: window, app: element)
+    }
+
     /// The traffic-light buttons sit vertically centred in the title bar (also in tall unified toolbars),
     /// so mirror the close button's top padding below it.
     private func titlebarHeight(windowTop: CGFloat) -> CGFloat {

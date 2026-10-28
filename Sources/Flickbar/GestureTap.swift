@@ -11,8 +11,6 @@ final class GestureTap {
     private var swallowMomentum = false
     private var command = false
     private var escaped = false
-    // shortcut: entries for closed windows are never pruned, a few bytes each; prune if it ever matters.
-    private var restoreMemory = RestoreMemory<AXUIElement>()
 
     /// Bundle IDs of apps where title-bar gestures are turned off.
     static var excludedApps: Set<String> {
@@ -116,7 +114,7 @@ final class GestureTap {
     private func handleDoubleTap(at point: CGPoint, flags: NSEvent.ModifierFlags) -> Bool {
         guard let action = ActionMap.action(for: .doubleTap, overrides: Self.gestureMap),
               let window = Self.window(at: point, flags: flags) else { return false }
-        run(action, on: window)
+        WindowActions.run(action, on: window)
         return true
     }
 
@@ -141,18 +139,7 @@ final class GestureTap {
         if UserDefaults.standard.object(forKey: "haptics") as? Bool ?? true {
             NSHapticFeedbackManager.defaultPerformer.perform(.alignment, performanceTime: .now)
         }
-        if let frame = landingFrame(of: action, on: target) { PreviewOverlay.show(frame) } else { PreviewOverlay.hide() }
-    }
-
-    private var gap: CGFloat { CGFloat(UserDefaults.standard.integer(forKey: "gap")) }
-
-    /// Where `run` would put the window; nil for actions that don't move it.
-    private func landingFrame(of action: WindowAction, on window: AXWindow) -> CGRect? {
-        if action == .minimize {
-            guard let current = window.frame else { return nil }
-            return restoreMemory.original(window.element, current: current)
-        }
-        return window.targetFrame(for: action, gap: gap)
+        if let frame = WindowActions.landingFrame(of: action, on: target) { PreviewOverlay.show(frame) } else { PreviewOverlay.hide() }
     }
 
     /// The action the strokes so far map to, with the user's choices from Settings.
@@ -160,26 +147,10 @@ final class GestureTap {
         ActionMap.action(for: recognizer.strokes, command: command, overrides: Self.gestureMap)
     }
 
-    /// Swipe down on a window Flickbar placed restores it; otherwise the action runs and moves are remembered.
-    private func run(_ action: WindowAction, on window: AXWindow) {
-        if action == .minimize, let current = window.frame,
-           let original = restoreMemory.takeOriginal(window.element, current: current) {
-            window.setFrame(original)
-            return
-        }
-        let before = window.frame
-        window.perform(action, gap: gap)
-        switch action {
-        case .snap, .moveToDisplay:
-            if let before, let after = window.frame { restoreMemory.record(window.element, from: before, to: after) }
-        default: break
-        }
-    }
-
     private func finish(cancelled: Bool) {
         PreviewOverlay.hide()
         if !cancelled, !escaped, let target, let action = currentAction() {
-            run(action, on: target)
+            WindowActions.run(action, on: target)
         }
         swallowMomentum = true
         target = nil

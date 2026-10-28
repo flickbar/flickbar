@@ -53,7 +53,7 @@ public extension WindowAction {
         case .nextWindow: "nextWindow"
         case .hideApp: "hideApp"
         case .quitApp: "quitApp"
-        case .moveToDisplay: "moveToDisplay"
+        case .moveToDisplay(let direction): "moveToDisplay.\(direction)"
         }
     }
 

@@ -107,6 +107,7 @@ final class AppState {
 
     init() {
         NSApp?.setActivationPolicy(.accessory)
+        Shortcuts.install()
         logger.notice("launched, accessibility trusted: \(self.isTrusted, privacy: .public)")
         if isTrusted {
             tap.isEnabled = isEnabled
