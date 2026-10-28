@@ -54,7 +54,7 @@ public enum SnapGeometry {
             CGRect(x: area.midX - current.width / 2, y: area.midY - current.height / 2,
                    width: min(current.width, area.width), height: min(current.height, area.height))
         }
-        return rect.integral
+        return rect.roundedToPoints
     }
 
     /// The display next to `current` in `direction` (nearest centre on that side), or nil if there is none.
@@ -77,6 +77,13 @@ public enum SnapGeometry {
         let sx = destination.width / source.width, sy = destination.height / source.height
         return CGRect(x: destination.minX + (frame.minX - source.minX) * sx,
                       y: destination.minY + (frame.minY - source.minY) * sy,
-                      width: frame.width * sx, height: frame.height * sy).integral
+                      width: frame.width * sx, height: frame.height * sy).roundedToPoints
+    }
+}
+
+private extension CGRect {
+    /// Nearest whole points. Unlike `integral` (which grows outward) this doesn't inflate frames on round trips.
+    var roundedToPoints: CGRect {
+        CGRect(x: minX.rounded(), y: minY.rounded(), width: width.rounded(), height: height.rounded())
     }
 }

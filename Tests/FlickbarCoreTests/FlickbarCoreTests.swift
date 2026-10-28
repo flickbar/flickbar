@@ -122,6 +122,15 @@ import Testing
         #expect(SnapGeometry.neighbor(of: right, in: all, toward: .left) == main)
     }
 
+    @Test func relocateRoundTripDoesNotGrow() {
+        // Real layout seen in testing: laptop below an ultrawide.
+        let laptop = CGRect(x: 0, y: 33, width: 1512, height: 896)
+        let ultrawide = CGRect(x: -634, y: -1440, width: 3440, height: 1440)
+        let window = CGRect(x: 200, y: 200, width: 700, height: 500)
+        let there = SnapGeometry.relocate(window, from: laptop, to: ultrawide)
+        #expect(SnapGeometry.relocate(there, from: ultrawide, to: laptop) == window)
+    }
+
     @Test func relocateKeepsProportions() {
         let leftHalf = CGRect(x: 0, y: 0, width: 500, height: 800)
         #expect(SnapGeometry.relocate(leftHalf, from: main, to: right) == CGRect(x: 1000, y: 0, width: 1000, height: 1000))

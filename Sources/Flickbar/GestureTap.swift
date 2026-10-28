@@ -96,7 +96,7 @@ final class GestureTap {
         command = flags.contains(.command)
         escaped = false
         target = AXWindow.titlebar(at: point)
-        logger.notice("gesture began at \(point.debugDescription, privacy: .public), on title bar: \(self.target != nil, privacy: .public)")
+        logger.debug("gesture began at \(point.debugDescription, privacy: .public), on title bar: \(self.target != nil, privacy: .public)")
     }
 
     /// A tick tells the user the gesture so far maps to an action, before they lift their fingers.
