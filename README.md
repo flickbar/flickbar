@@ -19,23 +19,23 @@ Put the pointer on a window's title bar and use two fingers:
 
 | Gesture | Result |
 |---|---|
-| Swipe left / right | Snap to the left / right half |
+| Swipe left / right | Snap to the left / right half; repeat for ⅔, then ⅓ |
 | Swipe left or right, then up or down (either order) | Snap to that quarter |
-| Swipe up | Fill the screen |
+| Swipe up | Fill the screen; repeat for the middle third |
 | Swipe down | Restore the size from before snapping, otherwise minimize |
 | Double-tap | Center the window |
 | Pinch out | Toggle full screen |
 | Pinch in | Close the window |
 | Hold ⌘ and swipe | Move the window to the display on that side |
 
-A light haptic tap confirms the gesture before you lift your fingers, and it runs when you lift
-them. Press Esc first to cancel. Gestures that start anywhere else pass through untouched, so normal
+While your fingers are down, a highlight shows where the window will land and a light haptic tap
+confirms the gesture; it runs when you lift them. Press Esc first to cancel. Gestures that start anywhere else pass through untouched, so normal
 scrolling and zooming keep working.
 
 ## Settings
 
 Open **Settings…** from the menu bar icon (or press ⌘, while it's open) to turn individual gestures on
-or off, add space between snapped windows, turn off haptic feedback, keep gestures off in specific
+or off, add space between snapped windows, turn off the preview or haptic feedback, keep gestures off in specific
 apps, and open Flickbar at login. The menu bar icon can also turn gestures off for the app you're
 using.
 

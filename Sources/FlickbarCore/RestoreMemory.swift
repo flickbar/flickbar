@@ -13,11 +13,17 @@ public struct RestoreMemory<Key: Hashable> {
         entries[key] = (entries[key]?.original ?? before, after)
     }
 
-    /// The frame to restore if the window is still where Flickbar put it; forgets the entry either way.
-    public mutating func takeOriginal(_ key: Key, current: CGRect) -> CGRect? {
-        guard let entry = entries.removeValue(forKey: key),
+    /// The frame to restore if the window is still where Flickbar put it.
+    public func original(_ key: Key, current: CGRect) -> CGRect? {
+        guard let entry = entries[key],
               abs(entry.placed.minX - current.minX) <= tolerance,
               abs(entry.placed.minY - current.minY) <= tolerance else { return nil }
         return entry.original
+    }
+
+    /// Like `original`, but forgets the entry either way.
+    public mutating func takeOriginal(_ key: Key, current: CGRect) -> CGRect? {
+        defer { entries[key] = nil }
+        return original(key, current: current)
     }
 }

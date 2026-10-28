@@ -6,8 +6,9 @@ public enum GestureKind: String, CaseIterable, Sendable {
 public extension WindowAction {
     var kind: GestureKind {
         switch self {
-        case .snap(.leftHalf), .snap(.rightHalf): .halves
-        case .snap(.maximize): .fill
+        case .snap(.leftHalf), .snap(.rightHalf), .snap(.leftTwoThirds), .snap(.rightTwoThirds),
+             .snap(.leftThird), .snap(.rightThird): .halves
+        case .snap(.maximize), .snap(.centerThird): .fill
         case .snap(.topLeft), .snap(.topRight), .snap(.bottomLeft), .snap(.bottomRight): .quarters
         case .snap(.center): .center
         case .minimize: .restoreOrMinimize

@@ -37,16 +37,30 @@ struct AXWindow {
 
     var frame: CGRect? { element.frame }
 
-    func perform(_ action: WindowAction, gap: CGFloat = 0) {
+    /// Where `action` would put the window, for actions that move it. Shared by the preview and `perform`.
+    func targetFrame(for action: WindowAction, gap: CGFloat = 0) -> CGRect? {
+        guard let current = frame, let source = Self.visibleFrame(containing: current) else { return nil }
         switch action {
         case .snap(let target):
-            guard let current = frame, let visible = Self.visibleFrame(containing: current) else { return }
-            setFrame(SnapGeometry.frame(for: target, in: visible, current: current, gap: gap))
+            let target = SnapGeometry.cycled(target, in: source, current: current, gap: gap)
+            return SnapGeometry.frame(for: target, in: source, current: current, gap: gap)
         case .moveToDisplay(let direction):
-            let screens = Self.visibleFrames()
-            guard let current = frame, let source = Self.visibleFrame(containing: current),
-                  let destination = SnapGeometry.neighbor(of: source, in: screens, toward: direction) else { return }
-            setFrame(SnapGeometry.relocate(current, from: source, to: destination))
+            guard let destination = SnapGeometry.neighbor(of: source, in: Self.visibleFrames(), toward: direction) else { return nil }
+            return SnapGeometry.relocate(current, from: source, to: destination)
+        default:
+            return nil
+        }
+    }
+
+    func perform(_ action: WindowAction, gap: CGFloat = 0) {
+        switch action {
+        case .snap, .moveToDisplay:
+            guard let target = targetFrame(for: action, gap: gap) else { return }
+            setFrame(target)
+            // Apps with a minimum or maximum size keep their own; line it up with the target instead.
+            if let actual = frame, !actual.isClose(to: target, tolerance: 2), let visible = Self.visibleFrame(containing: target) {
+                setFrame(SnapGeometry.anchored(actual.size, to: target, in: visible))
+            }
         case .minimize:
             AXUIElementSetAttributeValue(element, kAXMinimizedAttribute as CFString, kCFBooleanTrue)
         case .close:

@@ -149,3 +149,57 @@ import Testing
         #expect(SnapGeometry.relocate(leftHalf, from: main, to: right) == CGRect(x: 1000, y: 0, width: 1000, height: 1000))
     }
 }
+
+@Suite struct ThirdsTests {
+    let screen = CGRect(x: 0, y: 0, width: 900, height: 600)
+    let window = CGRect(x: 10, y: 40, width: 400, height: 300)
+
+    func frame(_ t: SnapTarget, gap: CGFloat = 0) -> CGRect {
+        SnapGeometry.frame(for: t, in: screen, current: window, gap: gap)
+    }
+
+    @Test func thirdsTileTheScreen() {
+        #expect(frame(.leftThird) == CGRect(x: 0, y: 0, width: 300, height: 600))
+        #expect(frame(.centerThird) == CGRect(x: 300, y: 0, width: 300, height: 600))
+        #expect(frame(.rightThird) == CGRect(x: 600, y: 0, width: 300, height: 600))
+        #expect(frame(.leftTwoThirds) == CGRect(x: 0, y: 0, width: 600, height: 600))
+        #expect(frame(.rightTwoThirds) == CGRect(x: 300, y: 0, width: 600, height: 600))
+    }
+
+    @Test func thirdsWithGapLineUp() {
+        // gap 15: area 870 wide, thirds 280 each with 15 between.
+        #expect(frame(.leftThird, gap: 15) == CGRect(x: 15, y: 15, width: 280, height: 570))
+        #expect(frame(.rightTwoThirds, gap: 15) == CGRect(x: 310, y: 15, width: 575, height: 570))
+    }
+
+    @Test func repeatingCyclesSizes() {
+        func next(_ t: SnapTarget, from current: CGRect) -> SnapTarget {
+            SnapGeometry.cycled(t, in: screen, current: current)
+        }
+        #expect(next(.leftHalf, from: window) == .leftHalf)
+        #expect(next(.leftHalf, from: frame(.leftHalf)) == .leftTwoThirds)
+        #expect(next(.leftHalf, from: frame(.leftTwoThirds)) == .leftThird)
+        #expect(next(.leftHalf, from: frame(.leftThird)) == .leftHalf)
+        #expect(next(.rightHalf, from: frame(.rightHalf)) == .rightTwoThirds)
+        #expect(next(.maximize, from: frame(.maximize)) == .centerThird)
+        #expect(next(.maximize, from: frame(.centerThird)) == .maximize)
+        // A left-side frame doesn't advance the right-side cycle.
+        #expect(next(.rightHalf, from: frame(.leftHalf)) == .rightHalf)
+        #expect(next(.topLeft, from: frame(.topLeft)) == .topLeft)
+    }
+
+    @Test func oversizedWindowKeepsTargetEdge() {
+        let wide = CGSize(width: 400, height: 600)
+        #expect(SnapGeometry.anchored(wide, to: frame(.leftThird), in: screen) == CGRect(x: 0, y: 0, width: 400, height: 600))
+        #expect(SnapGeometry.anchored(wide, to: frame(.rightThird), in: screen) == CGRect(x: 500, y: 0, width: 400, height: 600))
+        #expect(SnapGeometry.anchored(wide, to: frame(.centerThird), in: screen) == CGRect(x: 250, y: 0, width: 400, height: 600))
+    }
+
+    @Test func undersizedWindowCentresOnFill() {
+        let small = CGSize(width: 500, height: 400)
+        #expect(SnapGeometry.anchored(small, to: frame(.maximize), in: screen) == CGRect(x: 200, y: 100, width: 500, height: 400))
+        // Bottom-right quarter that's too tall stays on screen, against the bottom edge.
+        let tall = CGSize(width: 450, height: 450)
+        #expect(SnapGeometry.anchored(tall, to: frame(.bottomRight), in: screen) == CGRect(x: 450, y: 150, width: 450, height: 450))
+    }
+}

@@ -27,6 +27,7 @@ private struct GeneralSettings: View {
     @Bindable var state: AppState
     @AppStorage("gap") private var gap = 0
     @AppStorage("haptics") private var haptics = true
+    @AppStorage("preview") private var preview = true
 
     var body: some View {
         Form {
@@ -49,9 +50,10 @@ private struct GeneralSettings: View {
                     Text("Medium").tag(12)
                     Text("Large").tag(20)
                 }
+                Toggle("Show where the window will go", isOn: $preview)
                 Toggle("Haptic feedback", isOn: $haptics)
             } footer: {
-                Text("A light tap from the trackpad confirms a gesture before you lift your fingers.")
+                Text("A preview and a light tap from the trackpad confirm a gesture before you lift your fingers.")
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.leading)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -61,7 +63,7 @@ private struct GeneralSettings: View {
             }
         }
         .formStyle(.grouped)
-        .frame(height: 330)
+        .frame(height: 370)
     }
 }
 
@@ -73,9 +75,9 @@ private struct GestureSettings: View {
     var body: some View {
         Form {
             Section("Snap") {
-                row(.halves, "Left or right half", "Swipe left or right", "rectangle.lefthalf.inset.filled")
+                row(.halves, "Left or right half", "Swipe left or right; repeat for ⅔ and ⅓", "rectangle.lefthalf.inset.filled")
                 row(.quarters, "Quarter", "Swipe left or right, then up or down", "rectangle.split.2x2")
-                row(.fill, "Fill the screen", "Swipe up", "rectangle.inset.filled")
+                row(.fill, "Fill the screen", "Swipe up; repeat for the middle third", "rectangle.inset.filled")
                 row(.center, "Center", "Double-tap with two fingers", "rectangle.center.inset.filled")
                 row(.restoreOrMinimize, "Restore or minimize", "Swipe down", "arrow.uturn.backward.square")
             }
@@ -225,6 +227,6 @@ private struct AboutSettings: View {
         }
         .padding(30)
         .frame(maxWidth: .infinity)
-        .frame(height: 330)
+        .frame(height: 370)
     }
 }

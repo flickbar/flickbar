@@ -60,6 +60,7 @@ final class GestureTap {
             guard target != nil, event.getIntegerValueField(.keyboardEventKeycode) == escape else { return false }
             // Keep consuming the rest of the gesture so it doesn't leak into the app; it just won't fire.
             escaped = true
+            PreviewOverlay.hide()
             return true
         }
         guard let ns = NSEvent(cgEvent: event) else { return false }
@@ -111,10 +112,25 @@ final class GestureTap {
         logger.debug("gesture began at \(point.debugDescription, privacy: .public), on title bar: \(self.target != nil, privacy: .public)")
     }
 
-    /// A tick tells the user the gesture so far maps to an action, before they lift their fingers.
+    /// A tick and a preview of where the window will land tell the user the gesture so far maps to an action,
+    /// before they lift their fingers.
     private func strokeRecognized() {
-        guard !escaped, currentAction() != nil, UserDefaults.standard.object(forKey: "haptics") as? Bool ?? true else { return }
-        NSHapticFeedbackManager.defaultPerformer.perform(.alignment, performanceTime: .now)
+        guard !escaped, let target, let action = currentAction() else { return PreviewOverlay.hide() }
+        if UserDefaults.standard.object(forKey: "haptics") as? Bool ?? true {
+            NSHapticFeedbackManager.defaultPerformer.perform(.alignment, performanceTime: .now)
+        }
+        if let frame = landingFrame(of: action, on: target) { PreviewOverlay.show(frame) } else { PreviewOverlay.hide() }
+    }
+
+    private var gap: CGFloat { CGFloat(UserDefaults.standard.integer(forKey: "gap")) }
+
+    /// Where `run` would put the window; nil for actions that don't move it.
+    private func landingFrame(of action: WindowAction, on window: AXWindow) -> CGRect? {
+        if action == .minimize {
+            guard let current = window.frame else { return nil }
+            return restoreMemory.original(window.element, current: current)
+        }
+        return window.targetFrame(for: action, gap: gap)
     }
 
     /// The action the strokes so far map to, unless the user turned that gesture off.
@@ -132,7 +148,7 @@ final class GestureTap {
             return
         }
         let before = window.frame
-        window.perform(action, gap: CGFloat(UserDefaults.standard.integer(forKey: "gap")))
+        window.perform(action, gap: gap)
         switch action {
         case .snap, .moveToDisplay:
             if let before, let after = window.frame { restoreMemory.record(window.element, from: before, to: after) }
@@ -141,6 +157,7 @@ final class GestureTap {
     }
 
     private func finish(cancelled: Bool) {
+        PreviewOverlay.hide()
         if !cancelled, !escaped, let target, let action = currentAction() {
             run(action, on: target)
         }
