@@ -38,12 +38,16 @@ open build/Flickbar.app
 macOS ties the Accessibility permission to the app's code signature. Without a signing certificate the
 script signs ad-hoc, which produces a new signature on every build: the toggle in System Settings stays on
 but no longer applies, and Flickbar does nothing. Either remove Flickbar from *System Settings → Privacy &
-Security → Accessibility* (the **−** button) and grant it again after each build, or create a local
-signing certificate once:
+Security → Accessibility* (the **−** button) and grant it again after each build, or get a stable
+signing identity once. The script picks the first valid *Developer ID Application*, *Apple Development*
+or `Flickbar Local Signing` identity (override with `SIGN_IDENTITY=...`):
 
-1. Open *Keychain Access → Certificate Assistant → Create a Certificate…*
-2. Name: `Flickbar Local Signing`, Identity Type: *Self Signed Root*, Certificate Type: *Code Signing*.
-3. Rebuild, then grant Accessibility one last time. Later builds keep the permission.
+- **Apple Development (free):** *Xcode → Settings → Accounts →* your Apple ID *→ Manage Certificates… → + →
+  Apple Development*. Works with a free Personal Team.
+- **Or self-signed:** *Keychain Access → Certificate Assistant → Create a Certificate…*, name
+  `Flickbar Local Signing`, Identity Type *Self Signed Root*, Certificate Type *Code Signing*.
+
+Rebuild, then grant Accessibility one last time. Later builds keep the permission.
 
 Flickbar logs to the unified log under the subsystem `io.github.flickbar.Flickbar`
 (`log stream --predicate 'subsystem == "io.github.flickbar.Flickbar"'`).

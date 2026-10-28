@@ -32,11 +32,14 @@ EOF
 
 # macOS ties the Accessibility grant to the signature. Ad-hoc signatures change on every build, so the grant
 # silently stops applying; a stable identity (see README) keeps it across rebuilds.
-IDENTITY="${SIGN_IDENTITY:-Flickbar Local Signing}"
-if security find-certificate -c "$IDENTITY" >/dev/null 2>&1; then
+# Uses $SIGN_IDENTITY, else the first valid (unexpired) Developer ID / Apple Development / local identity.
+IDENTITY="${SIGN_IDENTITY:-$(security find-identity -v -p codesigning |
+    awk -F'"' '/"(Developer ID Application|Apple Development|Flickbar Local Signing)/ { print $2; exit }')}"
+if [ -n "$IDENTITY" ]; then
     codesign --force --sign "$IDENTITY" "$APP"
+    echo "Signed with $IDENTITY"
 else
-    echo "warning: no '$IDENTITY' certificate; ad-hoc signing (re-grant Accessibility after each build)" >&2
+    echo "warning: no valid signing identity; ad-hoc signing (re-grant Accessibility after each build)" >&2
     codesign --force --sign - "$APP"
 fi
 echo "Built $APP"
