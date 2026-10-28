@@ -1,27 +1,105 @@
-# Flickbar
+<p align="center">
+  <img src="docs/images/icon.png" width="128" height="128" alt="Flickbar icon">
+</p>
 
-Manage macOS windows with trackpad gestures on their title bars. Free and open source.
+<h1 align="center">Flickbar</h1>
 
-Put the pointer on a window's title bar and swipe with two fingers:
+<p align="center">
+  Snap, resize and move macOS windows with trackpad gestures on their title bars.<br>
+  Free and open source.
+</p>
 
-| Gesture on title bar | Result |
+<p align="center">
+  <img src="docs/images/settings-gestures.png" width="420" alt="Flickbar's Gestures settings">
+</p>
+
+## Gestures
+
+Put the pointer on a window's title bar and use two fingers:
+
+| Gesture | Result |
 |---|---|
-| Swipe left / right | Snap to left / right half |
-| Swipe up | Fill the screen |
-| Swipe down | Restore the size from before Flickbar snapped it, otherwise minimize |
+| Swipe left / right | Snap to the left / right half |
 | Swipe left or right, then up or down (either order) | Snap to that quarter |
-| Pinch in | Close window |
+| Swipe up | Fill the screen |
+| Swipe down | Restore the size from before snapping, otherwise minimize |
+| Double-tap | Center the window |
 | Pinch out | Toggle full screen |
-| Double-tap with two fingers | Center window |
-| Hold ⌘ and swipe in any direction | Move window to the display on that side |
+| Pinch in | Close the window |
+| Hold ⌘ and swipe | Move the window to the display on that side |
 
-A haptic tick confirms when the gesture so far maps to an action; it runs when you lift your fingers.
-Press Esc before lifting to cancel.
-Gestures that start anywhere else are passed through untouched, so normal scrolling and zooming keep working.
+A light haptic tap confirms the gesture before you lift your fingers, and it runs when you lift
+them. Press Esc first to cancel. Gestures that start anywhere else pass through untouched, so normal
+scrolling and zooming keep working.
 
-**Settings** (menu bar icon → Settings…, or ⌘,) let you turn individual gestures on or off, set the
-space between snapped windows, turn off haptic feedback, keep gestures off in specific apps, and open
-Flickbar at login. The menu bar icon can also turn gestures off for the app you're using.
+## Settings
+
+Open **Settings…** from the menu bar icon (or press ⌘, while it's open) to turn individual gestures on
+or off, add space between snapped windows, turn off haptic feedback, keep gestures off in specific
+apps, and open Flickbar at login. The menu bar icon can also turn gestures off for the app you're
+using.
+
+<p align="center">
+  <img src="docs/images/settings-general.png" width="380" alt="General settings">
+  <img src="docs/images/settings-apps.png" width="380" alt="Apps settings">
+</p>
+
+## Install
+
+Flickbar is early (v0.1) and there's no signed download yet, so build it from source:
+
+```sh
+git clone https://github.com/flickbar/flickbar.git
+cd flickbar
+./scripts/bundle.sh          # builds build/Flickbar.app (Apple silicon and Intel)
+open build/Flickbar.app
+```
+
+You need macOS 14 Sonoma or later, a trackpad, and Xcode 16 or later (or its command line tools).
+
+On first launch Flickbar explains why it needs **Accessibility** access, which macOS requires for any
+app that arranges windows, and takes you to System Settings to turn it on.
+
+<p align="center">
+  <img src="docs/images/welcome.png" width="400" alt="Welcome window">
+</p>
+
+For pinch and double-tap, keep *Zoom in or out* and *Smart zoom* turned on in
+*System Settings → Trackpad → Scroll & Zoom*.
+
+### Keeping the permission across rebuilds
+
+macOS ties the Accessibility permission to the app's code signature. `bundle.sh` signs with the first
+valid *Developer ID Application*, *Apple Development* or `Flickbar Local Signing` identity it finds
+(override with `SIGN_IDENTITY=...`). Without one it signs ad-hoc, which changes the signature on every
+build: the switch in System Settings stays on but no longer applies. In that case remove Flickbar from
+the Accessibility list (the **−** button) and add it again, or set up a signing identity once:
+
+- **Apple Development (free):** *Xcode → Settings → Accounts →* your Apple ID *→ Manage
+  Certificates… → + → Apple Development*. A free Personal Team works. If the certificate shows as not valid, install
+  Apple's [WWDR G3 intermediate certificate](https://www.apple.com/certificateauthority/).
+- **Self-signed:** *Keychain Access → Certificate Assistant → Create a Certificate…*, name
+  `Flickbar Local Signing`, Identity Type *Self Signed Root*, Certificate Type *Code Signing*.
+
+## Privacy
+
+Flickbar makes no network connections and collects no data. It uses Accessibility access only to find
+the window under the pointer and move, resize, minimize, close or full-screen it when you gesture.
+Settings stay in its local preferences.
+
+## How it works
+
+- A Core Graphics event tap receives scroll and magnify events system-wide. Only events with a touch
+  phase are considered, which filters out mouse wheels.
+- When a gesture begins, the Accessibility API finds the window under the pointer and checks whether
+  the pointer is in its title bar, using the position of the window's close button so that tall,
+  unified toolbars count too.
+- `FlickbarCore.GestureRecognizer` turns finger movement into strokes (`left`, `up`, `pinchIn`, …);
+  each change of direction starts a new stroke. When the fingers lift, `ActionMap` picks the action
+  and `SnapGeometry` computes the target frame.
+
+The gesture logic in `FlickbarCore` has no AppKit dependencies and is fully unit-tested; the app layer
+is in `Sources/Flickbar`.
 
 ## Testing
 
@@ -30,55 +108,15 @@ swift test               # unit tests (no permissions needed)
 ./scripts/livetest.sh    # end-to-end: drives the running app with synthetic gestures
 ```
 
-The live test opens its own TextEdit document and moves it around (and the pointer) for about a
-minute, so don't use the Mac while it runs. The terminal needs Accessibility permission to post events.
+The live test opens its own TextEdit document and moves it (and the pointer) for about a minute, so
+leave the Mac alone while it runs. The terminal needs Accessibility permission to post events.
+Flickbar logs to the unified log under the subsystem `io.github.flickbar.Flickbar`.
 
-## Requirements
+## Contributing
 
-- macOS 14 Sonoma or later, with a trackpad
-- Accessibility permission (Flickbar asks on first launch)
-- For double-tap: *System Settings → Trackpad → Smart zoom* enabled. For pinch: *Zoom in or out* enabled.
-
-## Build and run
-
-```sh
-swift test               # unit tests for the gesture recognizer and snap geometry
-./scripts/bundle.sh      # builds build/Flickbar.app (universal)
-open build/Flickbar.app
-```
-
-macOS ties the Accessibility permission to the app's code signature. Without a signing certificate the
-script signs ad-hoc, which produces a new signature on every build: the toggle in System Settings stays on
-but no longer applies, and Flickbar does nothing. Either remove Flickbar from *System Settings → Privacy &
-Security → Accessibility* (the **−** button) and grant it again after each build, or get a stable
-signing identity once. The script picks the first valid *Developer ID Application*, *Apple Development*
-or `Flickbar Local Signing` identity (override with `SIGN_IDENTITY=...`):
-
-- **Apple Development (free):** *Xcode → Settings → Accounts →* your Apple ID *→ Manage Certificates… → + →
-  Apple Development*. Works with a free Personal Team.
-- **Or self-signed:** *Keychain Access → Certificate Assistant → Create a Certificate…*, name
-  `Flickbar Local Signing`, Identity Type *Self Signed Root*, Certificate Type *Code Signing*.
-
-Rebuild, then grant Accessibility one last time. Later builds keep the permission.
-
-Flickbar logs to the unified log under the subsystem `io.github.flickbar.Flickbar`
-(`log stream --predicate 'subsystem == "io.github.flickbar.Flickbar"'`).
-
-## How it works
-
-- A Core Graphics event tap receives scroll and magnify events system-wide. Only events with a touch
-  phase are considered, which filters out mouse wheels.
-- When a gesture begins, the Accessibility API finds the window under the pointer and checks whether the
-  pointer is inside its title bar (derived from the position of the window's close button).
-- `FlickbarCore.GestureRecognizer` turns the finger movement into strokes (`left`, `up`, `pinchIn`, …);
-  each change of direction starts a new stroke. When the fingers lift, `ActionMap` picks the action and
-  `SnapGeometry` computes the target frame.
-
-## Project
-
-Flickbar is an independent project, written from scratch. It is not affiliated with any other
-window-management app. Contributions must be your own work: please don't submit code, assets or text
-copied from other apps or derived from decompiling them.
+Issues and pull requests are welcome. Flickbar is an independent project written from scratch and
+isn't affiliated with any other window-management app. Contributions must be your own work: please
+don't submit code, assets or text copied from other apps or derived from decompiling them.
 
 ## License
 
