@@ -91,10 +91,12 @@ final class AppState {
     }
 
     /// The id of the action `gesture` does (`ActionMap.off` when turned off).
-    func actionBinding(_ gesture: TrackpadGesture) -> Binding<String> {
-        Binding(
-            get: { ActionMap.action(for: gesture, overrides: self.gestureMap)?.id ?? ActionMap.off },
-            set: { self.gestureMap[gesture.rawValue] = $0 == gesture.defaultAction.id ? nil : $0 })
+    func actionBinding(_ gesture: TrackpadGesture, onDock: Bool = false) -> Binding<String> {
+        let key = ActionMap.key(gesture, onDock: onDock)
+        let defaultID = (onDock ? gesture.defaultDockAction : gesture.defaultAction)?.id ?? ActionMap.off
+        return Binding(
+            get: { ActionMap.action(for: gesture, onDock: onDock, overrides: self.gestureMap)?.id ?? ActionMap.off },
+            set: { self.gestureMap[key] = $0 == defaultID ? nil : $0 })
     }
 
     var commandSwipeEnabled: Bool {

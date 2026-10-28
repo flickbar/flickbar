@@ -177,6 +177,24 @@ expect("gap 12 left half", CGRect(x: main.minX + 12, y: main.minY + 12, width: (
 UserDefaults(suiteName: "io.github.flickbar.Flickbar")!.set(0, forKey: "gap")
 setFrame(window, start); usleep(300000)
 
+// Dock: the TextEdit icon (TextEdit is running, so it's in the Dock).
+let dockApp = AXUIElementCreateApplication(NSRunningApplication.runningApplications(withBundleIdentifier: "com.apple.dock").first!.processIdentifier)
+let dockItems = (attr(dockApp, kAXChildrenAttribute) as! [AXUIElement]).flatMap { attr($0, kAXChildrenAttribute) as? [AXUIElement] ?? [] }
+let textEditIcon = dockItems.first { (attr($0, kAXTitleAttribute) as? String) == "TextEdit" }.map { e -> CGPoint in
+    let f = frame(e); return CGPoint(x: f.midX, y: f.midY)
+}!
+let textEdit = NSRunningApplication(processIdentifier: pid)!
+swipe(textEditIcon, [(0, 120)]); usleep(500000)
+check("Dock: swipe down → hide app", textEdit.isHidden, "not hidden")
+textEdit.unhide(); appleScript("tell application \"TextEdit\" to activate"); usleep(500000)
+
+appleScript("tell application \"TextEdit\" to make new document"); usleep(500000)
+func frontWindow() -> AXUIElement? { (attr(app, kAXWindowsAttribute) as? [AXUIElement])?.first }
+check("second window is in front", frontWindow().map { !CFEqual($0, window) } ?? false, "test window still in front")
+swipe(textEditIcon, [(-120, 0)]); usleep(500000)
+check("Dock: swipe left → next window of app", frontWindow().map { CFEqual($0, window) } ?? false, "test window not raised")
+setFrame(window, start); usleep(300000)
+
 pinch(titlebar(), total: 0.5); sleep(1)
 check("pinch out → full screen", bool(window, "AXFullScreen"), "not full screen")
 AXUIElementSetAttributeValue(window, "AXFullScreen" as CFString, kCFBooleanFalse); sleep(2)

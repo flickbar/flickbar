@@ -8,6 +8,9 @@ final class GestureTap {
     private var tap: CFMachPort?
     private var recognizer = GestureRecognizer()
     private var target: AXWindow?
+    /// The app whose Dock icon the gesture started on, when it didn't start on a window.
+    private var dockApp: NSRunningApplication?
+    private var tracking: Bool { target != nil || dockApp != nil }
     private var swallowMomentum = false
     private var command = false
     private var escaped = false
@@ -71,7 +74,7 @@ final class GestureTap {
         }
         if type == .keyDown {
             let escape: Int64 = 53
-            guard target != nil, event.getIntegerValueField(.keyboardEventKeycode) == escape else { return false }
+            guard tracking, event.getIntegerValueField(.keyboardEventKeycode) == escape else { return false }
             // Keep consuming the rest of the gesture so it doesn't leak into the app; it just won't fire.
             escaped = true
             PreviewOverlay.hide()
@@ -94,7 +97,7 @@ final class GestureTap {
             return swallow
         }
         if e.phase.contains(.began) { begin(at: point, flags: e.modifierFlags) }
-        guard target != nil else { return false }
+        guard tracking else { return false }
 
         // Convert content-scroll deltas to finger movement, regardless of the natural-scrolling setting.
         let sign: CGFloat = e.isDirectionInvertedFromDevice ? 1 : -1
@@ -105,7 +108,7 @@ final class GestureTap {
 
     private func handlePinch(_ e: NSEvent, at point: CGPoint) -> Bool {
         if e.phase.contains(.began) { begin(at: point, flags: e.modifierFlags) }
-        guard target != nil else { return false }
+        guard tracking else { return false }
         if recognizer.addMagnification(e.magnification) != nil { strokeRecognized() }
         if e.phase.contains(.ended) || e.phase.contains(.cancelled) { finish(cancelled: e.phase.contains(.cancelled)) }
         return true
@@ -119,8 +122,12 @@ final class GestureTap {
     }
 
     private static func window(at point: CGPoint, flags: NSEvent.ModifierFlags) -> AXWindow? {
+        AXWindow.element(at: point).flatMap { window(of: $0, at: point, flags: flags) }
+    }
+
+    private static func window(of hit: AXUIElement, at point: CGPoint, flags: NSEvent.ModifierFlags) -> AXWindow? {
         let anywhere = anywhereModifier.map(flags.contains) ?? false
-        return AXWindow.at(point, titleBarOnly: !anywhere)
+        return AXWindow.of(hit, at: point, titleBarOnly: !anywhere)
     }
 
     private func begin(at point: CGPoint, flags: NSEvent.ModifierFlags) {
@@ -128,32 +135,35 @@ final class GestureTap {
         swallowMomentum = false
         command = flags.contains(.command)
         escaped = false
-        target = Self.window(at: point, flags: flags)
-        logger.debug("gesture began at \(point.debugDescription, privacy: .public), on window: \(self.target != nil, privacy: .public)")
+        let hit = AXWindow.element(at: point)
+        target = hit.flatMap { Self.window(of: $0, at: point, flags: flags) }
+        dockApp = target == nil ? hit.flatMap(AppControl.app(ofDockItem:)) : nil
+        logger.debug("gesture began at \(point.debugDescription, privacy: .public), on window: \(self.target != nil, privacy: .public), on Dock: \(self.dockApp?.bundleIdentifier ?? "no", privacy: .public)")
     }
 
     /// A tick and a preview of where the window will land tell the user the gesture so far maps to an action,
     /// before they lift their fingers.
     private func strokeRecognized() {
-        guard !escaped, let target, let action = currentAction() else { return PreviewOverlay.hide() }
+        guard !escaped, let action = currentAction() else { return PreviewOverlay.hide() }
         if UserDefaults.standard.object(forKey: "haptics") as? Bool ?? true {
             NSHapticFeedbackManager.defaultPerformer.perform(.alignment, performanceTime: .now)
         }
-        if let frame = WindowActions.landingFrame(of: action, on: target) { PreviewOverlay.show(frame) } else { PreviewOverlay.hide() }
+        if let target, let frame = WindowActions.landingFrame(of: action, on: target) { PreviewOverlay.show(frame) } else { PreviewOverlay.hide() }
     }
 
     /// The action the strokes so far map to, with the user's choices from Settings.
     private func currentAction() -> WindowAction? {
-        ActionMap.action(for: recognizer.strokes, command: command, overrides: Self.gestureMap)
+        ActionMap.action(for: recognizer.strokes, command: command, onDock: dockApp != nil, overrides: Self.gestureMap)
     }
 
     private func finish(cancelled: Bool) {
         PreviewOverlay.hide()
-        if !cancelled, !escaped, let target, let action = currentAction() {
-            WindowActions.run(action, on: target)
+        if !cancelled, !escaped, let action = currentAction() {
+            if let target { WindowActions.run(action, on: target) } else if let dockApp { AppControl.perform(action, on: dockApp) }
         }
         swallowMomentum = true
         target = nil
+        dockApp = nil
         recognizer.reset()
     }
 }

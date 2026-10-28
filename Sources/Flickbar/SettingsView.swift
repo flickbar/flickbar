@@ -80,8 +80,11 @@ enum ActionNames {
          [.snap(.leftThird), .snap(.centerThird), .snap(.rightThird), .snap(.leftTwoThirds), .snap(.rightTwoThirds)],
          [.snap(.topLeft), .snap(.topRight), .snap(.bottomLeft), .snap(.bottomRight)],
          [.minimize, .toggleFullscreen, .close, .nextWindow],
-         [.hideApp, .quitApp]]
+         appActions]
     }
+
+    /// The actions that make sense on a Dock icon, which has an app but no window.
+    static var appActions: [WindowAction] { [.appWindows, .hideApp, .quitApp] }
 
     static func title(_ action: WindowAction) -> String {
         switch action {
@@ -102,6 +105,7 @@ enum ActionNames {
         case .toggleFullscreen: "Full Screen"
         case .close: "Close Window"
         case .nextWindow: "Next Window of App"
+        case .appWindows: "Show App's Windows"
         case .hideApp: "Hide App"
         case .quitApp: "Quit App"
         case .moveToDisplay(.left): "Move to Display on the Left"
@@ -146,6 +150,18 @@ private struct GestureSettings: View {
                 }
             }
             Section {
+                row(.swipeUp, "Swipe up", "arrow.up", onDock: true)
+                row(.swipeDown, "Swipe down", "arrow.down", onDock: true)
+                row(.swipeLeft, "Swipe left", "arrow.left", onDock: true)
+                row(.swipeRight, "Swipe right", "arrow.right", onDock: true)
+                row(.pinchIn, "Pinch in", "arrow.down.right.and.arrow.up.left", onDock: true)
+                row(.pinchOut, "Pinch out", "arrow.up.left.and.arrow.down.right", onDock: true)
+            } header: {
+                Text("On an app's Dock icon")
+            } footer: {
+                footnote("Works on apps that are running.")
+            }
+            Section {
                 Picker("Use gestures anywhere in a window while holding", selection: $anywhereModifier) {
                     Text("⌥ Option").tag("option")
                     Text("⌃ Control").tag("control")
@@ -164,9 +180,9 @@ private struct GestureSettings: View {
         .frame(height: 640)
     }
 
-    private func row(_ gesture: TrackpadGesture, _ title: String, _ symbol: String) -> some View {
-        Picker(selection: state.actionBinding(gesture)) {
-            ForEach(ActionNames.groups, id: \.self) { group in
+    private func row(_ gesture: TrackpadGesture, _ title: String, _ symbol: String, onDock: Bool = false) -> some View {
+        Picker(selection: state.actionBinding(gesture, onDock: onDock)) {
+            ForEach(onDock ? [[.nextWindow] + ActionNames.appActions] : ActionNames.groups, id: \.self) { group in
                 ForEach(group, id: \.id) { Text(ActionNames.title($0)).tag($0.id) }
                 Divider()
             }

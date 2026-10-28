@@ -11,11 +11,14 @@ struct AXWindow {
     private static let systemWide = AXUIElementCreateSystemWide()
     private static let fallbackTitlebarHeight: CGFloat = 28
 
-    /// The window under `point`, if any; with `titleBarOnly`, only when the point is on its title bar.
-    static func at(_ point: CGPoint, titleBarOnly: Bool) -> AXWindow? {
+    /// The Accessibility element under `point` (one round trip to the app there, so look it up once per gesture).
+    static func element(at point: CGPoint) -> AXUIElement? {
         var hit: AXUIElement?
-        guard AXUIElementCopyElementAtPosition(systemWide, Float(point.x), Float(point.y), &hit) == .success,
-              let hit else { return nil }
+        return AXUIElementCopyElementAtPosition(systemWide, Float(point.x), Float(point.y), &hit) == .success ? hit : nil
+    }
+
+    /// The window `hit` belongs to, if any; with `titleBarOnly`, only when `point` is on its title bar.
+    static func of(_ hit: AXUIElement, at point: CGPoint, titleBarOnly: Bool) -> AXWindow? {
         let window: AXUIElement? = hit.string(kAXRoleAttribute) == kAXWindowRole ? hit : hit.element(kAXWindowAttribute)
         guard let window, window.string(kAXSubroleAttribute) == kAXStandardWindowSubrole else { return nil }
 
@@ -80,24 +83,11 @@ struct AXWindow {
         case .toggleFullscreen:
             let isFull = element.bool("AXFullScreen") ?? false
             AXUIElementSetAttributeValue(element, "AXFullScreen" as CFString, (!isFull) as CFBoolean)
-        case .nextWindow:
-            // Windows are listed front to back, so raising the last one cycles through all of them.
-            let windows = (app.value(kAXWindowsAttribute) as? [AXUIElement] ?? []).filter {
-                $0.string(kAXSubroleAttribute) == kAXStandardWindowSubrole && $0.bool(kAXMinimizedAttribute) != true
-            }
-            guard let back = windows.last, windows.count > 1 else { return }
-            AXUIElementPerformAction(back, kAXRaiseAction as CFString)
-            runningApplication?.activate()
-        case .hideApp:
-            runningApplication?.hide()
-        case .quitApp:
-            runningApplication?.terminate()
+        case .nextWindow, .appWindows, .hideApp, .quitApp:
+            var pid: pid_t = 0
+            guard AXUIElementGetPid(app, &pid) == .success, let running = NSRunningApplication(processIdentifier: pid) else { return }
+            AppControl.perform(action, on: running)
         }
-    }
-
-    private var runningApplication: NSRunningApplication? {
-        var pid: pid_t = 0
-        return AXUIElementGetPid(app, &pid) == .success ? NSRunningApplication(processIdentifier: pid) : nil
     }
 
     func setFrame(_ rect: CGRect) {
@@ -126,6 +116,50 @@ struct AXWindow {
     /// Visible frame of the screen holding most of `rect`.
     private static func visibleFrame(containing rect: CGRect) -> CGRect? {
         visibleFrames().max { $0.intersection(rect).area < $1.intersection(rect).area }
+    }
+}
+
+/// App-wide actions, for a window's app or an app's Dock icon.
+@MainActor
+enum AppControl {
+    private static var dock: AXUIElement? {
+        NSRunningApplication.runningApplications(withBundleIdentifier: "com.apple.dock").first
+            .map { AXUIElementCreateApplication($0.processIdentifier) }
+    }
+
+    /// The running app whose Dock icon `hit` is, if any.
+    static func app(ofDockItem hit: AXUIElement) -> NSRunningApplication? {
+        guard hit.string(kAXSubroleAttribute) == kAXApplicationDockItemSubrole,
+              let url = hit.value("AXURL") as? URL, let id = Bundle(url: url)?.bundleIdentifier else { return nil }
+        return NSRunningApplication.runningApplications(withBundleIdentifier: id).first
+    }
+
+    static func perform(_ action: WindowAction, on app: NSRunningApplication) {
+        switch action {
+        case .nextWindow:
+            // Windows are listed front to back, so raising the last one cycles through all of them.
+            let windows = (AXUIElementCreateApplication(app.processIdentifier).value(kAXWindowsAttribute) as? [AXUIElement] ?? []).filter {
+                $0.string(kAXSubroleAttribute) == kAXStandardWindowSubrole && $0.bool(kAXMinimizedAttribute) != true
+            }
+            if windows.count > 1, let back = windows.last { AXUIElementPerformAction(back, kAXRaiseAction as CFString) }
+            app.activate()
+        case .appWindows:
+            // The Dock offers App Exposé as an accessibility action on a running app's icon.
+            app.unhide()
+            if let item = dockItem(for: app) { AXUIElementPerformAction(item, "AXShowExpose" as CFString) }
+        case .hideApp:
+            app.hide()
+        case .quitApp:
+            app.terminate()
+        default:
+            break
+        }
+    }
+
+    private static func dockItem(for app: NSRunningApplication) -> AXUIElement? {
+        let lists = dock?.value(kAXChildrenAttribute) as? [AXUIElement] ?? []
+        let items = lists.flatMap { $0.value(kAXChildrenAttribute) as? [AXUIElement] ?? [] }
+        return items.first { (($0.value("AXURL") as? URL).flatMap { Bundle(url: $0)?.bundleIdentifier }) == app.bundleIdentifier }
     }
 }
 

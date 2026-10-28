@@ -15,6 +15,8 @@ public enum WindowAction: Hashable, Sendable {
     /// Brings the app's backmost window to the front, so repeating cycles through its windows.
     case nextWindow
     case hideApp, quitApp
+    /// Shows all of the app's windows (App Exposé).
+    case appWindows
 }
 
 public enum ActionMap {
@@ -23,21 +25,27 @@ public enum ActionMap {
     /// `gestureMap` key for ⌘-swipe (move to another display), which is either on or off.
     public static let commandSwipe = "commandSwipe"
 
-    /// The action for `gesture`: the user's choice in `overrides` (gesture raw value → action id), else the default.
-    public static func action(for gesture: TrackpadGesture, overrides: [String: String] = [:]) -> WindowAction? {
-        guard let id = overrides[gesture.rawValue] else { return gesture.defaultAction }
+    /// The `gestureMap` key for `gesture`; gestures on Dock icons have their own.
+    public static func key(_ gesture: TrackpadGesture, onDock: Bool = false) -> String {
+        onDock ? "dock." + gesture.rawValue : gesture.rawValue
+    }
+
+    /// The action for `gesture`: the user's choice in `overrides` (`key` → action id), else the default.
+    public static func action(for gesture: TrackpadGesture, onDock: Bool = false, overrides: [String: String] = [:]) -> WindowAction? {
+        guard let id = overrides[key(gesture, onDock: onDock)] else { return onDock ? gesture.defaultDockAction : gesture.defaultAction }
         return WindowAction(id: id)
     }
 
     /// The action a finished gesture performs. With ⌘ held, a single swipe moves the window to the
     /// neighbouring display instead.
-    public static func action(for strokes: [Stroke], command: Bool = false, overrides: [String: String] = [:]) -> WindowAction? {
-        if command {
+    public static func action(for strokes: [Stroke], command: Bool = false, onDock: Bool = false,
+                              overrides: [String: String] = [:]) -> WindowAction? {
+        if command, !onDock {
             guard overrides[commandSwipe] != off, strokes.count == 1, let s = strokes.first, s != .pinchIn, s != .pinchOut
             else { return nil }
             return .moveToDisplay(s)
         }
-        return TrackpadGesture(strokes: strokes).flatMap { action(for: $0, overrides: overrides) }
+        return TrackpadGesture(strokes: strokes).flatMap { action(for: $0, onDock: onDock, overrides: overrides) }
     }
 
     /// `gestureMap` entries for the per-group switches of version 0.2 (`disabledGestures`).

@@ -30,6 +30,15 @@ Put the pointer on a window's title bar and use two fingers:
 
 Hold ⌥ Option to use the same gestures anywhere in a window, not just on its title bar.
 
+Gestures also work on a running app's icon in the Dock:
+
+| On a Dock icon | Result |
+|---|---|
+| Swipe up | Show all of the app's windows |
+| Swipe down | Hide the app |
+| Swipe left / right | Bring the app's next window to the front |
+| Pinch in | Quit the app |
+
 While your fingers are down, a highlight shows where the window will land and a light haptic tap
 confirms the gesture; it runs when you lift them. Press Esc first to cancel. Other scrolling and
 zooming passes through untouched.
@@ -42,12 +51,16 @@ half or Fill Screen shortcut cycles through thirds, just like repeating the swip
 
 ## Settings
 
-Open **Settings…** from the menu bar icon (or press ⌘, while it's open) to choose what each gesture
-does (any half, third, quarter, fill, center, full screen, close, next window of the app, hide or quit
-the app, or nothing), pick the key for gesturing anywhere in a window, record keyboard shortcuts, add space between snapped
-windows, turn off the preview or haptic feedback, keep gestures off in specific apps, and open
-Flickbar at login. The menu bar icon can also turn gestures off for the app you're
-using.
+Open **Settings…** from the menu bar icon (or press ⌘, while it's open) to:
+
+- choose what each gesture does on title bars and on Dock icons: any half, third or quarter, fill,
+  center, full screen, close, next window of the app, show the app's windows, hide or quit the app, or
+  nothing;
+- pick the key for gesturing anywhere in a window, and record keyboard shortcuts;
+- add space between snapped windows, and turn off the preview or haptic feedback;
+- keep gestures off in specific apps, and open Flickbar at login.
+
+The menu bar icon can also turn gestures off for the app you're using.
 
 <p align="center">
   <img src="docs/images/settings-general.png" width="380" alt="General settings">
@@ -56,7 +69,7 @@ using.
 
 ## Install
 
-**Download:** get **Flickbar-0.4.0.zip** from the
+**Download:** get **Flickbar-0.5.0.zip** from the
 [latest release](https://github.com/flickbar/flickbar/releases/latest), unzip it and move
 **Flickbar.app** to Applications. This early build isn't notarized by Apple yet, so macOS blocks it the
 first time: open it once, then click **Open Anyway** in *System Settings → Privacy & Security*.

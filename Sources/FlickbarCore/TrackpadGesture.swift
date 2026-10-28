@@ -36,12 +36,23 @@ public enum TrackpadGesture: String, CaseIterable, Sendable {
         case .pinchIn: .close
         }
     }
+
+    /// What the gesture does on a running app's Dock icon by default.
+    public var defaultDockAction: WindowAction? {
+        switch self {
+        case .swipeUp: .appWindows
+        case .swipeDown: .hideApp
+        case .swipeLeft, .swipeRight: .nextWindow
+        case .pinchIn: .quitApp
+        default: nil
+        }
+    }
 }
 
 public extension WindowAction {
     /// Actions a gesture can be set to, in menu order.
     static let assignable: [WindowAction] = SnapTarget.allCases.map(WindowAction.snap)
-        + [.minimize, .toggleFullscreen, .close, .nextWindow, .hideApp, .quitApp]
+        + [.minimize, .toggleFullscreen, .close, .nextWindow, .appWindows, .hideApp, .quitApp]
 
     /// Stable name used in preferences.
     var id: String {
@@ -53,6 +64,7 @@ public extension WindowAction {
         case .nextWindow: "nextWindow"
         case .hideApp: "hideApp"
         case .quitApp: "quitApp"
+        case .appWindows: "appWindows"
         case .moveToDisplay(let direction): "moveToDisplay.\(direction)"
         }
     }

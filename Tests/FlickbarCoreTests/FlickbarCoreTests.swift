@@ -112,6 +112,19 @@ import Testing
         for gesture in TrackpadGesture.allCases { #expect(WindowAction.assignable.contains(gesture.defaultAction)) }
     }
 
+    @Test func dockGesturesHaveTheirOwnDefaultsAndKeys() {
+        #expect(ActionMap.action(for: [.up], onDock: true) == .appWindows)
+        #expect(ActionMap.action(for: [.down], onDock: true) == .hideApp)
+        #expect(ActionMap.action(for: [.left, .up], onDock: true) == nil)
+        #expect(ActionMap.action(for: [.up], command: true, onDock: true) == .appWindows)
+        let map = ["dock.swipeDown": "quitApp", "swipeDown": "close"]
+        #expect(ActionMap.action(for: [.down], onDock: true, overrides: map) == .quitApp)
+        #expect(ActionMap.action(for: [.down], overrides: map) == .close)
+        for gesture in TrackpadGesture.allCases {
+            if let action = gesture.defaultDockAction { #expect(WindowAction.assignable.contains(action)) }
+        }
+    }
+
     @Test func oldGroupSwitchesMigrate() {
         let map = ActionMap.migrate(disabled: ["halves", "moveToDisplay", "unknown"])
         #expect(map == ["swipeLeft": "none", "swipeRight": "none", "commandSwipe": "none"])
