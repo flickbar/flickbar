@@ -10,6 +10,8 @@ final class GestureTap {
     private var target: AXWindow?
     private var swallowMomentum = false
     private var command = false
+    // shortcut: entries for closed windows are never pruned, a few bytes each; prune if it ever matters.
+    private var restoreMemory = RestoreMemory<AXUIElement>()
 
     var isEnabled = false {
         didSet {
@@ -92,9 +94,25 @@ final class GestureTap {
         NSHapticFeedbackManager.defaultPerformer.perform(.alignment, performanceTime: .now)
     }
 
+    /// Swipe down on a window Flickbar placed restores it; otherwise the action runs and moves are remembered.
+    private func run(_ action: WindowAction, on window: AXWindow) {
+        if action == .minimize, let current = window.frame,
+           let original = restoreMemory.takeOriginal(window.element, current: current) {
+            window.setFrame(original)
+            return
+        }
+        let before = window.frame
+        window.perform(action, gap: CGFloat(UserDefaults.standard.integer(forKey: "gap")))
+        switch action {
+        case .snap, .moveToDisplay:
+            if let before, let after = window.frame { restoreMemory.record(window.element, from: before, to: after) }
+        default: break
+        }
+    }
+
     private func finish(cancelled: Bool) {
         if !cancelled, let target, let action = ActionMap.action(for: recognizer.strokes, command: command) {
-            target.perform(action, gap: CGFloat(UserDefaults.standard.integer(forKey: "gap")))
+            run(action, on: target)
         }
         swallowMomentum = true
         target = nil

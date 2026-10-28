@@ -83,6 +83,32 @@ import Testing
     }
 }
 
+@Suite struct RestoreTests {
+    let original = CGRect(x: 100, y: 100, width: 600, height: 400)
+    let half = CGRect(x: 0, y: 25, width: 500, height: 800)
+    let quarter = CGRect(x: 0, y: 25, width: 500, height: 400)
+
+    @Test func restoresFirstOriginalAfterRepeatedSnaps() {
+        var m = RestoreMemory<Int>()
+        m.record(1, from: original, to: half)
+        m.record(1, from: half, to: quarter)
+        #expect(m.takeOriginal(1, current: quarter) == original)
+        #expect(m.takeOriginal(1, current: quarter) == nil)
+    }
+
+    @Test func noRestoreIfUserMovedWindow() {
+        var m = RestoreMemory<Int>()
+        m.record(1, from: original, to: half)
+        #expect(m.takeOriginal(1, current: half.offsetBy(dx: 200, dy: 0)) == nil)
+    }
+
+    @Test func toleratesSmallAdjustments() {
+        var m = RestoreMemory<Int>()
+        m.record(1, from: original, to: half)
+        #expect(m.takeOriginal(1, current: half.offsetBy(dx: 3, dy: 5)) == original)
+    }
+}
+
 @Suite struct DisplayTests {
     let main = CGRect(x: 0, y: 0, width: 1000, height: 800)
     let right = CGRect(x: 1000, y: 0, width: 2000, height: 1000)

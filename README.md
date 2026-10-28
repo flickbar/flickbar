@@ -8,7 +8,7 @@ Put the pointer on a window's title bar and swipe with two fingers:
 |---|---|
 | Swipe left / right | Snap to left / right half |
 | Swipe up | Fill the screen |
-| Swipe down | Minimize |
+| Swipe down | Restore the size from before Flickbar snapped it, otherwise minimize |
 | Swipe left or right, then up or down (either order) | Snap to that quarter |
 | Pinch in | Close window |
 | Pinch out | Toggle full screen |

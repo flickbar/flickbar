@@ -58,7 +58,7 @@ struct AXWindow {
         }
     }
 
-    private func setFrame(_ rect: CGRect) {
+    func setFrame(_ rect: CGRect) {
         // Apps with enhanced UI on (set by assistive tools) animate and ignore frame changes.
         let enhanced = app.bool("AXEnhancedUserInterface") ?? false
         if enhanced { AXUIElementSetAttributeValue(app, "AXEnhancedUserInterface" as CFString, kCFBooleanFalse) }
