@@ -6,7 +6,7 @@
 
 <p align="center">
   Snap, resize and move macOS windows with trackpad gestures on their title bars.<br>
-  Free and open source. Made by <a href="https://github.com/benymaxparsa">Parsa Kamalipour</a>.
+  Free and open source. <a href="https://flickbar.github.io/">Website</a>. Made by <a href="https://github.com/benymaxparsa">Parsa Kamalipour</a>.
 </p>
 
 <p align="center">
