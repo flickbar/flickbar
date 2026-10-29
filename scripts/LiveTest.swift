@@ -197,10 +197,12 @@ setFrame(window, start); usleep(300000)
 
 // Dock: the TextEdit icon (TextEdit is running, so it's in the Dock).
 let dockApp = AXUIElementCreateApplication(NSRunningApplication.runningApplications(withBundleIdentifier: "com.apple.dock").first!.processIdentifier)
-let dockItems = (attr(dockApp, kAXChildrenAttribute) as! [AXUIElement]).flatMap { attr($0, kAXChildrenAttribute) as? [AXUIElement] ?? [] }
-let textEditIcon = dockItems.first { (attr($0, kAXTitleAttribute) as? String) == "TextEdit" }.map { e -> CGPoint in
-    let f = frame(e); return CGPoint(x: f.midX, y: f.midY)
-}!
+// Looked up each time: the Dock re-centres its icons when minimized-window tiles come and go.
+var textEditIcon: CGPoint {
+    let items = (attr(dockApp, kAXChildrenAttribute) as! [AXUIElement]).flatMap { attr($0, kAXChildrenAttribute) as? [AXUIElement] ?? [] }
+    let f = frame(items.first { (attr($0, kAXTitleAttribute) as? String) == "TextEdit" }!)
+    return CGPoint(x: f.midX, y: f.midY)
+}
 let textEdit = NSRunningApplication(processIdentifier: pid)!
 swipe(textEditIcon, [(0, 120)]); usleep(500000)
 check("Dock: swipe down → hide app", textEdit.isHidden, "not hidden")
@@ -219,7 +221,30 @@ AXUIElementSetAttributeValue(window, "AXFullScreen" as CFString, kCFBooleanFalse
 
 swipe(titlebar(), [(0, 120)]); usleep(500000)
 check("swipe down (not snapped) → minimize", bool(window, kAXMinimizedAttribute), "not minimized")
+
+// Minimized windows get their own Dock tile unless they minimize into the app's icon.
+func minimizedTile() -> CGPoint? {
+    let items = (attr(dockApp, kAXChildrenAttribute) as! [AXUIElement]).flatMap { attr($0, kAXChildrenAttribute) as? [AXUIElement] ?? [] }
+    let title = attr(window, kAXTitleAttribute) as? String
+    return items.first { (attr($0, kAXSubroleAttribute) as? String) == "AXMinimizedWindowDockItem" && (attr($0, kAXTitleAttribute) as? String) == title }
+        .map { e in let f = frame(e); return CGPoint(x: f.midX, y: f.midY) }
+}
+func minimize() { AXUIElementSetAttributeValue(window, kAXMinimizedAttribute as CFString, kCFBooleanTrue); sleep(1) }
+if let tile = minimizedTile() {
+    swipe(tile, [(0, -120)]); sleep(1)
+    check("Dock tile: swipe up → window back", !bool(window, kAXMinimizedAttribute), "still minimized")
+    minimize()
+    swipe(minimizedTile() ?? tile, [(-120, 0)]); sleep(1)
+    check("Dock tile: swipe left → window back", !bool(window, kAXMinimizedAttribute), "still minimized")
+    expect("Dock tile: swipe left → left half", CGRect(x: main.minX, y: main.minY, width: halfW, height: main.height))
+    minimize()
+} else {
+    print("SKIP Dock tile checks: minimized windows go into the app's icon")
+}
+swipe(textEditIcon, [(-120, 0)]); sleep(1)
+check("Dock: swipe left → brings back minimized window", !bool(window, kAXMinimizedAttribute), "still minimized")
 AXUIElementSetAttributeValue(window, kAXMinimizedAttribute as CFString, kCFBooleanFalse); sleep(1)
+setFrame(window, start); usleep(300000)
 appleScript("tell application \"TextEdit\" to activate"); usleep(500000)
 
 pinch(titlebar(), total: -0.5); usleep(500000)

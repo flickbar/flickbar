@@ -10,7 +10,9 @@ final class GestureTap {
     private var target: AXWindow?
     /// The app whose Dock icon the gesture started on, when it didn't start on a window.
     private var dockApp: NSRunningApplication?
-    private var tracking: Bool { target != nil || dockApp != nil }
+    /// The Dock tile of a minimized window the gesture started on.
+    private var minimizedTile: AXUIElement?
+    private var tracking: Bool { target != nil || dockApp != nil || minimizedTile != nil }
     private var swallowMomentum = false
     private var command = false
     private var escaped = false
@@ -75,6 +77,7 @@ final class GestureTap {
     /// Returns true when the event was used for a gesture and must not reach the app below.
     private func handle(_ type: CGEventType, _ event: CGEvent) -> Bool {
         if type == .tapDisabledByTimeout || type == .tapDisabledByUserInput {
+            logger.notice("event tap was disabled (\(type == .tapDisabledByTimeout ? "too slow" : "by input", privacy: .public)); re-enabling")
             if let tap, isEnabled { CGEvent.tapEnable(tap: tap, enable: true) }
             return false
         }
@@ -153,7 +156,8 @@ final class GestureTap {
         let hit = AXWindow.element(at: point)
         target = hit.flatMap { Self.window(of: $0, at: point, flags: flags) }
         dockApp = target == nil ? hit.flatMap(AppControl.app(ofDockItem:)) : nil
-        logger.debug("gesture began at \(point.debugDescription, privacy: .public), on window: \(self.target != nil, privacy: .public), on Dock: \(self.dockApp?.bundleIdentifier ?? "no", privacy: .public)")
+        minimizedTile = target == nil && dockApp == nil ? hit.flatMap(AppControl.minimizedWindowTile) : nil
+        logger.debug("gesture began at \(point.debugDescription, privacy: .public), on window: \(self.target != nil, privacy: .public), on Dock: \(self.dockApp?.bundleIdentifier ?? "no", privacy: .public), on minimized window: \(self.minimizedTile != nil, privacy: .public)")
     }
 
     /// A tick and a preview of where the window will land tell the user the gesture so far maps to an action,
@@ -195,7 +199,14 @@ final class GestureTap {
 
     /// The action the strokes so far map to, with the user's choices from Settings.
     private func currentAction() -> WindowAction? {
-        ActionMap.action(for: recognizer.strokes, command: command, onDock: dockApp != nil, overrides: Self.gestureMap)
+        guard minimizedTile != nil else {
+            return ActionMap.action(for: recognizer.strokes, command: command, onDock: dockApp != nil, overrides: Self.gestureMap)
+        }
+        // On a minimized window, swipe up just brings it back (restore-or-minimize does exactly that to a minimized
+        // window); other gestures bring it back and then do what they do on a title bar. Minimizing again does nothing.
+        if recognizer.strokes == [.up] { return .minimize }
+        let action = ActionMap.action(for: recognizer.strokes, overrides: Self.gestureMap)
+        return action == .minimize ? nil : action
     }
 
     private func finish(cancelled: Bool) {
@@ -204,11 +215,19 @@ final class GestureTap {
         if let grid, let gridScreen, let target {
             if !cancelled, !escaped { WindowActions.place(target, at: grid.frame(in: gridScreen, gap: WindowActions.gap)) }
         } else if !cancelled, !escaped, let action = currentAction() {
-            if let target { WindowActions.run(action, on: target) } else if let dockApp { AppControl.perform(action, on: dockApp) }
+            if let target {
+                WindowActions.run(action, on: target)
+            } else if let dockApp {
+                AppControl.perform(action, on: dockApp)
+            } else if let minimizedTile {
+                // Finding the window asks every app for its windows; don't hold up the event tap while it does.
+                DispatchQueue.main.async { AppControl.restore(minimizedTile, then: action == .minimize ? nil : action) }
+            }
         }
         swallowMomentum = true
         target = nil
         dockApp = nil
+        minimizedTile = nil
         grid = nil
         recognizer.reset()
     }

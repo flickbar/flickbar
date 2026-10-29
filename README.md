@@ -39,10 +39,13 @@ Gestures also work on a running app's icon in the Dock:
 
 | On a Dock icon | Result |
 |---|---|
-| Swipe up | Show all of the app's windows |
+| Swipe up | Show all of the app's windows (or bring them back if they're all minimized) |
 | Swipe down | Hide the app |
-| Swipe left / right | Bring the app's next window to the front |
+| Swipe left / right | Bring the app's next window to the front, including minimized ones |
 | Pinch in | Quit the app |
+
+On a minimized window's own tile in the Dock, swipe up to bring the window back, or use any title-bar
+gesture to bring it back and snap it, such as swipe left for the left half.
 
 While your fingers are down, a highlight shows where the window will land and a light haptic tap
 confirms the gesture; it runs when you lift them. Press Esc first to cancel. Other scrolling and

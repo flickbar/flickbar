@@ -140,19 +140,72 @@ enum AppControl {
         return NSRunningApplication.runningApplications(withBundleIdentifier: id).first
     }
 
+    /// `hit` if it's the Dock tile of a minimized window (shown when windows don't minimize into their app's icon).
+    static func minimizedWindowTile(_ hit: AXUIElement) -> AXUIElement? {
+        hit.string(kAXSubroleAttribute) == "AXMinimizedWindowDockItem" ? hit : nil
+    }
+
+    /// Brings back the window a minimized-window tile stands for, then runs `action` on it.
+    static func restore(_ tile: AXUIElement, then action: WindowAction?) {
+        guard let title = tile.string(kAXTitleAttribute), let (window, app) = minimizedWindow(titled: title) else {
+            // Pressing the tile restores it too, just without a window to run `action` on.
+            AXUIElementPerformAction(tile, kAXPressAction as CFString)
+            return
+        }
+        unminimize(window.element)
+        app.activate()
+        guard let action else { return }
+        // shortcut: waits out the restore animation (about half a second), during which the window ignores
+        // frame changes; watch for the animation's end instead if half a second proves wrong somewhere.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { WindowActions.run(action, on: window) }
+    }
+
+    /// The tile only has the window's title, so look for a minimized window with that title.
+    /// shortcut: with two minimized windows of the same title in different apps, either may come back; match on more if that bites.
+    private static func minimizedWindow(titled title: String) -> (AXWindow, NSRunningApplication)? {
+        for app in NSWorkspace.shared.runningApplications where app.activationPolicy == .regular {
+            let element = AXUIElementCreateApplication(app.processIdentifier)
+            // An app that's hung would otherwise stall this for seconds.
+            AXUIElementSetMessagingTimeout(element, 0.25)
+            if let window = standardWindows(of: element).first(where: { $0.bool(kAXMinimizedAttribute) == true && $0.string(kAXTitleAttribute) == title }) {
+                return (AXWindow(element: window, app: element), app)
+            }
+        }
+        return nil
+    }
+
+    /// Minimized windows report the dialog subrole, so they count whatever their subrole.
+    private static func standardWindows(of app: AXUIElement) -> [AXUIElement] {
+        (app.value(kAXWindowsAttribute) as? [AXUIElement] ?? []).filter {
+            $0.string(kAXSubroleAttribute) == kAXStandardWindowSubrole || $0.bool(kAXMinimizedAttribute) == true
+        }
+    }
+
+    private static func unminimize(_ window: AXUIElement) {
+        AXUIElementSetAttributeValue(window, kAXMinimizedAttribute as CFString, kCFBooleanFalse)
+        AXUIElementPerformAction(window, kAXRaiseAction as CFString)
+    }
+
     static func perform(_ action: WindowAction, on app: NSRunningApplication) {
+        let windows = standardWindows(of: AXUIElementCreateApplication(app.processIdentifier))
         switch action {
         case .nextWindow:
-            // Windows are listed front to back, so raising the last one cycles through all of them.
-            let windows = (AXUIElementCreateApplication(app.processIdentifier).value(kAXWindowsAttribute) as? [AXUIElement] ?? []).filter {
-                $0.string(kAXSubroleAttribute) == kAXStandardWindowSubrole && $0.bool(kAXMinimizedAttribute) != true
+            // Windows are listed front to back with minimized ones last, so raising the last one cycles through
+            // all of them, bringing minimized ones back on the way.
+            if let back = windows.count > 1 ? windows.last : windows.first(where: { $0.bool(kAXMinimizedAttribute) == true }) {
+                unminimize(back)
             }
-            if windows.count > 1, let back = windows.last { AXUIElementPerformAction(back, kAXRaiseAction as CFString) }
             app.activate()
         case .appWindows:
-            // The Dock offers App Exposé as an accessibility action on a running app's icon.
             app.unhide()
-            if let item = dockItem(for: app) { AXUIElementPerformAction(item, "AXShowExpose" as CFString) }
+            // App Exposé leaves minimized windows out, so with all of them minimized it would show nothing.
+            if !windows.isEmpty, windows.allSatisfy({ $0.bool(kAXMinimizedAttribute) == true }) {
+                windows.forEach(unminimize)
+                app.activate()
+            } else if let item = dockItem(for: app) {
+                // The Dock offers App Exposé as an accessibility action on a running app's icon.
+                AXUIElementPerformAction(item, "AXShowExpose" as CFString)
+            }
         case .hideApp:
             app.hide()
         case .quitApp:
