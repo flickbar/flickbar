@@ -74,7 +74,7 @@ The menu bar icon can also turn gestures off for the app you're using.
 
 ## Install
 
-**Download:** get **Flickbar-0.6.0.zip** from the
+**Download:** get **Flickbar-0.7.0.zip** from the
 [latest release](https://github.com/flickbar/flickbar/releases/latest), unzip it and move
 **Flickbar.app** to Applications. This early build isn't notarized by Apple yet, so macOS blocks it the
 first time: open it once, then click **Open Anyway** in *System Settings → Privacy & Security*.
