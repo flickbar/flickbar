@@ -32,12 +32,13 @@ if [ -n "$IDENTITY" ]; then
     # Stapling the ticket lets the app pass Gatekeeper offline too; zip again so the download has it.
     xcrun stapler staple "$APP"
     spctl --assess --type execute "$APP"
-    NOTARIZED=yes
+    OPEN="Open it."
 else
     IDENTITY="$(security find-identity -p codesigning | awk '/"Flickbar Release"/ { print $2; exit }')"
     [ -n "$IDENTITY" ] || echo "warning: no \"Flickbar Release\" identity; signing ad-hoc" >&2
     APP="$APP" SIGN_IDENTITY="${IDENTITY:--}" ./scripts/bundle.sh
-    NOTARIZED=
+    OPEN="Flickbar isn't notarized by Apple, so macOS blocks it the first time: open it once, then click **Open Anyway** in
+*System Settings → Privacy & Security*."
 fi
 rm -f "$ZIP"
 ditto -c -k --keepParent "$APP" "$ZIP"
@@ -55,8 +56,7 @@ Or download}"
 
 ${BREW:-Download} **Flickbar-$VERSION.zip** below, unzip it, and move **Flickbar.app** to Applications.
 
-${NOTARIZED:+Open Flickbar.app. }${NOTARIZED:-Flickbar isn't notarized by Apple, so macOS blocks it the first time: open it once, then click **Open Anyway** in
-*System Settings → Privacy & Security*. }Flickbar then asks for **Accessibility** access, which macOS requires for
+$OPEN Flickbar then asks for **Accessibility** access, which macOS requires for
 apps that arrange windows. If gestures stop working after an update, remove Flickbar from the Accessibility list
 with **−** and add it again.
 
