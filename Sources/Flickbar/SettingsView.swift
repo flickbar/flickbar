@@ -20,7 +20,7 @@ struct SettingsView: View {
             AboutSettings()
                 .tabItem { Label("About", systemImage: "info.circle") }
         }
-        .frame(width: 500)
+        .frame(width: 600)
     }
 }
 
@@ -35,18 +35,22 @@ private struct GeneralSettings: View {
     var body: some View {
         Form {
             Section {
-                Toggle("Title bar gestures", isOn: $state.isEnabled)
-                    .disabled(!state.isTrusted)
-                LabeledContent("Accessibility access") {
+                HStack(spacing: 12) {
+                    Image(nsImage: NSApp.applicationIconImage).resizable().frame(width: 48, height: 48)
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("Flickbar").font(.headline)
+                        Text(status).font(.callout).foregroundStyle(.secondary)
+                    }
+                    Spacer()
                     if state.isTrusted {
-                        Label("Granted", systemImage: "checkmark.circle.fill")
-                            .foregroundStyle(.green)
+                        Toggle("Gestures", isOn: $state.isEnabled).toggleStyle(.switch).labelsHidden()
                     } else {
-                        Button("Grant Access…") { state.showWelcome() }
+                        Button("Grant Access…") { state.showWelcome() }.buttonStyle(.borderedProminent)
                     }
                 }
+                .padding(.vertical, 4)
             }
-            Section {
+            Section("Windows") {
                 Picker("Space between windows", selection: $gap) {
                     Text("None").tag(0)
                     Text("Small").tag(6)
@@ -54,31 +58,36 @@ private struct GeneralSettings: View {
                     Text("Large").tag(20)
                 }
                 Toggle("Show where the window will go", isOn: $preview)
-                Toggle("Haptic feedback", isOn: $haptics)
-            } footer: {
-                Text("A preview and a light tap from the trackpad confirm a gesture before you lift your fingers.")
-                    .foregroundStyle(.secondary)
-                    .multilineTextAlignment(.leading)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                Toggle("Tap the trackpad when a gesture is recognized", isOn: $haptics)
             }
             Section {
                 Toggle("Open at login", isOn: $state.launchAtLogin)
                 Toggle("Check for updates", isOn: $state.checkForUpdates)
             } footer: {
-                Text("Once a day, Flickbar asks GitHub for the latest version number and shows it in the menu if it's newer. It sends nothing else.")
-                    .foregroundStyle(.secondary)
-                    .multilineTextAlignment(.leading)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                footnote("Once a day, Flickbar asks GitHub for the latest version number. It sends nothing else.")
             }
         }
         .formStyle(.grouped)
-        .frame(height: 450)
+        .frame(height: 430)
     }
+
+    private var status: String {
+        if !state.isTrusted { return "Needs Accessibility access to move windows." }
+        return state.isEnabled ? "On. Swipe on a window's title bar." : "Off."
+    }
+}
+
+private func footnote(_ text: String) -> some View {
+    Text(text)
+        .foregroundStyle(.secondary)
+        .multilineTextAlignment(.leading)
+        .fixedSize(horizontal: false, vertical: true)
+        .frame(maxWidth: .infinity, alignment: .leading)
 }
 
 // MARK: Action names
 
-/// Menu titles for actions, shared by the Gestures and Shortcuts tabs.
+/// Menu titles and pictures for actions, shared by the Gestures and Shortcuts tabs.
 enum ActionNames {
     /// Menu sections: halves and fill, thirds, quarters, window actions, app actions.
     static var groups: [[WindowAction]] {
@@ -88,6 +97,7 @@ enum ActionNames {
          [.minimize, .toggleFullscreen, .close, .nextWindow],
          appActions]
     }
+    static let groupTitles = ["Halves", "Thirds", "Quarters", "Window", "App"]
 
     /// The actions that make sense on a Dock icon, which has an app but no window.
     static var appActions: [WindowAction] { [.appWindows, .hideApp, .quitApp] }
@@ -121,6 +131,57 @@ enum ActionNames {
         case .moveToDisplay: "Move to Another Display"
         }
     }
+
+    /// Symbol for actions that don't put the window somewhere `LayoutGlyph` can draw.
+    static func symbol(_ action: WindowAction?) -> String {
+        switch action {
+        case .minimize: "dock.arrow.down.rectangle"
+        case .toggleFullscreen: "arrow.up.left.and.arrow.down.right"
+        case .close: "xmark"
+        case .nextWindow: "macwindow.on.rectangle"
+        case .appWindows: "square.grid.2x2"
+        case .hideApp: "eye.slash"
+        case .quitApp: "power"
+        case .moveToDisplay(.left): "arrow.left"
+        case .moveToDisplay(.right): "arrow.right"
+        case .moveToDisplay(.up): "arrow.up"
+        case .moveToDisplay(.down): "arrow.down"
+        default: "nosign"
+        }
+    }
+}
+
+/// A small screen showing where an action puts the window, or a symbol for actions that don't move it.
+struct LayoutGlyph: View {
+    let action: WindowAction?
+    var symbol: String?
+    var width: CGFloat = 56
+
+    var body: some View {
+        let height = (width * 0.64).rounded()
+        let corner = width * 0.1
+        ZStack(alignment: .topLeading) {
+            RoundedRectangle(cornerRadius: corner).fill(.quaternary)
+            RoundedRectangle(cornerRadius: corner).strokeBorder(.tertiary, lineWidth: 1)
+            if symbol == nil, case .snap(let target) = action {
+                let inset = width * 0.05
+                let screen = CGRect(x: inset, y: inset, width: width - 2 * inset, height: height - 2 * inset)
+                let r = SnapGeometry.frame(for: target, in: screen, current: screen.insetBy(dx: screen.width * 0.22, dy: screen.height * 0.2),
+                                           gap: width * 0.03)
+                RoundedRectangle(cornerRadius: corner * 0.5)
+                    .fill(Color.accentColor.gradient)
+                    .frame(width: r.width, height: r.height)
+                    .offset(x: r.minX, y: r.minY)
+            } else {
+                Image(systemName: symbol ?? ActionNames.symbol(action))
+                    .font(.system(size: height * 0.42, weight: .semibold))
+                    .foregroundStyle(action == nil && symbol == nil ? AnyShapeStyle(.tertiary) : AnyShapeStyle(.tint))
+                    .frame(width: width, height: height)
+            }
+        }
+        .frame(width: width, height: height)
+        .accessibilityHidden(true)
+    }
 }
 
 // MARK: Gestures
@@ -128,93 +189,109 @@ enum ActionNames {
 private struct GestureSettings: View {
     @Bindable var state: AppState
     @AppStorage("anywhereModifier") private var anywhereModifier = "option"
+    @State private var onDock = false
+
+    private static let titleBarGestures: [(TrackpadGesture, String, String)] = [
+        (.swipeLeft, "Swipe Left", "arrow.left"),
+        (.swipeUp, "Swipe Up", "arrow.up"),
+        (.swipeRight, "Swipe Right", "arrow.right"),
+        (.swipeLeftUp, "Left, Then Up", "arrow.up.left"),
+        (.swipeDown, "Swipe Down", "arrow.down"),
+        (.swipeRightUp, "Right, Then Up", "arrow.up.right"),
+        (.swipeLeftDown, "Left, Then Down", "arrow.down.left"),
+        (.doubleTap, "Double-Tap", "hand.tap"),
+        (.swipeRightDown, "Right, Then Down", "arrow.down.right"),
+        (.pinchIn, "Pinch In", "arrow.down.right.and.arrow.up.left"),
+        (.pinchOut, "Pinch Out", "arrow.up.left.and.arrow.down.right"),
+    ]
+    private static let dockGestures: [(TrackpadGesture, String, String)] = [
+        (.swipeLeft, "Swipe Left", "arrow.left"),
+        (.swipeUp, "Swipe Up", "arrow.up"),
+        (.swipeRight, "Swipe Right", "arrow.right"),
+        (.pinchIn, "Pinch In", "arrow.down.right.and.arrow.up.left"),
+        (.swipeDown, "Swipe Down", "arrow.down"),
+        (.pinchOut, "Pinch Out", "arrow.up.left.and.arrow.down.right"),
+    ]
 
     var body: some View {
-        Form {
-            Section {
-                row(.swipeLeft, "Swipe left", "arrow.left")
-                row(.swipeRight, "Swipe right", "arrow.right")
-                row(.swipeUp, "Swipe up", "arrow.up")
-                row(.swipeDown, "Swipe down", "arrow.down")
-            } header: {
-                Text("Swipe")
-            } footer: {
-                footnote("Repeat a swipe to a half for ⅔ and ⅓, or to fill the screen for the middle third. Swiping down on a snapped window restores its earlier size.")
+        VStack(spacing: 14) {
+            Picker("Where", selection: $onDock) {
+                Text("On a Window's Title Bar").tag(false)
+                Text("On an App's Dock Icon").tag(true)
             }
-            Section("Swipe sideways, then up or down") {
-                row(.swipeLeftUp, "Left and up", "arrow.up.left")
-                row(.swipeRightUp, "Right and up", "arrow.up.right")
-                row(.swipeLeftDown, "Left and down", "arrow.down.left")
-                row(.swipeRightDown, "Right and down", "arrow.down.right")
-            }
-            Section("Tap and pinch") {
-                row(.doubleTap, "Double-tap", "hand.tap")
-                row(.pinchOut, "Pinch out", "arrow.up.left.and.arrow.down.right")
-                row(.pinchIn, "Pinch in", "arrow.down.right.and.arrow.up.left")
-                Toggle(isOn: $state.commandSwipeEnabled) {
-                    label("Move to another display", "Hold ⌘ and swipe toward the display", "display.2")
+            .pickerStyle(.segmented)
+            .labelsHidden()
+            .fixedSize()
+
+            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 10), count: 3), spacing: 10) {
+                ForEach(onDock ? Self.dockGestures : Self.titleBarGestures, id: \.0) { gesture, title, symbol in
+                    tile(title, symbol) {
+                        LayoutGlyph(action: ActionMap.action(for: gesture, onDock: onDock, overrides: state.gestureMap))
+                    } detail: {
+                        picker(gesture)
+                    }
+                }
+                if !onDock {
+                    tile("Touch and Hold", "hand.point.up.left") {
+                        LayoutGlyph(action: nil, symbol: "square.grid.3x3")
+                    } detail: {
+                        Text("Pick from a grid").foregroundStyle(.secondary)
+                    }
                 }
             }
-            Section {
-                row(.swipeUp, "Swipe up", "arrow.up", onDock: true)
-                row(.swipeDown, "Swipe down", "arrow.down", onDock: true)
-                row(.swipeLeft, "Swipe left", "arrow.left", onDock: true)
-                row(.swipeRight, "Swipe right", "arrow.right", onDock: true)
-                row(.pinchIn, "Pinch in", "arrow.down.right.and.arrow.up.left", onDock: true)
-                row(.pinchOut, "Pinch out", "arrow.up.left.and.arrow.down.right", onDock: true)
-            } header: {
-                Text("On an app's Dock icon")
-            } footer: {
-                footnote("Works on apps that are running.")
-            }
-            Section {
-                Picker("Use gestures anywhere in a window while holding", selection: $anywhereModifier) {
-                    Text("⌥ Option").tag("option")
-                    Text("⌃ Control").tag("control")
-                    Text("Off").tag("off")
+
+            if onDock {
+                footnote("Works on the icons of apps that are running.")
+            } else {
+                VStack(spacing: 8) {
+                    Toggle("Hold ⌘ and swipe to move a window to another display", isOn: $state.commandSwipeEnabled)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    Picker("Gesture anywhere in a window while holding", selection: $anywhereModifier) {
+                        Text("⌥ Option").tag("option")
+                        Text("⌃ Control").tag("control")
+                        Text("Off").tag("off")
+                    }
+                    .fixedSize()
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 }
-            } footer: {
-                footnote("Otherwise gestures work with the pointer over a window's title bar. Press Esc before lifting your fingers to cancel.")
             }
-            Section {
+            Spacer(minLength: 0)
+            HStack(alignment: .firstTextBaseline) {
+                footnote(onDock ? "" : "Repeat a swipe to a half or Fill Screen to cycle through thirds. Press Esc before lifting your fingers to cancel.")
                 Button("Restore Defaults") { state.gestureMap = [:] }
                     .disabled(state.gestureMap.isEmpty)
-                    .frame(maxWidth: .infinity, alignment: .trailing)
             }
         }
-        .formStyle(.grouped)
-        .frame(height: 640)
+        .padding(20)
+        // Dock icons have fewer gestures; fit the window to them.
+        .frame(height: onDock ? 440 : 660)
     }
 
-    private func row(_ gesture: TrackpadGesture, _ title: String, _ symbol: String, onDock: Bool = false) -> some View {
-        Picker(selection: state.actionBinding(gesture, onDock: onDock)) {
+    private func tile(_ title: String, _ symbol: String, @ViewBuilder glyph: () -> some View,
+                      @ViewBuilder detail: () -> some View) -> some View {
+        VStack(spacing: 6) {
+            glyph()
+            Label(title, systemImage: symbol).font(.callout.weight(.medium)).lineLimit(1).frame(height: 20)
+            detail().frame(height: 22)
+        }
+        .padding(.vertical, 12)
+        .padding(.horizontal, 6)
+        .frame(maxWidth: .infinity)
+        .background(Color(nsColor: .controlBackgroundColor), in: RoundedRectangle(cornerRadius: 10))
+        .overlay(RoundedRectangle(cornerRadius: 10).strokeBorder(.separator))
+    }
+
+    private func picker(_ gesture: TrackpadGesture) -> some View {
+        Picker("Action", selection: state.actionBinding(gesture, onDock: onDock)) {
             ForEach(onDock ? [[.nextWindow] + ActionNames.appActions] : ActionNames.groups, id: \.self) { group in
                 ForEach(group, id: \.id) { Text(ActionNames.title($0)).tag($0.id) }
                 Divider()
             }
             Text("Nothing").tag(ActionMap.off)
-        } label: {
-            label(title, nil, symbol)
         }
-    }
-
-    private func label(_ title: String, _ detail: String?, _ symbol: String) -> some View {
-        Label {
-            VStack(alignment: .leading, spacing: 2) {
-                Text(title)
-                if let detail { Text(detail).font(.callout).foregroundStyle(.secondary) }
-            }
-        } icon: {
-            // Fixed width so titles line up whatever the symbol's shape.
-            Image(systemName: symbol).foregroundStyle(.tint).frame(width: 24)
-        }
-    }
-
-    private func footnote(_ text: String) -> some View {
-        Text(text)
-            .foregroundStyle(.secondary)
-            .multilineTextAlignment(.leading)
-            .frame(maxWidth: .infinity, alignment: .leading)
+        .labelsHidden()
+        .controlSize(.small)
+        .frame(maxWidth: 160)
     }
 }
 
@@ -223,25 +300,31 @@ private struct GestureSettings: View {
 private struct ShortcutSettings: View {
     var body: some View {
         Form {
-            ForEach(ActionNames.groups, id: \.self) { group in
-                Section { recorders(group) }
+            ForEach(Array(zip(ActionNames.groupTitles, ActionNames.groups)), id: \.0) { title, group in
+                Section(title) { recorders(group) }
             }
             Section {
                 recorders(Shortcuts.displayMoves)
+            } header: {
+                Text("Displays")
             } footer: {
-                Text("Shortcuts act on the frontmost window. Repeat a half or Fill Screen shortcut to cycle through thirds.")
-                    .foregroundStyle(.secondary)
-                    .multilineTextAlignment(.leading)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                footnote("Shortcuts act on the frontmost window. Repeat a half or Fill Screen shortcut to cycle through thirds.")
             }
         }
         .formStyle(.grouped)
-        .frame(height: 640)
+        .frame(height: 660)
     }
 
     private func recorders(_ actions: [WindowAction]) -> some View {
         ForEach(actions, id: \.id) { action in
-            KeyboardShortcuts.Recorder(LocalizedStringKey(ActionNames.title(action)), name: Shortcuts.name(action))
+            LabeledContent {
+                KeyboardShortcuts.Recorder(for: Shortcuts.name(action))
+            } label: {
+                HStack(spacing: 10) {
+                    LayoutGlyph(action: action, width: 30)
+                    Text(ActionNames.title(action))
+                }
+            }
         }
     }
 }
