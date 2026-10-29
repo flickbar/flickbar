@@ -44,7 +44,8 @@ EOF
 IDENTITY="${SIGN_IDENTITY:-$(security find-identity -v -p codesigning |
     awk '/"(Developer ID Application|Apple Development|Flickbar Local Signing)/ { print $2; exit }')}"
 if [ -n "$IDENTITY" ]; then
-    codesign --force --sign "$IDENTITY" "$APP"
+    # Hardened runtime, and a secure timestamp when asked (both required for notarization).
+    codesign --force --options runtime ${SIGN_TIMESTAMP:+--timestamp} --sign "$IDENTITY" "$APP"
     echo "Signed with $IDENTITY"
 else
     echo "warning: no valid signing identity; ad-hoc signing (re-grant Accessibility after each build)" >&2

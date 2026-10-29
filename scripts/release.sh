@@ -14,14 +14,33 @@ sed -i '' "s/Flickbar-[0-9.]*[0-9]\.zip/Flickbar-$VERSION.zip/" README.md
 grep -q "VERSION:-$VERSION}" scripts/bundle.sh || { echo "Couldn't set the version in bundle.sh." >&2; exit 1; }
 git commit -qam "Version $VERSION"
 
-# A dedicated self-signed identity keeps the signature (and so users' Accessibility grant) the same across
-# releases. Never the personal Apple Development certificate: its name holds the developer's email.
-IDENTITY="$(security find-identity -p codesigning | awk '/"Flickbar Release"/ { print $2; exit }')"
-[ -n "$IDENTITY" ] || echo "warning: no \"Flickbar Release\" identity; signing ad-hoc" >&2
-APP=build/release/Flickbar.app SIGN_IDENTITY="${IDENTITY:--}" ./scripts/bundle.sh
+# With a Developer ID certificate the app is notarized, so it opens without Gatekeeper's warning; that needs the
+# notary credentials stored once with `xcrun notarytool store-credentials flickbar-notary`. Otherwise a dedicated
+# self-signed identity keeps the signature (and so users' Accessibility grant) the same across releases.
+# Never the personal Apple Development certificate: its name holds the developer's email.
+APP=build/release/Flickbar.app
 ZIP="build/release/Flickbar-$VERSION.zip"
+IDENTITY="$(security find-identity -v -p codesigning | awk '/"Developer ID Application/ { print $2; exit }')"
+if [ -n "$IDENTITY" ]; then
+    xcrun notarytool history --keychain-profile flickbar-notary >/dev/null 2>&1 ||
+        { echo "Store the notary credentials first: xcrun notarytool store-credentials flickbar-notary" >&2; exit 1; }
+    APP="$APP" SIGN_IDENTITY="$IDENTITY" SIGN_TIMESTAMP=1 ./scripts/bundle.sh
+    rm -f "$ZIP"
+    ditto -c -k --keepParent "$APP" "$ZIP"
+    xcrun notarytool submit "$ZIP" --keychain-profile flickbar-notary --wait | tee build/release/notary.log
+    grep -q "status: Accepted" build/release/notary.log || { echo "Notarization failed; see build/release/notary.log" >&2; exit 1; }
+    # Stapling the ticket lets the app pass Gatekeeper offline too; zip again so the download has it.
+    xcrun stapler staple "$APP"
+    spctl --assess --type execute "$APP"
+    NOTARIZED=yes
+else
+    IDENTITY="$(security find-identity -p codesigning | awk '/"Flickbar Release"/ { print $2; exit }')"
+    [ -n "$IDENTITY" ] || echo "warning: no \"Flickbar Release\" identity; signing ad-hoc" >&2
+    APP="$APP" SIGN_IDENTITY="${IDENTITY:--}" ./scripts/bundle.sh
+    NOTARIZED=
+fi
 rm -f "$ZIP"
-ditto -c -k --keepParent build/release/Flickbar.app "$ZIP"
+ditto -c -k --keepParent "$APP" "$ZIP"
 SHA="$(shasum -a 256 "$ZIP" | cut -d' ' -f1)"
 TAPPED="$(gh repo view flickbar/homebrew-tap --json name >/dev/null 2>&1 && echo yes || true)"
 BREW="${TAPPED:+With [Homebrew](https://brew.sh): \`brew install --cask flickbar/tap/flickbar\` (or \`brew upgrade flickbar\`).
@@ -36,8 +55,8 @@ Or download}"
 
 ${BREW:-Download} **Flickbar-$VERSION.zip** below, unzip it, and move **Flickbar.app** to Applications.
 
-Flickbar isn't notarized by Apple, so macOS blocks it the first time: open it once, then click **Open Anyway** in
-*System Settings → Privacy & Security*. Flickbar then asks for **Accessibility** access, which macOS requires for
+${NOTARIZED:+Open Flickbar.app. }${NOTARIZED:-Flickbar isn't notarized by Apple, so macOS blocks it the first time: open it once, then click **Open Anyway** in
+*System Settings → Privacy & Security*. }Flickbar then asks for **Accessibility** access, which macOS requires for
 apps that arrange windows. If gestures stop working after an update, remove Flickbar from the Accessibility list
 with **−** and add it again.
 
