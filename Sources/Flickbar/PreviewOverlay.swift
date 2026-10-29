@@ -4,15 +4,7 @@ import AppKit
 @MainActor
 enum PreviewOverlay {
     private static let panel: NSPanel = {
-        let panel = NSPanel(contentRect: .zero, styleMask: [.borderless, .nonactivatingPanel], backing: .buffered, defer: true)
-        panel.isOpaque = false
-        panel.backgroundColor = .clear
-        panel.hasShadow = false
-        panel.ignoresMouseEvents = true
-        panel.level = .floating
-        panel.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary, .transient, .ignoresCycle]
-        panel.animationBehavior = .none
-
+        let panel = makePanel()
         // A light accent tint keeps what's underneath readable, so the user sees what will be covered.
         let box = NSView()
         box.wantsLayer = true
@@ -24,12 +16,38 @@ enum PreviewOverlay {
         return panel
     }()
 
+    /// Hold-to-grid's cells, under the preview.
+    private static let gridPanel: NSPanel = {
+        let panel = makePanel()
+        panel.level = .init(NSWindow.Level.floating.rawValue - 1)
+        panel.contentView = GridView()
+        return panel
+    }()
+
+    private static func makePanel() -> NSPanel {
+        let panel = NSPanel(contentRect: .zero, styleMask: [.borderless, .nonactivatingPanel], backing: .buffered, defer: true)
+        panel.isOpaque = false
+        panel.backgroundColor = .clear
+        panel.hasShadow = false
+        panel.ignoresMouseEvents = true
+        panel.level = .floating
+        panel.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary, .transient, .ignoresCycle]
+        panel.animationBehavior = .none
+        return panel
+    }
+
     static var isEnabled: Bool { UserDefaults.standard.object(forKey: "preview") as? Bool ?? true }
 
-    /// `frame` in Accessibility coordinates (top-left origin on the primary screen).
-    static func show(_ frame: CGRect) {
-        guard isEnabled, let primary = NSScreen.screens.first else { return }
-        let cocoa = CGRect(x: frame.minX, y: primary.frame.maxY - frame.maxY, width: frame.width, height: frame.height)
+    /// Accessibility coordinates (top-left origin on the primary screen) to Cocoa's (bottom-left).
+    private static func cocoa(_ frame: CGRect) -> CGRect {
+        let top = NSScreen.screens.first?.frame.maxY ?? 0
+        return CGRect(x: frame.minX, y: top - frame.maxY, width: frame.width, height: frame.height)
+    }
+
+    /// `frame` in Accessibility coordinates. The grid shows it even with previews turned off, as it's all it has.
+    static func show(_ frame: CGRect, always: Bool = false) {
+        guard isEnabled || always else { return }
+        let cocoa = cocoa(frame)
         if panel.isVisible {
             NSAnimationContext.runAnimationGroup { ctx in
                 ctx.duration = 0.12
@@ -41,8 +59,35 @@ enum PreviewOverlay {
         }
     }
 
+    /// Outlines `cells` (Accessibility coordinates) over a slightly dimmed screen.
+    static func showGrid(_ cells: [CGRect]) {
+        let bounds = cocoa(cells.reduce(CGRect.null) { $0.union($1) }).insetBy(dx: -8, dy: -8)
+        let view = gridPanel.contentView as! GridView
+        view.cells = cells.map { cocoa($0).offsetBy(dx: -bounds.minX, dy: -bounds.minY) }
+        gridPanel.setFrame(bounds, display: true)
+        gridPanel.orderFrontRegardless()
+    }
+
     static func hide() {
-        guard panel.isVisible else { return }
-        panel.orderOut(nil)
+        if panel.isVisible { panel.orderOut(nil) }
+        if gridPanel.isVisible { gridPanel.orderOut(nil) }
+    }
+}
+
+private final class GridView: NSView {
+    var cells: [CGRect] = [] { didSet { needsDisplay = true } }
+
+    override func draw(_ dirtyRect: NSRect) {
+        NSColor.black.withAlphaComponent(0.12).setFill()
+        NSBezierPath(roundedRect: bounds, xRadius: 14, yRadius: 14).fill()
+        for cell in cells {
+            let path = NSBezierPath(roundedRect: cell.insetBy(dx: 2, dy: 2), xRadius: 10, yRadius: 10)
+            NSColor.white.withAlphaComponent(0.08).setFill()
+            path.fill()
+            path.lineWidth = 1.5
+            path.setLineDash([6, 4], count: 2, phase: 0)
+            NSColor.white.withAlphaComponent(0.7).setStroke()
+            path.stroke()
+        }
     }
 }

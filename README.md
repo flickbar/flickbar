@@ -27,8 +27,13 @@ Put the pointer on a window's title bar and use two fingers:
 | Pinch out | Toggle full screen |
 | Pinch in | Close the window |
 | Hold ⌘ and swipe | Move the window to the display on that side |
+| Touch, hold, then move | Pick a layout from a grid (see below) |
 
 Hold ⌥ Option to use the same gestures anywhere in a window, not just on its title bar.
+
+**Grid.** Rest two fingers on a title bar for a moment before swiping and a grid appears: the screen's
+three columns, each full height or as a top or bottom half. Move your fingers to choose a cell and lift
+them to snap the window there.
 
 Gestures also work on a running app's icon in the Dock:
 
@@ -126,6 +131,8 @@ act on it when you gesture or press a shortcut. Settings stay in its local prefe
 - `FlickbarCore.GestureRecognizer` turns finger movement into strokes (`left`, `up`, `pinchIn`, …);
   each change of direction starts a new stroke. When the fingers lift, `ActionMap` picks the action
   (your choice from Settings, otherwise the default) and `SnapGeometry` computes the target frame.
+- Trackpads send no events while fingers rest, so a short timer that every movement restarts spots a
+  hold; `GridCursor` then turns further movement into steps across the grid.
 
 The gesture logic in `FlickbarCore` has no AppKit dependencies and is fully unit-tested; the app layer
 is in `Sources/Flickbar`.

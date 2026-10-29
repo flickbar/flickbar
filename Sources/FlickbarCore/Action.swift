@@ -152,7 +152,7 @@ public extension CGRect {
     }
 }
 
-private extension CGRect {
+extension CGRect {
     /// Nearest whole points. Unlike `integral` (which grows outward) this doesn't inflate frames on round trips.
     var roundedToPoints: CGRect {
         CGRect(x: minX.rounded(), y: minY.rounded(), width: width.rounded(), height: height.rounded())

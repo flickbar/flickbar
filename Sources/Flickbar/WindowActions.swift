@@ -7,7 +7,7 @@ enum WindowActions {
     // shortcut: entries for closed windows are never pruned, a few bytes each; prune if it ever matters.
     private static var restoreMemory = RestoreMemory<AXUIElement>()
 
-    private static var gap: CGFloat { CGFloat(UserDefaults.standard.integer(forKey: "gap")) }
+    static var gap: CGFloat { CGFloat(UserDefaults.standard.integer(forKey: "gap")) }
 
     /// Where `run` would put the window; nil for actions that don't move it.
     static func landingFrame(of action: WindowAction, on window: AXWindow) -> CGRect? {
@@ -16,6 +16,13 @@ enum WindowActions {
             return restoreMemory.original(window.element, current: current)
         }
         return window.targetFrame(for: action, gap: gap)
+    }
+
+    /// Moves the window to a frame chosen on the grid, remembering where it was.
+    static func place(_ window: AXWindow, at frame: CGRect) {
+        let before = window.frame
+        window.place(frame)
+        if let before, let after = window.frame { restoreMemory.record(window.element, from: before, to: after) }
     }
 
     /// Restore-or-minimize on a window Flickbar placed restores it; otherwise the action runs and moves are remembered.

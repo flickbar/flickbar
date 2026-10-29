@@ -68,12 +68,7 @@ struct AXWindow {
     func perform(_ action: WindowAction, gap: CGFloat = 0) {
         switch action {
         case .snap, .moveToDisplay:
-            guard let target = targetFrame(for: action, gap: gap) else { return }
-            setFrame(target)
-            // Apps with a minimum or maximum size keep their own; line it up with the target instead.
-            if let actual = frame, !actual.isClose(to: target, tolerance: 2), let visible = Self.visibleFrame(containing: target) {
-                setFrame(SnapGeometry.anchored(actual.size, to: target, in: visible))
-            }
+            if let target = targetFrame(for: action, gap: gap) { place(target) }
         case .minimize:
             AXUIElementSetAttributeValue(element, kAXMinimizedAttribute as CFString, kCFBooleanTrue)
         case .close:
@@ -89,6 +84,17 @@ struct AXWindow {
             AppControl.perform(action, on: running)
         }
     }
+
+    /// Moves the window to `target`. Apps with a minimum or maximum size keep their own; line it up with the target instead.
+    func place(_ target: CGRect) {
+        setFrame(target)
+        if let actual = frame, !actual.isClose(to: target, tolerance: 2), let visible = Self.visibleFrame(containing: target) {
+            setFrame(SnapGeometry.anchored(actual.size, to: target, in: visible))
+        }
+    }
+
+    /// Visible frame of the screen the window is mostly on.
+    var screen: CGRect? { frame.flatMap(Self.visibleFrame(containing:)) }
 
     func setFrame(_ rect: CGRect) {
         // Apps with enhanced UI on (set by assistive tools) animate and ignore frame changes.

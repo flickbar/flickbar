@@ -250,3 +250,37 @@ import Testing
         #expect(!Version.isNewer("v0.5.0", than: "0.6.0"))
     }
 }
+
+@Suite struct GridTests {
+    let screen = CGRect(x: 0, y: 25, width: 900, height: 600)
+
+    @Test func startsOnFullHeightThirdUnderPointer() {
+        #expect(GridCursor(x: 10, in: screen).frame(in: screen) == CGRect(x: 0, y: 25, width: 300, height: 600))
+        #expect(GridCursor(x: 450, in: screen).column == 1)
+        #expect(GridCursor(x: 899, in: screen).column == 2)
+        #expect(GridCursor(x: 2000, in: screen).column == 2)
+    }
+
+    @Test func stepsOneCellPerStepAndStopsAtEdges() {
+        var grid = GridCursor(x: 450, in: screen)
+        let moves = [grid.move(dx: 50, dy: 0), grid.move(dx: 30, dy: 0)]
+        #expect(moves == [false, true])
+        #expect(grid.column == 2)
+        let pastEdge = grid.move(dx: 500, dy: 0)
+        #expect(!pastEdge)
+        // Travel past the edge is dropped, so one step back moves straight away.
+        let back = grid.move(dx: -70, dy: 0)
+        #expect(back && grid.column == 1)
+        grid.move(dx: 0, dy: -80)
+        #expect(grid.frame(in: screen) == CGRect(x: 300, y: 25, width: 300, height: 300))
+        grid.move(dx: 0, dy: 280)
+        #expect(grid.frame(in: screen) == CGRect(x: 300, y: 325, width: 300, height: 300))
+    }
+
+    @Test func outlineIsSixCellsWithGaps() {
+        let cells = GridCursor.outline(in: screen, gap: 10)
+        #expect(cells.count == 6)
+        #expect(cells[0] == CGRect(x: 10, y: 35, width: 287, height: 285))
+        #expect(cells[5] == CGRect(x: 603, y: 330, width: 287, height: 285))
+    }
+}

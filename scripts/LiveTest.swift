@@ -62,6 +62,19 @@ func swipe(_ at: CGPoint, _ strokes: [(Double, Double)], flags: CGEventFlags = [
     usleep(400000)
 }
 
+/// Touches, rests the fingers until the grid shows, then moves by each (x, y) of finger travel and lifts.
+func holdSwipe(_ at: CGPoint, _ moves: [(Double, Double)]) {
+    CGWarpMouseCursorPosition(at)
+    usleep(50000)
+    scroll(at, dx: -2, dy: 0, phase: 1)
+    usleep(700000)
+    for (fx, fy) in moves {
+        for _ in 0..<12 { scroll(at, dx: -fx / 12, dy: -fy / 12, phase: 2) }
+    }
+    scroll(at, dx: 0, dy: 0, phase: 4)
+    usleep(400000)
+}
+
 func pinch(_ at: CGPoint, total: Double) {
     // Undocumented CGEvent fields carried by the system's own gesture events.
     func post(_ v: Double, _ phase: Int64) {
@@ -162,6 +175,11 @@ prefs.set(["swipeLeft": "rightThird"], forKey: "gestureMap")
 swipe(titlebar(), [(-120, 0)]);               expect("remapped gesture: swipe left → right ⅓", CGRect(x: main.maxX - thirdW, y: main.minY, width: thirdW, height: main.height))
 prefs.removeObject(forKey: "gestureMap")
 swipe(content(), [(-120, 0)], flags: .maskAlternate); expect("⌥ swipe on content → left half", CGRect(x: main.minX, y: main.minY, width: halfW, height: main.height))
+setFrame(window, before); usleep(300000)
+// The grid starts on the full-height third under the pointer; one cell right, then up to the top half.
+let column = min(Int((titlebar().x - main.minX) / main.width * 3) + 1, 2)
+holdSwipe(titlebar(), [(90, 0), (0, -90)])
+expect("hold, right, up → top sixth", CGRect(x: main.minX + CGFloat(column) * thirdW, y: main.minY, width: thirdW, height: halfH))
 setFrame(window, before); usleep(300000)
 
 if screens.count > 1 {

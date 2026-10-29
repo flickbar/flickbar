@@ -14,6 +14,12 @@ final class GestureTap {
     private var swallowMomentum = false
     private var command = false
     private var escaped = false
+    /// Hold-to-grid: set once the fingers rest on a title bar before a swipe registers.
+    private var grid: GridCursor?
+    private var gridScreen: CGRect?
+    private var holdTimer: Timer?
+    private var origin = CGPoint.zero
+    private static let holdDelay: TimeInterval = 0.4
 
     /// Bundle IDs of apps where title-bar gestures are turned off.
     static var excludedApps: Set<String> {
@@ -101,7 +107,13 @@ final class GestureTap {
 
         // Convert content-scroll deltas to finger movement, regardless of the natural-scrolling setting.
         let sign: CGFloat = e.isDirectionInvertedFromDevice ? 1 : -1
-        if recognizer.addScroll(dx: sign * e.scrollingDeltaX, dy: sign * e.scrollingDeltaY) != nil { strokeRecognized() }
+        let dx = sign * e.scrollingDeltaX, dy = sign * e.scrollingDeltaY
+        if grid != nil {
+            if grid!.move(dx: dx, dy: dy) { showGridCell() }
+        } else {
+            if recognizer.addScroll(dx: dx, dy: dy) != nil { strokeRecognized() }
+            armHold()
+        }
         if e.phase.contains(.ended) || e.phase.contains(.cancelled) { finish(cancelled: e.phase.contains(.cancelled)) }
         return true
     }
@@ -135,6 +147,9 @@ final class GestureTap {
         swallowMomentum = false
         command = flags.contains(.command)
         escaped = false
+        grid = nil
+        holdTimer?.invalidate()
+        origin = point
         let hit = AXWindow.element(at: point)
         target = hit.flatMap { Self.window(of: $0, at: point, flags: flags) }
         dockApp = target == nil ? hit.flatMap(AppControl.app(ofDockItem:)) : nil
@@ -145,10 +160,37 @@ final class GestureTap {
     /// before they lift their fingers.
     private func strokeRecognized() {
         guard !escaped, let action = currentAction() else { return PreviewOverlay.hide() }
+        tick()
+        if let target, let frame = WindowActions.landingFrame(of: action, on: target) { PreviewOverlay.show(frame) } else { PreviewOverlay.hide() }
+    }
+
+    private func tick() {
         if UserDefaults.standard.object(forKey: "haptics") as? Bool ?? true {
             NSHapticFeedbackManager.defaultPerformer.perform(.alignment, performanceTime: .now)
         }
-        if let target, let frame = WindowActions.landingFrame(of: action, on: target) { PreviewOverlay.show(frame) } else { PreviewOverlay.hide() }
+    }
+
+    /// Trackpads send nothing while the fingers rest, so a timer restarted by every movement spots the hold.
+    private func armHold() {
+        holdTimer?.invalidate()
+        guard target != nil, recognizer.strokes.isEmpty, !command, !escaped else { return }
+        holdTimer = Timer.scheduledTimer(withTimeInterval: Self.holdDelay, repeats: false) { [weak self] _ in
+            MainActor.assumeIsolated { self?.enterGrid() }
+        }
+    }
+
+    private func enterGrid() {
+        guard let target, recognizer.strokes.isEmpty, !escaped, let screen = target.screen else { return }
+        grid = GridCursor(x: origin.x, in: screen)
+        gridScreen = screen
+        PreviewOverlay.showGrid(GridCursor.outline(in: screen, gap: WindowActions.gap))
+        showGridCell()
+    }
+
+    private func showGridCell() {
+        guard let grid, let gridScreen, !escaped else { return }
+        tick()
+        PreviewOverlay.show(grid.frame(in: gridScreen, gap: WindowActions.gap), always: true)
     }
 
     /// The action the strokes so far map to, with the user's choices from Settings.
@@ -158,12 +200,16 @@ final class GestureTap {
 
     private func finish(cancelled: Bool) {
         PreviewOverlay.hide()
-        if !cancelled, !escaped, let action = currentAction() {
+        holdTimer?.invalidate()
+        if let grid, let gridScreen, let target {
+            if !cancelled, !escaped { WindowActions.place(target, at: grid.frame(in: gridScreen, gap: WindowActions.gap)) }
+        } else if !cancelled, !escaped, let action = currentAction() {
             if let target { WindowActions.run(action, on: target) } else if let dockApp { AppControl.perform(action, on: dockApp) }
         }
         swallowMomentum = true
         target = nil
         dockApp = nil
+        grid = nil
         recognizer.reset()
     }
 }
