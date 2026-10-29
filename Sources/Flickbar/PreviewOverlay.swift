@@ -74,20 +74,32 @@ enum PreviewOverlay {
     }
 }
 
+/// Built from layers rather than `draw(_:)`: drawing a screen-sized view on the CPU took over a second the first
+/// time, long enough for macOS to turn off the event tap.
 private final class GridView: NSView {
-    var cells: [CGRect] = [] { didSet { needsDisplay = true } }
+    override init(frame: NSRect) {
+        super.init(frame: frame)
+        wantsLayer = true
+        layer?.backgroundColor = NSColor.black.withAlphaComponent(0.12).cgColor
+        layer?.cornerRadius = 14
+    }
 
-    override func draw(_ dirtyRect: NSRect) {
-        NSColor.black.withAlphaComponent(0.12).setFill()
-        NSBezierPath(roundedRect: bounds, xRadius: 14, yRadius: 14).fill()
-        for cell in cells {
-            let path = NSBezierPath(roundedRect: cell.insetBy(dx: 2, dy: 2), xRadius: 10, yRadius: 10)
-            NSColor.white.withAlphaComponent(0.08).setFill()
-            path.fill()
-            path.lineWidth = 1.5
-            path.setLineDash([6, 4], count: 2, phase: 0)
-            NSColor.white.withAlphaComponent(0.7).setStroke()
-            path.stroke()
+    required init?(coder: NSCoder) { nil }
+
+    var cells: [CGRect] = [] {
+        didSet {
+            CATransaction.begin()
+            CATransaction.setDisableActions(true)
+            layer?.sublayers = cells.map { cell in
+                let shape = CAShapeLayer()
+                shape.path = CGPath(roundedRect: cell.insetBy(dx: 2, dy: 2), cornerWidth: 10, cornerHeight: 10, transform: nil)
+                shape.fillColor = NSColor.white.withAlphaComponent(0.08).cgColor
+                shape.strokeColor = NSColor.white.withAlphaComponent(0.7).cgColor
+                shape.lineWidth = 1.5
+                shape.lineDashPattern = [6, 4]
+                return shape
+            }
+            CATransaction.commit()
         }
     }
 }
