@@ -77,7 +77,15 @@ The menu bar icon can also turn gestures off for the app you're using.
 
 ## Install
 
-**Download:** get **Flickbar-0.8.0.zip** from the
+**With [Homebrew](https://brew.sh):**
+
+```sh
+brew install --cask flickbar/tap/flickbar
+```
+
+Update later with `brew upgrade --cask flickbar`.
+
+**Or download:** get **Flickbar-0.8.0.zip** from the
 [latest release](https://github.com/flickbar/flickbar/releases/latest), unzip it and move
 **Flickbar.app** to Applications, then open it. Releases are signed with a Developer ID and notarized by
 Apple, so macOS opens them without a warning.
