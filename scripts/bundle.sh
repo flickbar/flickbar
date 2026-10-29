@@ -32,7 +32,7 @@ cat > "$APP/Contents/Info.plist" <<EOF
     <key>CFBundleVersion</key><string>$VERSION</string>
     <key>LSMinimumSystemVersion</key><string>14.0</string>
     <key>LSUIElement</key><true/>
-    <key>NSHumanReadableCopyright</key><string>Copyright © 2026 Flickbar contributors. GPL-3.0-or-later.</string>
+    <key>NSHumanReadableCopyright</key><string>Copyright © 2026 Parsa Kamalipour and Flickbar contributors. GPL-3.0-or-later.</string>
 </dict>
 </plist>
 EOF

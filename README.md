@@ -6,7 +6,7 @@
 
 <p align="center">
   Snap, resize and move macOS windows with trackpad gestures on their title bars.<br>
-  Free and open source.
+  Free and open source. Made by <a href="https://github.com/benymaxparsa">Parsa Kamalipour</a>.
 </p>
 
 <p align="center">
@@ -165,9 +165,13 @@ Issues and pull requests are welcome. Flickbar is an independent project written
 isn't affiliated with any other window-management app. Contributions must be your own work: please
 don't submit code, assets or text copied from other apps or derived from decompiling them.
 
+## Author
+
+Flickbar is made by [Parsa Kamalipour](https://github.com/benymaxparsa).
+
 ## License
 
-[GPL-3.0-or-later](LICENSE)
+Copyright © 2026 Parsa Kamalipour and Flickbar contributors. [GPL-3.0-or-later](LICENSE)
 
 Keyboard shortcuts use [KeyboardShortcuts](https://github.com/sindresorhus/KeyboardShortcuts) by Sindre
 Sorhus (MIT); its license ships inside the app.

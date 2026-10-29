@@ -433,6 +433,8 @@ private struct AboutSettings: View {
                 Link("Report an Issue", destination: URL(string: "https://github.com/flickbar/flickbar/issues")!)
             }
             .padding(.top, 4)
+            Text("Made by [Parsa Kamalipour](https://github.com/benymaxparsa)")
+                .padding(.top, 8)
             Text("Free and open source under the GNU GPL v3.")
                 .font(.caption)
                 .foregroundStyle(.secondary)
@@ -440,6 +442,6 @@ private struct AboutSettings: View {
         }
         .padding(30)
         .frame(maxWidth: .infinity)
-        .frame(height: 370)
+        .frame(height: 400)
     }
 }
