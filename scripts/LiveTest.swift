@@ -158,14 +158,19 @@ swipe(titlebar(), [(0, -120)]);           expect("swipe up again → middle ⅓"
 swipe(titlebar(), [(0, -120)]);           expect("swipe up again → fill", main)
 swipe(titlebar(), [(-120, 0), (0, -120)]); expect("left, up → top-left", CGRect(x: main.minX, y: main.minY, width: halfW, height: halfH))
 swipe(titlebar(), [(0, 120), (120, 0)]);  expect("down, right → bottom-right", CGRect(x: main.minX + halfW, y: main.minY + halfH, width: halfW, height: halfH))
-swipe(titlebar(), [(0, 120)]);            expect("swipe down → restore", start)
+swipe(titlebar(), [(0, 120)]); usleep(500000)
+check("swipe down (snapped) → minimize", bool(window, kAXMinimizedAttribute), "not minimized")
+AXUIElementSetAttributeValue(window, kAXMinimizedAttribute as CFString, kCFBooleanFalse); sleep(1)
+let prefs = UserDefaults(suiteName: "io.github.flickbar.Flickbar")!
+prefs.set(["swipeDown": "restoreOrMinimize"], forKey: "gestureMap")
+swipe(titlebar(), [(0, 120)]);            expect("restore-or-minimize → restore", start)
+prefs.removeObject(forKey: "gestureMap")
 
 let before = frame(window)
 swipe(titlebar(), [(-120, 0)], escape: true); expect("Esc cancels", before)
 swipe(content(), [(-120, 0)]);                expect("swipe on content is ignored", before)
 swipe(titlebar(), [(-60, -60)]);              expect("diagonal is ignored", before)
 
-let prefs = UserDefaults(suiteName: "io.github.flickbar.Flickbar")!
 prefs.set(["com.apple.TextEdit"], forKey: "excludedApps")
 swipe(titlebar(), [(-120, 0)]);               expect("excluded app is ignored", before)
 prefs.removeObject(forKey: "excludedApps")

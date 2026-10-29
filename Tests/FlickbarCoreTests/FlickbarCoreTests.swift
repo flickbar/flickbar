@@ -100,6 +100,7 @@ import Testing
         #expect(ActionMap.action(for: [.up], overrides: map) == nil)
         #expect(ActionMap.action(for: [.down], overrides: map) == nil)
         #expect(ActionMap.action(for: [.right], overrides: map) == .snap(.rightHalf))
+        #expect(ActionMap.action(for: [.down], overrides: ["swipeDown": "restoreOrMinimize"]) == .restoreOrMinimize)
     }
 
     @Test func commandSwipeCanBeTurnedOff() {

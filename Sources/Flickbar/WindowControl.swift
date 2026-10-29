@@ -69,7 +69,7 @@ struct AXWindow {
         switch action {
         case .snap, .moveToDisplay:
             if let target = targetFrame(for: action, gap: gap) { place(target) }
-        case .minimize:
+        case .minimize, .restoreOrMinimize:
             AXUIElementSetAttributeValue(element, kAXMinimizedAttribute as CFString, kCFBooleanTrue)
         case .close:
             if let button = element.element(kAXCloseButtonAttribute) {

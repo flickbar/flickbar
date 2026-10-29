@@ -11,7 +11,7 @@ enum WindowActions {
 
     /// Where `run` would put the window; nil for actions that don't move it.
     static func landingFrame(of action: WindowAction, on window: AXWindow) -> CGRect? {
-        if action == .minimize {
+        if action == .restoreOrMinimize {
             guard let current = window.frame else { return nil }
             return restoreMemory.original(window.element, current: current)
         }
@@ -27,7 +27,7 @@ enum WindowActions {
 
     /// Restore-or-minimize on a window Flickbar placed restores it; otherwise the action runs and moves are remembered.
     static func run(_ action: WindowAction, on window: AXWindow) {
-        if action == .minimize, let current = window.frame,
+        if action == .restoreOrMinimize, let current = window.frame,
            let original = restoreMemory.takeOriginal(window.element, current: current) {
             window.setFrame(original)
             return
