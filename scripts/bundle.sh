@@ -39,10 +39,13 @@ EOF
 
 # macOS ties the Accessibility grant to the signature. Ad-hoc signatures change on every build, so the grant
 # silently stops applying; a stable identity (see README) keeps it across rebuilds.
-# Uses $SIGN_IDENTITY, else the first valid (unexpired) Developer ID / Apple Development / local identity.
+# Uses $SIGN_IDENTITY, else a valid (unexpired) Developer ID, else Apple Development, else a local identity.
+# Developer ID first so local builds share the Accessibility grant with installed releases.
 # Picks the SHA-1 hash, since an expired certificate can share the same name and make the name ambiguous.
-IDENTITY="${SIGN_IDENTITY:-$(security find-identity -v -p codesigning |
-    awk '/"(Developer ID Application|Apple Development|Flickbar Local Signing)/ { print $2; exit }')}"
+identity() { security find-identity -v -p codesigning | awk -v name="\"$1" 'index($0, name) { print $2; exit }'; }
+IDENTITY="${SIGN_IDENTITY:-$(identity "Developer ID Application")}"
+IDENTITY="${IDENTITY:-$(identity "Apple Development")}"
+IDENTITY="${IDENTITY:-$(identity "Flickbar Local Signing")}"
 if [ -n "$IDENTITY" ]; then
     # Hardened runtime, and a secure timestamp when asked (both required for notarization).
     codesign --force --options runtime ${SIGN_TIMESTAMP:+--timestamp} --sign "$IDENTITY" "$APP"
