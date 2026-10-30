@@ -10,11 +10,13 @@ enum Shortcuts {
 
     static func name(_ action: WindowAction) -> KeyboardShortcuts.Name { KeyboardShortcuts.Name(action.id) }
 
-    /// Before 0.9 the `minimize` shortcut restored or minimized; move it to the action that still does, once.
+    /// Before 0.9 the `minimize` action restored or minimized; move shortcuts and gestures set to it over to the
+    /// action that still does, once.
     static func migratePreferences() {
         let defaults = UserDefaults.standard
         guard !defaults.bool(forKey: "migratedRestoreShortcut") else { return }
         defaults.set(true, forKey: "migratedRestoreShortcut")
+        GestureTap.gestureMap = GestureTap.gestureMap.mapValues { $0 == WindowAction.minimize.id ? WindowAction.restoreOrMinimize.id : $0 }
         let old = name(.minimize), new = name(.restoreOrMinimize)
         guard let shortcut = KeyboardShortcuts.getShortcut(for: old), KeyboardShortcuts.getShortcut(for: new) == nil else { return }
         KeyboardShortcuts.setShortcut(shortcut, for: new)
