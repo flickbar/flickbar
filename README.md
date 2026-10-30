@@ -188,6 +188,12 @@ don't submit code, assets or text copied from other apps or derived from decompi
 
 Flickbar is made by [Parsa Kamalipour](https://github.com/benymaxparsa).
 
+## Support
+
+Flickbar is free and stays that way. If it saves you time, you can support its development through
+[GitHub Sponsors](https://github.com/sponsors/benymaxparsa) or [Buy Me a Coffee](https://buymeacoffee.com/parsakamalipour).
+Starring the repo and telling a friend help just as much.
+
 ## License
 
 Copyright © 2026 Parsa Kamalipour and Flickbar contributors. [GPL-3.0-or-later](LICENSE)
