@@ -1,20 +1,54 @@
 {
-  "fill" : {
-    "linear-gradient" : [
+  "fill": {
+    "linear-gradient": [
       "srgb:0.35294,0.63529,1.00000,1.00000",
       "srgb:0.22745,0.27843,0.83529,1.00000"
     ]
   },
-  "groups" : [
+  "groups": [
     {
-      "layers" : [
-        { "glass" : false, "image-name" : "content.svg", "name" : "content" },
-        { "glass" : true, "image-name" : "window.svg", "name" : "window" },
-        { "glass" : true, "image-name" : "target.svg", "name" : "target", "opacity" : 0.7 }
+      "layers": [
+        {
+          "glass": true,
+          "image-name": "fingers.svg",
+          "name": "fingers"
+        },
+        {
+          "glass": false,
+          "image-name": "content.svg",
+          "name": "content"
+        },
+        {
+          "glass": true,
+          "image-name": "window.svg",
+          "name": "window"
+        },
+        {
+          "glass": true,
+          "image-name": "ghost.svg",
+          "name": "ghost",
+          "opacity": 0.6
+        },
+        {
+          "glass": false,
+          "image-name": "desk.svg",
+          "name": "desk",
+          "opacity": 0.16
+        }
       ],
-      "shadow" : { "kind" : "neutral", "opacity" : 0.5 },
-      "translucency" : { "enabled" : true, "value" : 0.4 }
+      "shadow": {
+        "kind": "neutral",
+        "opacity": 0.5
+      },
+      "translucency": {
+        "enabled": true,
+        "value": 0.4
+      }
     }
   ],
-  "supported-platforms" : { "squares" : [ "macOS" ] }
+  "supported-platforms": {
+    "squares": [
+      "macOS"
+    ]
+  }
 }
