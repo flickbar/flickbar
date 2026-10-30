@@ -14,7 +14,6 @@ enum Main {
            Locale.Language(identifier: language).characterDirection == .rightToLeft {
             var arguments = UserDefaults.standard.volatileDomain(forName: UserDefaults.argumentDomain)
             arguments["AppleTextDirection"] = true
-            arguments["NSForceRightToLeftWritingDirection"] = true
             UserDefaults.standard.setVolatileDomain(arguments, forName: UserDefaults.argumentDomain)
         }
         if CommandLine.arguments.contains(Tutorial.argument) { Tutorial.runPracticeApp() }
