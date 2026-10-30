@@ -5,7 +5,14 @@ import ServiceManagement
 import Sparkle
 import SwiftUI
 
-@main
+@main @MainActor
+enum Main {
+    static func main() {
+        if CommandLine.arguments.contains(Tutorial.argument) { Tutorial.runPracticeApp() }
+        FlickbarApp.main()
+    }
+}
+
 struct FlickbarApp: App {
     @State private var state = AppState()
 
@@ -44,6 +51,7 @@ private struct MenuContent: View {
             openSettings()
         }
         .keyboardShortcut(",")
+        if state.isTrusted { Button("Gesture Tutorial…") { Tutorial.open() } }
         Button("Check for Updates…") {
             NSApp.activate()
             state.updater.checkForUpdates(nil)

@@ -23,10 +23,12 @@ enum WindowActions {
         let before = window.frame
         window.place(frame)
         if let before, let after = window.frame { restoreMemory.record(window.element, from: before, to: after) }
+        Tutorial.report(TutorialStep.gridID, on: window)
     }
 
     /// Restore-or-minimize on a window Flickbar placed restores it; otherwise the action runs and moves are remembered.
     static func run(_ action: WindowAction, on window: AXWindow) {
+        Tutorial.report(action.id, on: window)
         if action == .restoreOrMinimize, let current = window.frame,
            let original = restoreMemory.takeOriginal(window.element, current: current) {
             window.setFrame(original)
