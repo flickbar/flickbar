@@ -12,21 +12,24 @@ enum Tutorial {
     /// Opens the practice window, or brings it forward if it's already open.
     static func open() {
         let copies = NSRunningApplication.runningApplications(withBundleIdentifier: Bundle.main.bundleIdentifier ?? "")
-        if let practice = copies.first(where: { $0.processIdentifier != getpid() }) {
+        // Only the practice copy has a Dock icon; another normal copy (say, a development build) has none.
+        if let practice = copies.first(where: { $0.processIdentifier != getpid() && $0.activationPolicy == .regular }) {
             practice.activate()
             return
         }
         let configuration = NSWorkspace.OpenConfiguration()
         configuration.createsNewApplicationInstance = true
         configuration.arguments = [argument]
-        NSWorkspace.shared.openApplication(at: Bundle.main.bundleURL, configuration: configuration)
+        NSWorkspace.shared.openApplication(at: Bundle.main.bundleURL, configuration: configuration) { _, error in
+            if let error { logger.error("tutorial didn't open: \(error.localizedDescription, privacy: .public)") }
+        }
     }
 
     /// Tells the practice window that `actionID` ran on `window`, if `window` is the practice window.
     static func report(_ actionID: String, on window: AXWindow) {
         var pid: pid_t = 0
-        guard AXUIElementGetPid(window.element, &pid) == .success,
-              NSRunningApplication(processIdentifier: pid)?.bundleIdentifier == Bundle.main.bundleIdentifier else { return }
+        guard let own = Bundle.main.bundleIdentifier, AXUIElementGetPid(window.element, &pid) == .success,
+              NSRunningApplication(processIdentifier: pid)?.bundleIdentifier == own else { return }
         DistributedNotificationCenter.default().postNotificationName(performed, object: actionID, deliverImmediately: true)
     }
 
@@ -35,6 +38,14 @@ enum Tutorial {
         let app = NSApplication.shared
         // A Dock icon, so swiping down has somewhere to minimize the window to.
         app.setActivationPolicy(.regular)
+        // Just enough menu for ⌘W and ⌘Q.
+        let appMenu = NSMenu()
+        appMenu.addItem(withTitle: "Close Window", action: #selector(NSWindow.performClose(_:)), keyEquivalent: "w")
+        appMenu.addItem(withTitle: "Quit Tutorial", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q")
+        let appItem = NSMenuItem()
+        appItem.submenu = appMenu
+        app.mainMenu = NSMenu()
+        app.mainMenu?.addItem(appItem)
         let delegate = PracticeDelegate()
         app.delegate = delegate
         app.run()
@@ -63,8 +74,11 @@ enum Tutorial {
         }
 
         private func completed(_ id: String) {
-            let steps = TutorialStep.allCases.filter { $0.isDone(by: id) }
+            let steps = TutorialStep.allCases.filter { $0.isDone(by: id) && !progress.done.contains($0) }
             progress.done.formUnion(steps)
+            for step in steps {
+                AccessibilityNotification.Announcement("\(step.title) done").post()
+            }
             // Bring the window back from the Dock so the tutorial can go on.
             if steps.contains(.minimize) {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) { self.window?.deminiaturize(nil) }
@@ -100,6 +114,7 @@ private struct TutorialView: View {
                     Image(systemName: done ? "checkmark.circle.fill" : "circle")
                         .foregroundStyle(done ? AnyShapeStyle(.green) : AnyShapeStyle(.tertiary))
                         .contentTransition(.symbolEffect(.replace))
+                        .accessibilityHidden(true)
                     VStack(alignment: .leading, spacing: 1) {
                         Text(step.title).font(.headline)
                         Text(step.how).font(.callout).foregroundStyle(.secondary)
