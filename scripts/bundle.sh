@@ -11,7 +11,13 @@ APP="${APP:-build/Flickbar.app}"
 mkdir -p "$(dirname "$APP")"
 rm -rf "$APP"
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
-cp Resources/AppIcon.icns "$APP/Contents/Resources/AppIcon.icns"
+# The icon is an Icon Composer document (open Resources/AppIcon.icon in Xcode's Icon Composer to edit it).
+# actool turns it into Assets.car for macOS 26's Liquid Glass and AppIcon.icns for earlier systems.
+xcrun actool Resources/AppIcon.icon --compile "$APP/Contents/Resources" --platform macosx \
+    --minimum-deployment-target 14.0 --app-icon AppIcon --output-partial-info-plist "$(dirname "$BIN")/icon.plist" >/dev/null
+# actool exits 0 without writing anything when the path or icon name is wrong. (Its partial Info.plist isn't
+# read: the two icon keys it holds are written below.)
+[ -f "$APP/Contents/Resources/Assets.car" ] || { echo "actool produced no icon" >&2; exit 1; }
 cp "$BIN" "$APP/Contents/MacOS/Flickbar"
 # Dependencies' resource bundles (KeyboardShortcuts' translations) go where Bundle.module looks in an app.
 find "$(dirname "$BIN")" -maxdepth 1 -name '*.bundle' -exec cp -R {} "$APP/Contents/Resources/" \;
@@ -31,6 +37,7 @@ cat > "$APP/Contents/Info.plist" <<EOF
     <key>CFBundleIdentifier</key><string>io.github.flickbar.Flickbar</string>
     <key>CFBundleName</key><string>Flickbar</string>
     <key>CFBundleIconFile</key><string>AppIcon</string>
+    <key>CFBundleIconName</key><string>AppIcon</string>
     <key>CFBundlePackageType</key><string>APPL</string>
     <key>CFBundleShortVersionString</key><string>$VERSION</string>
     <key>CFBundleVersion</key><string>$VERSION</string>

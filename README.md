@@ -99,7 +99,7 @@ cd flickbar
 open build/Flickbar.app
 ```
 
-You need macOS 14 Sonoma or later, a trackpad, and Xcode 16 or later (or its command line tools).
+You need macOS 14 Sonoma or later, a trackpad, and Xcode 26 or later (the full app, not just its command line tools: the build compiles the Icon Composer icon with `actool`).
 
 On first launch Flickbar explains why it needs **Accessibility** access, which macOS requires for any
 app that arranges windows, and takes you to System Settings to turn it on.
