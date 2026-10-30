@@ -275,3 +275,19 @@ import Testing
         #expect(cells[5] == CGRect(x: 603, y: 330, width: 287, height: 285))
     }
 }
+
+@Suite struct TutorialTests {
+    @Test func stepsCompleteOnTheirDefaultActions() {
+        #expect(TutorialStep.leftHalf.isDone(by: SnapTarget.leftHalf.rawValue))
+        #expect(!TutorialStep.leftHalf.isDone(by: SnapTarget.leftTwoThirds.rawValue))
+        #expect(TutorialStep.fill.isDone(by: WindowAction.snap(.maximize).id))
+        #expect(TutorialStep.quarter.isDone(by: SnapTarget.bottomRight.rawValue))
+        #expect(TutorialStep.grid.isDone(by: TutorialStep.gridID))
+        #expect(TutorialStep.minimize.isDone(by: WindowAction.minimize.id))
+        #expect(TutorialStep.minimize.isDone(by: WindowAction.restoreOrMinimize.id))
+        for action in WindowAction.assignable where action != .snap(.center) {
+            // Every action ticks at most one step.
+            #expect(TutorialStep.allCases.filter { $0.isDone(by: action.id) }.count <= 1)
+        }
+    }
+}

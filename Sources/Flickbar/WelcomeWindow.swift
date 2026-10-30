@@ -60,7 +60,12 @@ private struct WelcomeView: View {
             HStack {
                 Spacer()
                 if state.isTrusted {
-                    Button("Get Started", action: close).keyboardShortcut(.defaultAction)
+                    Button("Skip", action: close).keyboardShortcut(.cancelAction)
+                    Button("Try the Gestures") {
+                        Tutorial.open()
+                        close()
+                    }
+                    .keyboardShortcut(.defaultAction)
                 } else {
                     Button("Later", action: close).keyboardShortcut(.cancelAction)
                     Button("Open System Settings") { state.requestAccess() }.keyboardShortcut(.defaultAction)
