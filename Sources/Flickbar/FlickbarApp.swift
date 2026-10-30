@@ -8,6 +8,16 @@ import SwiftUI
 @main @MainActor
 enum Main {
     static func main() {
+        // AppKit mirrors its layout only when the system language is right to left, not when just this app is set
+        // to Persian; ask for it for this run (the argument domain isn't saved).
+        if let language = Bundle.main.preferredLocalizations.first,
+           Locale.Language(identifier: language).characterDirection == .rightToLeft {
+            var arguments = UserDefaults.standard.volatileDomain(forName: UserDefaults.argumentDomain)
+            arguments["AppleTextDirection"] = true
+            UserDefaults.standard.setVolatileDomain(arguments, forName: UserDefaults.argumentDomain)
+        }
+        // Static lets start lazily; read it now so it holds the language this run started in.
+        _ = AppLanguage.atLaunch
         if CommandLine.arguments.contains(Tutorial.argument) { Tutorial.runPracticeApp() }
         FlickbarApp.main()
     }
@@ -22,7 +32,7 @@ struct FlickbarApp: App {
         } label: {
             // Without a label VoiceOver reads the symbol's name ("Hand Drawing A Line").
             Image(systemName: state.isActive ? "hand.draw" : "hand.raised.slash")
-                .accessibilityLabel(state.isActive ? "Flickbar" : "Flickbar, off")
+                .accessibilityLabel(state.isActive ? String(localized: "Flickbar") : String(localized: "Flickbar, off"))
         }
         Settings {
             SettingsView(state: state)
@@ -42,7 +52,7 @@ private struct MenuContent: View {
             Button("Grant Accessibility Access…") { state.showWelcome() }
         }
         if let app = state.frontmostApp, let id = app.bundleIdentifier {
-            Toggle("Turn Off in \(app.localizedName ?? id)", isOn: state.excludedBinding(id))
+            Toggle(String(format: String(localized: "Turn Off in %@"), app.localizedName ?? id), isOn: state.excludedBinding(id))
         }
         Divider()
         Button("Settings…") {

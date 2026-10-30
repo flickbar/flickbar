@@ -1,0 +1,10 @@
+/* Persian for the KeyboardShortcuts package's recorder, which ships no Persian of its own. */
+"record_shortcut" = "ثبت میان‌بر";
+"press_shortcut" = "میان‌بر را بزنید";
+"keyboard_shortcut_used_by_menu_item" = "از این میان‌بر نمی‌شود استفاده کرد، چون مورد منوی «%@» از آن استفاده می‌کند.";
+"keyboard_shortcut_used_by_system" = "از این میان‌بر نمی‌شود استفاده کرد، چون میان‌بر سراسری سیستم است.";
+"keyboard_shortcuts_can_be_changed" = "بیشتر میان‌برهای سراسری را می‌توانید در «تنظیمات سیستم › صفحه‌کلید › میان‌برهای صفحه‌کلید» عوض کنید.";
+"keyboard_shortcut_disallowed" = "کلید Option را باید همراه Command یا Control به کار ببرید.";
+"force_use_shortcut" = "با این حال استفاده شود";
+"ok" = "قبول";
+"space_key" = "فاصله";

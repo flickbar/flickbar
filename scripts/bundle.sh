@@ -21,6 +21,11 @@ xcrun actool Resources/AppIcon.icon --compile "$APP/Contents/Resources" --platfo
 cp "$BIN" "$APP/Contents/MacOS/Flickbar"
 # Dependencies' resource bundles (KeyboardShortcuts' translations) go where Bundle.module looks in an app.
 find "$(dirname "$BIN")" -maxdepth 1 -name '*.bundle' -exec cp -R {} "$APP/Contents/Resources/" \;
+# Their recorder has no Persian; ours goes alongside its other languages.
+ditto Resources/KeyboardShortcuts "$APP/Contents/Resources/KeyboardShortcuts_KeyboardShortcuts.bundle/Contents/Resources"
+# Translations: the String Catalog (edit with Xcode, or scripts/update-strings.sh for new text) becomes one
+# .lproj folder per language.
+xcrun xcstringstool compile Resources/Localizable.xcstrings -o "$APP/Contents/Resources"
 # Sparkle's framework, found by the rpath set in Package.swift.
 mkdir -p "$APP/Contents/Frameworks"
 ditto "$(dirname "$BIN")/Sparkle.framework" "$APP/Contents/Frameworks/Sparkle.framework"
@@ -33,6 +38,8 @@ cat > "$APP/Contents/Info.plist" <<EOF
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+    <key>CFBundleDevelopmentRegion</key><string>en</string>
+    <key>CFBundleLocalizations</key><array><string>en</string><string>fr</string><string>fa</string></array>
     <key>CFBundleExecutable</key><string>Flickbar</string>
     <key>CFBundleIdentifier</key><string>io.github.flickbar.Flickbar</string>
     <key>CFBundleName</key><string>Flickbar</string>

@@ -40,8 +40,8 @@ enum Tutorial {
         app.setActivationPolicy(.regular)
         // Just enough menu for ⌘W and ⌘Q.
         let appMenu = NSMenu()
-        appMenu.addItem(withTitle: "Close Window", action: #selector(NSWindow.performClose(_:)), keyEquivalent: "w")
-        appMenu.addItem(withTitle: "Quit Tutorial", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q")
+        appMenu.addItem(withTitle: String(localized: "Close Window"), action: #selector(NSWindow.performClose(_:)), keyEquivalent: "w")
+        appMenu.addItem(withTitle: String(localized: "Quit Tutorial"), action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q")
         let appItem = NSMenuItem()
         appItem.submenu = appMenu
         app.mainMenu = NSMenu()
@@ -59,7 +59,7 @@ enum Tutorial {
 
         func applicationDidFinishLaunching(_ notification: Notification) {
             let w = NSWindow(contentViewController: NSHostingController(rootView: TutorialView(progress: progress)))
-            w.title = "Try Flickbar's Gestures"
+            w.title = String(localized: "Try Flickbar's Gestures")
             // Resizable, or the Accessibility API can't snap it.
             w.styleMask = [.titled, .closable, .miniaturizable, .resizable]
             w.setContentSize(NSSize(width: 520, height: 440))
@@ -77,7 +77,7 @@ enum Tutorial {
             let steps = TutorialStep.allCases.filter { $0.isDone(by: id) && !progress.done.contains($0) }
             progress.done.formUnion(steps)
             for step in steps {
-                AccessibilityNotification.Announcement("\(step.title) done").post()
+                AccessibilityNotification.Announcement(String(format: String(localized: "%@ done"), step.title)).post()
             }
             // Bring the window back from the Dock so the tutorial can go on.
             if steps.contains(.minimize) {
@@ -121,7 +121,7 @@ private struct TutorialView: View {
                     }
                 }
                 .accessibilityElement(children: .combine)
-                .accessibilityValue(done ? "Done" : "Not done yet")
+                .accessibilityValue(done ? String(localized: "Done") : String(localized: "Not done yet"))
             }
             Spacer(minLength: 0)
             HStack {
@@ -139,23 +139,23 @@ private struct TutorialView: View {
 private extension TutorialStep {
     var title: String {
         switch self {
-        case .leftHalf: "Left half"
-        case .rightHalf: "Right half"
-        case .fill: "Fill the screen"
-        case .quarter: "A quarter"
-        case .grid: "Pick a layout"
-        case .minimize: "Minimize"
+        case .leftHalf: String(localized: "Left half")
+        case .rightHalf: String(localized: "Right half")
+        case .fill: String(localized: "Fill the screen")
+        case .quarter: String(localized: "A quarter")
+        case .grid: String(localized: "Pick a layout")
+        case .minimize: String(localized: "Minimize")
         }
     }
 
     var how: String {
         switch self {
-        case .leftHalf: "Swipe left."
-        case .rightHalf: "Swipe right."
-        case .fill: "Swipe up."
-        case .quarter: "Swipe left or right, then up or down."
-        case .grid: "Rest two fingers until a grid appears, move to a cell, then lift."
-        case .minimize: "Swipe down. The window comes right back."
+        case .leftHalf: String(localized: "Swipe left.")
+        case .rightHalf: String(localized: "Swipe right.")
+        case .fill: String(localized: "Swipe up.")
+        case .quarter: String(localized: "Swipe left or right, then up or down.")
+        case .grid: String(localized: "Rest two fingers until a grid appears, move to a cell, then lift.")
+        case .minimize: String(localized: "Swipe down. The window comes right back.")
         }
     }
 }
