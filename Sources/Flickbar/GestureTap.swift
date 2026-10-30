@@ -203,7 +203,7 @@ final class GestureTap {
             return ActionMap.action(for: recognizer.strokes, command: command, onDock: dockApp != nil, overrides: Self.gestureMap)
         }
         // On a minimized window, swipe up just brings it back (restore-or-minimize does exactly that to a minimized
-        // window); other gestures bring it back and then do what they do on a title bar. Minimizing again does nothing.
+        // window); other gestures bring it back and then do what they do on a title bar. Neither minimize action minimizes it again.
         if recognizer.strokes == [.up] { return .restoreOrMinimize }
         let action = ActionMap.action(for: recognizer.strokes, overrides: Self.gestureMap)
         return action == .minimize || action == .restoreOrMinimize ? nil : action
