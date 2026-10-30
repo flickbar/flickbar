@@ -112,7 +112,8 @@ if [ -n "$TAPPED" ]; then
 else
     echo "warning: flickbar/homebrew-tap doesn't exist yet; cask not updated" >&2
 fi
-# Last, so the feed only points at a release that exists.
+# Last, so the feed only points at a release that exists. If only this push fails, finish by hand with
+# `git -C build/site push`; re-running would stop at the existing tag.
 git -C "$SITE" add appcast.xml
 git -C "$SITE" commit -qm "Flickbar $VERSION update feed"
 git -C "$SITE" push -q
