@@ -15,6 +15,11 @@
         },
         {
           "glass": false,
+          "image-name": "trails.svg",
+          "name": "trails"
+        },
+        {
+          "glass": false,
           "image-name": "content.svg",
           "name": "content"
         },
@@ -27,7 +32,7 @@
           "glass": true,
           "image-name": "ghost.svg",
           "name": "ghost",
-          "opacity": 0.6
+          "opacity": 0.55
         },
         {
           "glass": false,
