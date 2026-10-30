@@ -203,10 +203,10 @@ final class GestureTap {
             return ActionMap.action(for: recognizer.strokes, command: command, onDock: dockApp != nil, overrides: Self.gestureMap)
         }
         // On a minimized window, swipe up just brings it back (restore-or-minimize does exactly that to a minimized
-        // window); other gestures bring it back and then do what they do on a title bar. Minimizing again does nothing.
-        if recognizer.strokes == [.up] { return .minimize }
+        // window); other gestures bring it back and then do what they do on a title bar. Neither minimize action minimizes it again.
+        if recognizer.strokes == [.up] { return .restoreOrMinimize }
         let action = ActionMap.action(for: recognizer.strokes, overrides: Self.gestureMap)
-        return action == .minimize ? nil : action
+        return action == .minimize || action == .restoreOrMinimize ? nil : action
     }
 
     private func finish(cancelled: Bool) {
@@ -221,7 +221,7 @@ final class GestureTap {
                 AppControl.perform(action, on: dockApp)
             } else if let minimizedTile {
                 // Finding the window asks every app for its windows; don't hold up the event tap while it does.
-                DispatchQueue.main.async { AppControl.restore(minimizedTile, then: action == .minimize ? nil : action) }
+                DispatchQueue.main.async { AppControl.restore(minimizedTile, then: action == .restoreOrMinimize ? nil : action) }
             }
         }
         swallowMomentum = true

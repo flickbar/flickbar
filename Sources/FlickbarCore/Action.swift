@@ -8,8 +8,9 @@ public enum SnapTarget: String, CaseIterable, Sendable {
 
 public enum WindowAction: Hashable, Sendable {
     case snap(SnapTarget)
-    /// Restores the size from before Flickbar moved the window, otherwise minimizes.
     case minimize
+    /// Restores the size from before Flickbar moved the window, otherwise minimizes.
+    case restoreOrMinimize
     case close, toggleFullscreen
     case moveToDisplay(Stroke)
     /// Brings the app's backmost window to the front, so repeating cycles through its windows.

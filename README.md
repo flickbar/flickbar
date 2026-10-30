@@ -22,7 +22,7 @@ Put the pointer on a window's title bar and use two fingers:
 | Swipe left / right | Snap to the left / right half; repeat for ⅔, then ⅓ |
 | Swipe left or right, then up or down (either order) | Snap to that quarter |
 | Swipe up | Fill the screen; repeat for the middle third |
-| Swipe down | Restore the size from before snapping, otherwise minimize |
+| Swipe down | Minimize |
 | Double-tap | Center the window |
 | Pinch out | Toggle full screen |
 | Pinch in | Close the window |

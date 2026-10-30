@@ -94,7 +94,7 @@ enum ActionNames {
         [[.snap(.leftHalf), .snap(.rightHalf), .snap(.maximize), .snap(.center)],
          [.snap(.leftThird), .snap(.centerThird), .snap(.rightThird), .snap(.leftTwoThirds), .snap(.rightTwoThirds)],
          [.snap(.topLeft), .snap(.topRight), .snap(.bottomLeft), .snap(.bottomRight)],
-         [.minimize, .toggleFullscreen, .close, .nextWindow],
+         [.minimize, .restoreOrMinimize, .toggleFullscreen, .close, .nextWindow],
          appActions]
     }
     static let groupTitles = ["Halves", "Thirds", "Quarters", "Window", "App"]
@@ -117,7 +117,8 @@ enum ActionNames {
         case .snap(.topRight): "Top-Right Quarter"
         case .snap(.bottomLeft): "Bottom-Left Quarter"
         case .snap(.bottomRight): "Bottom-Right Quarter"
-        case .minimize: "Restore or Minimize"
+        case .minimize: "Minimize"
+        case .restoreOrMinimize: "Restore or Minimize"
         case .toggleFullscreen: "Full Screen"
         case .close: "Close Window"
         case .nextWindow: "Next Window of App"
@@ -136,6 +137,7 @@ enum ActionNames {
     static func symbol(_ action: WindowAction?) -> String {
         switch action {
         case .minimize: "dock.arrow.down.rectangle"
+        case .restoreOrMinimize: "arrow.uturn.backward"
         case .toggleFullscreen: "arrow.up.left.and.arrow.down.right"
         case .close: "xmark"
         case .nextWindow: "macwindow.on.rectangle"

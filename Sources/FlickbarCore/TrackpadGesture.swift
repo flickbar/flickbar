@@ -52,13 +52,14 @@ public enum TrackpadGesture: String, CaseIterable, Sendable {
 public extension WindowAction {
     /// Actions a gesture can be set to, in menu order.
     static let assignable: [WindowAction] = SnapTarget.allCases.map(WindowAction.snap)
-        + [.minimize, .toggleFullscreen, .close, .nextWindow, .appWindows, .hideApp, .quitApp]
+        + [.minimize, .restoreOrMinimize, .toggleFullscreen, .close, .nextWindow, .appWindows, .hideApp, .quitApp]
 
     /// Stable name used in preferences.
     var id: String {
         switch self {
         case .snap(let target): target.rawValue
         case .minimize: "minimize"
+        case .restoreOrMinimize: "restoreOrMinimize"
         case .close: "close"
         case .toggleFullscreen: "toggleFullscreen"
         case .nextWindow: "nextWindow"

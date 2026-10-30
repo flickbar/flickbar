@@ -97,6 +97,7 @@ final class AppState {
     }
     var gestureMap: [String: String] = {
         GestureTap.migratePreferences()
+        Shortcuts.migratePreferences()
         return GestureTap.gestureMap
     }() {
         didSet { GestureTap.gestureMap = gestureMap }
