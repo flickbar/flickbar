@@ -44,19 +44,44 @@ enum PreviewOverlay {
         return CGRect(x: frame.minX, y: top - frame.maxY, width: frame.width, height: frame.height)
     }
 
+    /// Fast at the start and settling gently, like a spring without the overshoot that would misplace an edge.
+    private static let easeOut = CAMediaTimingFunction(controlPoints: 0.2, 0.9, 0.25, 1)
+    private static var reduceMotion: Bool { NSWorkspace.shared.accessibilityDisplayShouldReduceMotion }
+    /// Bumped by every show and hide, so a fade-out that finishes after the next gesture began leaves the panels up.
+    private static var generation = 0
+
+    private static func animate(_ duration: TimeInterval, _ changes: @escaping () -> Void, done: (@Sendable () -> Void)? = nil) {
+        NSAnimationContext.runAnimationGroup({ ctx in
+            ctx.duration = duration
+            ctx.timingFunction = easeOut
+            changes()
+        }, completionHandler: done)
+    }
+
+    /// Moves `panel` to `frame`: gliding there if it's already up, otherwise growing and fading in.
+    private static func present(_ panel: NSPanel, at frame: CGRect, glide: Bool) {
+        generation += 1
+        if panel.isVisible {
+            animate(0.2) {
+                if glide && !reduceMotion { panel.animator().setFrame(frame, display: true) } else { panel.setFrame(frame, display: true) }
+                panel.animator().alphaValue = 1
+            }
+        } else {
+            let inset = glide && !reduceMotion ? min(frame.width, frame.height) * 0.04 : 0
+            panel.setFrame(frame.insetBy(dx: inset, dy: inset), display: true)
+            panel.alphaValue = 0
+            panel.orderFrontRegardless()
+            animate(reduceMotion ? 0.1 : 0.18) {
+                if inset > 0 { panel.animator().setFrame(frame, display: true) }
+                panel.animator().alphaValue = 1
+            }
+        }
+    }
+
     /// `frame` in Accessibility coordinates. The grid shows it even with previews turned off, as it's all it has.
     static func show(_ frame: CGRect, always: Bool = false) {
         guard isEnabled || always else { return }
-        let cocoa = cocoa(frame)
-        if panel.isVisible {
-            NSAnimationContext.runAnimationGroup { ctx in
-                ctx.duration = 0.12
-                panel.animator().setFrame(cocoa, display: true)
-            }
-        } else {
-            panel.setFrame(cocoa, display: true)
-            panel.orderFrontRegardless()
-        }
+        present(panel, at: cocoa(frame), glide: true)
     }
 
     /// Outlines `cells` (Accessibility coordinates) over a slightly dimmed screen.
@@ -64,13 +89,19 @@ enum PreviewOverlay {
         let bounds = cocoa(cells.reduce(CGRect.null) { $0.union($1) }).insetBy(dx: -8, dy: -8)
         let view = gridPanel.contentView as! GridView
         view.cells = cells.map { cocoa($0).offsetBy(dx: -bounds.minX, dy: -bounds.minY) }
-        gridPanel.setFrame(bounds, display: true)
-        gridPanel.orderFrontRegardless()
+        present(gridPanel, at: bounds, glide: false)
     }
 
     static func hide() {
-        if panel.isVisible { panel.orderOut(nil) }
-        if gridPanel.isVisible { gridPanel.orderOut(nil) }
+        generation += 1
+        let fading = generation
+        for panel in [panel, gridPanel] where panel.isVisible {
+            animate(reduceMotion ? 0.1 : 0.15) {
+                panel.animator().alphaValue = 0
+            } done: {
+                MainActor.assumeIsolated { if generation == fading { panel.orderOut(nil) } }
+            }
+        }
     }
 }
 
