@@ -16,6 +16,8 @@ enum Main {
             arguments["AppleTextDirection"] = true
             UserDefaults.standard.setVolatileDomain(arguments, forName: UserDefaults.argumentDomain)
         }
+        // Static lets start lazily; read it now so it holds the language this run started in.
+        _ = AppLanguage.atLaunch
         if CommandLine.arguments.contains(Tutorial.argument) { Tutorial.runPracticeApp() }
         FlickbarApp.main()
     }
