@@ -43,9 +43,14 @@ func scroll(_ at: CGPoint, dx: Double, dy: Double, phase: Int64, flags: CGEventF
 }
 
 /// Each stroke is finger travel in points (+x right, +y down). Not natural-scrolling, so content delta = -finger.
-func swipe(_ at: CGPoint, _ strokes: [(Double, Double)], flags: CGEventFlags = [], escape: Bool = false) {
+/// `touch`: fingers touch down ("may begin") just before they move, as usual on a trackpad; fast flicks can skip it.
+func swipe(_ at: CGPoint, _ strokes: [(Double, Double)], flags: CGEventFlags = [], escape: Bool = false, touch: Bool = true) {
     CGWarpMouseCursorPosition(at)
     usleep(50000)
+    if touch {
+        scroll(at, dx: 0, dy: 0, phase: 128, flags: flags)
+        usleep(80000)
+    }
     var first = true
     for (fx, fy) in strokes {
         for _ in 0..<12 {
@@ -63,13 +68,15 @@ func swipe(_ at: CGPoint, _ strokes: [(Double, Double)], flags: CGEventFlags = [
 }
 
 /// Touches, rests the fingers until the grid shows, then moves by each (x, y) of finger travel and lifts.
+/// Like a real trackpad: resting fingers only send "may begin" (128); "began" comes with the first movement.
 func holdSwipe(_ at: CGPoint, _ moves: [(Double, Double)]) {
     CGWarpMouseCursorPosition(at)
     usleep(50000)
-    scroll(at, dx: -2, dy: 0, phase: 1)
+    scroll(at, dx: 0, dy: 0, phase: 128)
     usleep(700000)
+    var first = true
     for (fx, fy) in moves {
-        for _ in 0..<12 { scroll(at, dx: -fx / 12, dy: -fy / 12, phase: 2) }
+        for _ in 0..<12 { scroll(at, dx: -fx / 12, dy: -fy / 12, phase: first ? 1 : 2); first = false }
     }
     scroll(at, dx: 0, dy: 0, phase: 4)
     usleep(400000)
@@ -156,7 +163,9 @@ swipe(titlebar(), [(120, 0)]);            expect("swipe right → right half", C
 swipe(titlebar(), [(0, -120)]);           expect("swipe up → fill", main)
 swipe(titlebar(), [(0, -120)]);           expect("swipe up again → middle ⅓", CGRect(x: main.minX + thirdW, y: main.minY, width: thirdW, height: main.height))
 swipe(titlebar(), [(0, -120)]);           expect("swipe up again → fill", main)
-swipe(titlebar(), [(-120, 0), (0, -120)]); expect("left, up → top-left", CGRect(x: main.minX, y: main.minY, width: halfW, height: halfH))
+// Fingers resting then lifting off a title bar, then a flick with no touch-down first, must still snap.
+CGWarpMouseCursorPosition(content()); scroll(content(), dx: 0, dy: 0, phase: 128); scroll(content(), dx: 0, dy: 0, phase: 8); usleep(200000)
+swipe(titlebar(), [(-120, 0), (0, -120)], touch: false); expect("left, up → top-left", CGRect(x: main.minX, y: main.minY, width: halfW, height: halfH))
 swipe(titlebar(), [(0, 120), (120, 0)]);  expect("down, right → bottom-right", CGRect(x: main.minX + halfW, y: main.minY + halfH, width: halfW, height: halfH))
 swipe(titlebar(), [(0, 120)]); usleep(500000)
 check("swipe down (snapped) → minimize", bool(window, kAXMinimizedAttribute), "not minimized")

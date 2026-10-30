@@ -20,6 +20,8 @@ final class GestureTap {
     private var grid: GridCursor?
     private var gridScreen: CGRect?
     private var holdTimer: Timer?
+    /// The fingers touched down ("may begin") and haven't moved yet, so the next "began" continues this gesture.
+    private var resting = false
     private var origin = CGPoint.zero
     private static let holdDelay: TimeInterval = 0.4
 
@@ -59,8 +61,9 @@ final class GestureTap {
     }
 
     private func install() {
-        // 10 keyDown (Esc cancels), 22 scrollWheel, 29 gesture, 30 magnify, 32 smartMagnify (two-finger double tap).
-        let mask: CGEventMask = (1 << 10) | (1 << 22) | (1 << 29) | (1 << 30) | (1 << 32)
+        // 1/3 left/right mouse down (a click cancels a hold), 10 keyDown (Esc cancels), 22 scrollWheel, 29 gesture,
+        // 30 magnify, 32 smartMagnify (two-finger double tap).
+        let mask: CGEventMask = (1 << 1) | (1 << 3) | (1 << 10) | (1 << 22) | (1 << 29) | (1 << 30) | (1 << 32)
         let callback: CGEventTapCallBack = { _, type, event, info in
             let me = Unmanaged<GestureTap>.fromOpaque(info!).takeUnretainedValue()
             let consumed = MainActor.assumeIsolated { me.handle(type, event) }
@@ -81,9 +84,15 @@ final class GestureTap {
             if let tap, isEnabled { CGEvent.tapEnable(tap: tap, enable: true) }
             return false
         }
+        if type == .leftMouseDown || type == .rightMouseDown {
+            // Clicking with fingers resting (e.g. holding a two-finger click) isn't a hold; let the click through.
+            if resting, grid == nil { finish(cancelled: true) }
+            return false
+        }
         if type == .keyDown {
             let escape: Int64 = 53
-            guard tracking, event.getIntegerValueField(.keyboardEventKeycode) == escape else { return false }
+            // Fingers merely resting aren't a gesture yet, so Esc belongs to the app until one starts.
+            guard tracking, !resting || grid != nil, event.getIntegerValueField(.keyboardEventKeycode) == escape else { return false }
             // Keep consuming the rest of the gesture so it doesn't leak into the app; it just won't fire.
             escaped = true
             PreviewOverlay.hide()
@@ -105,7 +114,17 @@ final class GestureTap {
             if e.momentumPhase.contains(.ended) { swallowMomentum = false }
             return swallow
         }
-        if e.phase.contains(.began) { begin(at: point, flags: e.modifierFlags) }
+        // Resting fingers only send "may begin"; the hold has to be timed from there, as "began" waits for movement.
+        if e.phase.contains(.mayBegin) {
+            begin(at: point, flags: e.modifierFlags)
+            resting = tracking
+            armHold()
+            return tracking
+        }
+        if e.phase.contains(.began) {
+            if !resting { begin(at: point, flags: e.modifierFlags) }
+            resting = false
+        }
         guard tracking else { return false }
 
         // Convert content-scroll deltas to finger movement, regardless of the natural-scrolling setting.
@@ -117,7 +136,8 @@ final class GestureTap {
             if recognizer.addScroll(dx: dx, dy: dy) != nil { strokeRecognized() }
             armHold()
         }
-        if e.phase.contains(.ended) || e.phase.contains(.cancelled) { finish(cancelled: e.phase.contains(.cancelled)) }
+        // Lifting fingers that never moved reports "cancelled"; on the grid that's still a choice of the cell shown.
+        if e.phase.contains(.ended) || e.phase.contains(.cancelled) { finish(cancelled: e.phase.contains(.cancelled) && !resting) }
         return true
     }
 
@@ -151,6 +171,7 @@ final class GestureTap {
         command = flags.contains(.command)
         escaped = false
         grid = nil
+        resting = false
         holdTimer?.invalidate()
         origin = point
         let hit = AXWindow.element(at: point)
@@ -229,6 +250,7 @@ final class GestureTap {
         dockApp = nil
         minimizedTile = nil
         grid = nil
+        resting = false
         recognizer.reset()
     }
 }
