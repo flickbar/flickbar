@@ -13,7 +13,8 @@ NOTES="$2"
 sed -i '' "s/VERSION=\"\${VERSION:-[0-9.]*}\"/VERSION=\"\${VERSION:-$VERSION}\"/" scripts/bundle.sh
 sed -i '' "s/Flickbar-[0-9.]*[0-9]\.zip/Flickbar-$VERSION.zip/" README.md
 grep -q "VERSION:-$VERSION}" scripts/bundle.sh || { echo "Couldn't set the version in bundle.sh." >&2; exit 1; }
-git commit -qam "Version $VERSION"
+# Skipped when re-running after a failure that came before anything was pushed.
+git diff --quiet || git commit -qam "Version $VERSION"
 
 # With a Developer ID certificate the app is notarized, so it opens without Gatekeeper's warning; that needs the
 # notary credentials stored once with `xcrun notarytool store-credentials flickbar-notary`. Otherwise a dedicated
@@ -67,28 +68,15 @@ SHA-256 of the zip: \`$SHA\`
 EOF
 } > build/release/notes.md
 
-git push -q
-git tag "v$VERSION"
-git push -q origin "v$VERSION"
-gh release create "v$VERSION" "$ZIP" --title "Flickbar $VERSION" --notes-file build/release/notes.md
-
-if [ -n "$TAPPED" ]; then
-    TAP=build/homebrew-tap
-    [ -d "$TAP/.git" ] || gh repo clone flickbar/homebrew-tap "$TAP" -- -q
-    git -C "$TAP" pull -q
-    sed -i '' "s/^  version \".*\"/  version \"$VERSION\"/; s/^  sha256 \".*\"/  sha256 \"$SHA\"/" "$TAP/Casks/flickbar.rb"
-    git -C "$TAP" commit -qam "Flickbar $VERSION"
-    git -C "$TAP" push -q
-else
-    echo "warning: flickbar/homebrew-tap doesn't exist yet; cask not updated" >&2
-fi
 # Sparkle's update feed. The EdDSA signature comes from the private key in the login keychain (made once with
 # Sparkle's generate_keys; back it up with `generate_keys -x`); apps refuse updates that don't match the public
 # key in their Info.plist. The feed only needs the latest version.
+# Written and checked before anything is published, so a failure here leaves nothing half released.
 SIGNATURE="$(.build/artifacts/sparkle/Sparkle/bin/sign_update "$ZIP")"
 SITE=build/site
 [ -d "$SITE/.git" ] || gh repo clone flickbar/flickbar.github.io "$SITE" -- -q
-git -C "$SITE" pull -q
+# A failed earlier run may have left its feed behind.
+git -C "$SITE" fetch -q && git -C "$SITE" reset -q --hard origin/main
 cat > "$SITE/appcast.xml" <<EOF
 <?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle">
@@ -109,6 +97,22 @@ cat > "$SITE/appcast.xml" <<EOF
 </rss>
 EOF
 xmllint --noout "$SITE/appcast.xml"
+git push -q
+git tag "v$VERSION"
+git push -q origin "v$VERSION"
+gh release create "v$VERSION" "$ZIP" --title "Flickbar $VERSION" --notes-file build/release/notes.md
+
+if [ -n "$TAPPED" ]; then
+    TAP=build/homebrew-tap
+    [ -d "$TAP/.git" ] || gh repo clone flickbar/homebrew-tap "$TAP" -- -q
+    git -C "$TAP" pull -q
+    sed -i '' "s/^  version \".*\"/  version \"$VERSION\"/; s/^  sha256 \".*\"/  sha256 \"$SHA\"/" "$TAP/Casks/flickbar.rb"
+    git -C "$TAP" commit -qam "Flickbar $VERSION"
+    git -C "$TAP" push -q
+else
+    echo "warning: flickbar/homebrew-tap doesn't exist yet; cask not updated" >&2
+fi
+# Last, so the feed only points at a release that exists.
 git -C "$SITE" add appcast.xml
 git -C "$SITE" commit -qm "Flickbar $VERSION update feed"
 git -C "$SITE" push -q
