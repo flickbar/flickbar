@@ -20,6 +20,8 @@ final class GestureTap {
     private var grid: GridCursor?
     private var gridScreen: CGRect?
     private var holdTimer: Timer?
+    /// The fingers touched down ("may begin") and haven't moved yet, so the next "began" continues this gesture.
+    private var resting = false
     private var origin = CGPoint.zero
     private static let holdDelay: TimeInterval = 0.4
 
@@ -105,7 +107,17 @@ final class GestureTap {
             if e.momentumPhase.contains(.ended) { swallowMomentum = false }
             return swallow
         }
-        if e.phase.contains(.began) { begin(at: point, flags: e.modifierFlags) }
+        // Resting fingers only send "may begin"; the hold has to be timed from there, as "began" waits for movement.
+        if e.phase.contains(.mayBegin) {
+            begin(at: point, flags: e.modifierFlags)
+            resting = true
+            armHold()
+            return tracking
+        }
+        if e.phase.contains(.began) {
+            if !resting { begin(at: point, flags: e.modifierFlags) }
+            resting = false
+        }
         guard tracking else { return false }
 
         // Convert content-scroll deltas to finger movement, regardless of the natural-scrolling setting.
@@ -117,7 +129,8 @@ final class GestureTap {
             if recognizer.addScroll(dx: dx, dy: dy) != nil { strokeRecognized() }
             armHold()
         }
-        if e.phase.contains(.ended) || e.phase.contains(.cancelled) { finish(cancelled: e.phase.contains(.cancelled)) }
+        // Lifting fingers that never moved reports "cancelled"; on the grid that's still a choice of the cell shown.
+        if e.phase.contains(.ended) || e.phase.contains(.cancelled) { finish(cancelled: e.phase.contains(.cancelled) && !resting) }
         return true
     }
 
@@ -229,6 +242,7 @@ final class GestureTap {
         dockApp = nil
         minimizedTile = nil
         grid = nil
+        resting = false
         recognizer.reset()
     }
 }

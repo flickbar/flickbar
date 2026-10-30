@@ -46,6 +46,9 @@ func scroll(_ at: CGPoint, dx: Double, dy: Double, phase: Int64, flags: CGEventF
 func swipe(_ at: CGPoint, _ strokes: [(Double, Double)], flags: CGEventFlags = [], escape: Bool = false) {
     CGWarpMouseCursorPosition(at)
     usleep(50000)
+    // Fingers touch down ("may begin") just before they move, as on a real trackpad.
+    scroll(at, dx: 0, dy: 0, phase: 128, flags: flags)
+    usleep(80000)
     var first = true
     for (fx, fy) in strokes {
         for _ in 0..<12 {
@@ -63,13 +66,15 @@ func swipe(_ at: CGPoint, _ strokes: [(Double, Double)], flags: CGEventFlags = [
 }
 
 /// Touches, rests the fingers until the grid shows, then moves by each (x, y) of finger travel and lifts.
+/// Like a real trackpad: resting fingers only send "may begin" (128); "began" comes with the first movement.
 func holdSwipe(_ at: CGPoint, _ moves: [(Double, Double)]) {
     CGWarpMouseCursorPosition(at)
     usleep(50000)
-    scroll(at, dx: -2, dy: 0, phase: 1)
+    scroll(at, dx: 0, dy: 0, phase: 128)
     usleep(700000)
+    var first = true
     for (fx, fy) in moves {
-        for _ in 0..<12 { scroll(at, dx: -fx / 12, dy: -fy / 12, phase: 2) }
+        for _ in 0..<12 { scroll(at, dx: -fx / 12, dy: -fy / 12, phase: first ? 1 : 2); first = false }
     }
     scroll(at, dx: 0, dy: 0, phase: 4)
     usleep(400000)
