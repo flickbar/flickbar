@@ -1,0 +1,2089 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "%@ done": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ انجام شد"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ : terminé"
+          }
+        }
+      }
+    },
+    "A quarter": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "یک‌چهارم"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un quart"
+          }
+        }
+      }
+    },
+    "About": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "درباره"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "À propos"
+          }
+        }
+      }
+    },
+    "Accessibility access is on. You're ready to go.": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "دسترسی «دسترس‌پذیری» روشن است. همه‌چیز آماده است."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’accès Accessibilité est activé. Tout est prêt."
+          }
+        }
+      }
+    },
+    "Action": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "کار"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Action"
+          }
+        }
+      }
+    },
+    "Add": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "افزودن"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajouter"
+          }
+        }
+      }
+    },
+    "Add an app": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "افزودن برنامه"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajouter une app"
+          }
+        }
+      }
+    },
+    "App": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "برنامه"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App"
+          }
+        }
+      }
+    },
+    "Apps": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "برنامه‌ها"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apps"
+          }
+        }
+      }
+    },
+    "Bottom-Left Quarter": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "یک‌چهارم پایین چپ"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quart inférieur gauche"
+          }
+        }
+      }
+    },
+    "Bottom-Right Quarter": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "یک‌چهارم پایین راست"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quart inférieur droit"
+          }
+        }
+      }
+    },
+    "Center": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "وسط صفحه"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Centrer"
+          }
+        }
+      }
+    },
+    "Check for Updates…": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بررسی به‌روزرسانی‌ها…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rechercher les mises à jour…"
+          }
+        }
+      }
+    },
+    "Check for updates": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بررسی خودکار به‌روزرسانی‌ها"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rechercher les mises à jour"
+          }
+        }
+      }
+    },
+    "Click + to choose an app.": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "برای انتخاب برنامه، روی + بزنید."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cliquez sur + pour choisir une app."
+          }
+        }
+      }
+    },
+    "Click Open System Settings, then turn on Flickbar. If it's already on, select it, click − to remove it, and add it again.": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "روی «باز کردن تنظیمات سیستم» بزنید و Flickbar را روشن کنید. اگر از قبل روشن است، انتخابش کنید، با − حذفش کنید و دوباره اضافه‌اش کنید."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cliquez sur Ouvrir Réglages Système, puis activez Flickbar. S’il est déjà activé, sélectionnez-le, cliquez sur − pour le supprimer, puis ajoutez-le à nouveau."
+          }
+        }
+      }
+    },
+    "Close Window": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بستن پنجره"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fermer la fenêtre"
+          }
+        }
+      }
+    },
+    "Displays": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نمایشگرها"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moniteurs"
+          }
+        }
+      }
+    },
+    "Done": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تمام"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terminé"
+          }
+        }
+      }
+    },
+    "Double-Tap": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "دو ضربه"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toucher deux fois"
+          }
+        }
+      }
+    },
+    "Fill Screen": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "پر کردن صفحه"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remplir l’écran"
+          }
+        }
+      }
+    },
+    "Fill the screen": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "پر کردن صفحه"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remplir l’écran"
+          }
+        }
+      }
+    },
+    "Flickbar": {
+      "shouldTranslate": false
+    },
+    "Flickbar needs Accessibility access": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flickbar به دسترسی «دسترس‌پذیری» نیاز دارد"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flickbar a besoin de l’accès Accessibilité"
+          }
+        }
+      }
+    },
+    "Flickbar, off": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flickbar، خاموش"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flickbar, désactivé"
+          }
+        }
+      }
+    },
+    "Free and open source under the GNU GPL v3.": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "رایگان و متن‌باز، با مجوز GNU GPL نسخه‌ی ۳."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Libre et open source sous licence GNU GPL v3."
+          }
+        }
+      }
+    },
+    "Full Screen": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تمام‌صفحه"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plein écran"
+          }
+        }
+      }
+    },
+    "General": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عمومی"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Général"
+          }
+        }
+      }
+    },
+    "Gesture Tutorial…": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "آموزش حرکت‌ها…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Didacticiel des gestes…"
+          }
+        }
+      }
+    },
+    "Gesture anywhere in a window while holding": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حرکت در هر جای پنجره، با نگه داشتن"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Faire les gestes n’importe où dans une fenêtre en maintenant"
+          }
+        }
+      }
+    },
+    "Gestures": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حرکت‌ها"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gestes"
+          }
+        }
+      }
+    },
+    "Grant Accessibility Access…": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "دادن دسترسی «دسترس‌پذیری»…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autoriser l’accès Accessibilité…"
+          }
+        }
+      }
+    },
+    "Grant Access…": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "دادن دسترسی…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autoriser l’accès…"
+          }
+        }
+      }
+    },
+    "Halves": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نیمه‌ها"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moitiés"
+          }
+        }
+      }
+    },
+    "Hide App": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "پنهان کردن برنامه"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Masquer l’app"
+          }
+        }
+      }
+    },
+    "Hold ⌘ and swipe to move a window to another display": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "برای بردن پنجره به نمایشگر دیگر، ⌘ را نگه دارید و بکشید"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maintenez ⌘ et balayez pour déplacer une fenêtre vers un autre moniteur"
+          }
+        }
+      }
+    },
+    "Large": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "زیاد"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grand"
+          }
+        }
+      }
+    },
+    "Later": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بعدا"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plus tard"
+          }
+        }
+      }
+    },
+    "Left Half": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نیمه‌ی چپ"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moitié gauche"
+          }
+        }
+      }
+    },
+    "Left Third": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "یک‌سوم چپ"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tiers gauche"
+          }
+        }
+      }
+    },
+    "Left Two-Thirds": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "دوسوم چپ"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deux tiers gauche"
+          }
+        }
+      }
+    },
+    "Left half": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نیمه‌ی چپ"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moitié gauche"
+          }
+        }
+      }
+    },
+    "Left, Then Down": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "چپ، بعد پایین"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gauche, puis bas"
+          }
+        }
+      }
+    },
+    "Left, Then Up": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "چپ، بعد بالا"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gauche, puis haut"
+          }
+        }
+      }
+    },
+    "Made by [Parsa Kamalipour](https://github.com/benymaxparsa)": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ساخته‌ی [پارسا کمالی‌پور](https://github.com/benymaxparsa)"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Créé par [Parsa Kamalipour](https://github.com/benymaxparsa)"
+          }
+        }
+      }
+    },
+    "Medium": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "متوسط"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moyen"
+          }
+        }
+      }
+    },
+    "Middle Third": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "یک‌سوم وسط"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tiers central"
+          }
+        }
+      }
+    },
+    "Minimize": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "کوچک کردن"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Placer dans le Dock"
+          }
+        }
+      }
+    },
+    "Move to Another Display": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بردن به نمایشگر دیگر"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Déplacer vers un autre moniteur"
+          }
+        }
+      }
+    },
+    "Move to Display Above": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بردن به نمایشگر بالایی"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Déplacer vers le moniteur du dessus"
+          }
+        }
+      }
+    },
+    "Move to Display Below": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بردن به نمایشگر پایینی"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Déplacer vers le moniteur du dessous"
+          }
+        }
+      }
+    },
+    "Move to Display on the Left": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بردن به نمایشگر سمت چپ"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Déplacer vers le moniteur de gauche"
+          }
+        }
+      }
+    },
+    "Move to Display on the Right": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بردن به نمایشگر سمت راست"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Déplacer vers le moniteur de droite"
+          }
+        }
+      }
+    },
+    "Needs Accessibility access to move windows.": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "برای جابه‌جا کردن پنجره‌ها به دسترسی «دسترس‌پذیری» نیاز دارد."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A besoin de l’accès Accessibilité pour déplacer les fenêtres."
+          }
+        }
+      }
+    },
+    "Next Window of App": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "پنجره‌ی بعدی برنامه"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fenêtre suivante de l’app"
+          }
+        }
+      }
+    },
+    "No Apps": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "برنامه‌ای نیست"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucune app"
+          }
+        }
+      }
+    },
+    "None": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بدون فاصله"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucun"
+          }
+        }
+      }
+    },
+    "Not done yet": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "هنوز انجام نشده"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pas encore fait"
+          }
+        }
+      }
+    },
+    "Not installed": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نصب نشده"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non installée"
+          }
+        }
+      }
+    },
+    "Nothing": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "هیچ"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rien"
+          }
+        }
+      }
+    },
+    "Off": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خاموش"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Désactivé"
+          }
+        }
+      }
+    },
+    "Off.": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خاموش."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Désactivé."
+          }
+        }
+      }
+    },
+    "On a Window's Title Bar": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "روی نوار عنوان پنجره"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sur la barre de titre d’une fenêtre"
+          }
+        }
+      }
+    },
+    "On an App's Dock Icon": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "روی نماد برنامه در Dock"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sur l’icône d’une app dans le Dock"
+          }
+        }
+      }
+    },
+    "On. Swipe on a window's title bar.": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "روشن. روی نوار عنوان پنجره بکشید."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activé. Balayez sur la barre de titre d’une fenêtre."
+          }
+        }
+      }
+    },
+    "Once a day, Flickbar reads its update list from flickbar.github.io, sending only its version number. Updates are signed and checked before they install.": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flickbar روزی یک بار فهرست به‌روزرسانی‌ها را از flickbar.github.io می‌گیرد و فقط شماره‌ی نسخه‌اش را می‌فرستد. به‌روزرسانی‌ها امضا شده‌اند و پیش از نصب بررسی می‌شوند."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une fois par jour, Flickbar lit sa liste de mises à jour sur flickbar.github.io en n’envoyant que son numéro de version. Les mises à jour sont signées et vérifiées avant leur installation."
+          }
+        }
+      }
+    },
+    "Open System Settings": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "باز کردن تنظیمات سیستم"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir Réglages Système"
+          }
+        }
+      }
+    },
+    "Open at login": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اجرا هنگام ورود به سیستم"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir à la connexion"
+          }
+        }
+      }
+    },
+    "Pick a layout": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "انتخاب چیدمان"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisir une disposition"
+          }
+        }
+      }
+    },
+    "Pick from a grid": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "انتخاب از جدول"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisir dans une grille"
+          }
+        }
+      }
+    },
+    "Pinch In": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "جمع کردن دو انگشت"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pincer"
+          }
+        }
+      }
+    },
+    "Pinch Out": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "باز کردن دو انگشت"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Écarter"
+          }
+        }
+      }
+    },
+    "Put the pointer on this window's title bar and use two fingers on the trackpad.": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نشانگر را روی نوار عنوان همین پنجره ببرید و با دو انگشت روی ترک‌پد حرکت کنید."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Placez le pointeur sur la barre de titre de cette fenêtre et utilisez deux doigts sur le trackpad."
+          }
+        }
+      }
+    },
+    "Quarters": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "یک‌چهارم‌ها"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quarts"
+          }
+        }
+      }
+    },
+    "Quit App": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خروج از برنامه"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quitter l’app"
+          }
+        }
+      }
+    },
+    "Quit Flickbar": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خروج از Flickbar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quitter Flickbar"
+          }
+        }
+      }
+    },
+    "Quit Tutorial": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خروج از آموزش"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quitter le didacticiel"
+          }
+        }
+      }
+    },
+    "Remove the selected apps": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حذف برنامه‌های انتخاب‌شده"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supprimer les apps sélectionnées"
+          }
+        }
+      }
+    },
+    "Repeat a swipe to a half or Fill Screen to cycle through thirds. Press Esc before lifting your fingers to cancel.": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اگر کشیدن به سمت یک نیمه یا «پر کردن صفحه» را تکرار کنید، پنجره بین اندازه‌های یک‌سوم می‌چرخد. برای لغو، پیش از برداشتن انگشت‌ها Esc را بزنید."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Répétez un balayage vers une moitié ou Remplir l’écran pour passer par les tiers. Appuyez sur Échap avant de lever les doigts pour annuler."
+          }
+        }
+      }
+    },
+    "Report an Issue": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "گزارش مشکل"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Signaler un problème"
+          }
+        }
+      }
+    },
+    "Rest two fingers until a grid appears, move to a cell, then lift.": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "دو انگشت را نگه دارید تا جدول ظاهر شود، روی یک خانه بروید و انگشت‌ها را بردارید."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Posez deux doigts jusqu’à ce qu’une grille apparaisse, allez sur une case, puis levez-les."
+          }
+        }
+      }
+    },
+    "Restore Defaults": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بازگشت به پیش‌فرض"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rétablir les valeurs par défaut"
+          }
+        }
+      }
+    },
+    "Restore or Minimize": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بازگرداندن یا کوچک کردن"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restaurer ou placer dans le Dock"
+          }
+        }
+      }
+    },
+    "Right Half": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نیمه‌ی راست"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moitié droite"
+          }
+        }
+      }
+    },
+    "Right Third": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "یک‌سوم راست"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tiers droit"
+          }
+        }
+      }
+    },
+    "Right Two-Thirds": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "دوسوم راست"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deux tiers droit"
+          }
+        }
+      }
+    },
+    "Right half": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نیمه‌ی راست"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moitié droite"
+          }
+        }
+      }
+    },
+    "Right, Then Down": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "راست، بعد پایین"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Droite, puis bas"
+          }
+        }
+      }
+    },
+    "Right, Then Up": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "راست، بعد بالا"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Droite, puis haut"
+          }
+        }
+      }
+    },
+    "Settings…": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تنظیمات…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réglages…"
+          }
+        }
+      }
+    },
+    "Shortcuts": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "میان‌برها"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Raccourcis"
+          }
+        }
+      }
+    },
+    "Shortcuts act on the frontmost window. Repeat a half or Fill Screen shortcut to cycle through thirds.": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "میان‌برها روی پنجره‌ی جلویی کار می‌کنند. اگر میان‌بر یک نیمه یا «پر کردن صفحه» را تکرار کنید، پنجره بین اندازه‌های یک‌سوم می‌چرخد."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les raccourcis agissent sur la fenêtre au premier plan. Répétez un raccourci de moitié ou Remplir l’écran pour passer par les tiers."
+          }
+        }
+      }
+    },
+    "Show App's Windows": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نشان دادن پنجره‌های برنامه"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Afficher les fenêtres de l’app"
+          }
+        }
+      }
+    },
+    "Show where the window will go": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نشان دادن جای تازه‌ی پنجره"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Montrer où ira la fenêtre"
+          }
+        }
+      }
+    },
+    "Skip": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "رد شدن"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Passer"
+          }
+        }
+      }
+    },
+    "Small": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "کم"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Petit"
+          }
+        }
+      }
+    },
+    "Snap, resize and move windows with trackpad gestures on their title bars.": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "پنجره‌ها را با حرکت‌های ترک‌پد روی نوار عنوانشان بچینید، اندازه‌شان را عوض کنید و جابه‌جایشان کنید."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ancrez, redimensionnez et déplacez les fenêtres avec des gestes du trackpad sur leur barre de titre."
+          }
+        }
+      }
+    },
+    "Source Code": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "کد منبع"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Code source"
+          }
+        }
+      }
+    },
+    "Space between windows": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فاصله‌ی بین پنجره‌ها"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Espace entre les fenêtres"
+          }
+        }
+      }
+    },
+    "Swipe Down": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "کشیدن به پایین"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Balayer vers le bas"
+          }
+        }
+      }
+    },
+    "Swipe Left": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "کشیدن به چپ"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Balayer vers la gauche"
+          }
+        }
+      }
+    },
+    "Swipe Right": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "کشیدن به راست"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Balayer vers la droite"
+          }
+        }
+      }
+    },
+    "Swipe Up": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "کشیدن به بالا"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Balayer vers le haut"
+          }
+        }
+      }
+    },
+    "Swipe down. The window comes right back.": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "به پایین بکشید. پنجره زود برمی‌گردد."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Balayez vers le bas. La fenêtre revient aussitôt."
+          }
+        }
+      }
+    },
+    "Swipe left or right, then up or down.": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "به چپ یا راست بکشید، بعد به بالا یا پایین."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Balayez vers la gauche ou la droite, puis vers le haut ou le bas."
+          }
+        }
+      }
+    },
+    "Swipe left.": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "به چپ بکشید."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Balayez vers la gauche."
+          }
+        }
+      }
+    },
+    "Swipe or pinch with two fingers on any window's title bar to snap, resize and move it.": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "با دو انگشت روی نوار عنوان هر پنجره بکشید، یا انگشت‌ها را جمع و باز کنید، تا پنجره را بچینید، اندازه‌اش را عوض کنید یا جابه‌جایش کنید."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Balayez ou pincez avec deux doigts sur la barre de titre d’une fenêtre pour l’ancrer, la redimensionner et la déplacer."
+          }
+        }
+      }
+    },
+    "Swipe right.": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "به راست بکشید."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Balayez vers la droite."
+          }
+        }
+      }
+    },
+    "Swipe up.": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "به بالا بکشید."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Balayez vers le haut."
+          }
+        }
+      }
+    },
+    "Tap the trackpad when a gesture is recognized": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لرزش کوتاه ترک‌پد وقتی حرکت شناخته می‌شود"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Faire vibrer le trackpad quand un geste est reconnu"
+          }
+        }
+      }
+    },
+    "Thirds": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "یک‌سوم‌ها"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tiers"
+          }
+        }
+      }
+    },
+    "Title Bar Gestures": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حرکت‌های نوار عنوان"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gestes sur la barre de titre"
+          }
+        }
+      }
+    },
+    "Title bar gestures are turned off in these apps.": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حرکت‌های نوار عنوان در این برنامه‌ها خاموش‌اند."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les gestes sur la barre de titre sont désactivés dans ces apps."
+          }
+        }
+      }
+    },
+    "Top-Left Quarter": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "یک‌چهارم بالا چپ"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quart supérieur gauche"
+          }
+        }
+      }
+    },
+    "Top-Right Quarter": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "یک‌چهارم بالا راست"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quart supérieur droit"
+          }
+        }
+      }
+    },
+    "Touch and Hold": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لمس و نگه داشتن"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toucher et maintenir"
+          }
+        }
+      }
+    },
+    "Try Flickbar's Gestures": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حرکت‌های Flickbar را امتحان کنید"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Essayez les gestes de Flickbar"
+          }
+        }
+      }
+    },
+    "Try it on this window": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "روی همین پنجره امتحان کنید"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Essayez sur cette fenêtre"
+          }
+        }
+      }
+    },
+    "Try the Gestures": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "امتحان حرکت‌ها"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Essayer les gestes"
+          }
+        }
+      }
+    },
+    "Turn Off in %@": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خاموش کردن در %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Désactiver dans %@"
+          }
+        }
+      }
+    },
+    "Version %@": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نسخه‌ی %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Version %@"
+          }
+        }
+      }
+    },
+    "Welcome to Flickbar": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "به Flickbar خوش آمدید"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bienvenue dans Flickbar"
+          }
+        }
+      }
+    },
+    "Where": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "کجا"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Où"
+          }
+        }
+      }
+    },
+    "Window": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "پنجره"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fenêtre"
+          }
+        }
+      }
+    },
+    "Windows": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "پنجره‌ها"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fenêtres"
+          }
+        }
+      }
+    },
+    "Works on the icons of apps that are running.": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "روی نماد برنامه‌هایی که باز هستند کار می‌کند."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fonctionne sur les icônes des apps ouvertes."
+          }
+        }
+      }
+    },
+    "You can also turn gestures off for the current app from the Flickbar menu.": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "از منوی Flickbar هم می‌توانید حرکت‌ها را برای برنامه‌ی فعلی خاموش کنید."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vous pouvez aussi désactiver les gestes pour l’app active depuis le menu de Flickbar."
+          }
+        }
+      }
+    },
+    "You're all set.": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "همه‌چیز آماده است."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tout est prêt."
+          }
+        }
+      }
+    },
+    "macOS requires this permission for apps that arrange windows. Flickbar uses it only to move and resize the windows you gesture on. It doesn't collect or send any data.": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS این اجازه را برای برنامه‌هایی که پنجره‌ها را مرتب می‌کنند لازم می‌داند. Flickbar فقط برای جابه‌جا کردن و تغییر اندازه‌ی پنجره‌هایی که رویشان حرکت می‌کنید از آن استفاده می‌کند و هیچ داده‌ای جمع نمی‌کند یا نمی‌فرستد."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS exige cette autorisation pour les apps qui organisent les fenêtres. Flickbar ne l’utilise que pour déplacer et redimensionner les fenêtres sur lesquelles vous faites un geste. Il ne collecte ni n’envoie aucune donnée."
+          }
+        }
+      }
+    },
+    "⌃ Control": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌃ Control"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌃ Contrôle"
+          }
+        }
+      }
+    },
+    "⌥ Option": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌥ Option"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌥ Option"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

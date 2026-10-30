@@ -64,7 +64,7 @@ private struct GeneralSettings: View {
                 Toggle("Open at login", isOn: $state.launchAtLogin)
                 Toggle("Check for updates", isOn: $state.checkForUpdates)
             } footer: {
-                footnote("Once a day, Flickbar reads its update list from flickbar.github.io, sending only its version number. Updates are signed and checked before they install.")
+                Text("Once a day, Flickbar reads its update list from flickbar.github.io, sending only its version number. Updates are signed and checked before they install.").footnote()
             }
         }
         .formStyle(.grouped)
@@ -72,17 +72,19 @@ private struct GeneralSettings: View {
     }
 
     private var status: String {
-        if !state.isTrusted { return "Needs Accessibility access to move windows." }
-        return state.isEnabled ? "On. Swipe on a window's title bar." : "Off."
+        if !state.isTrusted { return String(localized: "Needs Accessibility access to move windows.") }
+        return state.isEnabled ? String(localized: "On. Swipe on a window's title bar.") : String(localized: "Off.")
     }
 }
 
-private func footnote(_ text: String) -> some View {
-    Text(text)
-        .foregroundStyle(.secondary)
-        .multilineTextAlignment(.leading)
-        .fixedSize(horizontal: false, vertical: true)
-        .frame(maxWidth: .infinity, alignment: .leading)
+private extension Text {
+    /// Secondary explanatory text under a section.
+    func footnote() -> some View {
+        foregroundStyle(.secondary)
+            .multilineTextAlignment(.leading)
+            .fixedSize(horizontal: false, vertical: true)
+            .frame(maxWidth: .infinity, alignment: .leading)
+    }
 }
 
 // MARK: Action names
@@ -97,39 +99,40 @@ enum ActionNames {
          [.minimize, .restoreOrMinimize, .toggleFullscreen, .close, .nextWindow],
          appActions]
     }
-    static let groupTitles = ["Halves", "Thirds", "Quarters", "Window", "App"]
+    static let groupTitles = [String(localized: "Halves"), String(localized: "Thirds"), String(localized: "Quarters"),
+                               String(localized: "Window"), String(localized: "App")]
 
     /// The actions that make sense on a Dock icon, which has an app but no window.
     static var appActions: [WindowAction] { [.appWindows, .hideApp, .quitApp] }
 
     static func title(_ action: WindowAction) -> String {
         switch action {
-        case .snap(.leftHalf): "Left Half"
-        case .snap(.rightHalf): "Right Half"
-        case .snap(.maximize): "Fill Screen"
-        case .snap(.center): "Center"
-        case .snap(.leftThird): "Left Third"
-        case .snap(.centerThird): "Middle Third"
-        case .snap(.rightThird): "Right Third"
-        case .snap(.leftTwoThirds): "Left Two-Thirds"
-        case .snap(.rightTwoThirds): "Right Two-Thirds"
-        case .snap(.topLeft): "Top-Left Quarter"
-        case .snap(.topRight): "Top-Right Quarter"
-        case .snap(.bottomLeft): "Bottom-Left Quarter"
-        case .snap(.bottomRight): "Bottom-Right Quarter"
-        case .minimize: "Minimize"
-        case .restoreOrMinimize: "Restore or Minimize"
-        case .toggleFullscreen: "Full Screen"
-        case .close: "Close Window"
-        case .nextWindow: "Next Window of App"
-        case .appWindows: "Show App's Windows"
-        case .hideApp: "Hide App"
-        case .quitApp: "Quit App"
-        case .moveToDisplay(.left): "Move to Display on the Left"
-        case .moveToDisplay(.right): "Move to Display on the Right"
-        case .moveToDisplay(.up): "Move to Display Above"
-        case .moveToDisplay(.down): "Move to Display Below"
-        case .moveToDisplay: "Move to Another Display"
+        case .snap(.leftHalf): String(localized: "Left Half")
+        case .snap(.rightHalf): String(localized: "Right Half")
+        case .snap(.maximize): String(localized: "Fill Screen")
+        case .snap(.center): String(localized: "Center")
+        case .snap(.leftThird): String(localized: "Left Third")
+        case .snap(.centerThird): String(localized: "Middle Third")
+        case .snap(.rightThird): String(localized: "Right Third")
+        case .snap(.leftTwoThirds): String(localized: "Left Two-Thirds")
+        case .snap(.rightTwoThirds): String(localized: "Right Two-Thirds")
+        case .snap(.topLeft): String(localized: "Top-Left Quarter")
+        case .snap(.topRight): String(localized: "Top-Right Quarter")
+        case .snap(.bottomLeft): String(localized: "Bottom-Left Quarter")
+        case .snap(.bottomRight): String(localized: "Bottom-Right Quarter")
+        case .minimize: String(localized: "Minimize")
+        case .restoreOrMinimize: String(localized: "Restore or Minimize")
+        case .toggleFullscreen: String(localized: "Full Screen")
+        case .close: String(localized: "Close Window")
+        case .nextWindow: String(localized: "Next Window of App")
+        case .appWindows: String(localized: "Show App's Windows")
+        case .hideApp: String(localized: "Hide App")
+        case .quitApp: String(localized: "Quit App")
+        case .moveToDisplay(.left): String(localized: "Move to Display on the Left")
+        case .moveToDisplay(.right): String(localized: "Move to Display on the Right")
+        case .moveToDisplay(.up): String(localized: "Move to Display Above")
+        case .moveToDisplay(.down): String(localized: "Move to Display Below")
+        case .moveToDisplay: String(localized: "Move to Another Display")
         }
     }
 
@@ -182,6 +185,8 @@ struct LayoutGlyph: View {
             }
         }
         .frame(width: width, height: height)
+        // A picture of the screen: left stays left in right-to-left languages.
+        .environment(\.layoutDirection, .leftToRight)
         .accessibilityHidden(true)
     }
 }
@@ -192,27 +197,28 @@ private struct GestureSettings: View {
     @Bindable var state: AppState
     @AppStorage("anywhereModifier") private var anywhereModifier = "option"
     @State private var onDock = false
+    @Environment(\.layoutDirection) private var direction
 
     private static let titleBarGestures: [(TrackpadGesture, String, String)] = [
-        (.swipeLeft, "Swipe Left", "arrow.left"),
-        (.swipeUp, "Swipe Up", "arrow.up"),
-        (.swipeRight, "Swipe Right", "arrow.right"),
-        (.swipeLeftUp, "Left, Then Up", "arrow.up.left"),
-        (.swipeDown, "Swipe Down", "arrow.down"),
-        (.swipeRightUp, "Right, Then Up", "arrow.up.right"),
-        (.swipeLeftDown, "Left, Then Down", "arrow.down.left"),
-        (.doubleTap, "Double-Tap", "hand.tap"),
-        (.swipeRightDown, "Right, Then Down", "arrow.down.right"),
-        (.pinchIn, "Pinch In", "arrow.down.right.and.arrow.up.left"),
-        (.pinchOut, "Pinch Out", "arrow.up.left.and.arrow.down.right"),
+        (.swipeLeft, String(localized: "Swipe Left"), "arrow.left"),
+        (.swipeUp, String(localized: "Swipe Up"), "arrow.up"),
+        (.swipeRight, String(localized: "Swipe Right"), "arrow.right"),
+        (.swipeLeftUp, String(localized: "Left, Then Up"), "arrow.up.left"),
+        (.swipeDown, String(localized: "Swipe Down"), "arrow.down"),
+        (.swipeRightUp, String(localized: "Right, Then Up"), "arrow.up.right"),
+        (.swipeLeftDown, String(localized: "Left, Then Down"), "arrow.down.left"),
+        (.doubleTap, String(localized: "Double-Tap"), "hand.tap"),
+        (.swipeRightDown, String(localized: "Right, Then Down"), "arrow.down.right"),
+        (.pinchIn, String(localized: "Pinch In"), "arrow.down.right.and.arrow.up.left"),
+        (.pinchOut, String(localized: "Pinch Out"), "arrow.up.left.and.arrow.down.right"),
     ]
     private static let dockGestures: [(TrackpadGesture, String, String)] = [
-        (.swipeLeft, "Swipe Left", "arrow.left"),
-        (.swipeUp, "Swipe Up", "arrow.up"),
-        (.swipeRight, "Swipe Right", "arrow.right"),
-        (.pinchIn, "Pinch In", "arrow.down.right.and.arrow.up.left"),
-        (.swipeDown, "Swipe Down", "arrow.down"),
-        (.pinchOut, "Pinch Out", "arrow.up.left.and.arrow.down.right"),
+        (.swipeLeft, String(localized: "Swipe Left"), "arrow.left"),
+        (.swipeUp, String(localized: "Swipe Up"), "arrow.up"),
+        (.swipeRight, String(localized: "Swipe Right"), "arrow.right"),
+        (.pinchIn, String(localized: "Pinch In"), "arrow.down.right.and.arrow.up.left"),
+        (.swipeDown, String(localized: "Swipe Down"), "arrow.down"),
+        (.pinchOut, String(localized: "Pinch Out"), "arrow.up.left.and.arrow.down.right"),
     ]
 
     var body: some View {
@@ -234,16 +240,18 @@ private struct GestureSettings: View {
                     }
                 }
                 if !onDock {
-                    tile("Touch and Hold", "hand.point.up.left") {
+                    tile(String(localized: "Touch and Hold"), "hand.point.up.left") {
                         LayoutGlyph(action: nil, symbol: "square.grid.3x3")
                     } detail: {
                         Text("Pick from a grid").foregroundStyle(.secondary)
                     }
                 }
             }
+            // The tiles sit where their gestures point (Swipe Left on the left), even in right-to-left languages.
+            .environment(\.layoutDirection, .leftToRight)
 
             if onDock {
-                footnote("Works on the icons of apps that are running.")
+                Text("Works on the icons of apps that are running.").footnote()
             } else {
                 VStack(spacing: 8) {
                     Toggle("Hold ⌘ and swipe to move a window to another display", isOn: $state.commandSwipeEnabled)
@@ -259,7 +267,11 @@ private struct GestureSettings: View {
             }
             Spacer(minLength: 0)
             HStack(alignment: .firstTextBaseline) {
-                footnote(onDock ? "" : "Repeat a swipe to a half or Fill Screen to cycle through thirds. Press Esc before lifting your fingers to cancel.")
+                if onDock {
+                    Spacer()
+                } else {
+                    Text("Repeat a swipe to a half or Fill Screen to cycle through thirds. Press Esc before lifting your fingers to cancel.").footnote()
+                }
                 Button("Restore Defaults") { state.gestureMap = [:] }
                     .disabled(state.gestureMap.isEmpty)
             }
@@ -281,6 +293,7 @@ private struct GestureSettings: View {
         .frame(maxWidth: .infinity)
         .background(Color(nsColor: .controlBackgroundColor), in: RoundedRectangle(cornerRadius: 10))
         .overlay(RoundedRectangle(cornerRadius: 10).strokeBorder(.separator))
+        .environment(\.layoutDirection, direction)
     }
 
     private func picker(_ gesture: TrackpadGesture) -> some View {
@@ -310,7 +323,7 @@ private struct ShortcutSettings: View {
             } header: {
                 Text("Displays")
             } footer: {
-                footnote("Shortcuts act on the frontmost window. Repeat a half or Fill Screen shortcut to cycle through thirds.")
+                Text("Shortcuts act on the frontmost window. Repeat a half or Fill Screen shortcut to cycle through thirds.").footnote()
             }
         }
         .formStyle(.grouped)
@@ -382,7 +395,7 @@ private struct AppSettings: View {
         panel.allowedContentTypes = [.application]
         panel.allowsMultipleSelection = true
         panel.directoryURL = URL(fileURLWithPath: "/Applications")
-        panel.prompt = "Add"
+        panel.prompt = String(localized: "Add")
         guard panel.runModal() == .OK else { return }
         let ids = panel.urls.compactMap { Bundle(url: $0)?.bundleIdentifier }.filter { $0 != Bundle.main.bundleIdentifier }
         state.excludedApps.formUnion(ids)
@@ -425,7 +438,7 @@ private struct AboutSettings: View {
                 .resizable()
                 .frame(width: 96, height: 96)
             Text("Flickbar").font(.title.bold())
-            Text("Version \(version)").foregroundStyle(.secondary)
+            Text(String(format: String(localized: "Version %@"), version)).foregroundStyle(.secondary)
             Text("Snap, resize and move windows with trackpad gestures on their title bars.")
                 .multilineTextAlignment(.center)
                 .fixedSize(horizontal: false, vertical: true)

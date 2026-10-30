@@ -162,6 +162,14 @@ The live test opens its own TextEdit document and moves it (and the pointer) for
 leave the Mac alone while it runs. The terminal needs Accessibility permission to post events.
 Flickbar logs to the unified log under the subsystem `io.github.flickbar.Flickbar`.
 
+## Languages
+
+Flickbar speaks English, French and Persian (فارسی, laid out right to left). It follows your Mac's
+language, or pick one just for Flickbar in *System Settings → General → Language & Region → Applications*.
+
+To add a language or new text, run `scripts/update-strings.sh` and translate `Resources/Localizable.xcstrings`
+(Xcode opens it in its String Catalog editor).
+
 ## Contributing
 
 Issues and pull requests are welcome. Flickbar is an independent project written from scratch and

@@ -11,7 +11,7 @@ enum WelcomeWindow {
         if window == nil {
             let view = WelcomeView(state: state) { window?.close() }
             let w = NSWindow(contentViewController: NSHostingController(rootView: view))
-            w.title = "Welcome to Flickbar"
+            w.title = String(localized: "Welcome to Flickbar")
             w.styleMask = [.titled, .closable]
             w.isReleasedWhenClosed = false
             w.center()
