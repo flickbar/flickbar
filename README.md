@@ -22,7 +22,7 @@ Put the pointer on a window's title bar and use two fingers:
 | Swipe left / right | Snap to the left / right half; repeat for ⅔, then ⅓ |
 | Swipe left or right, then up or down (either order) | Snap to that quarter |
 | Swipe up | Fill the screen; repeat for the middle third |
-| Swipe down | Minimize |
+| Swipe down | Minimize (or, if you choose in Settings, restore the size from before snapping) |
 | Double-tap | Center the window |
 | Pinch out | Toggle full screen |
 | Pinch in | Close the window |
@@ -47,7 +47,7 @@ Gestures also work on a running app's icon in the Dock:
 On a minimized window's own tile in the Dock, swipe up to bring the window back, or use any title-bar
 gesture to bring it back and snap it, such as swipe left for the left half.
 
-While your fingers are down, a highlight shows where the window will land and a light haptic tap
+While your fingers are down, a highlight glides to where the window will land and a light haptic tap
 confirms the gesture; it runs when you lift them. Press Esc first to cancel. Other scrolling and
 zooming passes through untouched.
 
@@ -66,7 +66,8 @@ Open **Settings…** from the menu bar icon (or press ⌘, while it's open) to:
   nothing;
 - pick the key for gesturing anywhere in a window, and record keyboard shortcuts;
 - add space between snapped windows, and turn off the preview or haptic feedback;
-- keep gestures off in specific apps, and open Flickbar at login.
+- keep gestures off in specific apps, and open Flickbar at login;
+- choose Flickbar's language (English, French or Persian) and turn on daily update checks.
 
 The menu bar icon can also turn gestures off for the app you're using.
 
@@ -107,7 +108,8 @@ a practice window that ticks off each main gesture as you do it. Open it again a
 Tutorial…* in the menu.
 
 <p align="center">
-  <img src="docs/images/welcome.png" width="400" alt="Welcome window">
+  <img src="docs/images/welcome.png" width="380" alt="Welcome window">
+  <img src="docs/images/tutorial.png" width="380" alt="Gesture tutorial">
 </p>
 
 For pinch and double-tap, keep *Zoom in or out* and *Smart zoom* turned on in
@@ -145,8 +147,13 @@ act on it when you gesture or press a shortcut. Settings stay in its local prefe
 - `FlickbarCore.GestureRecognizer` turns finger movement into strokes (`left`, `up`, `pinchIn`, …);
   each change of direction starts a new stroke. When the fingers lift, `ActionMap` picks the action
   (your choice from Settings, otherwise the default) and `SnapGeometry` computes the target frame.
-- Trackpads send no events while fingers rest, so a short timer that every movement restarts spots a
-  hold; `GridCursor` then turns further movement into steps across the grid.
+- Fingers resting on a trackpad send a single "may begin" scroll event and then nothing until they move,
+  so a short timer started there (and restarted by every movement) spots a hold; `GridCursor` then turns
+  further movement into steps across the grid.
+- macOS won't let an app reach its own windows through the Accessibility API, so the tutorial's practice
+  window runs in a second copy of Flickbar (`--practice`), which the main copy tells about each gesture.
+- Updates come through [Sparkle](https://sparkle-project.org): a signed feed at flickbar.github.io lists the
+  latest release, and an update installs only if its EdDSA signature matches the key in Flickbar's Info.plist.
 
 The gesture logic in `FlickbarCore` has no AppKit dependencies and is fully unit-tested; the app layer
 is in `Sources/Flickbar`.
@@ -186,4 +193,4 @@ Flickbar is made by [Parsa Kamalipour](https://github.com/benymaxparsa).
 Copyright © 2026 Parsa Kamalipour and Flickbar contributors. [GPL-3.0-or-later](LICENSE)
 
 Keyboard shortcuts use [KeyboardShortcuts](https://github.com/sindresorhus/KeyboardShortcuts) by Sindre
-Sorhus (MIT); its license ships inside the app.
+Sorhus and updates use [Sparkle](https://sparkle-project.org) (both MIT); their licenses ship inside the app.
