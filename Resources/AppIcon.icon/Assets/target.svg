@@ -1,5 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
-  <!-- 14 equal dashes: the outline is 2(278−84) + 2(530−84) + 2π·42 ≈ 1543.9 long, so 64 on, 46.28 off. -->
-  <rect x="539" y="247" width="278" height="530" rx="42" fill="none" stroke="#ffffff" stroke-width="22"
-        stroke-dasharray="64 46.28" stroke-dashoffset="-23" stroke-linecap="round"/>
-</svg>
