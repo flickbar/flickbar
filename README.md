@@ -165,7 +165,8 @@ Flickbar logs to the unified log under the subsystem `io.github.flickbar.Flickba
 ## Languages
 
 Flickbar speaks English, French and Persian (فارسی, laid out right to left). It follows your Mac's
-language, or pick one just for Flickbar in *System Settings → General → Language & Region → Applications*.
+language, or pick one in Flickbar's *Settings → General → Language* (the same choice as
+*System Settings → General → Language & Region → Applications*).
 
 To add a language or new text, run `scripts/update-strings.sh` and translate `Resources/Localizable.xcstrings`
 (Xcode opens it in its String Catalog editor).

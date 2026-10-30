@@ -564,6 +564,22 @@
         }
       }
     },
+    "Language": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "زبان"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Langue"
+          }
+        }
+      }
+    },
     "Large": {
       "localizations": {
         "fa": {
@@ -1284,6 +1300,38 @@
         }
       }
     },
+    "Restart Flickbar to use the new language.": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "برای دیدن زبان تازه، Flickbar را دوباره باز کنید."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Redémarrez Flickbar pour utiliser la nouvelle langue."
+          }
+        }
+      }
+    },
+    "Restart Now": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "باز کردن دوباره"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Redémarrer"
+          }
+        }
+      }
+    },
     "Restore Defaults": {
       "localizations": {
         "fa": {
@@ -1408,6 +1456,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Droite, puis haut"
+          }
+        }
+      }
+    },
+    "Same as System": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مثل زبان سیستم"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comme le système"
           }
         }
       }

@@ -31,6 +31,8 @@ private struct GeneralSettings: View {
     @AppStorage("gap") private var gap = 0
     @AppStorage("haptics") private var haptics = true
     @AppStorage("preview") private var preview = true
+    @State private var language = AppLanguage.chosen
+    @State private var languageChanged = false
 
     var body: some View {
         Form {
@@ -61,6 +63,25 @@ private struct GeneralSettings: View {
                 Toggle("Tap the trackpad when a gesture is recognized", isOn: $haptics)
             }
             Section {
+                Picker("Language", selection: $language) {
+                    Text("Same as System").tag("")
+                    Divider()
+                    // Each language in its own words, as macOS lists them.
+                    ForEach(AppLanguage.all, id: \.code) { Text(verbatim: $0.name).tag($0.code) }
+                }
+                .onChange(of: language) { _, new in
+                    AppLanguage.chosen = new
+                    languageChanged = true
+                }
+                if languageChanged {
+                    HStack {
+                        Text("Restart Flickbar to use the new language.").foregroundStyle(.secondary)
+                        Spacer()
+                        Button("Restart Now") { AppLanguage.relaunch() }
+                    }
+                }
+            }
+            Section {
                 Toggle("Open at login", isOn: $state.launchAtLogin)
                 Toggle("Check for updates", isOn: $state.checkForUpdates)
             } footer: {
@@ -68,7 +89,7 @@ private struct GeneralSettings: View {
             }
         }
         .formStyle(.grouped)
-        .frame(height: 430)
+        .frame(height: 500)
     }
 
     private var status: String {
