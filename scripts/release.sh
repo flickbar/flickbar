@@ -1,7 +1,8 @@
 #!/bin/sh
 # Publishes a release from main: ./scripts/release.sh 0.6.0 notes.md
 # notes.md holds what's new; the install steps and checksum are added here. Bumps the version, builds a
-# universal app, tags, creates the GitHub release and points the Homebrew cask (flickbar/homebrew-tap) at it.
+# universal app, tags, creates the GitHub release, publishes the Sparkle feed (appcast.xml on flickbar.github.io)
+# and points the Homebrew cask (flickbar/homebrew-tap) at it.
 set -eu
 cd "$(dirname "$0")/.."
 VERSION="$1"
@@ -81,4 +82,34 @@ if [ -n "$TAPPED" ]; then
 else
     echo "warning: flickbar/homebrew-tap doesn't exist yet; cask not updated" >&2
 fi
+# Sparkle's update feed. The EdDSA signature comes from the private key in the login keychain (made once with
+# Sparkle's generate_keys; back it up with `generate_keys -x`); apps refuse updates that don't match the public
+# key in their Info.plist. The feed only needs the latest version.
+SIGNATURE="$(.build/artifacts/sparkle/Sparkle/bin/sign_update "$ZIP")"
+SITE=build/site
+[ -d "$SITE/.git" ] || gh repo clone flickbar/flickbar.github.io "$SITE" -- -q
+git -C "$SITE" pull -q
+cat > "$SITE/appcast.xml" <<EOF
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle">
+  <channel>
+    <title>Flickbar</title>
+    <link>https://flickbar.github.io/</link>
+    <item>
+      <title>Flickbar $VERSION</title>
+      <pubDate>$(LC_ALL=C date -u "+%a, %d %b %Y %H:%M:%S +0000")</pubDate>
+      <sparkle:version>$VERSION</sparkle:version>
+      <sparkle:shortVersionString>$VERSION</sparkle:shortVersionString>
+      <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+      <link>https://github.com/flickbar/flickbar/releases/tag/v$VERSION</link>
+      <description sparkle:format="markdown"><![CDATA[$(cat "$NOTES")]]></description>
+      <enclosure url="https://github.com/flickbar/flickbar/releases/download/v$VERSION/Flickbar-$VERSION.zip" $SIGNATURE type="application/octet-stream"/>
+    </item>
+  </channel>
+</rss>
+EOF
+xmllint --noout "$SITE/appcast.xml"
+git -C "$SITE" add appcast.xml
+git -C "$SITE" commit -qm "Flickbar $VERSION update feed"
+git -C "$SITE" push -q
 echo "Released $VERSION"

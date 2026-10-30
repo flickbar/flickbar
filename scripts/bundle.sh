@@ -15,6 +15,10 @@ cp Resources/AppIcon.icns "$APP/Contents/Resources/AppIcon.icns"
 cp "$BIN" "$APP/Contents/MacOS/Flickbar"
 # Dependencies' resource bundles (KeyboardShortcuts' translations) go where Bundle.module looks in an app.
 find "$(dirname "$BIN")" -maxdepth 1 -name '*.bundle' -exec cp -R {} "$APP/Contents/Resources/" \;
+# Sparkle's framework, found by the rpath set in Package.swift.
+mkdir -p "$APP/Contents/Frameworks"
+ditto "$(dirname "$BIN")/Sparkle.framework" "$APP/Contents/Frameworks/Sparkle.framework"
+cp .build/checkouts/Sparkle/LICENSE "$APP/Contents/Resources/Sparkle-LICENSE.txt"
 # The MIT license asks for its notice to ship with copies.
 cp .build/checkouts/KeyboardShortcuts/license "$APP/Contents/Resources/KeyboardShortcuts-LICENSE.txt"
 
@@ -32,6 +36,9 @@ cat > "$APP/Contents/Info.plist" <<EOF
     <key>CFBundleVersion</key><string>$VERSION</string>
     <key>LSMinimumSystemVersion</key><string>14.0</string>
     <key>LSUIElement</key><true/>
+    <key>SUFeedURL</key><string>https://flickbar.github.io/appcast.xml</string>
+    <key>SUPublicEDKey</key><string>BL9HHXETCB4Yv4FIyToTMN5W6Sb/DUA2nVcjX66/ZDc=</string>
+    <key>SUEnableAutomaticChecks</key><false/>
     <key>NSHumanReadableCopyright</key><string>Copyright © 2026 Parsa Kamalipour and Flickbar contributors. GPL-3.0-or-later.</string>
 </dict>
 </plist>
@@ -48,7 +55,13 @@ IDENTITY="${IDENTITY:-$(identity "Apple Development")}"
 IDENTITY="${IDENTITY:-$(identity "Flickbar Local Signing")}"
 if [ -n "$IDENTITY" ]; then
     # Hardened runtime, and a secure timestamp when asked (both required for notarization).
-    codesign --force --options runtime ${SIGN_TIMESTAMP:+--timestamp} --sign "$IDENTITY" "$APP"
+    sign() { codesign --force --options runtime ${SIGN_TIMESTAMP:+--timestamp} --sign "$IDENTITY" "$@"; }
+    # Inside out, as Sparkle's docs ask: its helpers, then the framework, then the app.
+    SPARKLE="$APP/Contents/Frameworks/Sparkle.framework/Versions/B"
+    sign "$SPARKLE/XPCServices/Installer.xpc"
+    sign --preserve-metadata=entitlements "$SPARKLE/XPCServices/Downloader.xpc"
+    sign "$SPARKLE/Autoupdate" "$SPARKLE/Updater.app" "$APP/Contents/Frameworks/Sparkle.framework"
+    sign "$APP"
     echo "Signed with $IDENTITY"
 else
     echo "warning: no valid signing identity; ad-hoc signing (re-grant Accessibility after each build)" >&2

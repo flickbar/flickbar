@@ -83,7 +83,7 @@ The menu bar icon can also turn gestures off for the app you're using.
 brew install --cask flickbar/tap/flickbar
 ```
 
-Update later with `brew upgrade --cask flickbar`.
+Update later with `brew upgrade --cask flickbar`, or choose *Check for Updates…* in Flickbar's menu.
 
 **Or download:** get **Flickbar-0.9.0.zip** from the
 [latest release](https://github.com/flickbar/flickbar/releases/latest), unzip it and move
@@ -128,8 +128,9 @@ the Accessibility list (the **−** button) and add it again, or set up a signin
 ## Privacy
 
 Flickbar collects no data. It makes no network connections unless you turn on *Check for updates* in
-Settings; then, once a day, it asks GitHub's API for the latest release's version number and sends
-nothing else. It uses Accessibility access only to find the window or Dock icon under the pointer and
+Settings, or choose *Check for Updates…*; then it reads its update feed from flickbar.github.io (once a day
+when the setting is on), sending only its version number. Updates come from GitHub and install only if their
+signature matches the key built into Flickbar. It uses Accessibility access only to find the window or Dock icon under the pointer and
 act on it when you gesture or press a shortcut. Settings stay in its local preferences.
 
 ## How it works

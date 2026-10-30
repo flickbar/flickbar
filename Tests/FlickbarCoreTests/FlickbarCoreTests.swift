@@ -242,16 +242,6 @@ import Testing
     }
 }
 
-@Suite struct VersionTests {
-    @Test func comparesNumerically() {
-        #expect(Version.isNewer("v0.6.1", than: "0.6.0"))
-        #expect(Version.isNewer("v0.10.0", than: "0.9.0"))
-        #expect(Version.isNewer("1.0.0", than: "0.9.9"))
-        #expect(!Version.isNewer("v0.6.0", than: "0.6.0"))
-        #expect(!Version.isNewer("v0.5.0", than: "0.6.0"))
-    }
-}
-
 @Suite struct GridTests {
     let screen = CGRect(x: 0, y: 25, width: 900, height: 600)
 

@@ -2,6 +2,7 @@ import AppKit
 import ApplicationServices
 import FlickbarCore
 import ServiceManagement
+import Sparkle
 import SwiftUI
 
 @main
@@ -28,10 +29,6 @@ private struct MenuContent: View {
     @Environment(\.openSettings) private var openSettings
 
     var body: some View {
-        if let update = state.availableUpdate {
-            Button("Update Available: \(update.version)…") { NSWorkspace.shared.open(update.page) }
-            Divider()
-        }
         if state.isTrusted {
             Toggle("Title Bar Gestures", isOn: $state.isEnabled)
         } else {
@@ -47,6 +44,10 @@ private struct MenuContent: View {
             openSettings()
         }
         .keyboardShortcut(",")
+        Button("Check for Updates…") {
+            NSApp.activate()
+            state.updater.checkForUpdates(nil)
+        }
         Divider()
         Button("Quit Flickbar") { NSApp.terminate(nil) }.keyboardShortcut("q")
     }
@@ -75,21 +76,11 @@ final class AppState {
         }
     }
 
-    var checkForUpdates = UserDefaults.standard.bool(forKey: "checkForUpdates") {
-        didSet {
-            UserDefaults.standard.set(checkForUpdates, forKey: "checkForUpdates")
-            if checkForUpdates { checkForUpdate() } else { availableUpdate = nil }
-        }
-    }
-    private(set) var availableUpdate: UpdateCheck.Release?
-
-    func checkForUpdate() {
-        guard checkForUpdates else { return }
-        let current = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "0"
-        Task {
-            guard let latest = await UpdateCheck.latestRelease(), checkForUpdates else { return }
-            availableUpdate = Version.isNewer(latest.version, than: current) ? latest : nil
-        }
+    /// Sparkle, reading the signed feed named in Info.plist. Daily checks stay off until the user turns them on.
+    let updater = SPUStandardUpdaterController(startingUpdater: false, updaterDelegate: nil, userDriverDelegate: nil)
+    var checkForUpdates: Bool {
+        get { access(keyPath: \.checkForUpdates); return updater.updater.automaticallyChecksForUpdates }
+        set { withMutation(keyPath: \.checkForUpdates) { updater.updater.automaticallyChecksForUpdates = newValue } }
     }
 
     var excludedApps = GestureTap.excludedApps {
@@ -128,14 +119,16 @@ final class AppState {
 
     private let tap = GestureTap()
     private var trustPoll: Timer?
-    private var updateTimer: Timer?
 
     init() {
         NSApp?.setActivationPolicy(.accessory)
         Shortcuts.install()
-        checkForUpdate()
-        updateTimer = Timer.scheduledTimer(withTimeInterval: 24 * 60 * 60, repeats: true) { [weak self] _ in
-            MainActor.assumeIsolated { self?.checkForUpdate() }
+        // Fails outside an app bundle (`swift run`), where there's nothing to update.
+        do { try updater.updater.start() } catch { logger.error("updater: \(error.localizedDescription, privacy: .public)") }
+        // Before 0.10 Flickbar asked GitHub itself; carry the user's choice over to Sparkle once.
+        if let old = UserDefaults.standard.object(forKey: "checkForUpdates") as? Bool {
+            checkForUpdates = old
+            UserDefaults.standard.removeObject(forKey: "checkForUpdates")
         }
         logger.notice("launched, accessibility trusted: \(self.isTrusted, privacy: .public)")
         if isTrusted {
