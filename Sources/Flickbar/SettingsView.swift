@@ -64,7 +64,7 @@ private struct GeneralSettings: View {
                 Toggle("Open at login", isOn: $state.launchAtLogin)
                 Toggle("Check for updates", isOn: $state.checkForUpdates)
             } footer: {
-                footnote("Once a day, Flickbar asks GitHub for the latest version number. It sends nothing else.")
+                footnote("Once a day, Flickbar reads its update list from flickbar.github.io, sending only its version number. Updates are signed and checked before they install.")
             }
         }
         .formStyle(.grouped)
