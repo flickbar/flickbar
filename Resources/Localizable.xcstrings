@@ -404,6 +404,22 @@
         }
       }
     },
+    "Full Changelog": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "همه‌ی تغییرها"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Historique des versions"
+          }
+        }
+      }
+    },
     "Full Screen": {
       "localizations": {
         "fa": {
@@ -896,6 +912,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Aucune app"
+          }
+        }
+      }
+    },
+    "No notes for this version.": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "برای این نسخه یادداشتی نیست."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucune note pour cette version."
           }
         }
       }
@@ -2000,6 +2032,54 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bienvenue dans Flickbar"
+          }
+        }
+      }
+    },
+    "What's New": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تازه‌ها"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nouveautés"
+          }
+        }
+      }
+    },
+    "What's New in Flickbar %@": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تازه‌های Flickbar %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nouveautés de Flickbar %@"
+          }
+        }
+      }
+    },
+    "What's New…": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تازه‌ها…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nouveautés…"
           }
         }
       }

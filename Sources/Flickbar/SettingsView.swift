@@ -461,6 +461,7 @@ private struct AboutSettings: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.top, 4)
             HStack(spacing: 16) {
+                Button("What's New") { WhatsNew.open() }.buttonStyle(.link)
                 Link("Source Code", destination: URL(string: "https://github.com/flickbar/flickbar")!)
                 Link("Report an Issue", destination: URL(string: "https://github.com/flickbar/flickbar/issues")!)
             }

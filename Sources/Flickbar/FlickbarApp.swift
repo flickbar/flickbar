@@ -19,6 +19,7 @@ enum Main {
         // Static lets start lazily; read it now so it holds the language this run started in.
         _ = AppLanguage.atLaunch
         if CommandLine.arguments.contains(Tutorial.argument) { Tutorial.runPracticeApp() }
+        WhatsNew.showIfUpdated()
         FlickbarApp.main()
     }
 }
@@ -62,6 +63,7 @@ private struct MenuContent: View {
         }
         .keyboardShortcut(",")
         if state.isTrusted { Button("Gesture Tutorial…") { Tutorial.open() } }
+        Button("What's New…") { WhatsNew.open() }
         Button("Check for Updates…") {
             NSApp.activate()
             state.updater.checkForUpdates(nil)
