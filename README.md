@@ -180,7 +180,7 @@ To add a language or new text, run `scripts/update-strings.sh` and translate `Re
 
 ## Contributing
 
-Issues and pull requests are welcome. Flickbar is an independent project written from scratch and
+Issues and pull requests are welcome; see [CONTRIBUTING.md](CONTRIBUTING.md) to get started. Flickbar is an independent project written from scratch and
 isn't affiliated with any other window-management app. Contributions must be your own work: please
 don't submit code, assets or text copied from other apps or derived from decompiling them.
 
