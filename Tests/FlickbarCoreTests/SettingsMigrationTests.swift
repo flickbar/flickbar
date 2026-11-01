@@ -95,5 +95,6 @@ import Testing
         let log = Log()
         SettingsMigrator.run([step(log, 1), step(log, 2, legacyFlag: "migratedRestoreShortcut")], on: defaults)
         #expect(log.versions == [1, 2])
+        #expect(defaults.bool(forKey: "migratedRestoreShortcut"))
     }
 }

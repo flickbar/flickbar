@@ -24,7 +24,10 @@ public enum SettingsMigrator {
     public static func run(_ migrations: [SettingsMigration], on defaults: UserDefaults = .standard) {
         var current = defaults.integer(forKey: versionKey)
         for step in migrations.sorted(by: { $0.version < $1.version }) where step.version > current {
+            precondition(step.version > 0, "migration versions start at 1")
             if step.legacyFlag.map(defaults.bool(forKey:)) != true { step.apply(defaults) }
+            // Keep the old flag true so an older build after a downgrade doesn't run the step again.
+            if let flag = step.legacyFlag { defaults.set(true, forKey: flag) }
             defaults.set(step.version, forKey: versionKey)
             current = step.version
         }
