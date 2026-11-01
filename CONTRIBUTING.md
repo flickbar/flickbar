@@ -46,7 +46,8 @@ pointer for about a minute, so leave the Mac alone while it runs.
    e.g. `fix: ignore taps on the Dock (#42)`.
 6. If the change is something users would notice (a feature, a fix, a changed default), add a line under
    `## [Unreleased]` in [CHANGELOG.md](CHANGELOG.md), in the *Added*, *Changed* or *Fixed* group. Write it for
-   users, not developers: what they can now do, or what works better.
+   users, not developers: what they can now do, or what works better. Keep each entry to a single bullet line (the
+   app's What's New shows it line by line).
 7. Open the pull request against `main` and fill in the template, including `Closes #<issue>`.
 
 Pull requests are squash-merged. There's no automated CI, so please say in the description how you tested.

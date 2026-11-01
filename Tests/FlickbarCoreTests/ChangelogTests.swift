@@ -47,8 +47,12 @@ import Testing
     @Test func shippedChangelogHasEveryRelease() throws {
         let url = URL(filePath: #filePath).deletingLastPathComponent().appending(path: "../../CHANGELOG.md")
         let text = try String(contentsOf: url, encoding: .utf8)
-        for v in ["0.1.0", "0.2.0", "0.3.0", "0.4.0", "0.5.0", "0.6.0", "0.7.0", "0.7.1", "0.8.0", "0.9.0", "0.10.0", "0.11.0"] {
-            #expect(Changelog.section(for: v, in: text) != nil, "no notes for \(v)")
+        let versions = text.split(separator: "\n").filter { $0.hasPrefix("## [") }
+            .map { $0.dropFirst(4).prefix { $0 != "]" } }.filter { $0 != "Unreleased" }
+        #expect(versions.count >= 12)
+        #expect(versions.last == "0.1.0")
+        for v in versions {
+            #expect(Changelog.section(for: String(v), in: text) != nil, "no notes for \(v)")
         }
     }
 

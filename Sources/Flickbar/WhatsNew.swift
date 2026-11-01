@@ -22,6 +22,8 @@ enum WhatsNew {
     }
 
     /// Call first thing at launch: a new install is told apart from an update by having no saved settings yet.
+    /// shortcut: someone updating from before 0.10 who never saved a setting looks like a new install and misses
+    /// one What's New; fine while every 0.10+ install has Sparkle's keys saved.
     static func showIfUpdated() {
         let defaults = UserDefaults.standard
         let saved = defaults.persistentDomain(forName: Bundle.main.bundleIdentifier ?? "") ?? [:]
