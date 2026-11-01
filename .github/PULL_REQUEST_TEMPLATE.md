@@ -10,7 +10,7 @@ Closes #
 
 ## Checklist
 
-- [ ] This is my own work and not copied or derived from another app ([clean-room rule](../CONTRIBUTING.md#clean-room-rule))
+- [ ] This is my own work and not copied or derived from another app ([clean-room rule](https://github.com/flickbar/flickbar/blob/main/CONTRIBUTING.md#clean-room-rule))
 - [ ] `swift test` passes
 - [ ] New logic has tests, or I explained why not
 - [ ] User-visible text is in `Localizable.xcstrings`
