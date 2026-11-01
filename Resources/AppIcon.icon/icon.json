@@ -12,8 +12,8 @@
       "appearance": "dark",
       "value": {
         "linear-gradient": [
-          "srgb:0.16078,0.20000,0.46667,1.00000",
-          "srgb:0.05490,0.06667,0.20000,1.00000"
+          "srgb:0.29020,0.38824,0.83137,1.00000",
+          "srgb:0.14118,0.16863,0.50196,1.00000"
         ]
       }
     }
@@ -59,25 +59,55 @@
           "glass": false,
           "image-name": "desk.svg",
           "name": "desk",
-          "opacity-specializations": [
+          "opacity": 0.16,
+          "hidden-specializations": [
             {
-              "value": 0.16
+              "value": false
             },
             {
               "appearance": "tinted",
-              "value": 0.26
+              "value": true
             }
           ]
         }
       ],
-      "shadow": {
-        "kind": "neutral",
-        "opacity": 0.5
-      },
-      "translucency": {
-        "enabled": true,
-        "value": 0.4
-      }
+      "translucency-specializations": [
+        {
+          "value": {
+            "enabled": true,
+            "value": 0.4
+          }
+        },
+        {
+          "appearance": "dark",
+          "value": {
+            "enabled": false,
+            "value": 0
+          }
+        },
+        {
+          "appearance": "tinted",
+          "value": {
+            "enabled": false,
+            "value": 0
+          }
+        }
+      ],
+      "shadow-specializations": [
+        {
+          "value": {
+            "kind": "neutral",
+            "opacity": 0.5
+          }
+        },
+        {
+          "appearance": "tinted",
+          "value": {
+            "kind": "neutral",
+            "opacity": 1.0
+          }
+        }
+      ]
     }
   ],
   "supported-platforms": {
