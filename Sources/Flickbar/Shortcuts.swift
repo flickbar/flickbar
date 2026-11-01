@@ -26,8 +26,9 @@ enum Shortcuts {
     static func install() {
         for action in actions {
             KeyboardShortcuts.onKeyDown(for: name(action)) {
-                logger.debug("shortcut \(action.id, privacy: .public), focused window: \(AXWindow.focused() != nil, privacy: .public)")
-                guard let window = AXWindow.focused() else { return NSSound.beep() }
+                let window = AXWindow.focused()
+                logger.debug("shortcut \(action.id, privacy: .public), focused window: \(window != nil, privacy: .public)")
+                guard let window else { return NSSound.beep() }
                 WindowActions.run(action, on: window)
             }
         }
