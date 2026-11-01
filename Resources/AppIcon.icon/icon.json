@@ -1,10 +1,23 @@
 {
-  "fill": {
-    "linear-gradient": [
-      "srgb:0.35294,0.63529,1.00000,1.00000",
-      "srgb:0.22745,0.27843,0.83529,1.00000"
-    ]
-  },
+  "fill-specializations": [
+    {
+      "value": {
+        "linear-gradient": [
+          "srgb:0.35294,0.63529,1.00000,1.00000",
+          "srgb:0.22745,0.27843,0.83529,1.00000"
+        ]
+      }
+    },
+    {
+      "appearance": "dark",
+      "value": {
+        "linear-gradient": [
+          "srgb:0.16078,0.20000,0.46667,1.00000",
+          "srgb:0.05490,0.06667,0.20000,1.00000"
+        ]
+      }
+    }
+  ],
   "groups": [
     {
       "layers": [
@@ -32,13 +45,29 @@
           "glass": true,
           "image-name": "ghost.svg",
           "name": "ghost",
-          "opacity": 0.55
+          "opacity-specializations": [
+            {
+              "value": 0.55
+            },
+            {
+              "appearance": "tinted",
+              "value": 1.0
+            }
+          ]
         },
         {
           "glass": false,
           "image-name": "desk.svg",
           "name": "desk",
-          "opacity": 0.16
+          "opacity-specializations": [
+            {
+              "value": 0.16
+            },
+            {
+              "appearance": "tinted",
+              "value": 0.26
+            }
+          ]
         }
       ],
       "shadow": {
