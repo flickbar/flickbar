@@ -1,14 +1,17 @@
 #!/bin/sh
-# Publishes a release from main: ./scripts/release.sh 0.6.0 notes.md
-# notes.md holds what's new; the install steps and checksum are added here. Bumps the version, builds a
+# Publishes a release from main: ./scripts/release.sh 0.12.0
+# What's new comes from the version's section in CHANGELOG.md (rename ## [Unreleased] to ## [0.12.0] - <date>
+# and commit first); the install steps and checksum are added here. Bumps the version, builds a
 # universal app, tags, creates the GitHub release, publishes the Sparkle feed (appcast.xml on flickbar.github.io)
 # and points the Homebrew cask (flickbar/homebrew-tap) at it.
 set -eu
 cd "$(dirname "$0")/.."
 VERSION="$1"
-NOTES="$2"
 [ -z "$(git status --porcelain)" ] || { echo "Commit or stash your changes first." >&2; exit 1; }
 [ "$(git branch --show-current)" = main ] || { echo "Release from main." >&2; exit 1; }
+mkdir -p build/release
+NOTES=build/release/changes.md
+./scripts/changelog-section.sh "$VERSION" > "$NOTES"
 
 sed -i '' "s/VERSION=\"\${VERSION:-[0-9.]*}\"/VERSION=\"\${VERSION:-$VERSION}\"/" scripts/bundle.sh
 sed -i '' "s/Flickbar-[0-9.]*[0-9]\.zip/Flickbar-$VERSION.zip/" README.md
@@ -90,6 +93,7 @@ cat > "$SITE/appcast.xml" <<EOF
       <sparkle:shortVersionString>$VERSION</sparkle:shortVersionString>
       <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
       <link>https://github.com/flickbar/flickbar/releases/tag/v$VERSION</link>
+      <sparkle:fullReleaseNotesLink>https://github.com/flickbar/flickbar/blob/main/CHANGELOG.md</sparkle:fullReleaseNotesLink>
       <description sparkle:format="markdown"><![CDATA[$(cat "$NOTES")]]></description>
       <enclosure url="https://github.com/flickbar/flickbar/releases/download/v$VERSION/Flickbar-$VERSION.zip" $SIGNATURE type="application/octet-stream"/>
     </item>
