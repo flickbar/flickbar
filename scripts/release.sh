@@ -14,7 +14,7 @@ NOTES=build/release/changes.md
 ./scripts/changelog-section.sh "$VERSION" > "$NOTES"
 
 sed -i '' "s/VERSION=\"\${VERSION:-[0-9.]*}\"/VERSION=\"\${VERSION:-$VERSION}\"/" scripts/bundle.sh
-sed -i '' "s/Flickbar-[0-9.]*[0-9]\.zip/Flickbar-$VERSION.zip/" README.md
+sed -i '' "s/Flickbar-[0-9.]*[0-9]\.dmg/Flickbar-$VERSION.dmg/" README.md
 grep -q "VERSION:-$VERSION}" scripts/bundle.sh || { echo "Couldn't set the version in bundle.sh." >&2; exit 1; }
 # Skipped when re-running after a failure that came before anything was pushed.
 git diff --quiet || git commit -qam "Version $VERSION"
@@ -25,6 +25,8 @@ git diff --quiet || git commit -qam "Version $VERSION"
 # Never the personal Apple Development certificate: its name holds the developer's email.
 APP=build/release/Flickbar.app
 ZIP="build/release/Flickbar-$VERSION.zip"
+DMG="build/release/Flickbar-$VERSION.dmg"
+NOTARIZE=
 IDENTITY="$(security find-identity -v -p codesigning | awk '/"Developer ID Application/ { print $2; exit }')"
 if [ -n "$IDENTITY" ]; then
     xcrun notarytool history --keychain-profile flickbar-notary >/dev/null 2>&1 ||
@@ -37,6 +39,7 @@ if [ -n "$IDENTITY" ]; then
     # Stapling the ticket lets the app pass Gatekeeper offline too; zip again so the download has it.
     xcrun stapler staple "$APP"
     spctl --assess --type execute "$APP"
+    NOTARIZE=1
     OPEN="Open it."
 else
     IDENTITY="$(security find-identity -p codesigning | awk '/"Flickbar Release"/ { print $2; exit }')"
@@ -48,6 +51,17 @@ fi
 rm -f "$ZIP"
 ditto -c -k --keepParent "$APP" "$ZIP"
 SHA="$(shasum -a 256 "$ZIP" | cut -d' ' -f1)"
+# The disk image is for people downloading by hand; Sparkle and the Homebrew cask keep using the zip.
+./scripts/dmg.sh "$APP" "$DMG"
+codesign --force --sign "${IDENTITY:--}" ${NOTARIZE:+--timestamp} "$DMG"
+if [ -n "$NOTARIZE" ]; then
+    xcrun notarytool submit "$DMG" --keychain-profile flickbar-notary --wait | tee build/release/notary-dmg.log
+    grep -q "status: Accepted" build/release/notary-dmg.log || { echo "DMG notarization failed; see build/release/notary-dmg.log" >&2; exit 1; }
+    xcrun stapler staple "$DMG"
+fi
+# Finder shows the file with Flickbar's icon; it's an extended attribute, so it goes on after signing.
+swift scripts/set-file-icon.swift "$APP/Contents/Resources/AppIcon.icns" "$DMG"
+DMG_SHA="$(shasum -a 256 "$DMG" | cut -d' ' -f1)"
 TAPPED="$(gh repo view flickbar/homebrew-tap --json name >/dev/null 2>&1 && echo yes || true)"
 BREW="${TAPPED:+With [Homebrew](https://brew.sh): \`brew install --cask flickbar/tap/flickbar\` (or \`brew upgrade flickbar\`).
 
@@ -59,7 +73,7 @@ Or download}"
 
 ### Install
 
-${BREW:-Download} **Flickbar-$VERSION.zip** below, unzip it, and move **Flickbar.app** to Applications.
+${BREW:-Download} **Flickbar-$VERSION.dmg** below, open it and drag **Flickbar** to Applications.
 
 $OPEN Flickbar then asks for **Accessibility** access, which macOS requires for
 apps that arrange windows. If gestures stop working after an update, remove Flickbar from the Accessibility list
@@ -67,7 +81,7 @@ with **−** and add it again.
 
 Requires macOS 14 Sonoma or later and a trackpad. Universal (Apple silicon and Intel).
 
-SHA-256 of the zip: \`$SHA\`
+SHA-256: \`$DMG_SHA\` (dmg), \`$SHA\` (zip, used by in-app updates and Homebrew)
 EOF
 } > build/release/notes.md
 
@@ -104,7 +118,7 @@ xmllint --noout "$SITE/appcast.xml"
 git push -q
 git tag "v$VERSION"
 git push -q origin "v$VERSION"
-gh release create "v$VERSION" "$ZIP" --title "Flickbar $VERSION" --notes-file build/release/notes.md
+gh release create "v$VERSION" "$DMG" "$ZIP" --title "Flickbar $VERSION" --notes-file build/release/notes.md
 
 if [ -n "$TAPPED" ]; then
     TAP=build/homebrew-tap
