@@ -32,10 +32,17 @@ struct AXWindow {
         return point.y - frame.minY <= height ? candidate : nil
     }
 
-    /// The frontmost app's focused window, for keyboard shortcuts.
+    /// The frontmost app's focused window, for keyboard shortcuts. When Flickbar itself is frontmost (its Settings
+    /// window, where a shortcut was just recorded and gets tried out), the app whose window is right behind it.
     static func focused() -> AXWindow? {
-        guard let app = NSWorkspace.shared.frontmostApplication, app.processIdentifier != getpid() else { return nil }
-        let element = AXUIElementCreateApplication(app.processIdentifier)
+        let me = getpid()
+        var pid = NSWorkspace.shared.frontmostApplication?.processIdentifier
+        if pid == nil || pid == me {
+            let windows = CGWindowListCopyWindowInfo([.optionOnScreenOnly, .excludeDesktopElements], kCGNullWindowID) as? [[String: Any]] ?? []
+            pid = WindowOrder.frontmostOwner(in: windows, excluding: me)
+        }
+        guard let pid else { return nil }
+        let element = AXUIElementCreateApplication(pid)
         guard let window = element.element(kAXFocusedWindowAttribute),
               window.string(kAXSubroleAttribute) == kAXStandardWindowSubrole else { return nil }
         return AXWindow(element: window, app: element)

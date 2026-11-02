@@ -291,3 +291,20 @@ import Testing
         }
     }
 }
+
+@Suite struct WindowOrderTests {
+    private func window(_ pid: Int, layer: Int = 0) -> [String: Any] {
+        [kCGWindowOwnerPID as String: pid, kCGWindowLayer as String: layer]
+    }
+
+    @Test func skipsOwnWindowsAndOtherLayers() {
+        // Front to back: the menu bar, Flickbar's Settings, then the app behind it.
+        let list = [window(10, layer: 24), window(1), window(1), window(42), window(7)]
+        #expect(WindowOrder.frontmostOwner(in: list, excluding: 1) == 42)
+    }
+
+    @Test func noneWhenOnlyOwnWindows() {
+        #expect(WindowOrder.frontmostOwner(in: [window(1), window(5, layer: 25)], excluding: 1) == nil)
+        #expect(WindowOrder.frontmostOwner(in: [], excluding: 1) == nil)
+    }
+}
