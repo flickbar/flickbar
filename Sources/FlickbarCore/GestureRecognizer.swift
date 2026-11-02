@@ -5,8 +5,8 @@ public enum Stroke: Equatable, Sendable {
 }
 
 /// Turns a stream of two-finger scroll / magnify samples into a list of strokes.
-/// A gesture is one finger-down…finger-up sequence; each change of direction starts a new stroke,
-/// so "left then up" yields [.left, .up].
+/// Within one finger-down…finger-up sequence, strokes combine while they match a supported gesture.
+/// Otherwise, the latest stroke replaces the pending gesture; reversing left to right yields right.
 public struct GestureRecognizer: Sendable {
     /// Points of travel along one axis before a swipe stroke counts.
     public var swipeThreshold: CGFloat = 40
@@ -56,7 +56,8 @@ public struct GestureRecognizer: Sendable {
         zoom = 0
         // Continuing in the same direction extends the current stroke instead of repeating it.
         if strokes.last == stroke { return nil }
-        strokes.append(stroke)
+        let next = strokes + [stroke]
+        strokes = TrackpadGesture(strokes: next) == nil ? [stroke] : next
         return stroke
     }
 }

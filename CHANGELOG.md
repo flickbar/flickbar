@@ -6,6 +6,10 @@ All notable changes to Flickbar are listed here. The format follows
 
 ## [Unreleased]
 
+### Added
+
+- **Adjust gestures before lifting your fingers.** Reversing a swipe replaces the pending gesture with the new direction. Perpendicular swipes combine into a quarter; if the sequence no longer matches a supported gesture, the latest stroke starts a new one.
+
 ## [1.0.0] - 2026-11-02
 
 ### Added
