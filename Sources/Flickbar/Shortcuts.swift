@@ -11,11 +11,8 @@ enum Shortcuts {
     static func name(_ action: WindowAction) -> KeyboardShortcuts.Name { KeyboardShortcuts.Name(action.id) }
 
     /// Before 0.9 the `minimize` action restored or minimized; move shortcuts and gestures set to it over to the
-    /// action that still does, once.
+    /// action that still does. Runs once, from `SettingsMigrations`.
     static func migratePreferences() {
-        let defaults = UserDefaults.standard
-        guard !defaults.bool(forKey: "migratedRestoreShortcut") else { return }
-        defaults.set(true, forKey: "migratedRestoreShortcut")
         GestureTap.gestureMap = GestureTap.gestureMap.mapValues { $0 == WindowAction.minimize.id ? WindowAction.restoreOrMinimize.id : $0 }
         let old = name(.minimize), new = name(.restoreOrMinimize)
         guard let shortcut = KeyboardShortcuts.getShortcut(for: old), KeyboardShortcuts.getShortcut(for: new) == nil else { return }
@@ -26,8 +23,9 @@ enum Shortcuts {
     static func install() {
         for action in actions {
             KeyboardShortcuts.onKeyDown(for: name(action)) {
-                logger.debug("shortcut \(action.id, privacy: .public), focused window: \(AXWindow.focused() != nil, privacy: .public)")
-                guard let window = AXWindow.focused() else { return NSSound.beep() }
+                let window = AXWindow.focused()
+                logger.debug("shortcut \(action.id, privacy: .public), focused window: \(window != nil, privacy: .public)")
+                guard let window else { return NSSound.beep() }
                 WindowActions.run(action, on: window)
             }
         }

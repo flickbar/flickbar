@@ -61,6 +61,25 @@ section is shown everywhere: as the GitHub release notes, in the update window, 
 commit, then run `./scripts/release.sh x.y.z`. It refuses to run without notes for that version; check them
 first with `./scripts/changelog-section.sh x.y.z`.
 
+## Stored preferences
+
+Users keep their settings across Sparkle updates, Homebrew upgrades and reinstalls, because they live in the
+app's defaults domain (`io.github.flickbar.Flickbar`, the bundle identifier) and in the `KeyboardShortcuts_*`
+keys the KeyboardShortcuts package writes there. Neither changes between releases, and nothing may reset them.
+
+**Never rename, remove or reinterpret a stored key without a migration.** To change how something is stored:
+
+1. Keep reading the old key until a migration has carried its value over.
+2. Append a `SettingsMigration` with the next version number to `SettingsMigrations.all`
+   (`Sources/Flickbar/SettingsMigrations.swift`). Steps run once, in order, at launch, and the version is kept
+   in `settingsSchemaVersion`. Never edit, reorder or renumber a step that has shipped.
+3. Make the step copy the value to the new key, then delete the old one, and leave anything it doesn't
+   understand alone.
+4. Put the data transformation in `FlickbarCore` where you can unit-test it, and add a test that starts from the
+   old shape (see `SettingsMigrationTests`).
+
+Use a throwaway defaults suite in tests and manual checks, never the real domain.
+
 ## Translations
 
 Flickbar speaks English, French and Persian. Run `scripts/update-strings.sh`, then edit

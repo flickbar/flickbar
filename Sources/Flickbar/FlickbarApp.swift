@@ -60,6 +60,11 @@ private struct MenuContent: View {
             // A menu bar app isn't active, so its Settings window would otherwise open behind other apps.
             NSApp.activate()
             openSettings()
+            // Showing the Settings window again focuses its first control, which on the Shortcuts tab starts
+            // recording a shortcut (and pauses all shortcuts) before the user has clicked anything.
+            // shortcut: SwiftUI's private window identifier; if it changes this silently stops applying, then use
+            // a Settings-window reference from the view instead.
+            NSApp.windows.first { $0.identifier?.rawValue == "com_apple_SwiftUI_Settings_window" }?.makeFirstResponder(nil)
         }
         .keyboardShortcut(",")
         if state.isTrusted { Button("Gesture Tutorial…") { Tutorial.open() } }
@@ -107,8 +112,7 @@ final class AppState {
         didSet { GestureTap.excludedApps = excludedApps }
     }
     var gestureMap: [String: String] = {
-        GestureTap.migratePreferences()
-        Shortcuts.migratePreferences()
+        SettingsMigrations.run()
         return GestureTap.gestureMap
     }() {
         didSet { GestureTap.gestureMap = gestureMap }
