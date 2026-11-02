@@ -90,9 +90,9 @@ brew install --cask flickbar/tap/flickbar
 
 Update later with `brew upgrade --cask flickbar`, or choose *Check for Updates…* in Flickbar's menu.
 
-**Or download:** get **Flickbar-1.0.0.zip** from the
-[latest release](https://github.com/flickbar/flickbar/releases/latest), unzip it and move
-**Flickbar.app** to Applications, then open it. Releases are signed with a Developer ID and notarized by
+**Or download:** get **Flickbar-1.0.0.dmg** from the
+[latest release](https://github.com/flickbar/flickbar/releases/latest), open it and drag
+**Flickbar** to Applications, then open it from there. Releases are signed with a Developer ID and notarized by
 Apple, so macOS opens them without a warning.
 
 **Or build from source:**
