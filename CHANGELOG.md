@@ -6,6 +6,11 @@ All notable changes to Flickbar are listed here. The format follows
 
 ## [Unreleased]
 
+### Fixed
+
+- **Removing a keyboard shortcut works.** The ✕ next to a shortcut now deletes it, and so does pressing Escape or Delete while recording.
+- **Shortcuts that couldn't be set now say why.** If a combination needs ⌘, ⌃ or ⌥, is already used for another action, belongs to macOS or is held by another app, the field explains it. Your previous shortcut stays, and clicking the field lets you try another one. Combinations like ⌃⇧W and ⌘⌃R are saved.
+
 ## [1.0.0] - 2026-11-01
 
 ### Added

@@ -1,6 +1,5 @@
 import AppKit
 import FlickbarCore
-import KeyboardShortcuts
 import SwiftUI
 import UniformTypeIdentifiers
 
@@ -350,7 +349,7 @@ private struct ShortcutSettings: View {
     private func recorders(_ actions: [WindowAction]) -> some View {
         ForEach(actions, id: \.id) { action in
             LabeledContent {
-                KeyboardShortcuts.Recorder(for: Shortcuts.name(action))
+                ShortcutRecorder(action: action)
             } label: {
                 HStack(spacing: 10) {
                     LayoutGlyph(action: action, width: 30)
