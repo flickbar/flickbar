@@ -7,3 +7,6 @@ build/
 .vscode/
 *.dmg
 *.zip
+*.p12
+*.p8
+*.cer
