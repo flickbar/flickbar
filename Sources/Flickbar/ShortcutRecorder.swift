@@ -29,17 +29,25 @@ struct ShortcutRecorder: View {
                         .frame(minWidth: 110)
                 }
                 .overlay { if isRecording { RoundedRectangle(cornerRadius: 6).stroke(Color.accentColor, lineWidth: 2) } }
+                .accessibilityLabel(ActionNames.title(action))
+                .accessibilityValue(label)
                 if shortcut != nil {
                     Button(action: clear) { Image(systemName: "xmark.circle.fill").foregroundStyle(.secondary) }
                         .buttonStyle(.plain)
-                        .accessibilityLabel("Clear Shortcut")
+                        .accessibilityLabel(String(format: String(localized: "Clear %@ Shortcut"), ActionNames.title(action)))
                 }
             }
             if let rejection {
                 Text(rejection).font(.caption).foregroundStyle(.red).multilineTextAlignment(.trailing)
+            } else if isRecording {
+                // Keys macOS or another app has taken never reach Flickbar, so this is the only way to explain them.
+                Text("If nothing happens, macOS or another app is using those keys.")
+                    .font(.caption).foregroundStyle(.secondary).multilineTextAlignment(.trailing)
             }
         }
         .onDisappear(perform: stop)
+        // Starting from VoiceOver or the keyboard sends no click, so the other recorders are stopped this way.
+        .onReceive(NotificationCenter.default.publisher(for: Self.didStart)) { if $0.object as? String != action.id { stop() } }
         .onReceive(NotificationCenter.default.publisher(for: NSApplication.didResignActiveNotification)) { _ in stop() }
     }
 
@@ -48,8 +56,11 @@ struct ShortcutRecorder: View {
         return isRecording ? String(localized: "Press Shortcut") : String(localized: "Record Shortcut")
     }
 
+    private static let didStart = Notification.Name("ShortcutRecorderDidStart")
+
     private func start() {
         stop()
+        NotificationCenter.default.post(name: Self.didStart, object: action.id)
         rejection = nil
         isRecording = true
         KeyboardShortcuts.isEnabled = false // a held global shortcut would otherwise swallow the key before we see it
@@ -89,6 +100,7 @@ struct ShortcutRecorder: View {
 
     private func reject(_ reason: String) {
         rejection = reason
+        AccessibilityNotification.Announcement(reason).post()
         stop()
     }
 
@@ -97,8 +109,11 @@ struct ShortcutRecorder: View {
 
     /// Why `shortcut` can't be used for `action`, or nil when it can.
     private static func problem(with shortcut: KeyboardShortcuts.Shortcut, modifiers: NSEvent.ModifierFlags, isFunctionKey: Bool, for action: WindowAction) -> String? {
-        if modifiers.isDisjoint(with: [.command, .control, .option]) && !isFunctionKey {
-            return String(localized: "Hold ⌘, ⌃ or ⌥ together with the key.")
+        switch ShortcutRule.problem(command: modifiers.contains(.command), control: modifiers.contains(.control),
+                                    option: modifiers.contains(.option), isFunctionKey: isFunctionKey) {
+        case .needsModifier: return String(localized: "Hold ⌃ or ⌥ together with the key.")
+        case .commandOnly: return String(localized: "⌘ alone would replace this shortcut in every app. Add ⌃ or ⌥.")
+        case nil: break
         }
         if let other = Shortcuts.actions.first(where: { $0.id != action.id && KeyboardShortcuts.getShortcut(for: Shortcuts.name($0)) == shortcut }) {
             return String(format: String(localized: "Already used for %@."), ActionNames.title(other))

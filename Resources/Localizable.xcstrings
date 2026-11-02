@@ -257,18 +257,18 @@
         }
       }
     },
-    "Clear Shortcut": {
+    "Clear %@ Shortcut": {
       "localizations": {
         "fa": {
           "stringUnit": {
             "state": "translated",
-            "value": "پاک کردن میان‌بر"
+            "value": "پاک کردن میان‌بر «%@»"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Effacer le raccourci"
+            "value": "Effacer le raccourci « %@ »"
           }
         }
       }
@@ -612,6 +612,22 @@
         }
       }
     },
+    "Hold ⌃ or ⌥ together with the key.": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "همراه کلید، ⌃ یا ⌥ را نگه دارید."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maintenez ⌃ ou ⌥ avec la touche."
+          }
+        }
+      }
+    },
     "Hold ⌘ and swipe to move a window to another display": {
       "localizations": {
         "fa": {
@@ -628,18 +644,18 @@
         }
       }
     },
-    "Hold ⌘, ⌃ or ⌥ together with the key.": {
+    "If nothing happens, macOS or another app is using those keys.": {
       "localizations": {
         "fa": {
           "stringUnit": {
             "state": "translated",
-            "value": "همراه کلید، یکی از ⌘ یا ⌃ یا ⌥ را نگه دارید."
+            "value": "اگر اتفاقی نیفتاد، macOS یا برنامه‌ای دیگر از این کلیدها استفاده می‌کند."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Maintenez ⌘, ⌃ ou ⌥ avec la touche."
+            "value": "Si rien ne se passe, macOS ou une autre app utilise ces touches."
           }
         }
       }
@@ -2336,6 +2352,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "⌃ Contrôle"
+          }
+        }
+      }
+    },
+    "⌘ alone would replace this shortcut in every app. Add ⌃ or ⌥.": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌘ به‌تنهایی این میان‌بر را در همه‌ی برنامه‌ها جایگزین می‌کند. ⌃ یا ⌥ را هم اضافه کنید."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌘ seul remplacerait ce raccourci dans toutes les apps. Ajoutez ⌃ ou ⌥."
           }
         }
       }
