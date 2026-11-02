@@ -110,8 +110,7 @@ final class AppState {
         didSet { GestureTap.excludedApps = excludedApps }
     }
     var gestureMap: [String: String] = {
-        GestureTap.migratePreferences()
-        Shortcuts.migratePreferences()
+        SettingsMigrations.run()
         return GestureTap.gestureMap
     }() {
         didSet { GestureTap.gestureMap = gestureMap }
