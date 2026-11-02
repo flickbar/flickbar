@@ -10,6 +10,7 @@ Closes #
 
 ## Checklist
 
+- [ ] I opened an issue first (only docs typos are exempt) and the PR says `Closes #`
 - [ ] This is my own work and not copied or derived from another app ([clean-room rule](https://github.com/flickbar/flickbar/blob/main/CONTRIBUTING.md#clean-room-rule))
 - [ ] `swift test` passes
 - [ ] New logic has tests, or I explained why not

@@ -1,5 +1,8 @@
 blank_issues_enabled: false
 contact_links:
+  - name: Question or idea
+    url: https://github.com/flickbar/flickbar/discussions
+    about: Ask questions and talk through ideas before opening an issue.
   - name: Security vulnerability
     url: https://github.com/flickbar/flickbar/security/advisories/new
     about: Report security problems privately, not in a public issue.
