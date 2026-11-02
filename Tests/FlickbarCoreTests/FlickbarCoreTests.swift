@@ -308,3 +308,14 @@ import Testing
         #expect(WindowOrder.frontmostOwner(in: [], excluding: 1) == nil)
     }
 }
+
+@Suite struct ShortcutRuleTests {
+    @Test func modifiers() {
+        #expect(ShortcutRule.problem(command: false, control: false, option: false, isFunctionKey: false) == .needsModifier)
+        #expect(ShortcutRule.problem(command: true, control: false, option: false, isFunctionKey: false) == .commandOnly)
+        #expect(ShortcutRule.problem(command: true, control: true, option: false, isFunctionKey: false) == nil) // ⌘⌃R
+        #expect(ShortcutRule.problem(command: false, control: true, option: false, isFunctionKey: false) == nil) // ⌃⇧W
+        #expect(ShortcutRule.problem(command: false, control: false, option: true, isFunctionKey: false) == nil)
+        #expect(ShortcutRule.problem(command: false, control: false, option: false, isFunctionKey: true) == nil) // F5
+    }
+}

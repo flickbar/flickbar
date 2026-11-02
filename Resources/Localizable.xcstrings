@@ -113,6 +113,38 @@
         }
       }
     },
+    "Already used for %@.": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "قبلاً برای «%@» استفاده شده است."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Déjà utilisé pour « %@ »."
+          }
+        }
+      }
+    },
+    "Another app is already using this shortcut.": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "برنامه‌ای دیگر از قبل از این میان‌بر استفاده می‌کند."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une autre app utilise déjà ce raccourci."
+          }
+        }
+      }
+    },
     "App": {
       "localizations": {
         "fa": {
@@ -221,6 +253,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Rechercher les mises à jour"
+          }
+        }
+      }
+    },
+    "Clear %@ Shortcut": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "پاک کردن میان‌بر «%@»"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Effacer le raccourci « %@ »"
           }
         }
       }
@@ -564,6 +612,22 @@
         }
       }
     },
+    "Hold ⌃ or ⌥ together with the key.": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "همراه کلید، ⌃ یا ⌥ را نگه دارید."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maintenez ⌃ ou ⌥ avec la touche."
+          }
+        }
+      }
+    },
     "Hold ⌘ and swipe to move a window to another display": {
       "localizations": {
         "fa": {
@@ -576,6 +640,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Maintenez ⌘ et balayez pour déplacer une fenêtre vers un autre moniteur"
+          }
+        }
+      }
+    },
+    "If nothing happens, macOS or another app is using those keys.": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اگر اتفاقی نیفتاد، macOS یا برنامه‌ای دیگر از این کلیدها استفاده می‌کند."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Si rien ne se passe, macOS ou une autre app utilise ces touches."
           }
         }
       }
@@ -1188,6 +1268,22 @@
         }
       }
     },
+    "Press Shortcut": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "میان‌بر را فشار دهید"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Appuyez sur le raccourci"
+          }
+        }
+      }
+    },
     "Put the pointer on this window's title bar and use two fingers on the trackpad.": {
       "localizations": {
         "fa": {
@@ -1264,6 +1360,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Quitter le didacticiel"
+          }
+        }
+      }
+    },
+    "Record Shortcut": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ثبت میان‌بر"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enregistrer un raccourci"
           }
         }
       }
@@ -1844,6 +1956,22 @@
         }
       }
     },
+    "That key can't be used.": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "این کلید قابل استفاده نیست."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cette touche ne peut pas être utilisée."
+          }
+        }
+      }
+    },
     "Thirds": {
       "localizations": {
         "fa": {
@@ -2180,6 +2308,22 @@
         }
       }
     },
+    "macOS already uses %@. Change it in System Settings › Keyboard › Keyboard Shortcuts.": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS از قبل از %@ استفاده می‌کند. آن را در تنظیمات سیستم › صفحه‌کلید › میان‌برهای صفحه‌کلید تغییر دهید."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS utilise déjà %@. Modifiez-le dans Réglages Système › Clavier › Raccourcis clavier."
+          }
+        }
+      }
+    },
     "macOS requires this permission for apps that arrange windows. Flickbar uses it only to move and resize the windows you gesture on. It doesn't collect or send any data.": {
       "localizations": {
         "fa": {
@@ -2208,6 +2352,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "⌃ Contrôle"
+          }
+        }
+      }
+    },
+    "⌘ alone would replace this shortcut in every app. Add ⌃ or ⌥.": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌘ به‌تنهایی این میان‌بر را در همه‌ی برنامه‌ها جایگزین می‌کند. ⌃ یا ⌥ را هم اضافه کنید."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌘ seul remplacerait ce raccourci dans toutes les apps. Ajoutez ⌃ ou ⌥."
           }
         }
       }
