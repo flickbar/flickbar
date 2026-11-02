@@ -6,9 +6,22 @@ All notable changes to Flickbar are listed here. The format follows
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-11-01
+
 ### Added
 
 - **What's New.** After an update, Flickbar shows what changed in the new version. Open it again any time with *What's New…* in the menu or in *Settings → About*.
+- **Dark, Clear and Tinted icons.** The app icon now has versions for macOS's Dark, Clear and Tinted looks, made to stay easy to see on dark wallpapers and in the Dock.
+
+### Changed
+
+- **Your settings are kept safe across updates.** Flickbar now keeps track of how its settings are stored, so future updates carry your gestures, shortcuts and options over.
+
+### Fixed
+
+- **Recording a keyboard shortcut works again.** Clicking a shortcut field and pressing keys now records them. On macOS 27, nothing was saved before.
+- **Settings no longer opens already recording.** Reopening Settings from the menu used to leave the first shortcut field waiting for keys, with all Flickbar shortcuts paused.
+- **Shortcuts work while a Flickbar window is in front.** Pressing a shortcut in Settings used to only beep; it now moves the window behind it.
 
 ## [0.11.0] - 2026-10-30
 
@@ -123,7 +136,8 @@ All notable changes to Flickbar are listed here. The format follows
 - **Gestures:** swipe left/right for halves, swipe sideways then up/down for quarters, swipe up to fill the screen, swipe down to restore or minimize, two-finger double-tap to center, pinch out for full screen, pinch in to close, and hold ⌘ while swiping to move a window to another display.
 - Settings let you turn each gesture on or off, add space between windows, and keep gestures off in specific apps.
 
-[Unreleased]: https://github.com/flickbar/flickbar/compare/v0.11.0...HEAD
+[Unreleased]: https://github.com/flickbar/flickbar/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/flickbar/flickbar/compare/v0.11.0...v1.0.0
 [0.11.0]: https://github.com/flickbar/flickbar/compare/v0.10.0...v0.11.0
 [0.10.0]: https://github.com/flickbar/flickbar/compare/v0.9.0...v0.10.0
 [0.9.0]: https://github.com/flickbar/flickbar/compare/v0.8.0...v0.9.0
