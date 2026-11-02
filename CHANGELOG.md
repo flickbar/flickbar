@@ -19,7 +19,7 @@ All notable changes to Flickbar are listed here. The format follows
 
 ### Fixed
 
-- **Recording a keyboard shortcut works on macOS 26 and later.** Clicking a shortcut field and pressing keys now records them. Before, nothing was saved.
+- **Recording a keyboard shortcut works again.** Clicking a shortcut field and pressing keys now records them. On macOS 27, nothing was saved before.
 - **Settings no longer opens already recording.** Reopening Settings from the menu used to leave the first shortcut field waiting for keys, with all Flickbar shortcuts paused.
 - **Shortcuts work while a Flickbar window is in front.** Pressing a shortcut in Settings used to only beep; it now moves the window behind it.
 
