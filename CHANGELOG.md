@@ -6,6 +6,10 @@ All notable changes to Flickbar are listed here. The format follows
 
 ## [Unreleased]
 
+### Added
+
+- **Website and support links.** *Settings → About* now links to Flickbar's website, and to a page where you can support Flickbar if you'd like to.
+
 ### Fixed
 
 - **Removing a keyboard shortcut works.** The ✕ next to a shortcut now deletes it, and so does pressing Escape or Delete while recording.
