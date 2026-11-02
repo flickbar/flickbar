@@ -461,12 +461,16 @@ private struct AboutSettings: View {
                 .padding(.top, 4)
             HStack(spacing: 16) {
                 Button("What's New") { WhatsNew.open() }.buttonStyle(.link)
+                Link("Website", destination: URL(string: "https://flickbar.github.io")!)
                 Link("Source Code", destination: URL(string: "https://github.com/flickbar/flickbar")!)
                 Link("Report an Issue", destination: URL(string: "https://github.com/flickbar/flickbar/issues")!)
             }
             .padding(.top, 4)
             Text("Made by [Parsa Kamalipour](https://github.com/benymaxparsa)")
                 .padding(.top, 8)
+            Link(destination: URL(string: "https://buymeacoffee.com/parsakamalipour")!) {
+                Label("Support Flickbar", systemImage: "heart")
+            }
             Text("Free and open source under the GNU GPL v3.")
                 .font(.caption)
                 .foregroundStyle(.secondary)

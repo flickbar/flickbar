@@ -1780,6 +1780,22 @@
         }
       }
     },
+    "Support Flickbar": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حمایت از Flickbar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Soutenir Flickbar"
+          }
+        }
+      }
+    },
     "Swipe Down": {
       "localizations": {
         "fa": {
@@ -2144,6 +2160,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Version %@"
+          }
+        }
+      }
+    },
+    "Website": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "وب‌سایت"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Site web"
           }
         }
       }
