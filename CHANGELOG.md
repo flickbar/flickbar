@@ -6,21 +6,13 @@ All notable changes to Flickbar are listed here. The format follows
 
 ## [Unreleased]
 
-### Added
-
-- **Website and support links.** *Settings → About* now links to Flickbar's website, and to a page where you can support Flickbar if you'd like to.
-
-### Fixed
-
-- **Removing a keyboard shortcut works.** The ✕ next to a shortcut now deletes it, and so does pressing Escape or Delete while recording.
-- **Shortcuts that couldn't be set now say why.** If a combination needs ⌃ or ⌥, is already used for another action, belongs to macOS or is held by another app, the field explains it. Your previous shortcut stays, and clicking the field lets you try another one. Combinations like ⌃⇧W and ⌘⌃R are saved. ⌘ alone (such as ⌘Q) is no longer accepted, since it would take over that key in every app.
-
-## [1.0.0] - 2026-11-01
+## [1.0.0] - 2026-11-02
 
 ### Added
 
 - **What's New.** After an update, Flickbar shows what changed in the new version. Open it again any time with *What's New…* in the menu or in *Settings → About*.
 - **Dark, Clear and Tinted icons.** The app icon now has versions for macOS's Dark, Clear and Tinted looks, made to stay easy to see on dark wallpapers and in the Dock.
+- **Website and support links.** *Settings → About* now links to Flickbar's website, and to a page where you can support Flickbar if you'd like to.
 
 ### Changed
 
@@ -31,6 +23,8 @@ All notable changes to Flickbar are listed here. The format follows
 - **Recording a keyboard shortcut works again.** Clicking a shortcut field and pressing keys now records them. On macOS 27, nothing was saved before.
 - **Settings no longer opens already recording.** Reopening Settings from the menu used to leave the first shortcut field waiting for keys, with all Flickbar shortcuts paused.
 - **Shortcuts work while a Flickbar window is in front.** Pressing a shortcut in Settings used to only beep; it now moves the window behind it.
+- **Removing a keyboard shortcut works.** The ✕ next to a shortcut now deletes it, and so does pressing Escape or Delete while recording.
+- **Shortcuts that couldn't be set now say why.** If a combination needs ⌃ or ⌥, is already used for another action, belongs to macOS or is held by another app, the field explains it. Your previous shortcut stays, and clicking the field lets you try another one. Combinations like ⌃⇧W and ⌘⌃R are saved. ⌘ alone (such as ⌘Q) is no longer accepted, since it would take over that key in every app.
 
 ## [0.11.0] - 2026-10-30
 
