@@ -26,6 +26,8 @@ ditto Resources/KeyboardShortcuts "$APP/Contents/Resources/KeyboardShortcuts_Key
 # Translations: the String Catalog (edit with Xcode, or scripts/update-strings.sh for new text) becomes one
 # .lproj folder per language.
 xcrun xcstringstool compile Resources/Localizable.xcstrings -o "$APP/Contents/Resources"
+# What's New shows this version's section.
+cp CHANGELOG.md "$APP/Contents/Resources/"
 # Sparkle's framework, found by the rpath set in Package.swift.
 mkdir -p "$APP/Contents/Frameworks"
 ditto "$(dirname "$BIN")/Sparkle.framework" "$APP/Contents/Frameworks/Sparkle.framework"

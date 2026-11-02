@@ -14,3 +14,4 @@ Closes #
 - [ ] `swift test` passes
 - [ ] New logic has tests, or I explained why not
 - [ ] User-visible text is in `Localizable.xcstrings`
+- [ ] User-facing changes have a line under `## [Unreleased]` in `CHANGELOG.md`

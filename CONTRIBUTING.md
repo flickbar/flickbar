@@ -44,9 +44,22 @@ pointer for about a minute, so leave the Mac alone while it runs.
 4. Run `swift test`, and try the change in the built app.
 5. Write [Conventional Commit](https://www.conventionalcommits.org) messages that mention the issue,
    e.g. `fix: ignore taps on the Dock (#42)`.
-6. Open the pull request against `main` and fill in the template, including `Closes #<issue>`.
+6. If the change is something users would notice (a feature, a fix, a changed default), add a line under
+   `## [Unreleased]` in [CHANGELOG.md](CHANGELOG.md), in the *Added*, *Changed* or *Fixed* group. Write it for
+   users, not developers: what they can now do, or what works better. Keep each entry to a single bullet line (the
+   app's What's New shows it line by line).
+7. Open the pull request against `main` and fill in the template, including `Closes #<issue>`.
 
 Pull requests are squash-merged. There's no automated CI, so please say in the description how you tested.
+
+## Changelog and releases
+
+[CHANGELOG.md](CHANGELOG.md) follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Each version's
+section is shown everywhere: as the GitHub release notes, in the update window, and in the app's *What's New*
+(shown once after an update, and from the menu or *Settings → About*). To release, rename `## [Unreleased]` to
+`## [x.y.z] - YYYY-MM-DD`, add a new empty `## [Unreleased]` above it, update the compare links at the bottom,
+commit, then run `./scripts/release.sh x.y.z`. It refuses to run without notes for that version; check them
+first with `./scripts/changelog-section.sh x.y.z`.
 
 ## Stored preferences
 
