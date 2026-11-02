@@ -12,6 +12,7 @@ All notable changes to Flickbar are listed here. The format follows
 
 - **What's New.** After an update, Flickbar shows what changed in the new version. Open it again any time with *What's New…* in the menu or in *Settings → About*.
 - **Dark, Clear and Tinted icons.** The app icon now has versions for macOS's Dark, Clear and Tinted looks, made to stay easy to see on dark wallpapers and in the Dock.
+- **A proper installer download.** Downloading Flickbar now gets you a disk image: open it and drag Flickbar to Applications.
 - **Website and support links.** *Settings → About* now links to Flickbar's website, and to a page where you can support Flickbar if you'd like to.
 
 ### Changed

@@ -19,6 +19,7 @@ hdiutil create -quiet -volname Flickbar -srcfolder "$WORK/src" -fs HFS+ -format 
 # A Flickbar volume that's already mounted would take the name Finder looks the window up by.
 [ ! -e /Volumes/Flickbar ] || { echo "Eject the mounted Flickbar disk image first." >&2; exit 1; }
 MNT="$(hdiutil attach -readwrite -noverify -noautoopen "$WORK/rw.dmg" | awk -F'\t' '/\/Volumes\// { print $NF }')"
+[ -n "$MNT" ] || { echo "Couldn't mount the disk image." >&2; exit 1; }
 # Finder needs a moment to notice the new disk.
 sleep 2
 
@@ -47,6 +48,7 @@ end tell
 EOF
 # Finder writes the layout to .DS_Store on its own schedule; ejecting before then loses it.
 i=0; while [ ! -s "$MNT/.DS_Store" ] && [ $i -lt 30 ]; do sleep 1; i=$((i+1)); done
+[ -s "$MNT/.DS_Store" ] || { echo "Finder didn't save the window layout; the disk image would be unstyled." >&2; exit 1; }
 sleep 2
 
 # The disk's own icon in the window title, sidebar and desktop (hdiutil and Finder's layout step both drop it, so it goes in last).

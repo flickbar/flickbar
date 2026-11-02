@@ -2,4 +2,5 @@
 // It lives in an extended attribute, so browsers drop it on download; the mounted disk keeps .VolumeIcon.icns.
 import AppKit
 let args = CommandLine.arguments
-guard NSWorkspace.shared.setIcon(NSImage(contentsOfFile: args[1]), forFile: args[2]) else { fatalError("couldn't set the icon") }
+// A nil image would clear the icon and still report success.
+guard let icon = NSImage(contentsOfFile: args[1]), NSWorkspace.shared.setIcon(icon, forFile: args[2]) else { fatalError("couldn't set the icon") }

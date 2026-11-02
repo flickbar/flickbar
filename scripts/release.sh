@@ -58,6 +58,7 @@ if [ -n "$NOTARIZE" ]; then
     xcrun notarytool submit "$DMG" --keychain-profile flickbar-notary --wait | tee build/release/notary-dmg.log
     grep -q "status: Accepted" build/release/notary-dmg.log || { echo "DMG notarization failed; see build/release/notary-dmg.log" >&2; exit 1; }
     xcrun stapler staple "$DMG"
+    spctl --assess --type open --context context:primary-signature "$DMG"
 fi
 # Finder shows the file with Flickbar's icon; it's an extended attribute, so it goes on after signing.
 swift scripts/set-file-icon.swift "$APP/Contents/Resources/AppIcon.icns" "$DMG"
