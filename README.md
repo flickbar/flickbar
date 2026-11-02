@@ -57,6 +57,10 @@ Every action can also have a keyboard shortcut, set in *Settings → Shortcuts* 
 Flickbar doesn't take over keys you already use). Shortcuts act on the frontmost window; repeating a
 half or Fill Screen shortcut cycles through thirds, just like repeating the swipe.
 
+A shortcut needs ⌃ or ⌥ (⌘ alone would take over that key in every app). If a combination can't be used,
+the field says why: another Flickbar action, macOS or another app already has it. Click ✕, or press Escape
+while recording, to remove a shortcut.
+
 ## Settings
 
 Open **Settings…** from the menu bar icon (or press ⌘, while it's open) to:
