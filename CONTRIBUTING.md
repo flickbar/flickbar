@@ -3,7 +3,9 @@
 Thanks for helping! Bug reports, ideas, translations and code are all welcome.
 
 By taking part you agree to follow the [Code of Conduct](CODE_OF_CONDUCT.md). Security problems go through
-[SECURITY.md](SECURITY.md), not public issues.
+[SECURITY.md](SECURITY.md), not public issues. Questions and half-formed ideas belong in
+[Discussions](https://github.com/flickbar/flickbar/discussions); user-visible changes are listed in the
+[changelog](CHANGELOG.md).
 
 ## Clean-room rule
 
@@ -38,7 +40,7 @@ pointer for about a minute, so leave the Mac alone while it runs.
 
 ## Sending a pull request
 
-1. Open or pick an issue first so we can agree on the approach, especially for new features.
+1. **Every pull request needs an issue first**, so we can agree on the approach. The only exception is a typo in the docs.
 2. Fork, then branch from `main`: `fix/<issue>-short-name` or `feat/<issue>-short-name`.
 3. Keep the change focused: one issue per pull request, with tests for new logic in `FlickbarCore`.
 4. Run `swift test`, and try the change in the built app.
@@ -50,7 +52,7 @@ pointer for about a minute, so leave the Mac alone while it runs.
    app's What's New shows it line by line).
 7. Open the pull request against `main` and fill in the template, including `Closes #<issue>`.
 
-Pull requests are squash-merged. There's no automated CI, so please say in the description how you tested.
+Pull requests are squash-merged. CI runs `swift test` on every pull request; please also say in the description what you tried in the built app.
 
 ## Changelog and releases
 
