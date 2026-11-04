@@ -27,8 +27,10 @@ import Testing
         #expect(r.strokes == [.right])
     }
 
-    @Test func twoStrokeQuarter() {
+    @Test(arguments: [true, false])
+    func twoStrokeQuarter(followsDirectionChanges: Bool) {
         var r = GestureRecognizer()
+        r.followsDirectionChanges = followsDirectionChanges
         for _ in 0..<10 { r.addScroll(dx: -8, dy: 0) }
         for _ in 0..<10 { r.addScroll(dx: 0, dy: -8) }
         #expect(r.strokes == [.left, .up])
@@ -40,11 +42,19 @@ import Testing
         [CGVector(dx: 40, dy: 0), CGVector(dx: -40, dy: 0)],
         [CGVector(dx: 0, dy: -40), CGVector(dx: 0, dy: 40)],
         [CGVector(dx: 0, dy: 40), CGVector(dx: 0, dy: -40)],
-    ])
-    func reversingChoosesLatestDirection(movements: [CGVector]) {
+    ], [true, false])
+    func reversingFollowsSetting(movements: [CGVector], followsDirectionChanges: Bool) {
         var r = GestureRecognizer()
+        r.followsDirectionChanges = followsDirectionChanges
         for movement in movements {
             #expect(r.addScroll(dx: movement.dx, dy: movement.dy) != nil)
+        }
+        if !followsDirectionChanges {
+            #expect(r.strokes.count == 2)
+            #expect(ActionMap.action(for: r.strokes) == nil)
+            r.addScroll(dx: 0, dy: -40)
+            #expect(ActionMap.action(for: r.strokes) == nil)
+            return
         }
         let last = movements.last!
         var fresh = GestureRecognizer()
@@ -82,6 +92,21 @@ import Testing
         for _ in 0..<10 { r.addMagnification(-0.02) }
         #expect(r.strokes == [.pinchIn])
         #expect(ActionMap.action(for: r.strokes) == .close)
+    }
+
+    @Test(arguments: [0.12, -0.12], [true, false])
+    func reversedPinchCancels(magnification: CGFloat, followsDirectionChanges: Bool) {
+        var r = GestureRecognizer()
+        r.followsDirectionChanges = followsDirectionChanges
+        #expect(r.addMagnification(magnification) != nil)
+        #expect(r.addMagnification(-magnification) != nil)
+        #expect(r.strokes == (magnification > 0 ? [.pinchOut, .pinchIn] : [.pinchIn, .pinchOut]))
+        #expect(ActionMap.action(for: r.strokes) == nil)
+        #expect(ActionMap.action(for: r.strokes, onDock: true) == nil)
+        r.addMagnification(magnification)
+        #expect(ActionMap.action(for: r.strokes) == nil)
+        r.addScroll(dx: 40, dy: 0)
+        #expect(ActionMap.action(for: r.strokes) == nil)
     }
 
     @Test func resetClears() {

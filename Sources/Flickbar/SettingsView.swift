@@ -212,6 +212,7 @@ struct LayoutGlyph: View {
 private struct GestureSettings: View {
     @Bindable var state: AppState
     @AppStorage("anywhereModifier") private var anywhereModifier = "option"
+    @AppStorage("followsDirectionChanges") private var followsDirectionChanges = true
     @State private var onDock = false
     @Environment(\.layoutDirection) private var direction
 
@@ -281,6 +282,9 @@ private struct GestureSettings: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                 }
             }
+            Toggle("Follow swipe direction changes", isOn: $followsDirectionChanges)
+                .help("When on, swiping back changes the pending gesture. Turn off to cancel by swiping back. Esc always cancels; reversing a pinch always cancels.")
+                .frame(maxWidth: .infinity, alignment: .leading)
             Spacer(minLength: 0)
             HStack(alignment: .firstTextBaseline) {
                 if onDock {
@@ -294,7 +298,7 @@ private struct GestureSettings: View {
         }
         .padding(20)
         // Dock icons have fewer gestures; fit the window to them.
-        .frame(height: onDock ? 440 : 660)
+        .frame(height: onDock ? 470 : 690)
     }
 
     private func tile(_ title: String, _ symbol: String, @ViewBuilder glyph: () -> some View,

@@ -51,9 +51,11 @@ While your fingers are down, a highlight glides to where the window will land an
 confirms the gesture; it runs when you lift them. Press Esc first to cancel. Other scrolling and
 zooming passes through untouched.
 
-Adjust the pending gesture before lifting your fingers by swiping in the opposite direction.
+By default, adjust the pending gesture before lifting your fingers by swiping in the opposite direction.
 Perpendicular swipes combine into a quarter. If the sequence no longer matches a supported gesture,
-the latest stroke starts a new one. The action runs when you lift your fingers.
+the latest swipe stroke starts a new one. The action runs when you lift your fingers. To use
+swipe-back-to-cancel instead, turn off **Follow swipe direction changes** in **Settings → Gestures**.
+Esc still cancels in either mode. Reversing a pinch always cancels.
 
 ## Keyboard shortcuts
 

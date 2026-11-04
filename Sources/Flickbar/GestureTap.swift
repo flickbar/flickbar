@@ -167,6 +167,7 @@ final class GestureTap {
 
     private func begin(at point: CGPoint, flags: NSEvent.ModifierFlags) {
         recognizer.reset()
+        recognizer.followsDirectionChanges = UserDefaults.standard.object(forKey: "followsDirectionChanges") as? Bool ?? true
         swallowMomentum = false
         command = flags.contains(.command)
         escaped = false

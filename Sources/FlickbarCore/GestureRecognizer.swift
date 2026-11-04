@@ -6,7 +6,8 @@ public enum Stroke: Equatable, Sendable {
 
 /// Turns a stream of two-finger scroll / magnify samples into a list of strokes.
 /// Within one finger-down…finger-up sequence, strokes combine while they match a supported gesture.
-/// Otherwise, the latest stroke replaces the pending gesture; reversing left to right yields right.
+/// When direction changes are enabled, an unsupported swipe sequence restarts from its latest stroke.
+/// Reversed pinches always cancel.
 public struct GestureRecognizer: Sendable {
     /// Points of travel along one axis before a swipe stroke counts.
     public var swipeThreshold: CGFloat = 40
@@ -14,6 +15,8 @@ public struct GestureRecognizer: Sendable {
     public var axisRatio: CGFloat = 1.8
     /// Cumulative magnification before a pinch stroke counts.
     public var pinchThreshold: CGFloat = 0.12
+    /// Follow swipe direction changes; when off, unsupported sequences cancel instead.
+    public var followsDirectionChanges = true
 
     public private(set) var strokes: [Stroke] = []
     private var travel = CGVector.zero
@@ -57,7 +60,8 @@ public struct GestureRecognizer: Sendable {
         // Continuing in the same direction extends the current stroke instead of repeating it.
         if strokes.last == stroke { return nil }
         let next = strokes + [stroke]
-        strokes = TrackpadGesture(strokes: next) == nil ? [stroke] : next
+        let onlySwipes = next.allSatisfy { $0 != .pinchIn && $0 != .pinchOut }
+        strokes = followsDirectionChanges && onlySwipes && TrackpadGesture(strokes: next) == nil ? [stroke] : next
         return stroke
     }
 }
