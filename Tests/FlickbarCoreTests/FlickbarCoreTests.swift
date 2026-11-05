@@ -72,10 +72,10 @@ import Testing
         r.addScroll(dx: 0, dy: -40)
         #expect(ActionMap.action(for: r.strokes) == .snap(.topRight))
         r.addScroll(dx: 0, dy: 40)
-        #expect(r.strokes == [.down])
-        #expect(ActionMap.action(for: r.strokes) == .minimize)
+        #expect(r.strokes == [.right, .down])
+        #expect(ActionMap.action(for: r.strokes) == .snap(.bottomRight))
         r.addScroll(dx: -40, dy: 0)
-        #expect(ActionMap.action(for: r.strokes) == .snap(.bottomLeft))
+        #expect(r.strokes == [.left])
     }
 
     @Test func smallReversalKeepsPendingGesture() {

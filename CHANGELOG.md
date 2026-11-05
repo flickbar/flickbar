@@ -8,7 +8,7 @@ All notable changes to Flickbar are listed here. The format follows
 
 ### Added
 
-- **Adjust swipes before lifting your fingers.** By default, reversing a swipe selects the new direction; perpendicular swipes combine into a quarter, and unsupported swipe sequences restart from the latest stroke. Turn off **Follow swipe direction changes** in **Settings → Gestures** to use swipe-back-to-cancel. Esc still cancels in either mode, and reversing a pinch always cancels.
+- **Adjust swipes before lifting your fingers.** By default, reversing a swipe selects the new direction; perpendicular swipes combine into a quarter, and reversing the second swipe of a quarter swaps it (right, up, then down gives the bottom-right quarter). Any other swipe starts a new gesture. Turn off **Follow swipe direction changes** in **Settings → Gestures** to use swipe-back-to-cancel. Esc still cancels in either mode, and reversing a pinch always cancels.
 
 ## [1.0.0] - 2026-11-02
 
