@@ -10,6 +10,10 @@
 </p>
 
 <p align="center">
+  <a href="https://macbrowse.com"><img src="https://macbrowse.com/badge/listed-light.svg" alt="Listed on Mac Browse" width="220" height="48"></a>
+</p>
+
+<p align="center">
   <img src="docs/images/settings-gestures.png" width="420" alt="Flickbar's Gestures settings">
 </p>
 
