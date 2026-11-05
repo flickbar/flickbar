@@ -78,6 +78,22 @@ import Testing
         #expect(r.strokes == [.left])
     }
 
+    @Test func reversingSecondSwipeSwapsIt() {
+        var r = GestureRecognizer()
+        r.addScroll(dx: 0, dy: -40)
+        r.addScroll(dx: 40, dy: 0)
+        r.addScroll(dx: -40, dy: 0)
+        #expect(r.strokes == [.up, .left])
+        r.addScroll(dx: 0, dy: 40)
+        #expect(r.strokes == [.down])
+        var off = GestureRecognizer()
+        off.followsDirectionChanges = false
+        off.addScroll(dx: 40, dy: 0)
+        off.addScroll(dx: 0, dy: -40)
+        off.addScroll(dx: 0, dy: 40)
+        #expect(off.strokes == [.right, .up, .down])
+    }
+
     @Test func smallReversalKeepsPendingGesture() {
         var r = GestureRecognizer()
         r.addScroll(dx: -40, dy: 0)
