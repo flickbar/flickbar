@@ -436,6 +436,22 @@
         }
       }
     },
+    "Follow swipe direction changes": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "دنبال کردن تغییر جهت سوایپ"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suivre les changements de direction du balayage"
+          }
+        }
+      }
+    },
     "Free and open source under the GNU GPL v3.": {
       "localizations": {
         "fa": {
@@ -2240,6 +2256,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nouveautés…"
+          }
+        }
+      }
+    },
+    "When on, swiping back changes the pending gesture. Turn off to cancel by swiping back. Esc always cancels; reversing a pinch always cancels.": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "وقتی روشن است، سوایپ در جهت مخالف ژست در انتظار را تغییر می‌دهد. برای لغو با سوایپ برگشتی، این گزینه را خاموش کنید. Esc همیشه لغو می‌کند؛ تغییر جهت پینچ هم همیشه لغو می‌کند."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lorsque cette option est activée, un balayage en sens inverse modifie le geste en attente. Désactivez-la pour annuler en revenant en arrière. Échap annule toujours ; inverser un pincement annule toujours."
           }
         }
       }

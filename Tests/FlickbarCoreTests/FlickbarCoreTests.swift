@@ -27,12 +27,64 @@ import Testing
         #expect(r.strokes == [.right])
     }
 
-    @Test func twoStrokeQuarter() {
+    @Test(arguments: [true, false])
+    func twoStrokeQuarter(followsDirectionChanges: Bool) {
         var r = GestureRecognizer()
+        r.followsDirectionChanges = followsDirectionChanges
         for _ in 0..<10 { r.addScroll(dx: -8, dy: 0) }
         for _ in 0..<10 { r.addScroll(dx: 0, dy: -8) }
         #expect(r.strokes == [.left, .up])
         #expect(ActionMap.action(for: r.strokes) == .snap(.topLeft))
+    }
+
+    @Test(arguments: [
+        [CGVector(dx: -40, dy: 0), CGVector(dx: 40, dy: 0)],
+        [CGVector(dx: 40, dy: 0), CGVector(dx: -40, dy: 0)],
+        [CGVector(dx: 0, dy: -40), CGVector(dx: 0, dy: 40)],
+        [CGVector(dx: 0, dy: 40), CGVector(dx: 0, dy: -40)],
+    ], [true, false])
+    func reversingFollowsSetting(movements: [CGVector], followsDirectionChanges: Bool) {
+        var r = GestureRecognizer()
+        r.followsDirectionChanges = followsDirectionChanges
+        for movement in movements {
+            #expect(r.addScroll(dx: movement.dx, dy: movement.dy) != nil)
+        }
+        if !followsDirectionChanges {
+            #expect(r.strokes.count == 2)
+            #expect(ActionMap.action(for: r.strokes) == nil)
+            r.addScroll(dx: 0, dy: -40)
+            #expect(ActionMap.action(for: r.strokes) == nil)
+            return
+        }
+        let last = movements.last!
+        var fresh = GestureRecognizer()
+        fresh.addScroll(dx: last.dx, dy: last.dy)
+        #expect(r.strokes == fresh.strokes)
+        #expect(ActionMap.action(for: r.strokes) == ActionMap.action(for: fresh.strokes))
+    }
+
+    @Test func reversedSwipeCanFormQuarterAndStartNewGesture() {
+        var r = GestureRecognizer()
+        r.addScroll(dx: -40, dy: 0)
+        r.addScroll(dx: 40, dy: 0)
+        #expect(ActionMap.action(for: r.strokes, command: true) == .moveToDisplay(.right))
+        #expect(ActionMap.action(for: r.strokes, overrides: ["swipeRight": "center"]) == .snap(.center))
+        r.addScroll(dx: 0, dy: -40)
+        #expect(ActionMap.action(for: r.strokes) == .snap(.topRight))
+        r.addScroll(dx: 0, dy: 40)
+        #expect(r.strokes == [.down])
+        #expect(ActionMap.action(for: r.strokes) == .minimize)
+        r.addScroll(dx: -40, dy: 0)
+        #expect(ActionMap.action(for: r.strokes) == .snap(.bottomLeft))
+    }
+
+    @Test func smallReversalKeepsPendingGesture() {
+        var r = GestureRecognizer()
+        r.addScroll(dx: -40, dy: 0)
+        #expect(r.addScroll(dx: 39, dy: 0) == nil)
+        #expect(r.strokes == [.left])
+        #expect(r.addScroll(dx: 1, dy: 0) == .right)
+        #expect(r.strokes == [.right])
     }
 
     @Test func pinch() {
@@ -40,6 +92,21 @@ import Testing
         for _ in 0..<10 { r.addMagnification(-0.02) }
         #expect(r.strokes == [.pinchIn])
         #expect(ActionMap.action(for: r.strokes) == .close)
+    }
+
+    @Test(arguments: [0.12, -0.12], [true, false])
+    func reversedPinchCancels(magnification: CGFloat, followsDirectionChanges: Bool) {
+        var r = GestureRecognizer()
+        r.followsDirectionChanges = followsDirectionChanges
+        #expect(r.addMagnification(magnification) != nil)
+        #expect(r.addMagnification(-magnification) != nil)
+        #expect(r.strokes == (magnification > 0 ? [.pinchOut, .pinchIn] : [.pinchIn, .pinchOut]))
+        #expect(ActionMap.action(for: r.strokes) == nil)
+        #expect(ActionMap.action(for: r.strokes, onDock: true) == nil)
+        r.addMagnification(magnification)
+        #expect(ActionMap.action(for: r.strokes) == nil)
+        r.addScroll(dx: 40, dy: 0)
+        #expect(ActionMap.action(for: r.strokes) == nil)
     }
 
     @Test func resetClears() {
