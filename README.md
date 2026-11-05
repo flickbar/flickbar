@@ -52,9 +52,10 @@ confirms the gesture; it runs when you lift them. Press Esc first to cancel. Oth
 zooming passes through untouched.
 
 By default, adjust the pending gesture before lifting your fingers by swiping in the opposite direction.
-Perpendicular swipes combine into a quarter. If the sequence no longer matches a supported gesture,
-the latest swipe stroke starts a new one. The action runs when you lift your fingers. To use
-swipe-back-to-cancel instead, turn off **Follow swipe direction changes** in **Settings → Gestures**.
+Perpendicular swipes combine into a quarter, and reversing the second swipe swaps it: right, up, then
+down gives the bottom-right quarter. Any other swipe starts a new gesture. The action runs when you lift
+your fingers. To use swipe-back-to-cancel instead, turn off **Follow swipe direction changes** in
+**Settings → Gestures**.
 Esc still cancels in either mode. Reversing a pinch always cancels.
 
 ## Keyboard shortcuts

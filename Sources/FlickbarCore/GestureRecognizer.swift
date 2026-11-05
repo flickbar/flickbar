@@ -6,7 +6,7 @@ public enum Stroke: Equatable, Sendable {
 
 /// Turns a stream of two-finger scroll / magnify samples into a list of strokes.
 /// Within one finger-down…finger-up sequence, strokes combine while they match a supported gesture.
-/// When direction changes are enabled, an unsupported swipe sequence restarts from its latest stroke.
+/// When direction changes are enabled, an unsupported swipe sequence swaps its last stroke, or restarts from it.
 /// Reversed pinches always cancel.
 public struct GestureRecognizer: Sendable {
     /// Points of travel along one axis before a swipe stroke counts.
@@ -61,7 +61,13 @@ public struct GestureRecognizer: Sendable {
         if strokes.last == stroke { return nil }
         let next = strokes + [stroke]
         let onlySwipes = next.allSatisfy { $0 != .pinchIn && $0 != .pinchOut }
-        strokes = followsDirectionChanges && onlySwipes && TrackpadGesture(strokes: next) == nil ? [stroke] : next
+        if followsDirectionChanges && onlySwipes && TrackpadGesture(strokes: next) == nil {
+            // Swap the latest stroke first ([right, up] + down → [right, down]); otherwise start over.
+            let swapped = Array(strokes.dropLast()) + [stroke]
+            strokes = TrackpadGesture(strokes: swapped) != nil ? swapped : [stroke]
+        } else {
+            strokes = next
+        }
         return stroke
     }
 }
