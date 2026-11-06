@@ -6,7 +6,7 @@
 
 <p align="center">
   Snap, resize and move macOS windows with trackpad gestures on their title bars.<br>
-  Free and open source. <a href="https://flickbar.github.io/">Website</a>. Made by <a href="https://github.com/benymaxparsa">Parsa Kamalipour</a>.
+  Free and open source. <a href="https://flickbar.parsakp.com/">Website</a>. Made by <a href="https://github.com/benymaxparsa">Parsa Kamalipour</a>.
 </p>
 
 <p align="center">
@@ -147,7 +147,7 @@ the Accessibility list (the **−** button) and add it again, or set up a signin
 ## Privacy
 
 Flickbar collects no data. It makes no network connections unless you turn on *Check for updates* in
-Settings, or choose *Check for Updates…*; then it reads its update feed from flickbar.github.io (once a day
+Settings, or choose *Check for Updates…*; then it reads its update feed from flickbar.parsakp.com (once a day
 when the setting is on), sending only its version number. Updates come from GitHub and install only if their
 signature matches the key built into Flickbar. It uses Accessibility access only to find the window or Dock icon under the pointer and
 act on it when you gesture or press a shortcut. Settings stay in its local preferences.
@@ -167,7 +167,7 @@ act on it when you gesture or press a shortcut. Settings stay in its local prefe
   further movement into steps across the grid.
 - macOS won't let an app reach its own windows through the Accessibility API, so the tutorial's practice
   window runs in a second copy of Flickbar (`--practice`), which the main copy tells about each gesture.
-- Updates come through [Sparkle](https://sparkle-project.org): a signed feed at flickbar.github.io lists the
+- Updates come through [Sparkle](https://sparkle-project.org): a signed feed at flickbar.parsakp.com lists the
   latest release, and an update installs only if its EdDSA signature matches the key in Flickbar's Info.plist.
 
 The gesture logic in `FlickbarCore` has no AppKit dependencies and is fully unit-tested; the app layer

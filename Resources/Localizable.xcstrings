@@ -1172,18 +1172,18 @@
         }
       }
     },
-    "Once a day, Flickbar reads its update list from flickbar.github.io, sending only its version number. Updates are signed and checked before they install.": {
+    "Once a day, Flickbar reads its update list from flickbar.parsakp.com, sending only its version number. Updates are signed and checked before they install.": {
       "localizations": {
         "fa": {
           "stringUnit": {
             "state": "translated",
-            "value": "روزی یک بار، Flickbar فهرست به‌روزرسانی‌ها را از flickbar.github.io می‌گیرد و فقط شماره‌ی نسخه‌اش را می‌فرستد. به‌روزرسانی‌ها امضا شده‌اند و پیش از نصب بررسی می‌شوند."
+            "value": "روزی یک بار، Flickbar فهرست به‌روزرسانی‌ها را از flickbar.parsakp.com می‌گیرد و فقط شماره‌ی نسخه‌اش را می‌فرستد. به‌روزرسانی‌ها امضا شده‌اند و پیش از نصب بررسی می‌شوند."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Une fois par jour, Flickbar lit sa liste de mises à jour sur flickbar.github.io en n’envoyant que son numéro de version. Les mises à jour sont signées et vérifiées avant leur installation."
+            "value": "Une fois par jour, Flickbar lit sa liste de mises à jour sur flickbar.parsakp.com en n’envoyant que son numéro de version. Les mises à jour sont signées et vérifiées avant leur installation."
           }
         }
       }

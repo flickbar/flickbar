@@ -80,7 +80,7 @@ private struct GeneralSettings: View {
                 Toggle("Open at login", isOn: $state.launchAtLogin)
                 Toggle("Check for updates", isOn: $state.checkForUpdates)
             } footer: {
-                Text("Once a day, Flickbar reads its update list from flickbar.github.io, sending only its version number. Updates are signed and checked before they install.").footnote()
+                Text("Once a day, Flickbar reads its update list from flickbar.parsakp.com, sending only its version number. Updates are signed and checked before they install.").footnote()
             }
         }
         .formStyle(.grouped)
@@ -465,7 +465,7 @@ private struct AboutSettings: View {
                 .padding(.top, 4)
             HStack(spacing: 16) {
                 Button("What's New") { WhatsNew.open() }.buttonStyle(.link)
-                Link("Website", destination: URL(string: "https://flickbar.github.io")!)
+                Link("Website", destination: URL(string: "https://flickbar.parsakp.com")!)
                 Link("Source Code", destination: URL(string: "https://github.com/flickbar/flickbar")!)
                 Link("Report an Issue", destination: URL(string: "https://github.com/flickbar/flickbar/issues")!)
             }

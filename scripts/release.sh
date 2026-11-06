@@ -2,7 +2,7 @@
 # Publishes a release from main: ./scripts/release.sh 0.12.0
 # What's new comes from the version's section in CHANGELOG.md (rename ## [Unreleased] to ## [0.12.0] - <date>
 # and commit first); the install steps and checksum are added here. Bumps the version, builds a
-# universal app, tags, creates the GitHub release, publishes the Sparkle feed (appcast.xml on flickbar.github.io)
+# universal app, tags, creates the GitHub release, publishes the Sparkle feed (appcast.xml on flickbar.parsakp.com)
 # and points the Homebrew cask (flickbar/homebrew-tap) at it.
 set -eu
 cd "$(dirname "$0")/.."
@@ -100,7 +100,7 @@ cat > "$SITE/appcast.xml" <<EOF
 <rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle">
   <channel>
     <title>Flickbar</title>
-    <link>https://flickbar.github.io/</link>
+    <link>https://flickbar.parsakp.com/</link>
     <item>
       <title>Flickbar $VERSION</title>
       <pubDate>$(LC_ALL=C date -u "+%a, %d %b %Y %H:%M:%S +0000")</pubDate>

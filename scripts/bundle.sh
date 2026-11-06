@@ -52,7 +52,7 @@ cat > "$APP/Contents/Info.plist" <<EOF
     <key>CFBundleVersion</key><string>$VERSION</string>
     <key>LSMinimumSystemVersion</key><string>14.0</string>
     <key>LSUIElement</key><true/>
-    <key>SUFeedURL</key><string>https://flickbar.github.io/appcast.xml</string>
+    <key>SUFeedURL</key><string>https://flickbar.parsakp.com/appcast.xml</string>
     <key>SUPublicEDKey</key><string>BL9HHXETCB4Yv4FIyToTMN5W6Sb/DUA2nVcjX66/ZDc=</string>
     <key>SUEnableAutomaticChecks</key><false/>
     <key>NSHumanReadableCopyright</key><string>Copyright © 2026 Parsa Kamalipour and Flickbar contributors. GPL-3.0-or-later.</string>
