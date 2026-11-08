@@ -189,6 +189,17 @@ prefs.set(["swipeLeft": "rightThird"], forKey: "gestureMap")
 swipe(titlebar(), [(-120, 0)]);               expect("remapped gesture: swipe left → right ⅓", CGRect(x: main.maxX - thirdW, y: main.minY, width: thirdW, height: main.height))
 prefs.removeObject(forKey: "gestureMap")
 swipe(content(), [(-120, 0)], flags: .maskAlternate); expect("⌥ swipe on content → left half", CGRect(x: main.minX, y: main.minY, width: halfW, height: main.height))
+// Send Keys: ⌘→ (key 124, ⌘ 256) moves to the end of the line, then x (key 7) types there; a held ⌥ mustn't make it ≈.
+func documentText() -> String {
+    var err: NSDictionary?
+    return NSAppleScript(source: "tell application \"TextEdit\" to get text of document 1")!.executeAndReturnError(&err).stringValue ?? ""
+}
+prefs.set(["swipeLeft": "keys.124.256", "swipeRight": "keys.7.0"], forKey: "gestureMap")
+swipe(titlebar(), [(-120, 0)]); swipe(titlebar(), [(120, 0)]); usleep(300000)
+check("send keys: ⌘→ then x", documentText() == "Flickbar live testx", documentText())
+swipe(content(), [(120, 0)], flags: .maskAlternate); usleep(300000)
+check("send keys with ⌥ held types x, not ≈", documentText() == "Flickbar live testxx", documentText())
+prefs.removeObject(forKey: "gestureMap")
 setFrame(window, before); usleep(300000)
 // The grid starts on the full-height third under the pointer; one cell right, then up to the top half.
 let column = min(Int((titlebar().x - main.minX) / main.width * 3) + 1, 2)
