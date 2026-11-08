@@ -6,6 +6,8 @@ All notable changes to Flickbar are listed here. The format follows
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-11-08
+
 ### Added
 
 - **简体中文 and 繁體中文.** Flickbar now speaks Simplified and Traditional Chinese. It follows your Mac's language, or choose one in *Settings → General → Language*.
@@ -152,7 +154,8 @@ All notable changes to Flickbar are listed here. The format follows
 - **Gestures:** swipe left/right for halves, swipe sideways then up/down for quarters, swipe up to fill the screen, swipe down to restore or minimize, two-finger double-tap to center, pinch out for full screen, pinch in to close, and hold ⌘ while swiping to move a window to another display.
 - Settings let you turn each gesture on or off, add space between windows, and keep gestures off in specific apps.
 
-[Unreleased]: https://github.com/flickbar/flickbar/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/flickbar/flickbar/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/flickbar/flickbar/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/flickbar/flickbar/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/flickbar/flickbar/compare/v0.11.0...v1.0.0
 [0.11.0]: https://github.com/flickbar/flickbar/compare/v0.10.0...v0.11.0
