@@ -82,7 +82,7 @@ Open **Settings…** from the menu bar icon (or press ⌘, while it's open) to:
 - pick the key for gesturing anywhere in a window, and record keyboard shortcuts;
 - add space between snapped windows, and turn off the preview or haptic feedback;
 - keep gestures off in specific apps, and open Flickbar at login;
-- choose Flickbar's language (English, French or Persian) and turn on daily update checks.
+- choose Flickbar's language (English, French, Persian or Chinese) and turn on daily update checks.
 
 The menu bar icon can also turn gestures off for the app you're using.
 
@@ -186,8 +186,9 @@ Flickbar logs to the unified log under the subsystem `io.github.flickbar.Flickba
 
 ## Languages
 
-Flickbar speaks English, French and Persian (فارسی, laid out right to left). It follows your Mac's
-language, or pick one in Flickbar's *Settings → General → Language* (the same choice as
+Flickbar speaks English, French, Persian (فارسی, laid out right to left) and Chinese
+(简体中文 and 繁體中文). It follows your Mac's language, or pick one in Flickbar's
+*Settings → General → Language* (the same choice as
 *System Settings → General → Language & Region → Applications*).
 
 To add a language or new text, run `scripts/update-strings.sh` and translate `Resources/Localizable.xcstrings`
