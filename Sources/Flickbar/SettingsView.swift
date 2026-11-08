@@ -1,5 +1,7 @@
 import AppKit
+import Carbon.HIToolbox
 import FlickbarCore
+import KeyboardShortcuts
 import SwiftUI
 import UniformTypeIdentifiers
 
@@ -149,6 +151,7 @@ enum ActionNames {
         case .moveToDisplay(.up): String(localized: "Move to Display Above")
         case .moveToDisplay(.down): String(localized: "Move to Display Below")
         case .moveToDisplay: String(localized: "Move to Another Display")
+        case .sendKeys(let key, let modifiers): "\(KeyboardShortcuts.Shortcut(carbonKeyCode: key, carbonModifiers: modifiers))"
         }
     }
 
@@ -167,6 +170,7 @@ enum ActionNames {
         case .moveToDisplay(.right): "arrow.right"
         case .moveToDisplay(.up): "arrow.up"
         case .moveToDisplay(.down): "arrow.down"
+        case .sendKeys: "keyboard"
         default: "nosign"
         }
     }
@@ -214,7 +218,12 @@ private struct GestureSettings: View {
     @AppStorage("anywhereModifier") private var anywhereModifier = "option"
     @AppStorage("followsDirectionChanges") private var followsDirectionChanges = true
     @State private var onDock = false
+    /// The gesture whose key-combination popover is open.
+    @State private var recordingKeys: TrackpadGesture?
     @Environment(\.layoutDirection) private var direction
+
+    /// Menu tag for "Send Keys…"; not an action id, so it never reaches `gestureMap`.
+    private static let sendKeysTag = "sendKeys…"
 
     private static let titleBarGestures: [(TrackpadGesture, String, String)] = [
         (.swipeLeft, String(localized: "Swipe Left"), "arrow.left"),
@@ -317,9 +326,19 @@ private struct GestureSettings: View {
     }
 
     private func picker(_ gesture: TrackpadGesture) -> some View {
-        Picker("Action", selection: state.actionBinding(gesture, onDock: onDock)) {
+        let action = state.actionBinding(gesture, onDock: onDock)
+        let selection = Binding(get: { action.wrappedValue },
+                                set: { if $0 == Self.sendKeysTag { recordingKeys = gesture } else { action.wrappedValue = $0 } })
+        return Picker("Action", selection: selection) {
             ForEach(onDock ? [[.nextWindow] + ActionNames.appActions] : ActionNames.groups, id: \.self) { group in
                 ForEach(group, id: \.id) { Text(ActionNames.title($0)).tag($0.id) }
+                Divider()
+            }
+            if !onDock {
+                if let keys = WindowAction(id: action.wrappedValue), case .sendKeys = keys {
+                    Text(ActionNames.title(keys)).tag(keys.id)
+                }
+                Text("Send Keys…").tag(Self.sendKeysTag)
                 Divider()
             }
             Text("Nothing").tag(ActionMap.off)
@@ -327,6 +346,47 @@ private struct GestureSettings: View {
         .labelsHidden()
         .controlSize(.small)
         .frame(maxWidth: 160)
+        .popover(isPresented: Binding(get: { recordingKeys == gesture }, set: { if !$0 { recordingKeys = nil } })) {
+            KeyComboRecorder { recorded in
+                if let recorded { action.wrappedValue = recorded.id }
+                recordingKeys = nil
+            }
+        }
+    }
+}
+
+/// Waits for the key combination a gesture should press. Any key is taken as pressed, with or without modifiers;
+/// Esc alone cancels.
+private struct KeyComboRecorder: View {
+    let done: (WindowAction?) -> Void
+    @State private var monitor: Any?
+
+    var body: some View {
+        VStack(spacing: 6) {
+            Text("Press the keys to send").font(.headline)
+            Text("The gesture brings its window to the front and presses these keys. Esc cancels.")
+                .font(.caption).foregroundStyle(.secondary).multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .frame(width: 220)
+        .padding(16)
+        .onAppear {
+            AccessibilityNotification.Announcement(String(localized: "Press the keys to send")).post()
+            KeyboardShortcuts.isEnabled = false // a global shortcut would otherwise swallow its keys
+            monitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown) { event in
+                let modifiers = event.modifierFlags.intersection([.command, .control, .option, .shift])
+                if modifiers.isEmpty, event.keyCode == kVK_Escape { done(nil) }
+                else if let keys = KeyboardShortcuts.Shortcut(event: event) {
+                    done(.sendKeys(keyCode: keys.carbonKeyCode, modifiers: keys.carbonModifiers))
+                }
+                return nil
+            }
+        }
+        .onDisappear {
+            KeyboardShortcuts.isEnabled = true
+            if let monitor { NSEvent.removeMonitor(monitor) }
+            monitor = nil
+        }
     }
 }
 

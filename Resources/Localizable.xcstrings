@@ -2272,6 +2272,34 @@
         }
       }
     },
+    "Press the keys to send": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "کلیدهایی را که باید فرستاده شوند بزنید"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Appuyez sur les touches à envoyer"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "请按下要发送的按键"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "請按下要傳送的按鍵"
+          }
+        }
+      }
+    },
     "Put the pointer on this window's title bar and use two fingers on the trackpad.": {
       "localizations": {
         "fa": {
@@ -2856,6 +2884,34 @@
           "stringUnit": {
             "state": "translated",
             "value": "與系統相同"
+          }
+        }
+      }
+    },
+    "Send Keys…": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فرستادن کلیدها…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Envoyer des touches…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "发送按键…"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "傳送按鍵…"
           }
         }
       }
@@ -3500,6 +3556,34 @@
           "stringUnit": {
             "state": "translated",
             "value": "無法使用該按鍵。"
+          }
+        }
+      }
+    },
+    "The gesture brings its window to the front and presses these keys. Esc cancels.": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "این حرکت پنجره‌اش را جلو می‌آورد و این کلیدها را می‌زند. Esc لغو می‌کند."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le geste place sa fenêtre au premier plan et appuie sur ces touches. Échap pour annuler."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "该手势会将其窗口移到最前面并按下这些按键。按 Esc 取消。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "此手勢會將其視窗移到最前方並按下這些按鍵。按 Esc 取消。"
           }
         }
       }
