@@ -152,7 +152,15 @@ func expect(_ name: String, _ want: CGRect, tol: CGFloat = 2) {
 
 // Apps may refuse exact sizes (TextEdit can't shrink below its minimum); tolerances cover rounding only.
 let halfW = (main.width / 2).rounded(), halfH = (main.height / 2).rounded()
-UserDefaults(suiteName: "io.github.flickbar.Flickbar")!.set(0, forKey: "gap")
+// The test changes the app's real settings; put back what the user had when it ends (shortcut: a crash skips this).
+let settings = UserDefaults(suiteName: "io.github.flickbar.Flickbar")!
+let savedSettings = ["gestureMap", "excludedApps", "gap"].map { ($0, settings.object(forKey: $0)) }
+func restoreSettings() {
+    for (key, value) in savedSettings { if let value { settings.set(value, forKey: key) } else { settings.removeObject(forKey: key) } }
+    settings.synchronize()
+}
+atexit { restoreSettings() }
+settings.set(0, forKey: "gap")
 
 setFrame(window, start); usleep(300000)
 swipe(titlebar(), [(-120, 0)]);           expect("swipe left → left half", CGRect(x: main.minX, y: main.minY, width: halfW, height: main.height))
@@ -170,7 +178,7 @@ swipe(titlebar(), [(0, 120), (120, 0)]);  expect("down, right → bottom-right",
 swipe(titlebar(), [(0, 120)]); usleep(500000)
 check("swipe down (snapped) → minimize", bool(window, kAXMinimizedAttribute), "not minimized")
 AXUIElementSetAttributeValue(window, kAXMinimizedAttribute as CFString, kCFBooleanFalse); sleep(1)
-let prefs = UserDefaults(suiteName: "io.github.flickbar.Flickbar")!
+let prefs = settings
 prefs.set(["swipeDown": "restoreOrMinimize"], forKey: "gestureMap")
 swipe(titlebar(), [(0, 120)]);            expect("restore-or-minimize → restore", start)
 prefs.removeObject(forKey: "gestureMap")
@@ -203,10 +211,10 @@ if screens.count > 1 {
     expect("⌘ swipe back → same frame", before)
 }
 
-UserDefaults(suiteName: "io.github.flickbar.Flickbar")!.set(12, forKey: "gap")
+settings.set(12, forKey: "gap")
 swipe(titlebar(), [(-120, 0)])
 expect("gap 12 left half", CGRect(x: main.minX + 12, y: main.minY + 12, width: ((main.width - 36) / 2).rounded(), height: main.height - 24))
-UserDefaults(suiteName: "io.github.flickbar.Flickbar")!.set(0, forKey: "gap")
+settings.set(0, forKey: "gap")
 setFrame(window, start); usleep(300000)
 
 // Dock: the TextEdit icon (TextEdit is running, so it's in the Dock).
