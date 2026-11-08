@@ -6,7 +6,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@ listo"
+            "value": "Completado: %@"
           }
         },
         "fa": {
@@ -108,7 +108,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "El acceso de Accesibilidad está activado. Todo listo."
+            "value": "El acceso a Accesibilidad está activado. Todo listo."
           }
         },
         "fa": {
@@ -859,7 +859,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Flickbar necesita acceso de Accesibilidad"
+            "value": "Flickbar necesita acceso a Accesibilidad"
           }
         },
         "fa": {
@@ -1131,7 +1131,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hacer gestos en cualquier parte de una ventana mientras se mantiene pulsada la tecla"
+            "value": "Usar gestos en cualquier parte de una ventana manteniendo pulsada la tecla"
           }
         },
         "fa": {
@@ -1199,7 +1199,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Conceder acceso de Accesibilidad…"
+            "value": "Conceder acceso a Accesibilidad…"
           }
         },
         "fa": {
@@ -2049,7 +2049,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Necesita acceso de Accesibilidad para mover ventanas."
+            "value": "Necesita acceso a Accesibilidad para mover ventanas."
           }
         },
         "fa": {
@@ -2219,7 +2219,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Aún no se ha hecho"
+            "value": "Pendiente"
           }
         },
         "fa": {
@@ -3103,7 +3103,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Mantén dos dedos quietos hasta que aparezca una cuadrícula, muévete a una celda y levanta los dedos."
+            "value": "Mantén dos dedos apoyados hasta que aparezca una cuadrícula, desplázalos a una celda y levántalos."
           }
         },
         "fa": {
@@ -4055,7 +4055,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Desliza hacia abajo. La ventana vuelve enseguida."
+            "value": "Desliza hacia abajo. La ventana vuelve de inmediato."
           }
         },
         "fa": {
@@ -4259,7 +4259,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Vibrar el trackpad cuando se reconoce un gesto"
+            "value": "Respuesta háptica en el trackpad al reconocer un gesto"
           }
         },
         "fa": {
@@ -4905,7 +4905,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Si está activado, deslizar hacia atrás cambia el gesto pendiente. Desactívalo para cancelar al deslizar hacia atrás. Esc siempre cancela; invertir un pellizco también cancela siempre."
+            "value": "Si está activado, deslizar hacia atrás cambia el gesto pendiente. Desactívalo para cancelar al deslizar hacia atrás. Esc siempre cancela, y también invertir un pellizco."
           }
         },
         "fa": {
@@ -5177,7 +5177,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "macOS exige este permiso a las apps que organizan ventanas. Flickbar solo lo usa para mover y cambiar el tamaño de las ventanas sobre las que haces gestos. No recopila ni envía ningún dato."
+            "value": "macOS exige este permiso a las apps que organizan ventanas. Flickbar solo lo usa para mover y cambiar el tamaño de las ventanas en las que usas gestos. No recopila ni envía ningún dato."
           }
         },
         "fa": {
