@@ -10,7 +10,7 @@ import Testing
         #expect(WindowAction(id: "keys.36.0") == .sendKeys(keyCode: 36, modifiers: 0)) // plain Return
     }
 
-    @Test(arguments: ["keys", "keys.8", "keys.x.256", "keys.8.256.1", "keys.8.y"])
+    @Test(arguments: ["keys", "keys.8", "keys.x.256", "keys.8.256.1", "keys.8.y", "keys.-1.0", "keys.70000.0", "keys.8.-256"])
     func malformedIDsAreRejected(id: String) {
         #expect(WindowAction(id: id) == nil)
     }

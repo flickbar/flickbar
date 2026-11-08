@@ -73,8 +73,9 @@ public extension WindowAction {
 
     init?(id: String) {
         let parts = id.split(separator: ".")
-        if parts.count == 3, parts[0] == "keys", let key = Int(parts[1]), let modifiers = Int(parts[2]) {
-            self = .sendKeys(keyCode: key, modifiers: modifiers)
+        // Key codes must fit CGKeyCode (UInt16): an out-of-range one in edited preferences would trap when posted.
+        if parts.count == 3, parts[0] == "keys", let key = UInt16(parts[1]), let modifiers = UInt32(parts[2]) {
+            self = .sendKeys(keyCode: Int(key), modifiers: Int(modifiers))
             return
         }
         guard let action = Self.assignable.first(where: { $0.id == id }) else { return nil }

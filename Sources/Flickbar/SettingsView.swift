@@ -371,6 +371,7 @@ private struct KeyComboRecorder: View {
         .frame(width: 220)
         .padding(16)
         .onAppear {
+            guard monitor == nil else { return }
             AccessibilityNotification.Announcement(String(localized: "Press the keys to send")).post()
             KeyboardShortcuts.isEnabled = false // a global shortcut would otherwise swallow its keys
             monitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown) { event in
