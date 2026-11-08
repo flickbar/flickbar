@@ -4,15 +4,19 @@ import AppKit
 /// System Settings → General → Language & Region → Applications, so both stay in step.
 @MainActor
 enum AppLanguage {
-    static let all: [(code: String, name: String)] = [("en", "English"), ("fr", "Français"), ("fa", "فارسی")]
+    static let all: [(code: String, name: String)] = [("en", "English"), ("fr", "Français"), ("fa", "فارسی"),
+                                                         ("zh-Hans", "简体中文"), ("zh-Hant", "繁體中文")]
 
     /// The chosen language code, or "" to follow the system. System Settings may store a regional variant
-    /// ("fr-CA"); only the language matters here.
+    /// ("fr-CA", "zh-TW"); only the language matters here, plus the script for Chinese.
     static var chosen: String {
         get {
             let own = Bundle.main.bundleIdentifier.flatMap(UserDefaults.standard.persistentDomain(forName:))
-            let code = (own?["AppleLanguages"] as? [String])?.first ?? ""
-            return String(code.prefix { $0 != "-" && $0 != "_" })
+            let language = Locale.Language(identifier: (own?["AppleLanguages"] as? [String])?.first ?? "")
+            guard let code = language.languageCode?.identifier else { return "" }
+            guard code == "zh" else { return code }
+            // Simplified or Traditional; the full form fills in a script missing from "zh-TW" or "zh-CN".
+            return "zh-" + (Locale.Language(identifier: language.maximalIdentifier).script?.identifier ?? "Hans")
         }
         set {
             if newValue.isEmpty { UserDefaults.standard.removeObject(forKey: "AppleLanguages") }
