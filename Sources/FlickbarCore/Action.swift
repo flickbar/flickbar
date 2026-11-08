@@ -18,6 +18,14 @@ public enum WindowAction: Hashable, Sendable {
     case hideApp, quitApp
     /// Shows all of the app's windows (App Exposé).
     case appWindows
+    /// Brings the window forward and presses a key combination in it, in Carbon codes as KeyboardShortcuts stores them.
+    case sendKeys(keyCode: Int, modifiers: Int)
+}
+
+/// CGEvent flags for Carbon modifier bits (Carbon.HIToolbox's cmdKey, shiftKey, optionKey, controlKey).
+public func eventFlags(carbonModifiers: Int) -> CGEventFlags {
+    let bits: [(Int, CGEventFlags)] = [(1 << 8, .maskCommand), (1 << 9, .maskShift), (1 << 11, .maskAlternate), (1 << 12, .maskControl)]
+    return bits.reduce(into: []) { flags, bit in if carbonModifiers & bit.0 != 0 { flags.insert(bit.1) } }
 }
 
 public enum ActionMap {

@@ -67,10 +67,16 @@ public extension WindowAction {
         case .quitApp: "quitApp"
         case .appWindows: "appWindows"
         case .moveToDisplay(let direction): "moveToDisplay.\(direction)"
+        case .sendKeys(let key, let modifiers): "keys.\(key).\(modifiers)"
         }
     }
 
     init?(id: String) {
+        let parts = id.split(separator: ".")
+        if parts.count == 3, parts[0] == "keys", let key = Int(parts[1]), let modifiers = Int(parts[2]) {
+            self = .sendKeys(keyCode: key, modifiers: modifiers)
+            return
+        }
         guard let action = Self.assignable.first(where: { $0.id == id }) else { return nil }
         self = action
     }
