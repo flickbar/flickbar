@@ -3,6 +3,12 @@
   "strings": {
     "%@ done": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Completado: %@"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -12,7 +18,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@ : terminé"
+            "value": "%@ : terminé"
           }
         },
         "zh-Hans": {
@@ -31,6 +37,12 @@
     },
     "A quarter": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un cuarto"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -59,6 +71,12 @@
     },
     "About": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acerca de"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -87,6 +105,12 @@
     },
     "Accessibility access is on. You're ready to go.": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El acceso a Accesibilidad está activado. Todo listo."
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -115,6 +139,12 @@
     },
     "Action": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acción"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -143,6 +173,12 @@
     },
     "Add": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Añadir"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -171,6 +207,12 @@
     },
     "Add an app": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Añadir una app"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -199,6 +241,12 @@
     },
     "Already used for %@.": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ya se usa para «%@»."
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -208,7 +256,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Déjà utilisé pour « %@ »."
+            "value": "Déjà utilisé pour « %@ »."
           }
         },
         "zh-Hans": {
@@ -227,6 +275,12 @@
     },
     "Another app is already using this shortcut.": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otra app ya está usando este atajo."
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -255,6 +309,12 @@
     },
     "App": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -283,6 +343,12 @@
     },
     "Apps": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apps"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -311,6 +377,12 @@
     },
     "Bottom-Left Quarter": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cuarto inferior izquierdo"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -339,6 +411,12 @@
     },
     "Bottom-Right Quarter": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cuarto inferior derecho"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -367,6 +445,12 @@
     },
     "Center": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Centrar"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -395,6 +479,12 @@
     },
     "Check for Updates…": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buscar actualizaciones…"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -423,6 +513,12 @@
     },
     "Check for updates": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buscar actualizaciones"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -451,6 +547,12 @@
     },
     "Clear %@ Shortcut": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Borrar el atajo «%@»"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -460,7 +562,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Effacer le raccourci « %@ »"
+            "value": "Effacer le raccourci « %@ »"
           }
         },
         "zh-Hans": {
@@ -479,6 +581,12 @@
     },
     "Click + to choose an app.": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Haz clic en + para elegir una app."
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -507,6 +615,12 @@
     },
     "Click Open System Settings, then turn on Flickbar. If it's already on, select it, click − to remove it, and add it again.": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Haz clic en Abrir Ajustes del Sistema y activa Flickbar. Si ya está activado, selecciónalo, haz clic en − para quitarlo y vuelve a añadirlo."
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -516,7 +630,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Cliquez sur Ouvrir Réglages Système, puis activez Flickbar. S’il est déjà activé, sélectionnez-le, cliquez sur − pour le supprimer, puis ajoutez-le à nouveau."
+            "value": "Cliquez sur « Ouvrir Réglages Système », puis activez Flickbar. S’il est déjà activé, sélectionnez-le, cliquez sur − pour le supprimer, puis ajoutez-le de nouveau."
           }
         },
         "zh-Hans": {
@@ -535,6 +649,12 @@
     },
     "Close Window": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cerrar ventana"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -563,6 +683,12 @@
     },
     "Displays": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pantallas"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -591,6 +717,12 @@
     },
     "Done": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Listo"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -619,6 +751,12 @@
     },
     "Double-Tap": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tocar dos veces"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -647,6 +785,12 @@
     },
     "Fill Screen": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Llenar pantalla"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -675,6 +819,12 @@
     },
     "Fill the screen": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Llenar la pantalla"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -706,6 +856,12 @@
     },
     "Flickbar needs Accessibility access": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flickbar necesita acceso a Accesibilidad"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -734,6 +890,12 @@
     },
     "Flickbar, off": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flickbar, desactivado"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -762,6 +924,12 @@
     },
     "Follow swipe direction changes": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seguir los cambios de dirección del deslizamiento"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -790,6 +958,12 @@
     },
     "Free and open source under the GNU GPL v3.": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gratis y de código abierto bajo la licencia GNU GPL v3."
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -818,6 +992,12 @@
     },
     "Full Changelog": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Historial de cambios completo"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -846,6 +1026,12 @@
     },
     "Full Screen": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pantalla completa"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -874,6 +1060,12 @@
     },
     "General": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "General"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -902,6 +1094,12 @@
     },
     "Gesture Tutorial…": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tutorial de gestos…"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -930,6 +1128,12 @@
     },
     "Gesture anywhere in a window while holding": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usar gestos en cualquier parte de una ventana manteniendo pulsada la tecla"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -939,7 +1143,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Faire les gestes n’importe où dans une fenêtre en maintenant"
+            "value": "Utiliser les gestes n’importe où dans une fenêtre en maintenant"
           }
         },
         "zh-Hans": {
@@ -958,6 +1162,12 @@
     },
     "Gestures": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gestos"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -986,6 +1196,12 @@
     },
     "Grant Accessibility Access…": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conceder acceso a Accesibilidad…"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -1014,6 +1230,12 @@
     },
     "Grant Access…": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conceder acceso…"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -1042,6 +1264,12 @@
     },
     "Halves": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mitades"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -1070,6 +1298,12 @@
     },
     "Hide App": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ocultar app"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -1098,6 +1332,12 @@
     },
     "Hold ⌃ or ⌥ together with the key.": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mantén pulsada ⌃ o ⌥ junto con la tecla."
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -1126,6 +1366,12 @@
     },
     "Hold ⌘ and swipe to move a window to another display": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mantén pulsada ⌘ y desliza para mover una ventana a otra pantalla"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -1154,6 +1400,12 @@
     },
     "If nothing happens, macOS or another app is using those keys.": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Si no pasa nada, macOS u otra app está usando esas teclas."
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -1182,6 +1434,12 @@
     },
     "Language": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Idioma"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -1210,6 +1468,12 @@
     },
     "Large": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grande"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -1238,6 +1502,12 @@
     },
     "Later": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Más tarde"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -1266,6 +1536,12 @@
     },
     "Left Half": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mitad izquierda"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -1294,6 +1570,12 @@
     },
     "Left Third": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tercio izquierdo"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -1322,6 +1604,12 @@
     },
     "Left Two-Thirds": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dos tercios izquierdos"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -1331,7 +1619,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Deux tiers gauche"
+            "value": "Deux tiers à gauche"
           }
         },
         "zh-Hans": {
@@ -1350,6 +1638,12 @@
     },
     "Left half": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mitad izquierda"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -1378,6 +1672,12 @@
     },
     "Left, Then Down": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Izquierda y luego abajo"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -1406,6 +1706,12 @@
     },
     "Left, Then Up": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Izquierda y luego arriba"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -1434,6 +1740,12 @@
     },
     "Made by [Parsa Kamalipour](https://github.com/benymaxparsa)": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Creado por [Parsa Kamalipour](https://github.com/benymaxparsa)"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -1462,6 +1774,12 @@
     },
     "Medium": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mediano"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -1490,6 +1808,12 @@
     },
     "Middle Third": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tercio central"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -1518,6 +1842,12 @@
     },
     "Minimize": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minimizar"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -1546,6 +1876,12 @@
     },
     "Move to Another Display": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mover a otra pantalla"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -1574,6 +1910,12 @@
     },
     "Move to Display Above": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mover a la pantalla de arriba"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -1602,6 +1944,12 @@
     },
     "Move to Display Below": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mover a la pantalla de abajo"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -1630,6 +1978,12 @@
     },
     "Move to Display on the Left": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mover a la pantalla de la izquierda"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -1658,6 +2012,12 @@
     },
     "Move to Display on the Right": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mover a la pantalla de la derecha"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -1686,6 +2046,12 @@
     },
     "Needs Accessibility access to move windows.": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Necesita acceso a Accesibilidad para mover ventanas."
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -1695,7 +2061,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "A besoin de l’accès Accessibilité pour déplacer les fenêtres."
+            "value": "Nécessite l’accès Accessibilité pour déplacer les fenêtres."
           }
         },
         "zh-Hans": {
@@ -1714,6 +2080,12 @@
     },
     "Next Window of App": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Siguiente ventana de la app"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -1742,6 +2114,12 @@
     },
     "No Apps": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sin apps"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -1770,6 +2148,12 @@
     },
     "No notes for this version.": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No hay notas para esta versión."
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -1798,6 +2182,12 @@
     },
     "None": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ninguno"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -1826,6 +2216,12 @@
     },
     "Not done yet": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pendiente"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -1835,7 +2231,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Pas encore fait"
+            "value": "Pas encore terminé"
           }
         },
         "zh-Hans": {
@@ -1854,6 +2250,12 @@
     },
     "Not installed": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No instalada"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -1882,6 +2284,12 @@
     },
     "Nothing": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nada"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -1910,6 +2318,12 @@
     },
     "Off": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desactivado"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -1938,6 +2352,12 @@
     },
     "Off.": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desactivado."
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -1966,6 +2386,12 @@
     },
     "On a Window's Title Bar": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En la barra de título de una ventana"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -1994,6 +2420,12 @@
     },
     "On an App's Dock Icon": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En el icono de una app en el Dock"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -2022,6 +2454,12 @@
     },
     "On. Swipe on a window's title bar.": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activado. Desliza sobre la barra de título de una ventana."
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -2050,6 +2488,12 @@
     },
     "Once a day, Flickbar reads its update list from flickbar.parsakp.com, sending only its version number. Updates are signed and checked before they install.": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una vez al día, Flickbar lee su lista de actualizaciones de flickbar.parsakp.com y solo envía su número de versión. Las actualizaciones están firmadas y se verifican antes de instalarse."
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -2078,6 +2522,12 @@
     },
     "Open System Settings": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir Ajustes del Sistema"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -2106,6 +2556,12 @@
     },
     "Open at login": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir al iniciar sesión"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -2134,6 +2590,12 @@
     },
     "Pick a layout": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elige una disposición"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -2162,6 +2624,12 @@
     },
     "Pick from a grid": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elegir en una cuadrícula"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -2190,6 +2658,12 @@
     },
     "Pinch In": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pellizcar"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -2218,6 +2692,12 @@
     },
     "Pinch Out": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Separar los dedos"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -2246,6 +2726,12 @@
     },
     "Press Shortcut": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pulsa el atajo"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -2274,6 +2760,12 @@
     },
     "Press the keys to send": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pulsa las teclas que quieres enviar"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -2302,6 +2794,12 @@
     },
     "Put the pointer on this window's title bar and use two fingers on the trackpad.": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Coloca el puntero en la barra de título de esta ventana y usa dos dedos en el trackpad."
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -2330,6 +2828,12 @@
     },
     "Quarters": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cuartos"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -2358,6 +2862,12 @@
     },
     "Quit App": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Salir de la app"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -2386,6 +2896,12 @@
     },
     "Quit Flickbar": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Salir de Flickbar"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -2414,6 +2930,12 @@
     },
     "Quit Tutorial": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Salir del tutorial"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -2442,6 +2964,12 @@
     },
     "Record Shortcut": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grabar atajo"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -2470,6 +2998,12 @@
     },
     "Remove the selected apps": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quitar las apps seleccionadas"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -2498,6 +3032,12 @@
     },
     "Repeat a swipe to a half or Fill Screen to cycle through thirds. Press Esc before lifting your fingers to cancel.": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Repite un deslizamiento hacia una mitad o Llenar pantalla para recorrer los tercios. Pulsa Esc antes de levantar los dedos para cancelar."
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -2507,7 +3047,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Répétez un balayage vers une moitié ou Remplir l’écran pour passer par les tiers. Appuyez sur Échap avant de lever les doigts pour annuler."
+            "value": "Répétez un balayage vers une moitié ou vers « Remplir l’écran » pour parcourir les tiers. Appuyez sur Échap avant de lever les doigts pour annuler."
           }
         },
         "zh-Hans": {
@@ -2526,6 +3066,12 @@
     },
     "Report an Issue": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Informar de un problema"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -2554,6 +3100,12 @@
     },
     "Rest two fingers until a grid appears, move to a cell, then lift.": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mantén dos dedos apoyados hasta que aparezca una cuadrícula, desplázalos a una celda y levántalos."
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -2563,7 +3115,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Posez deux doigts jusqu’à ce qu’une grille apparaisse, allez sur une case, puis levez-les."
+            "value": "Posez deux doigts sans bouger jusqu’à ce qu’une grille apparaisse, déplacez-les sur une case, puis levez-les."
           }
         },
         "zh-Hans": {
@@ -2582,6 +3134,12 @@
     },
     "Restart Flickbar to use the new language.": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reinicia Flickbar para usar el nuevo idioma."
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -2610,6 +3168,12 @@
     },
     "Restart Now": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reiniciar ahora"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -2619,7 +3183,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Redémarrer"
+            "value": "Redémarrer maintenant"
           }
         },
         "zh-Hans": {
@@ -2638,6 +3202,12 @@
     },
     "Restore Defaults": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restaurar valores predeterminados"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -2666,6 +3236,12 @@
     },
     "Restore or Minimize": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restaurar o minimizar"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -2694,6 +3270,12 @@
     },
     "Right Half": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mitad derecha"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -2722,6 +3304,12 @@
     },
     "Right Third": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tercio derecho"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -2750,6 +3338,12 @@
     },
     "Right Two-Thirds": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dos tercios derechos"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -2759,7 +3353,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Deux tiers droit"
+            "value": "Deux tiers à droite"
           }
         },
         "zh-Hans": {
@@ -2778,6 +3372,12 @@
     },
     "Right half": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mitad derecha"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -2806,6 +3406,12 @@
     },
     "Right, Then Down": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Derecha y luego abajo"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -2834,6 +3440,12 @@
     },
     "Right, Then Up": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Derecha y luego arriba"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -2862,6 +3474,12 @@
     },
     "Same as System": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Igual que el sistema"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -2890,6 +3508,12 @@
     },
     "Send Keys…": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enviar teclas…"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -2899,7 +3523,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Envoyer des touches…"
+            "value": "Envoyer une combinaison de touches…"
           }
         },
         "zh-Hans": {
@@ -2918,6 +3542,12 @@
     },
     "Settings…": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajustes…"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -2946,6 +3576,12 @@
     },
     "Shortcuts": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atajos"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -2974,6 +3610,12 @@
     },
     "Shortcuts act on the frontmost window. Repeat a half or Fill Screen shortcut to cycle through thirds.": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los atajos actúan sobre la ventana frontal. Repite un atajo de mitad o de Llenar pantalla para recorrer los tercios."
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -2983,7 +3625,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Les raccourcis agissent sur la fenêtre au premier plan. Répétez un raccourci de moitié ou Remplir l’écran pour passer par les tiers."
+            "value": "Les raccourcis agissent sur la fenêtre au premier plan. Répétez un raccourci de moitié ou « Remplir l’écran » pour parcourir les tiers."
           }
         },
         "zh-Hans": {
@@ -3002,6 +3644,12 @@
     },
     "Show App's Windows": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mostrar ventanas de la app"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -3030,6 +3678,12 @@
     },
     "Show where the window will go": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mostrar dónde irá la ventana"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -3058,6 +3712,12 @@
     },
     "Skip": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Omitir"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -3086,6 +3746,12 @@
     },
     "Small": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pequeño"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -3114,6 +3780,12 @@
     },
     "Snap, resize and move windows with trackpad gestures on their title bars.": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajusta, cambia el tamaño y mueve ventanas con gestos del trackpad en sus barras de título."
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -3142,6 +3814,12 @@
     },
     "Source Code": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Código fuente"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -3170,6 +3848,12 @@
     },
     "Space between windows": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Espacio entre ventanas"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -3198,6 +3882,12 @@
     },
     "Support Flickbar": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apoyar a Flickbar"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -3226,6 +3916,12 @@
     },
     "Swipe Down": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deslizar hacia abajo"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -3254,6 +3950,12 @@
     },
     "Swipe Left": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deslizar a la izquierda"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -3282,6 +3984,12 @@
     },
     "Swipe Right": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deslizar a la derecha"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -3310,6 +4018,12 @@
     },
     "Swipe Up": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deslizar hacia arriba"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -3338,6 +4052,12 @@
     },
     "Swipe down. The window comes right back.": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desliza hacia abajo. La ventana vuelve de inmediato."
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -3366,6 +4086,12 @@
     },
     "Swipe left or right, then up or down.": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desliza a la izquierda o a la derecha y luego hacia arriba o hacia abajo."
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -3394,6 +4120,12 @@
     },
     "Swipe left.": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desliza a la izquierda."
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -3422,6 +4154,12 @@
     },
     "Swipe or pinch with two fingers on any window's title bar to snap, resize and move it.": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desliza o pellizca con dos dedos en la barra de título de cualquier ventana para ajustarla, cambiar su tamaño y moverla."
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -3450,6 +4188,12 @@
     },
     "Swipe right.": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desliza a la derecha."
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -3478,6 +4222,12 @@
     },
     "Swipe up.": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desliza hacia arriba."
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -3506,6 +4256,12 @@
     },
     "Tap the trackpad when a gesture is recognized": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Respuesta háptica en el trackpad al reconocer un gesto"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -3515,7 +4271,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Faire vibrer le trackpad quand un geste est reconnu"
+            "value": "Retour haptique quand un geste est reconnu"
           }
         },
         "zh-Hans": {
@@ -3534,6 +4290,12 @@
     },
     "That key can't be used.": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se puede usar esa tecla."
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -3562,6 +4324,12 @@
     },
     "The gesture brings its window to the front and presses these keys. Esc cancels.": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El gesto trae su ventana al frente y pulsa estas teclas. Esc cancela."
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -3571,7 +4339,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Le geste place sa fenêtre au premier plan et appuie sur ces touches. Échap pour annuler."
+            "value": "Le geste place sa fenêtre au premier plan, puis appuie sur ces touches. Échap annule."
           }
         },
         "zh-Hans": {
@@ -3590,6 +4358,12 @@
     },
     "Thirds": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tercios"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -3618,6 +4392,12 @@
     },
     "Title Bar Gestures": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gestos en la barra de título"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -3646,6 +4426,12 @@
     },
     "Title bar gestures are turned off in these apps.": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los gestos en la barra de título están desactivados en estas apps."
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -3674,6 +4460,12 @@
     },
     "Top-Left Quarter": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cuarto superior izquierdo"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -3702,6 +4494,12 @@
     },
     "Top-Right Quarter": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cuarto superior derecho"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -3730,6 +4528,12 @@
     },
     "Touch and Hold": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tocar y mantener"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -3758,6 +4562,12 @@
     },
     "Try Flickbar's Gestures": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prueba los gestos de Flickbar"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -3786,6 +4596,12 @@
     },
     "Try it on this window": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pruébalo en esta ventana"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -3814,6 +4630,12 @@
     },
     "Try the Gestures": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Probar los gestos"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -3842,6 +4664,12 @@
     },
     "Turn Off in %@": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desactivar en %@"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -3870,6 +4698,12 @@
     },
     "Version %@": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versión %@"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -3898,6 +4732,12 @@
     },
     "Website": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sitio web"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -3926,6 +4766,12 @@
     },
     "Welcome to Flickbar": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Te damos la bienvenida a Flickbar"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -3954,6 +4800,12 @@
     },
     "What's New": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Novedades"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -3982,6 +4834,12 @@
     },
     "What's New in Flickbar %@": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Novedades de Flickbar %@"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -4010,6 +4868,12 @@
     },
     "What's New…": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Novedades…"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -4038,6 +4902,12 @@
     },
     "When on, swiping back changes the pending gesture. Turn off to cancel by swiping back. Esc always cancels; reversing a pinch always cancels.": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Si está activado, deslizar hacia atrás cambia el gesto pendiente. Desactívalo para cancelar al deslizar hacia atrás. Esc siempre cancela, y también invertir un pellizco."
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -4047,7 +4917,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Lorsque cette option est activée, un balayage en sens inverse modifie le geste en attente. Désactivez-la pour annuler en revenant en arrière. Échap annule toujours ; inverser un pincement annule toujours."
+            "value": "Lorsque cette option est activée, un balayage en sens inverse modifie le geste en attente. Désactivez-la pour annuler en revenant en arrière. Échap annule toujours, de même que l’inversion d’un pincement."
           }
         },
         "zh-Hans": {
@@ -4066,6 +4936,12 @@
     },
     "Where": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dónde"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -4094,6 +4970,12 @@
     },
     "Window": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ventana"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -4122,6 +5004,12 @@
     },
     "Windows": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ventanas"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -4150,6 +5038,12 @@
     },
     "Works on the icons of apps that are running.": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Funciona en los iconos de las apps que están abiertas."
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -4178,6 +5072,12 @@
     },
     "You can also turn gestures off for the current app from the Flickbar menu.": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "También puedes desactivar los gestos para la app actual desde el menú de Flickbar."
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -4206,6 +5106,12 @@
     },
     "You're all set.": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todo listo."
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -4234,6 +5140,12 @@
     },
     "macOS already uses %@. Change it in System Settings › Keyboard › Keyboard Shortcuts.": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS ya usa %@. Cámbialo en Ajustes del Sistema › Teclado › Atajos de teclado."
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -4262,6 +5174,12 @@
     },
     "macOS requires this permission for apps that arrange windows. Flickbar uses it only to move and resize the windows you gesture on. It doesn't collect or send any data.": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS exige este permiso a las apps que organizan ventanas. Flickbar solo lo usa para mover y cambiar el tamaño de las ventanas en las que usas gestos. No recopila ni envía ningún dato."
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -4271,7 +5189,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "macOS exige cette autorisation pour les apps qui organisent les fenêtres. Flickbar ne l’utilise que pour déplacer et redimensionner les fenêtres sur lesquelles vous faites un geste. Il ne collecte ni n’envoie aucune donnée."
+            "value": "macOS exige cette autorisation pour les apps qui gèrent les fenêtres. Flickbar ne l’utilise que pour déplacer et redimensionner les fenêtres sur lesquelles vous faites un geste. Il ne collecte ni ne transmet de données."
           }
         },
         "zh-Hans": {
@@ -4290,6 +5208,12 @@
     },
     "⌃ Control": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌃ Control"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -4318,6 +5242,12 @@
     },
     "⌘ alone would replace this shortcut in every app. Add ⌃ or ⌥.": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solo ⌘ sustituiría este atajo en todas las apps. Añade ⌃ o ⌥."
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",
@@ -4346,6 +5276,12 @@
     },
     "⌥ Option": {
       "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌥ Opción"
+          }
+        },
         "fa": {
           "stringUnit": {
             "state": "translated",

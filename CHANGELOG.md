@@ -10,6 +10,7 @@ All notable changes to Flickbar are listed here. The format follows
 
 - **简体中文 and 繁體中文.** Flickbar now speaks Simplified and Traditional Chinese. It follows your Mac's language, or choose one in *Settings → General → Language*.
 - **Gestures that press keys.** Set a title-bar gesture to **Send Keys…** in **Settings → Gestures** and record a key combination, such as ⌘C or ⌘V. The gesture brings its window to the front and presses those keys in it.
+- **Español.** Flickbar now speaks Spanish, and the French has been reviewed.
 
 ## [1.1.0] - 2026-11-04
 
