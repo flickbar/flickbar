@@ -123,7 +123,7 @@ enum ActionNames {
     /// The actions that make sense on a Dock icon, which has an app but no window.
     static var appActions: [WindowAction] { [.appWindows, .hideApp, .quitApp] }
 
-    static func title(_ action: WindowAction) -> String {
+    @MainActor static func title(_ action: WindowAction) -> String {
         switch action {
         case .snap(.leftHalf): String(localized: "Left Half")
         case .snap(.rightHalf): String(localized: "Right Half")
