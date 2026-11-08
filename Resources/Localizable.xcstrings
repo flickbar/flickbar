@@ -14,6 +14,18 @@
             "state": "translated",
             "value": "%@ : terminé"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ 已完成"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ 已完成"
+          }
         }
       }
     },
@@ -29,6 +41,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Un quart"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "四分之一"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "四分之一"
           }
         }
       }
@@ -46,6 +70,18 @@
             "state": "translated",
             "value": "À propos"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "关于"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "關於"
+          }
         }
       }
     },
@@ -61,6 +97,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "L’accès Accessibilité est activé. Tout est prêt."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "辅助功能权限已打开，一切就绪。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "輔助使用權限已開啟，一切就緒。"
           }
         }
       }
@@ -78,6 +126,18 @@
             "state": "translated",
             "value": "Action"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "操作"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "動作"
+          }
         }
       }
     },
@@ -93,6 +153,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ajouter"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "添加"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "加入"
           }
         }
       }
@@ -110,6 +182,18 @@
             "state": "translated",
             "value": "Ajouter une app"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "添加 App"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "加入 App"
+          }
         }
       }
     },
@@ -125,6 +209,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Déjà utilisé pour « %@ »."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已用于“%@”。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已用於「%@」。"
           }
         }
       }
@@ -142,6 +238,18 @@
             "state": "translated",
             "value": "Une autre app utilise déjà ce raccourci."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "另一个 App 已在使用此快捷键。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "另一個 App 已在使用此快速鍵。"
+          }
         }
       }
     },
@@ -154,6 +262,18 @@
           }
         },
         "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App"
+          }
+        },
+        "zh-Hant": {
           "stringUnit": {
             "state": "translated",
             "value": "App"
@@ -174,6 +294,18 @@
             "state": "translated",
             "value": "Apps"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App"
+          }
         }
       }
     },
@@ -189,6 +321,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Quart inférieur gauche"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "左下四分之一"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "左下四分之一"
           }
         }
       }
@@ -206,6 +350,18 @@
             "state": "translated",
             "value": "Quart inférieur droit"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "右下四分之一"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "右下四分之一"
+          }
         }
       }
     },
@@ -221,6 +377,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Centrer"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "居中"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "置中"
           }
         }
       }
@@ -238,6 +406,18 @@
             "state": "translated",
             "value": "Rechercher les mises à jour…"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "检查更新…"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "檢查更新項目…"
+          }
         }
       }
     },
@@ -253,6 +433,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Rechercher les mises à jour"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "检查更新"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "檢查更新項目"
           }
         }
       }
@@ -270,6 +462,18 @@
             "state": "translated",
             "value": "Effacer le raccourci « %@ »"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "清除“%@”快捷键"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "清除「%@」快速鍵"
+          }
         }
       }
     },
@@ -285,6 +489,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cliquez sur + pour choisir une app."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "点按 + 来选择 App。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "按一下 + 來選擇 App。"
           }
         }
       }
@@ -302,6 +518,18 @@
             "state": "translated",
             "value": "Cliquez sur Ouvrir Réglages Système, puis activez Flickbar. S’il est déjà activé, sélectionnez-le, cliquez sur − pour le supprimer, puis ajoutez-le à nouveau."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "点按“打开系统设置”，然后打开 Flickbar。如果它已经打开，请选中它，点按 − 将其移除，然后重新添加。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "按一下「打開系統設定」，然後開啟 Flickbar。如果它已經開啟，請選取它，按一下 − 將其移除，然後重新加入。"
+          }
         }
       }
     },
@@ -317,6 +545,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Fermer la fenêtre"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "关闭窗口"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "關閉視窗"
           }
         }
       }
@@ -334,6 +574,18 @@
             "state": "translated",
             "value": "Moniteurs"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "显示器"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "顯示器"
+          }
         }
       }
     },
@@ -349,6 +601,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Terminé"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "完成"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "完成"
           }
         }
       }
@@ -366,6 +630,18 @@
             "state": "translated",
             "value": "Toucher deux fois"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "轻点两下"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "輕點兩下"
+          }
         }
       }
     },
@@ -382,6 +658,18 @@
             "state": "translated",
             "value": "Remplir l’écran"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "填满屏幕"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "填滿螢幕"
+          }
         }
       }
     },
@@ -397,6 +685,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Remplir l’écran"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "填满屏幕"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "填滿螢幕"
           }
         }
       }
@@ -417,6 +717,18 @@
             "state": "translated",
             "value": "Flickbar a besoin de l’accès Accessibilité"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flickbar 需要辅助功能权限"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flickbar 需要輔助使用權限"
+          }
         }
       }
     },
@@ -432,6 +744,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Flickbar, désactivé"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flickbar，已关闭"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flickbar，已關閉"
           }
         }
       }
@@ -449,6 +773,18 @@
             "state": "translated",
             "value": "Suivre les changements de direction du balayage"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "跟随轻扫方向的变化"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "跟隨滑動方向的變化"
+          }
         }
       }
     },
@@ -464,6 +800,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Libre et open source sous licence GNU GPL v3."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "基于 GNU GPL v3 的免费开源软件。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "依據 GNU GPL v3 授權的免費開源軟體。"
           }
         }
       }
@@ -481,6 +829,18 @@
             "state": "translated",
             "value": "Historique des versions"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "完整更新日志"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "完整更新記錄"
+          }
         }
       }
     },
@@ -496,6 +856,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Plein écran"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "全屏幕"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "全螢幕"
           }
         }
       }
@@ -513,6 +885,18 @@
             "state": "translated",
             "value": "Général"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "通用"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "一般"
+          }
         }
       }
     },
@@ -528,6 +912,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Didacticiel des gestes…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "手势教程…"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "手勢教學…"
           }
         }
       }
@@ -545,6 +941,18 @@
             "state": "translated",
             "value": "Faire les gestes n’importe où dans une fenêtre en maintenant"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "按住以下按键时，可在窗口内任意位置使用手势"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "按住以下按鍵時，可在視窗內任意位置使用手勢"
+          }
         }
       }
     },
@@ -560,6 +968,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Gestes"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "手势"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "手勢"
           }
         }
       }
@@ -577,6 +997,18 @@
             "state": "translated",
             "value": "Autoriser l’accès Accessibilité…"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "授予辅助功能权限…"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "授予輔助使用權限…"
+          }
         }
       }
     },
@@ -592,6 +1024,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Autoriser l’accès…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "授予权限…"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "授予權限…"
           }
         }
       }
@@ -609,6 +1053,18 @@
             "state": "translated",
             "value": "Moitiés"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "二分之一"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "二分之一"
+          }
         }
       }
     },
@@ -624,6 +1080,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Masquer l’app"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "隐藏 App"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "隱藏 App"
           }
         }
       }
@@ -641,6 +1109,18 @@
             "state": "translated",
             "value": "Maintenez ⌃ ou ⌥ avec la touche."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "请同时按住 ⌃ 或 ⌥ 和该按键。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "請同時按住 ⌃ 或 ⌥ 和該按鍵。"
+          }
         }
       }
     },
@@ -656,6 +1136,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Maintenez ⌘ et balayez pour déplacer une fenêtre vers un autre moniteur"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "按住 ⌘ 并轻扫，可将窗口移到另一台显示器"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "按住 ⌘ 並滑動，可將視窗移到另一台顯示器"
           }
         }
       }
@@ -673,6 +1165,18 @@
             "state": "translated",
             "value": "Si rien ne se passe, macOS ou une autre app utilise ces touches."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "如果没有反应，说明 macOS 或其他 App 正在使用这些按键。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "如果沒有反應，表示 macOS 或其他 App 正在使用這些按鍵。"
+          }
         }
       }
     },
@@ -688,6 +1192,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Langue"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "语言"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "語言"
           }
         }
       }
@@ -705,6 +1221,18 @@
             "state": "translated",
             "value": "Grand"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "大"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "大"
+          }
         }
       }
     },
@@ -720,6 +1248,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Plus tard"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "以后"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "稍後"
           }
         }
       }
@@ -737,6 +1277,18 @@
             "state": "translated",
             "value": "Moitié gauche"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "左半边"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "左半邊"
+          }
         }
       }
     },
@@ -752,6 +1304,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tiers gauche"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "左三分之一"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "左三分之一"
           }
         }
       }
@@ -769,6 +1333,18 @@
             "state": "translated",
             "value": "Deux tiers gauche"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "左三分之二"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "左三分之二"
+          }
         }
       }
     },
@@ -784,6 +1360,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Moitié gauche"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "左半边"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "左半邊"
           }
         }
       }
@@ -801,6 +1389,18 @@
             "state": "translated",
             "value": "Gauche, puis bas"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "向左，再向下"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "向左，再向下"
+          }
         }
       }
     },
@@ -816,6 +1416,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Gauche, puis haut"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "向左，再向上"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "向左，再向上"
           }
         }
       }
@@ -833,6 +1445,18 @@
             "state": "translated",
             "value": "Créé par [Parsa Kamalipour](https://github.com/benymaxparsa)"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "由 [Parsa Kamalipour](https://github.com/benymaxparsa) 制作"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "由 [Parsa Kamalipour](https://github.com/benymaxparsa) 製作"
+          }
         }
       }
     },
@@ -848,6 +1472,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Moyen"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "中"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "中"
           }
         }
       }
@@ -865,6 +1501,18 @@
             "state": "translated",
             "value": "Tiers central"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "中间三分之一"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "中間三分之一"
+          }
         }
       }
     },
@@ -880,6 +1528,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Placer dans le Dock"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最小化"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "縮到最小"
           }
         }
       }
@@ -897,6 +1557,18 @@
             "state": "translated",
             "value": "Déplacer vers un autre moniteur"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "移到另一台显示器"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "移到另一台顯示器"
+          }
         }
       }
     },
@@ -912,6 +1584,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Déplacer vers le moniteur du dessus"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "移到上方显示器"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "移到上方顯示器"
           }
         }
       }
@@ -929,6 +1613,18 @@
             "state": "translated",
             "value": "Déplacer vers le moniteur du dessous"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "移到下方显示器"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "移到下方顯示器"
+          }
         }
       }
     },
@@ -944,6 +1640,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Déplacer vers le moniteur de gauche"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "移到左侧显示器"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "移到左側顯示器"
           }
         }
       }
@@ -961,6 +1669,18 @@
             "state": "translated",
             "value": "Déplacer vers le moniteur de droite"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "移到右侧显示器"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "移到右側顯示器"
+          }
         }
       }
     },
@@ -976,6 +1696,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "A besoin de l’accès Accessibilité pour déplacer les fenêtres."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "需要辅助功能权限才能移动窗口。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "需要輔助使用權限才能移動視窗。"
           }
         }
       }
@@ -993,6 +1725,18 @@
             "state": "translated",
             "value": "Fenêtre suivante de l’app"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App 的下一个窗口"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App 的下一個視窗"
+          }
         }
       }
     },
@@ -1008,6 +1752,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Aucune app"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "没有 App"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "沒有 App"
           }
         }
       }
@@ -1025,6 +1781,18 @@
             "state": "translated",
             "value": "Aucune note pour cette version."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "此版本没有发行说明。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "此版本沒有發行說明。"
+          }
         }
       }
     },
@@ -1040,6 +1808,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Aucun"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "无"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "無"
           }
         }
       }
@@ -1057,6 +1837,18 @@
             "state": "translated",
             "value": "Pas encore fait"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "尚未完成"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "尚未完成"
+          }
         }
       }
     },
@@ -1072,6 +1864,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Non installée"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未安装"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未安裝"
           }
         }
       }
@@ -1089,6 +1893,18 @@
             "state": "translated",
             "value": "Rien"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "无操作"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "無動作"
+          }
         }
       }
     },
@@ -1104,6 +1920,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Désactivé"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "关闭"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "關閉"
           }
         }
       }
@@ -1121,6 +1949,18 @@
             "state": "translated",
             "value": "Désactivé."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已关闭。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已關閉。"
+          }
         }
       }
     },
@@ -1136,6 +1976,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sur la barre de titre d’une fenêtre"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在窗口的标题栏上"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在視窗的標題列上"
           }
         }
       }
@@ -1153,6 +2005,18 @@
             "state": "translated",
             "value": "Sur l’icône d’une app dans le Dock"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在 App 的程序坞图标上"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在 App 的 Dock 圖像上"
+          }
         }
       }
     },
@@ -1168,6 +2032,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Activé. Balayez sur la barre de titre d’une fenêtre."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已打开。请在窗口的标题栏上轻扫。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已開啟。請在視窗的標題列上滑動。"
           }
         }
       }
@@ -1185,6 +2061,18 @@
             "state": "translated",
             "value": "Une fois par jour, Flickbar lit sa liste de mises à jour sur flickbar.parsakp.com en n’envoyant que son numéro de version. Les mises à jour sont signées et vérifiées avant leur installation."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flickbar 每天从 flickbar.parsakp.com 读取一次更新列表，只发送其版本号。更新在安装前都会经过签名和校验。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flickbar 每天從 flickbar.parsakp.com 讀取一次更新清單，只傳送其版本號碼。更新項目在安裝前都會經過簽署和檢查。"
+          }
         }
       }
     },
@@ -1200,6 +2088,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ouvrir Réglages Système"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "打开系统设置"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "打開系統設定"
           }
         }
       }
@@ -1217,6 +2117,18 @@
             "state": "translated",
             "value": "Ouvrir à la connexion"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "登录时打开"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "登入時打開"
+          }
         }
       }
     },
@@ -1232,6 +2144,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Choisir une disposition"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "选取布局"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "選擇版面配置"
           }
         }
       }
@@ -1249,6 +2173,18 @@
             "state": "translated",
             "value": "Choisir dans une grille"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "从网格中选取"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "從格線中選擇"
+          }
         }
       }
     },
@@ -1264,6 +2200,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pincer"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "双指捏合"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "兩指捏合"
           }
         }
       }
@@ -1281,6 +2229,18 @@
             "state": "translated",
             "value": "Écarter"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "双指张开"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "兩指張開"
+          }
         }
       }
     },
@@ -1296,6 +2256,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Appuyez sur le raccourci"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "按下快捷键"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "按下快速鍵"
           }
         }
       }
@@ -1313,6 +2285,18 @@
             "state": "translated",
             "value": "Placez le pointeur sur la barre de titre de cette fenêtre et utilisez deux doigts sur le trackpad."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "将指针放在此窗口的标题栏上，然后在触控板上用两个手指操作。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "將指標放在此視窗的標題列上，然後在觸控式軌跡板上用兩指操作。"
+          }
         }
       }
     },
@@ -1328,6 +2312,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Quarts"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "四分之一"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "四分之一"
           }
         }
       }
@@ -1345,6 +2341,18 @@
             "state": "translated",
             "value": "Quitter l’app"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "退出 App"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "結束 App"
+          }
         }
       }
     },
@@ -1360,6 +2368,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Quitter Flickbar"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "退出 Flickbar"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "結束 Flickbar"
           }
         }
       }
@@ -1377,6 +2397,18 @@
             "state": "translated",
             "value": "Quitter le didacticiel"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "退出教程"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "結束教學"
+          }
         }
       }
     },
@@ -1392,6 +2424,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Enregistrer un raccourci"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "录制快捷键"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "錄製快速鍵"
           }
         }
       }
@@ -1409,6 +2453,18 @@
             "state": "translated",
             "value": "Supprimer les apps sélectionnées"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "移除所选 App"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "移除所選的 App"
+          }
         }
       }
     },
@@ -1424,6 +2480,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Répétez un balayage vers une moitié ou Remplir l’écran pour passer par les tiers. Appuyez sur Échap avant de lever les doigts pour annuler."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "重复轻扫到二分之一或“填满屏幕”，可在三分之一之间循环切换。抬起手指前按 Esc 可取消。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "重複滑動到二分之一或「填滿螢幕」，可在三分之一之間循環切換。抬起手指前按 Esc 可取消。"
           }
         }
       }
@@ -1441,6 +2509,18 @@
             "state": "translated",
             "value": "Signaler un problème"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "报告问题"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "回報問題"
+          }
         }
       }
     },
@@ -1456,6 +2536,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Posez deux doigts jusqu’à ce qu’une grille apparaisse, allez sur une case, puis levez-les."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "两指停放不动，直到出现网格，再移到某个格子并抬起手指。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "兩指停放不動，直到出現格線，再移到某個格子並抬起手指。"
           }
         }
       }
@@ -1473,6 +2565,18 @@
             "state": "translated",
             "value": "Redémarrez Flickbar pour utiliser la nouvelle langue."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "重新启动 Flickbar 以使用新语言。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "重新啟動 Flickbar 以使用新語言。"
+          }
         }
       }
     },
@@ -1488,6 +2592,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Redémarrer"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "立即重新启动"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "立即重新啟動"
           }
         }
       }
@@ -1505,6 +2621,18 @@
             "state": "translated",
             "value": "Rétablir les valeurs par défaut"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "恢复默认设置"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "回復預設值"
+          }
         }
       }
     },
@@ -1520,6 +2648,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Restaurer ou placer dans le Dock"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "还原或最小化"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "還原或縮到最小"
           }
         }
       }
@@ -1537,6 +2677,18 @@
             "state": "translated",
             "value": "Moitié droite"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "右半边"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "右半邊"
+          }
         }
       }
     },
@@ -1552,6 +2704,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tiers droit"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "右三分之一"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "右三分之一"
           }
         }
       }
@@ -1569,6 +2733,18 @@
             "state": "translated",
             "value": "Deux tiers droit"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "右三分之二"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "右三分之二"
+          }
         }
       }
     },
@@ -1584,6 +2760,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Moitié droite"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "右半边"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "右半邊"
           }
         }
       }
@@ -1601,6 +2789,18 @@
             "state": "translated",
             "value": "Droite, puis bas"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "向右，再向下"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "向右，再向下"
+          }
         }
       }
     },
@@ -1616,6 +2816,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Droite, puis haut"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "向右，再向上"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "向右，再向上"
           }
         }
       }
@@ -1633,6 +2845,18 @@
             "state": "translated",
             "value": "Comme le système"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "与系统相同"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "與系統相同"
+          }
         }
       }
     },
@@ -1648,6 +2872,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Réglages…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "设置…"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "設定…"
           }
         }
       }
@@ -1665,6 +2901,18 @@
             "state": "translated",
             "value": "Raccourcis"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "快捷键"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "快速鍵"
+          }
         }
       }
     },
@@ -1680,6 +2928,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Les raccourcis agissent sur la fenêtre au premier plan. Répétez un raccourci de moitié ou Remplir l’écran pour passer par les tiers."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "快捷键作用于最前面的窗口。重复使用二分之一或“填满屏幕”快捷键，可在三分之一之间循环切换。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "快速鍵作用於最前方的視窗。重複使用二分之一或「填滿螢幕」快速鍵，可在三分之一之間循環切換。"
           }
         }
       }
@@ -1697,6 +2957,18 @@
             "state": "translated",
             "value": "Afficher les fenêtres de l’app"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "显示 App 的窗口"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "顯示 App 的視窗"
+          }
         }
       }
     },
@@ -1712,6 +2984,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Montrer où ira la fenêtre"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "显示窗口将要移到的位置"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "顯示視窗將要移到的位置"
           }
         }
       }
@@ -1729,6 +3013,18 @@
             "state": "translated",
             "value": "Passer"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "跳过"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "略過"
+          }
         }
       }
     },
@@ -1744,6 +3040,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Petit"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "小"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "小"
           }
         }
       }
@@ -1761,6 +3069,18 @@
             "state": "translated",
             "value": "Ancrez, redimensionnez et déplacez les fenêtres avec des gestes du trackpad sur leur barre de titre."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在窗口标题栏上使用触控板手势，即可吸附、调整大小和移动窗口。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在視窗標題列上使用觸控式軌跡板手勢，即可貼齊、調整大小和移動視窗。"
+          }
         }
       }
     },
@@ -1776,6 +3096,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Code source"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "源代码"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "原始碼"
           }
         }
       }
@@ -1793,6 +3125,18 @@
             "state": "translated",
             "value": "Espace entre les fenêtres"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "窗口间距"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "視窗間距"
+          }
         }
       }
     },
@@ -1808,6 +3152,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Soutenir Flickbar"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "支持 Flickbar"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "支持 Flickbar"
           }
         }
       }
@@ -1825,6 +3181,18 @@
             "state": "translated",
             "value": "Balayer vers le bas"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "向下轻扫"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "向下滑動"
+          }
         }
       }
     },
@@ -1840,6 +3208,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Balayer vers la gauche"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "向左轻扫"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "向左滑動"
           }
         }
       }
@@ -1857,6 +3237,18 @@
             "state": "translated",
             "value": "Balayer vers la droite"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "向右轻扫"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "向右滑動"
+          }
         }
       }
     },
@@ -1872,6 +3264,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Balayer vers le haut"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "向上轻扫"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "向上滑動"
           }
         }
       }
@@ -1889,6 +3293,18 @@
             "state": "translated",
             "value": "Balayez vers le bas. La fenêtre revient aussitôt."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "向下轻扫。窗口会马上回来。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "向下滑動。視窗會馬上回來。"
+          }
         }
       }
     },
@@ -1904,6 +3320,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Balayez vers la gauche ou la droite, puis vers le haut ou le bas."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "向左或向右轻扫，再向上或向下轻扫。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "向左或向右滑動，再向上或向下滑動。"
           }
         }
       }
@@ -1921,6 +3349,18 @@
             "state": "translated",
             "value": "Balayez vers la gauche."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "向左轻扫。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "向左滑動。"
+          }
         }
       }
     },
@@ -1936,6 +3376,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Balayez ou pincez avec deux doigts sur la barre de titre d’une fenêtre pour l’ancrer, la redimensionner et la déplacer."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在任意窗口的标题栏上用两指轻扫或捏合，即可吸附、调整大小和移动窗口。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在任何視窗的標題列上用兩指滑動或捏合，即可貼齊、調整大小和移動視窗。"
           }
         }
       }
@@ -1953,6 +3405,18 @@
             "state": "translated",
             "value": "Balayez vers la droite."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "向右轻扫。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "向右滑動。"
+          }
         }
       }
     },
@@ -1968,6 +3432,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Balayez vers le haut."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "向上轻扫。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "向上滑動。"
           }
         }
       }
@@ -1985,6 +3461,18 @@
             "state": "translated",
             "value": "Faire vibrer le trackpad quand un geste est reconnu"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "识别到手势时，触控板轻震一下"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "辨識到手勢時，觸控式軌跡板輕震一下"
+          }
         }
       }
     },
@@ -2000,6 +3488,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cette touche ne peut pas être utilisée."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "无法使用该按键。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "無法使用該按鍵。"
           }
         }
       }
@@ -2017,6 +3517,18 @@
             "state": "translated",
             "value": "Tiers"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "三分之一"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "三分之一"
+          }
         }
       }
     },
@@ -2032,6 +3544,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Gestes sur la barre de titre"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "标题栏手势"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "標題列手勢"
           }
         }
       }
@@ -2049,6 +3573,18 @@
             "state": "translated",
             "value": "Les gestes sur la barre de titre sont désactivés dans ces apps."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "这些 App 中已关闭标题栏手势。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "這些 App 中已關閉標題列手勢。"
+          }
         }
       }
     },
@@ -2064,6 +3600,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Quart supérieur gauche"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "左上四分之一"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "左上四分之一"
           }
         }
       }
@@ -2081,6 +3629,18 @@
             "state": "translated",
             "value": "Quart supérieur droit"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "右上四分之一"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "右上四分之一"
+          }
         }
       }
     },
@@ -2096,6 +3656,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Toucher et maintenir"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "触摸并按住"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "觸碰並按住"
           }
         }
       }
@@ -2113,6 +3685,18 @@
             "state": "translated",
             "value": "Essayez les gestes de Flickbar"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "试用 Flickbar 的手势"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "試用 Flickbar 的手勢"
+          }
         }
       }
     },
@@ -2128,6 +3712,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Essayez sur cette fenêtre"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在此窗口上试试"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在此視窗上試試"
           }
         }
       }
@@ -2145,6 +3741,18 @@
             "state": "translated",
             "value": "Essayer les gestes"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "试用手势"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "試用手勢"
+          }
         }
       }
     },
@@ -2160,6 +3768,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Désactiver dans %@"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在“%@”中关闭"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在「%@」中關閉"
           }
         }
       }
@@ -2177,6 +3797,18 @@
             "state": "translated",
             "value": "Version %@"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "版本 %@"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "版本 %@"
+          }
         }
       }
     },
@@ -2192,6 +3824,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Site web"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "网站"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "網站"
           }
         }
       }
@@ -2209,6 +3853,18 @@
             "state": "translated",
             "value": "Bienvenue dans Flickbar"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "欢迎使用 Flickbar"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "歡迎使用 Flickbar"
+          }
         }
       }
     },
@@ -2224,6 +3880,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nouveautés"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新功能"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新功能"
           }
         }
       }
@@ -2241,6 +3909,18 @@
             "state": "translated",
             "value": "Nouveautés de Flickbar %@"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flickbar %@ 的新功能"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flickbar %@ 的新功能"
+          }
         }
       }
     },
@@ -2256,6 +3936,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nouveautés…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新功能…"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新功能…"
           }
         }
       }
@@ -2273,6 +3965,18 @@
             "state": "translated",
             "value": "Lorsque cette option est activée, un balayage en sens inverse modifie le geste en attente. Désactivez-la pour annuler en revenant en arrière. Échap annule toujours ; inverser un pincement annule toujours."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "打开后，往回轻扫会更改尚未完成的手势。关闭后，往回轻扫会取消手势。按 Esc 始终会取消；反向捏合也始终会取消。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "開啟後，往回滑動會更改尚未完成的手勢。關閉後，往回滑動會取消手勢。按 Esc 一律會取消；反向捏合也一律會取消。"
+          }
         }
       }
     },
@@ -2288,6 +3992,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Où"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "位置"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "位置"
           }
         }
       }
@@ -2305,6 +4021,18 @@
             "state": "translated",
             "value": "Fenêtre"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "窗口"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "視窗"
+          }
         }
       }
     },
@@ -2320,6 +4048,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Fenêtres"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "窗口"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "視窗"
           }
         }
       }
@@ -2337,6 +4077,18 @@
             "state": "translated",
             "value": "Fonctionne sur les icônes des apps ouvertes."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "适用于正在运行的 App 的图标。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "適用於正在執行的 App 的圖像。"
+          }
         }
       }
     },
@@ -2352,6 +4104,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vous pouvez aussi désactiver les gestes pour l’app active depuis le menu de Flickbar."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "你也可以在 Flickbar 菜单中为当前 App 关闭手势。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "你也可以在 Flickbar 選單中為目前的 App 關閉手勢。"
           }
         }
       }
@@ -2369,6 +4133,18 @@
             "state": "translated",
             "value": "Tout est prêt."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "一切就绪。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "一切就緒。"
+          }
         }
       }
     },
@@ -2384,6 +4160,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "macOS utilise déjà %@. Modifiez-le dans Réglages Système › Clavier › Raccourcis clavier."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS 已在使用 %@。请在“系统设置 › 键盘 › 键盘快捷键”中更改。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS 已在使用 %@。請在「系統設定 › 鍵盤 › 鍵盤快速鍵」中更改。"
           }
         }
       }
@@ -2401,6 +4189,18 @@
             "state": "translated",
             "value": "macOS exige cette autorisation pour les apps qui organisent les fenêtres. Flickbar ne l’utilise que pour déplacer et redimensionner les fenêtres sur lesquelles vous faites un geste. Il ne collecte ni n’envoie aucune donnée."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS 要求排列窗口的 App 获得此权限。Flickbar 仅用它来移动你用手势操作的窗口并调整其大小，不会收集或发送任何数据。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS 要求排列視窗的 App 取得此權限。Flickbar 僅用它來移動你用手勢操作的視窗並調整其大小，不會收集或傳送任何資料。"
+          }
         }
       }
     },
@@ -2416,6 +4216,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "⌃ Contrôle"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌃ Control"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌃ Control"
           }
         }
       }
@@ -2433,6 +4245,18 @@
             "state": "translated",
             "value": "⌘ seul remplacerait ce raccourci dans toutes les apps. Ajoutez ⌃ ou ⌥."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "仅用 ⌘ 会在所有 App 中替换此快捷键。请加上 ⌃ 或 ⌥。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "只用 ⌘ 會在所有 App 中取代此快速鍵。請加上 ⌃ 或 ⌥。"
+          }
         }
       }
     },
@@ -2445,6 +4269,18 @@
           }
         },
         "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌥ Option"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌥ Option"
+          }
+        },
+        "zh-Hant": {
           "stringUnit": {
             "state": "translated",
             "value": "⌥ Option"

@@ -84,7 +84,7 @@ Use a throwaway defaults suite in tests and manual checks, never the real domain
 
 ## Translations
 
-Flickbar speaks English, French and Persian. Run `scripts/update-strings.sh`, then edit
+Flickbar speaks English, French, Persian and Chinese (Simplified and Traditional). Run `scripts/update-strings.sh`, then edit
 `Resources/Localizable.xcstrings` (Xcode opens it in its String Catalog editor). To add a language, open an
 issue first. Please have a fluent speaker check the wording.
 

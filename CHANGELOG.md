@@ -6,6 +6,10 @@ All notable changes to Flickbar are listed here. The format follows
 
 ## [Unreleased]
 
+### Added
+
+- **简体中文 and 繁體中文.** Flickbar now speaks Simplified and Traditional Chinese. It follows your Mac's language, or choose one in *Settings → General → Language*.
+
 ## [1.1.0] - 2026-11-04
 
 ### Added
