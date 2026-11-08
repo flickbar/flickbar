@@ -41,7 +41,7 @@ cat > "$APP/Contents/Info.plist" <<EOF
 <plist version="1.0">
 <dict>
     <key>CFBundleDevelopmentRegion</key><string>en</string>
-    <key>CFBundleLocalizations</key><array><string>en</string><string>fr</string><string>fa</string><string>zh-Hans</string><string>zh-Hant</string></array>
+    <key>CFBundleLocalizations</key><array><string>en</string><string>fr</string><string>es</string><string>fa</string><string>zh-Hans</string><string>zh-Hant</string></array>
     <key>CFBundleExecutable</key><string>Flickbar</string>
     <key>CFBundleIdentifier</key><string>io.github.flickbar.Flickbar</string>
     <key>CFBundleName</key><string>Flickbar</string>

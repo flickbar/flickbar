@@ -5,7 +5,7 @@ import FlickbarCore
 /// System Settings → General → Language & Region → Applications, so both stay in step.
 @MainActor
 enum AppLanguage {
-    static let all: [(code: String, name: String)] = [("en", "English"), ("fr", "Français"), ("fa", "فارسی"),
+    static let all: [(code: String, name: String)] = [("en", "English"), ("fr", "Français"), ("es", "Español"), ("fa", "فارسی"),
                                                          ("zh-Hans", "简体中文"), ("zh-Hant", "繁體中文")]
 
     /// The chosen language code, or "" to follow the system. System Settings may store a regional variant
