@@ -18,7 +18,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@ : terminé"
+            "value": "%@ : terminé"
           }
         },
         "zh-Hans": {
@@ -256,7 +256,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Déjà utilisé pour « %@ »."
+            "value": "Déjà utilisé pour « %@ »."
           }
         },
         "zh-Hans": {
@@ -562,7 +562,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Effacer le raccourci « %@ »"
+            "value": "Effacer le raccourci « %@ »"
           }
         },
         "zh-Hans": {
@@ -630,7 +630,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Cliquez sur Ouvrir Réglages Système, puis activez Flickbar. S’il est déjà activé, sélectionnez-le, cliquez sur − pour le supprimer, puis ajoutez-le à nouveau."
+            "value": "Cliquez sur « Ouvrir Réglages Système », puis activez Flickbar. S’il est déjà activé, sélectionnez-le, cliquez sur − pour le supprimer, puis ajoutez-le de nouveau."
           }
         },
         "zh-Hans": {
@@ -1143,7 +1143,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Faire les gestes n’importe où dans une fenêtre en maintenant"
+            "value": "Utiliser les gestes n’importe où dans une fenêtre en maintenant"
           }
         },
         "zh-Hans": {
@@ -1619,7 +1619,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Deux tiers gauche"
+            "value": "Deux tiers à gauche"
           }
         },
         "zh-Hans": {
@@ -2061,7 +2061,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "A besoin de l’accès Accessibilité pour déplacer les fenêtres."
+            "value": "Nécessite l’accès Accessibilité pour déplacer les fenêtres."
           }
         },
         "zh-Hans": {
@@ -2231,7 +2231,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Pas encore fait"
+            "value": "Pas encore terminé"
           }
         },
         "zh-Hans": {
@@ -3047,7 +3047,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Répétez un balayage vers une moitié ou Remplir l’écran pour passer par les tiers. Appuyez sur Échap avant de lever les doigts pour annuler."
+            "value": "Répétez un balayage vers une moitié ou vers « Remplir l’écran » pour parcourir les tiers. Appuyez sur Échap avant de lever les doigts pour annuler."
           }
         },
         "zh-Hans": {
@@ -3115,7 +3115,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Posez deux doigts jusqu’à ce qu’une grille apparaisse, allez sur une case, puis levez-les."
+            "value": "Posez deux doigts sans bouger jusqu’à ce qu’une grille apparaisse, déplacez-les sur une case, puis levez-les."
           }
         },
         "zh-Hans": {
@@ -3183,7 +3183,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Redémarrer"
+            "value": "Redémarrer maintenant"
           }
         },
         "zh-Hans": {
@@ -3353,7 +3353,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Deux tiers droit"
+            "value": "Deux tiers à droite"
           }
         },
         "zh-Hans": {
@@ -3523,7 +3523,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Envoyer des touches…"
+            "value": "Envoyer une combinaison de touches…"
           }
         },
         "zh-Hans": {
@@ -3625,7 +3625,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Les raccourcis agissent sur la fenêtre au premier plan. Répétez un raccourci de moitié ou Remplir l’écran pour passer par les tiers."
+            "value": "Les raccourcis agissent sur la fenêtre au premier plan. Répétez un raccourci de moitié ou « Remplir l’écran » pour parcourir les tiers."
           }
         },
         "zh-Hans": {
@@ -4271,7 +4271,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Faire vibrer le trackpad quand un geste est reconnu"
+            "value": "Retour haptique quand un geste est reconnu"
           }
         },
         "zh-Hans": {
@@ -4339,7 +4339,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Le geste place sa fenêtre au premier plan et appuie sur ces touches. Échap pour annuler."
+            "value": "Le geste place sa fenêtre au premier plan, puis appuie sur ces touches. Échap annule."
           }
         },
         "zh-Hans": {
@@ -4917,7 +4917,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Lorsque cette option est activée, un balayage en sens inverse modifie le geste en attente. Désactivez-la pour annuler en revenant en arrière. Échap annule toujours ; inverser un pincement annule toujours."
+            "value": "Lorsque cette option est activée, un balayage en sens inverse modifie le geste en attente. Désactivez-la pour annuler en revenant en arrière. Échap annule toujours, de même que l’inversion d’un pincement."
           }
         },
         "zh-Hans": {
@@ -5189,7 +5189,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "macOS exige cette autorisation pour les apps qui organisent les fenêtres. Flickbar ne l’utilise que pour déplacer et redimensionner les fenêtres sur lesquelles vous faites un geste. Il ne collecte ni n’envoie aucune donnée."
+            "value": "macOS exige cette autorisation pour les apps qui gèrent les fenêtres. Flickbar ne l’utilise que pour déplacer et redimensionner les fenêtres sur lesquelles vous faites un geste. Il ne collecte ni ne transmet de données."
           }
         },
         "zh-Hans": {
