@@ -102,7 +102,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "辅助功能权限已开启，一切就绪。"
+            "value": "辅助功能权限已打开，一切就绪。"
           }
         },
         "zh-Hant": {
@@ -640,7 +640,7 @@
         "zh-Hant": {
           "stringUnit": {
             "state": "translated",
-            "value": "點兩下"
+            "value": "輕點兩下"
           }
         }
       }
@@ -1785,13 +1785,13 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "此版本没有说明。"
+            "value": "此版本没有发行说明。"
           }
         },
         "zh-Hant": {
           "stringUnit": {
             "state": "translated",
-            "value": "此版本沒有說明。"
+            "value": "此版本沒有發行說明。"
           }
         }
       }
@@ -2071,7 +2071,7 @@
         "zh-Hant": {
           "stringUnit": {
             "state": "translated",
-            "value": "Flickbar 每天從 flickbar.parsakp.com 讀取一次更新列表，只傳送其版本號碼。更新項目在安裝前都會經過簽署和檢查。"
+            "value": "Flickbar 每天從 flickbar.parsakp.com 讀取一次更新清單，只傳送其版本號碼。更新項目在安裝前都會經過簽署和檢查。"
           }
         }
       }
@@ -2155,7 +2155,7 @@
         "zh-Hant": {
           "stringUnit": {
             "state": "translated",
-            "value": "選擇佈局"
+            "value": "選擇版面配置"
           }
         }
       }
@@ -2541,13 +2541,13 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "两指停放直到出现网格，移到某个格子，然后抬起手指。"
+            "value": "两指停放不动，直到出现网格，再移到某个格子并抬起手指。"
           }
         },
         "zh-Hant": {
           "stringUnit": {
             "state": "translated",
-            "value": "兩指停放直到出現格線，移到某個格子，然後抬起手指。"
+            "value": "兩指停放不動，直到出現格線，再移到某個格子並抬起手指。"
           }
         }
       }
@@ -3465,13 +3465,13 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "识别到手势时触控板轻震反馈"
+            "value": "识别到手势时，触控板轻震一下"
           }
         },
         "zh-Hant": {
           "stringUnit": {
             "state": "translated",
-            "value": "辨識到手勢時觸控式軌跡板輕震回饋"
+            "value": "辨識到手勢時，觸控式軌跡板輕震一下"
           }
         }
       }
@@ -4249,7 +4249,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "仅用 ⌘ 会在所有 App 中取代此快捷键。请加上 ⌃ 或 ⌥。"
+            "value": "仅用 ⌘ 会在所有 App 中替换此快捷键。请加上 ⌃ 或 ⌥。"
           }
         },
         "zh-Hant": {
