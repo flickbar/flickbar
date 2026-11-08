@@ -189,17 +189,6 @@ prefs.set(["swipeLeft": "rightThird"], forKey: "gestureMap")
 swipe(titlebar(), [(-120, 0)]);               expect("remapped gesture: swipe left → right ⅓", CGRect(x: main.maxX - thirdW, y: main.minY, width: thirdW, height: main.height))
 prefs.removeObject(forKey: "gestureMap")
 swipe(content(), [(-120, 0)], flags: .maskAlternate); expect("⌥ swipe on content → left half", CGRect(x: main.minX, y: main.minY, width: halfW, height: main.height))
-// Send Keys: ⌘→ (key 124, ⌘ 256) moves to the end of the line, then x (key 7) types there; a held ⌥ mustn't make it ≈.
-func documentText() -> String {
-    var err: NSDictionary?
-    return NSAppleScript(source: "tell application \"TextEdit\" to get text of document 1")!.executeAndReturnError(&err).stringValue ?? ""
-}
-prefs.set(["swipeLeft": "keys.124.256", "swipeRight": "keys.7.0"], forKey: "gestureMap")
-swipe(titlebar(), [(-120, 0)]); swipe(titlebar(), [(120, 0)]); usleep(300000)
-check("send keys: ⌘→ then x", documentText() == "Flickbar live testx", documentText())
-swipe(content(), [(120, 0)], flags: .maskAlternate); usleep(300000)
-check("send keys with ⌥ held types x, not ≈", documentText() == "Flickbar live testxx", documentText())
-prefs.removeObject(forKey: "gestureMap")
 setFrame(window, before); usleep(300000)
 // The grid starts on the full-height third under the pointer; one cell right, then up to the top half.
 let column = min(Int((titlebar().x - main.minX) / main.width * 3) + 1, 2)
@@ -275,6 +264,25 @@ appleScript("tell application \"TextEdit\" to activate"); usleep(500000)
 pinch(titlebar(), total: -0.5); usleep(500000)
 let open = (attr(app, kAXWindowsAttribute) as? [AXUIElement] ?? []).contains { CFEqual($0, window) }
 check("pinch in → close", !open, "window still open")
+// Send Keys, on a document of its own since typing leaves it edited. ⌘→ (key 124, ⌘ 256) moves to the end of the
+// line, then x (key 7) types there; a held ⌥ mustn't make it ≈; ⌘Z (key 6) takes the typing back.
+appleScript("tell application \"TextEdit\" to make new document with properties {text:\"Flickbar keys\"}"); sleep(1)
+func documentText() -> String {
+    var err: NSDictionary?
+    return NSAppleScript(source: "tell application \"TextEdit\" to get text of document 1")!.executeAndReturnError(&err).stringValue ?? ""
+}
+let keysFrame = frontWindow().map(frame) ?? .zero
+let keysBar = CGPoint(x: keysFrame.midX, y: keysFrame.minY + 12), keysContent = CGPoint(x: keysFrame.midX, y: keysFrame.midY)
+prefs.set(["swipeLeft": "keys.124.256", "swipeRight": "keys.7.0"], forKey: "gestureMap")
+swipe(keysBar, [(-120, 0)]); swipe(keysBar, [(120, 0)]); usleep(300000)
+check("send keys: ⌘→ then x", documentText() == "Flickbar keysx", documentText())
+swipe(keysContent, [(120, 0)], flags: .maskAlternate); usleep(300000)
+check("send keys with ⌥ held types x, not ≈", documentText() == "Flickbar keysxx", documentText())
+prefs.set(["swipeLeft": "keys.6.256"], forKey: "gestureMap")
+for _ in 0..<2 where documentText() != "Flickbar keys" { swipe(keysBar, [(-120, 0)]); usleep(300000) }
+check("send keys: ⌘Z undoes", documentText() == "Flickbar keys", documentText())
+prefs.removeObject(forKey: "gestureMap")
+
 // The test document has text, so TextEdit asks to save: discard.
 appleScript("tell application \"TextEdit\" to close (every document whose name starts with \"Untitled\") saving no")
 
