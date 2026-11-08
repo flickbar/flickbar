@@ -10,12 +10,23 @@
 </p>
 
 <p align="center">
+  <a href="#gestures">Gestures</a> · <a href="#keyboard-shortcuts">Shortcuts</a> · <a href="#settings">Settings</a> ·
+  <a href="#install">Install</a> · <a href="#languages">Languages</a> · <a href="https://flickbar.parsakp.com/">Website</a>
+</p>
+
+<p align="center">
   <a href="https://macbrowse.com"><img src="https://macbrowse.com/badge/listed-light.svg" alt="Listed on Mac Browse" width="220" height="48"></a>
 </p>
 
 <p align="center">
   <img src="docs/images/settings-gestures.png" width="420" alt="Flickbar's Gestures settings">
 </p>
+
+Flickbar turns a window's title bar into a place to gesture. Swipe two fingers left or right to snap the
+window to a half, add an up or down swipe for a quarter, rest your fingers for a grid of layouts, pinch to
+close it or go full screen, or hold ⌘ to send it to another display. It also works on Dock icons, takes
+keyboard shortcuts, and can press a key combination for you. It speaks English, French, Spanish, Persian and
+Chinese. No account, no analytics, free and open source.
 
 ## Gestures
 
@@ -85,6 +96,11 @@ Open **Settings…** from the menu bar icon (or press ⌘, while it's open) to:
 - choose Flickbar's language (English, French, Spanish, Persian or Chinese) and turn on daily update checks.
 
 The menu bar icon can also turn gestures off for the app you're using.
+
+**Gestures that press keys.** Open the menu under a title-bar gesture and choose **Send Keys…**, then press the
+combination to record it: any key, with or without ⌘ ⌃ ⌥ ⇧ (Esc cancels). When you do that gesture on a window,
+Flickbar brings the window to the front and presses those keys in it, so ⌘C copies from the window you gestured on.
+A gesture sends one combination. Dock-icon gestures and keyboard shortcuts can't send keys.
 
 <p align="center">
   <img src="docs/images/settings-general.png" width="380" alt="General settings">
@@ -180,8 +196,9 @@ swift test               # unit tests (no permissions needed)
 ./scripts/livetest.sh    # end-to-end: drives the running app with synthetic gestures
 ```
 
-The live test opens its own TextEdit document and moves it (and the pointer) for about a minute, so
-leave the Mac alone while it runs. The terminal needs Accessibility permission to post events.
+The live test opens its own TextEdit documents and moves them (and the pointer) for about a minute, so
+leave the Mac alone while it runs. It temporarily changes your gesture, excluded-app and window-gap settings and
+puts them back when it finishes. The terminal needs Accessibility permission to post events.
 Flickbar logs to the unified log under the subsystem `io.github.flickbar.Flickbar`.
 
 ## Languages
@@ -191,8 +208,18 @@ Flickbar speaks English, French, Spanish, Persian (فارسی, laid out right to
 *Settings → General → Language* (the same choice as
 *System Settings → General → Language & Region → Applications*).
 
+<p align="center">
+  <img src="docs/images/settings-gestures-fa.png" width="300" alt="Gestures settings in Persian, laid out right to left">
+  <img src="docs/images/settings-gestures-zh-Hans.png" width="300" alt="Gestures settings in Simplified Chinese">
+</p>
+
+The French, Spanish, Persian and Chinese translations were written with AI and checked by a second AI pass, not
+yet by native speakers. If you speak one of them, corrections are very welcome: open an issue with the
+`translation` label, or edit the string catalog and send a pull request.
+
 To add a language or new text, run `scripts/update-strings.sh` and translate `Resources/Localizable.xcstrings`
-(Xcode opens it in its String Catalog editor).
+(Xcode opens it in its String Catalog editor). The [website](https://flickbar.parsakp.com/) has its own pages
+for each language; see its [repository](https://github.com/flickbar/flickbar.github.io).
 
 ## Contributing
 
