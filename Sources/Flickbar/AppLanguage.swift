@@ -1,4 +1,5 @@
 import AppKit
+import FlickbarCore
 
 /// Flickbar's own interface language, kept where macOS keeps the per-app choice from
 /// System Settings → General → Language & Region → Applications, so both stay in step.
@@ -8,15 +9,11 @@ enum AppLanguage {
                                                          ("zh-Hans", "简体中文"), ("zh-Hant", "繁體中文")]
 
     /// The chosen language code, or "" to follow the system. System Settings may store a regional variant
-    /// ("fr-CA", "zh-TW"); only the language matters here, plus the script for Chinese.
+    /// ("fr-CA", "zh-TW"); `interfaceLanguage` reduces it to a picker code.
     static var chosen: String {
         get {
             let own = Bundle.main.bundleIdentifier.flatMap(UserDefaults.standard.persistentDomain(forName:))
-            let language = Locale.Language(identifier: (own?["AppleLanguages"] as? [String])?.first ?? "")
-            guard let code = language.languageCode?.identifier else { return "" }
-            guard code == "zh" else { return code }
-            // Simplified or Traditional; the full form fills in a script missing from "zh-TW" or "zh-CN".
-            return "zh-" + (Locale.Language(identifier: language.maximalIdentifier).script?.identifier ?? "Hans")
+            return interfaceLanguage((own?["AppleLanguages"] as? [String])?.first ?? "")
         }
         set {
             if newValue.isEmpty { UserDefaults.standard.removeObject(forKey: "AppleLanguages") }
