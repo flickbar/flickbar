@@ -78,7 +78,7 @@ Open **Settings…** from the menu bar icon (or press ⌘, while it's open) to:
 
 - choose what each gesture does on title bars and on Dock icons: any half, third or quarter, fill,
   center, full screen, close, next window of the app, show the app's windows, hide or quit the app, or
-  nothing;
+  nothing. A title-bar gesture can also press a key combination you record (such as ⌘C) in its window;
 - pick the key for gesturing anywhere in a window, and record keyboard shortcuts;
 - add space between snapped windows, and turn off the preview or haptic feedback;
 - keep gestures off in specific apps, and open Flickbar at login;

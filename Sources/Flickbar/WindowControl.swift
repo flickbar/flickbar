@@ -89,6 +89,21 @@ struct AXWindow {
             var pid: pid_t = 0
             guard AXUIElementGetPid(app, &pid) == .success, let running = NSRunningApplication(processIdentifier: pid) else { return }
             AppControl.perform(action, on: running)
+        case .sendKeys(let key, let modifiers):
+            var pid: pid_t = 0
+            guard AXUIElementGetPid(app, &pid) == .success else { return }
+            // Keys go to the app's key window: make it this one, in front. AX calls return once the app has
+            // handled them, so the keys posted after arrive after the switch.
+            AXUIElementSetAttributeValue(app, kAXFrontmostAttribute as CFString, kCFBooleanTrue)
+            AXUIElementSetAttributeValue(element, kAXMainAttribute as CFString, kCFBooleanTrue)
+            AXUIElementPerformAction(element, kAXRaiseAction as CFString)
+            // A private source, so a held ⌥ or ⌃ (gesturing anywhere in a window) doesn't join the combination.
+            let source = CGEventSource(stateID: .privateState)
+            for down in [true, false] {
+                guard let event = CGEvent(keyboardEventSource: source, virtualKey: CGKeyCode(key), keyDown: down) else { return }
+                event.flags = eventFlags(carbonModifiers: modifiers)
+                event.postToPid(pid)
+            }
         }
     }
 
