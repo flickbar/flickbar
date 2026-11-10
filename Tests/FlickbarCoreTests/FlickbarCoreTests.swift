@@ -209,6 +209,16 @@ import Testing
         }
     }
 
+    @Test func dockPinchOutCanToggleFullscreenWithoutChangingDefaults() {
+        #expect(ActionMap.action(for: [.pinchOut], onDock: true) == nil)
+        let map = [ActionMap.key(.pinchOut, onDock: true): WindowAction.toggleFullscreen.id]
+        #expect(ActionMap.action(for: [.pinchOut], onDock: true, overrides: map) == .toggleFullscreen)
+        #expect(ActionMap.action(for: [.pinchOut], overrides: map) == .toggleFullscreen)
+        #expect(ActionMap.action(for: [.pinchIn], onDock: true, overrides: map) == .quitApp)
+        #expect(ActionMap.action(for: [.pinchOut], onDock: true,
+                                 overrides: [ActionMap.key(.pinchOut, onDock: true): ActionMap.off]) == nil)
+    }
+
     @Test func oldGroupSwitchesMigrate() {
         let map = ActionMap.migrate(disabled: ["halves", "moveToDisplay", "unknown"])
         #expect(map == ["swipeLeft": "none", "swipeRight": "none", "commandSwipe": "none"])

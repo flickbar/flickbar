@@ -209,8 +209,23 @@ enum AppControl {
     }
 
     static func perform(_ action: WindowAction, on app: NSRunningApplication) {
-        let windows = standardWindows(of: AXUIElementCreateApplication(app.processIdentifier))
+        let element = AXUIElementCreateApplication(app.processIdentifier)
+        let windows = standardWindows(of: element)
         switch action {
+        case .toggleFullscreen:
+            let focused = element.element(kAXFocusedWindowAttribute)
+            guard let window = windows.first(where: { $0 == focused }) ?? windows.first else { return }
+            let target = AXWindow(element: window, app: element)
+            let minimized = window.bool(kAXMinimizedAttribute) == true
+            app.unhide()
+            unminimize(window)
+            app.activate()
+            if minimized {
+                // Wait out the restore animation, as when restoring a minimized window's Dock tile.
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { WindowActions.run(action, on: target) }
+            } else {
+                WindowActions.run(action, on: target)
+            }
         case .nextWindow:
             // Windows are listed front to back with minimized ones last, so raising the last one cycles through
             // all of them, bringing minimized ones back on the way.

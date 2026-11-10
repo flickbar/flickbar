@@ -6,6 +6,10 @@ All notable changes to Flickbar are listed here. The format follows
 
 ## [Unreleased]
 
+### Added
+
+- **Full Screen from the Dock.** Assign Full Screen to Pinch Out or another gesture on an app's Dock icon to toggle its focused window into or out of full screen; Pinch Out still does nothing by default.
+
 ## [1.2.0] - 2026-11-08
 
 ### Added
