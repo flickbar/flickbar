@@ -59,6 +59,8 @@ Gestures also work on a running app's icon in the Dock:
 | Swipe left / right | Bring the app's next window to the front, including minimized ones |
 | Pinch in | Quit the app |
 
+Pinch out on a Dock icon does nothing until you set it, for example to Full Screen in Settings.
+
 On a minimized window's own tile in the Dock, swipe up to bring the window back, or use any title-bar
 gesture to bring it back and snap it, such as swipe left for the left half.
 
@@ -117,7 +119,7 @@ brew install --cask flickbar/tap/flickbar
 
 Update later with `brew upgrade --cask flickbar`, or choose *Check for Updates…* in Flickbar's menu.
 
-**Or download:** get **Flickbar-1.2.0.dmg** from the
+**Or download:** get **Flickbar-1.3.0.dmg** from the
 [latest release](https://github.com/flickbar/flickbar/releases/latest), open it and drag
 **Flickbar** to Applications, then open it from there. Releases are signed with a Developer ID and notarized by
 Apple, so macOS opens them without a warning.
