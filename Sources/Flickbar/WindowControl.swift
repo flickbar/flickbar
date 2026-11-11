@@ -158,8 +158,14 @@ enum AppControl {
     /// The running app whose Dock icon `hit` is, if any.
     static func app(ofDockItem hit: AXUIElement) -> NSRunningApplication? {
         guard hit.string(kAXSubroleAttribute) == kAXApplicationDockItemSubrole,
-              let url = hit.value("AXURL") as? URL, let id = Bundle(url: url)?.bundleIdentifier else { return nil }
+              let url = hit.value("AXURL") as? URL, let id = bundleID(at: url) else { return nil }
         return NSRunningApplication.runningApplications(withBundleIdentifier: id).first
+    }
+
+    /// Read from disk each time: `Bundle(url:)` caches by path, and Safari gives a web app a new identifier when
+    /// it's re-created, so a cached one stops matching the running app.
+    private static func bundleID(at url: URL) -> String? {
+        NSDictionary(contentsOf: url.appendingPathComponent("Contents/Info.plist"))?["CFBundleIdentifier"] as? String
     }
 
     /// `hit` if it's the Dock tile of a minimized window (shown when windows don't minimize into their app's icon).
@@ -255,7 +261,7 @@ enum AppControl {
     private static func dockItem(for app: NSRunningApplication) -> AXUIElement? {
         let lists = dock?.value(kAXChildrenAttribute) as? [AXUIElement] ?? []
         let items = lists.flatMap { $0.value(kAXChildrenAttribute) as? [AXUIElement] ?? [] }
-        return items.first { (($0.value("AXURL") as? URL).flatMap { Bundle(url: $0)?.bundleIdentifier }) == app.bundleIdentifier }
+        return items.first { (($0.value("AXURL") as? URL).flatMap(bundleID(at:))) == app.bundleIdentifier }
     }
 }
 

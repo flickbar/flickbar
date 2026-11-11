@@ -10,6 +10,10 @@ All notable changes to Flickbar are listed here. The format follows
 
 - **Full Screen from the Dock.** Assign Full Screen to Pinch Out or another gesture on an app's Dock icon to toggle its focused window into or out of full screen; Pinch Out still does nothing by default.
 
+### Fixed
+
+- Gestures on a Safari web app's Dock icon work again after the web app is re-created; before, they did nothing until Flickbar was restarted.
+
 ## [1.2.0] - 2026-11-08
 
 ### Added
