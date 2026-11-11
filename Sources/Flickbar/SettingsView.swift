@@ -330,7 +330,7 @@ private struct GestureSettings: View {
         let selection = Binding(get: { action.wrappedValue },
                                 set: { if $0 == Self.sendKeysTag { recordingKeys = gesture } else { action.wrappedValue = $0 } })
         return Picker("Action", selection: selection) {
-            ForEach(onDock ? [[.nextWindow] + ActionNames.appActions] : ActionNames.groups, id: \.self) { group in
+            ForEach(onDock ? [[.nextWindow, .toggleFullscreen] + ActionNames.appActions] : ActionNames.groups, id: \.self) { group in
                 ForEach(group, id: \.id) { Text(ActionNames.title($0)).tag($0.id) }
                 Divider()
             }
