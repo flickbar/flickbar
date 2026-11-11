@@ -163,9 +163,11 @@ enum AppControl {
     }
 
     /// Read from disk each time: `Bundle(url:)` caches by path, and Safari gives a web app a new identifier when
-    /// it's re-created, so a cached one stops matching the running app.
+    /// it's re-created, so a cached one stops matching the running app. Bundles laid out differently (iPhone and
+    /// iPad apps' wrappers) still go through `Bundle`.
     private static func bundleID(at url: URL) -> String? {
         NSDictionary(contentsOf: url.appendingPathComponent("Contents/Info.plist"))?["CFBundleIdentifier"] as? String
+            ?? Bundle(url: url)?.bundleIdentifier
     }
 
     /// `hit` if it's the Dock tile of a minimized window (shown when windows don't minimize into their app's icon).
